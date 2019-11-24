@@ -18,3 +18,13 @@ C:\Users\ASUS\Desktop\C#\Greenair\ApplicationCore\obj\Debug\netcoreapp3.0\Applic
 C:\Users\ASUS\Desktop\C#\Greenair\ApplicationCore\obj\Debug\netcoreapp3.0\ApplicationCore.AssemblyInfo.cs
 C:\Users\ASUS\Desktop\C#\Greenair\ApplicationCore\obj\Debug\netcoreapp3.0\ApplicationCore.dll
 C:\Users\ASUS\Desktop\C#\Greenair\ApplicationCore\obj\Debug\netcoreapp3.0\ApplicationCore.pdb
+C:\Users\Administrator\Desktop\Greenair-1\ApplicationCore\bin\Debug\netcoreapp3.0\ApplicationCore.deps.json
+C:\Users\Administrator\Desktop\Greenair-1\ApplicationCore\bin\Debug\netcoreapp3.0\ApplicationCore.runtimeconfig.json
+C:\Users\Administrator\Desktop\Greenair-1\ApplicationCore\bin\Debug\netcoreapp3.0\ApplicationCore.runtimeconfig.dev.json
+C:\Users\Administrator\Desktop\Greenair-1\ApplicationCore\bin\Debug\netcoreapp3.0\ApplicationCore.dll
+C:\Users\Administrator\Desktop\Greenair-1\ApplicationCore\bin\Debug\netcoreapp3.0\ApplicationCore.pdb
+C:\Users\Administrator\Desktop\Greenair-1\ApplicationCore\obj\Debug\netcoreapp3.0\ApplicationCore.csprojAssemblyReference.cache
+C:\Users\Administrator\Desktop\Greenair-1\ApplicationCore\obj\Debug\netcoreapp3.0\ApplicationCore.AssemblyInfoInputs.cache
+C:\Users\Administrator\Desktop\Greenair-1\ApplicationCore\obj\Debug\netcoreapp3.0\ApplicationCore.AssemblyInfo.cs
+C:\Users\Administrator\Desktop\Greenair-1\ApplicationCore\obj\Debug\netcoreapp3.0\ApplicationCore.dll
+C:\Users\Administrator\Desktop\Greenair-1\ApplicationCore\obj\Debug\netcoreapp3.0\ApplicationCore.pdb

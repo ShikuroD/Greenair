@@ -1,0 +1,238 @@
+@page
+@model Presentation.Pages.Admin.MakerModel
+@{
+  Layout = "_LayoutAdmin";
+	ViewData["Title"] = "Admin Page";
+}
+<div class="main-panel">
+  <!-- Maker content-wrapper -->
+  <div class="content-wrapper">
+     <!-- row button create -->
+    <div class="row">
+      <div class="col-lg-12 stretch-card">
+        <a href="#CreateMakerForm" data-toggle="modal" id="btCreateMaker" type="button" class="btn  btn-primary btn-lg btn-inverse-*">
+          <i class="mdi mdi-upload"></i>Create Maker
+        </a>
+      </div>
+    </div>
+    <!-- row table -->
+    <div class="row">
+      <div class="col-lg-12 stretch-card">
+        <div class="card">
+          <div class="card-header">
+            <div class="form-group row">
+              <div class="col-sm-7"></div>
+              <div class="col-sm-5">
+                <div class="input-group">
+                  <input type="search" class="form-control" placeholder="Search Here">
+                  <button type="button" class="btn btn-icons btn-rounded btn-outline-primary"><i class="fa fa-search"></i></button>
+                </div> 
+              </div> 
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 align="center">List of Makers </h3>
+            <table class="table table-bordered table-striped table-hover" id="TableMaker">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- change to code later thua --> 
+              @foreach (var item in Model.ListMakers){
+                <tr>
+                <!-- <tr id="@item.MakerId" class="list-maker"> -->
+                  <td>@item.MakerId</td>
+                  <td>@item.MakerName</td>
+                  <td>@item.Address.toString()</td>
+                  <td> 
+                    <button  id="@item.MakerId" data-toggle="modal" data-target="#EditMakerForm"  type="button" class="btn btn-dark btn-sm  btn-rounded EditMaker"><i class="fa fa-cog"></i></button>
+                    <button  id="@item.MakerId" type="button" class="btn btn-danger btn-sm  btn-rounded DeleteMaker"><i class="fa fa-times" ></i></button>
+                  </td>
+                </tr>
+              }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end table maker  -->
+
+  </div> 
+  <!-- end content_warper -->
+
+  <!-- Plane content-wrapper -->
+  <div class="content-wrapper">
+    <!-- row table -->
+    <div class="row">
+    <div class="col-lg-9 stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h3 align="center">List of Planes </h3>
+          <table class="table table-bordered table-striped table-hover" id="TablePlane">
+           <thead>
+            <tr>
+              <th>Phane ID</th>
+              <th>Seat Num</th>
+              <th>Maker ID</th>
+              <th></th>
+            </tr>
+           </thead>
+           <tbody>
+            @foreach (var item in Model.ListPlanes){
+              <tr>
+                <td>@item.PlaneId</td>
+                <td>@item.SeatNum</td>
+                <td>@item.MakerId</td>
+                <td> 
+                  <button  id="@item.PlaneId" data-toggle="modal" data-target="#EditPlaneForm"  type="button" class="btn btn-dark btn-sm  btn-rounded EditPlane"><i class="fa fa-cog"></i></button>
+                  <button  id="@item.PlaneId" type="button" class="btn btn-danger btn-sm  btn-rounded DeletePlane"><i class="fa fa-times" ></i></button>
+                </td>
+              </tr>
+            }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    </div>
+
+  </div>
+  <!-- end content-wrapper -->
+
+</div>
+<!-- end main body -->
+
+<!--create maker form  -->
+<div class="modal fade" id="CreateMakerForm" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content" >
+      <div class="modal-header" style="text-align:center !important; background-color:aliceblue;">
+        <h4 class="modal-title" style=" color:#000; font-weight: bold;font-size:34">Create Maker</h4>
+      </div>
+		  <div class="model-body" style="margin: 15px">
+				<form class="forms-sample">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Name</label>
+            <div class="col-sm-9">
+              <input id="CreateMaker-id" type="text" class="form-control"  placeholder="Enter name">
+            </div>    
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Address</label>
+            <div class="col-sm-9">
+              <input id="CreateMaker-name" type="text" class="form-control" placeholder="Enter address">
+            </div>
+          </div>
+          <button id="btsubmitCreateMaker" type="submit" class="btn btn-success mr-2" ><b>Create</b></button>
+          <button class="btn btn-light" data-dismiss="modal"><b>Cancel</b></button>
+        </form>
+		  </div>
+    </div> 
+  </div>
+</div>
+
+ <!-- edit maker form -->
+<div class="modal fade" id="EditMakerForm" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content" >
+      <div class="modal-header" style="text-align:center !important; background-color:aliceblue;">
+        <h4 class="modal-title" style=" color:#000; font-weight: bold;font-size:34">Edit Maker</h4>
+      </div>
+      <div class="model-body" style="margin: 15px" id="bodyEditMaker">
+        <form class="forms-sample">
+          <input id="EditMaker-id" type="hidden" class="form-control"   >
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Name</label>
+            <div class="col-sm-9">
+              <input id="EditMaker-name" type="text" class="form-control"  placeholder="Enter name">
+            </div>
+            <span style="color: red bold" class="z-mak-name"></span>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Address</label>
+            <div class="col-sm-9">
+              <input id="EditMaker-address" type="text" class="form-control" placeholder="Enter address">
+            </div>
+            <span style="color: red bold" class="z-mak-address"></span>
+          </div>
+          <button  id="btsubmitEditMaker" class="btn btn-success mr-2"><b>Update</b></button>
+          <button class="btn btn-light" data-dismiss="modal"><b>Cancel</b></button>
+        </form>
+      </div>
+    </div>    
+  </div>
+</div>
+
+<!--create plane form  -->
+<div class="modal fade" id="CreatePlaneForm" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content" >
+      <div class="modal-header" style="text-align:center !important; background-color:aliceblue;">
+        <h4 class="modal-title" style=" color:#000; font-weight: bold;font-size:34">Create Plane</h4>
+      </div>
+		  <div class="model-body" style="margin: 15px">
+				<form class="forms-sample">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">SeatNum</label>
+            <div class="col-sm-9">
+              <input id="CreatePlane-seatnum" type="text" class="form-control"  placeholder="Enter seat number">
+            </div>    
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Maker ID</label>
+            <div class="col-sm-9">
+              <select class="form-control form-control-lg" id="CreatePlane-makerid">
+                @foreach (var item in Model.ListMakers){
+                  <option>@item.MakerId</option>
+                }
+              </select>
+            </div>
+          </div>
+          <button id="btsubmitCreatePlane" type="submit" class="btn btn-success mr-2" ><b>Create</b></button>
+          <button class="btn btn-light" data-dismiss="modal"><b>Cancel</b></button>
+        </form>
+		  </div>
+    </div> 
+  </div>
+</div>
+
+ <!-- edit Plane form -->
+<div class="modal fade" id="EditPlaneForm" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content" >
+      <div class="modal-header" style="text-align:center !important; background-color:aliceblue;">
+        <h4 class="modal-title" style=" color:#000; font-weight: bold;font-size:34">Edit Plane</h4>
+      </div>
+      <div class="model-body" style="margin: 15px" id="bodyEditPlane">
+				<form class="forms-sample">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">SeatNum</label>
+            <div class="col-sm-9">
+              <input id="EditPlane-seatnum" type="text" class="form-control"  placeholder="Enter seat number">
+            </div>    
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Maker ID</label>
+            <div class="col-sm-9">
+              <select class="form-control form-control-lg" id="EditPlane-makerid">
+                  <option id="EditPlane-default" hidden>abc</option>
+                @foreach (var item in Model.ListMakers){
+                  <option>@item.MakerId</option>
+                }
+              </select>
+            </div>
+          </div>
+          <button id="btsubmitCreatePlane" type="submit" class="btn btn-success mr-2" ><b>Create</b></button>
+          <button class="btn btn-light" data-dismiss="modal"><b>Cancel</b></button>
+        </form>
+      </div>
+    </div>    
+  </div>
+</div>
+
