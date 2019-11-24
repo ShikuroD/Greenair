@@ -8,5 +8,7 @@ namespace ApplicationCore.Interfaces
 
         Task disable(string username);
         Task activate(string username);
+        Task disable(Account acc);
+        Task activate(Account acc);
     }
 }
