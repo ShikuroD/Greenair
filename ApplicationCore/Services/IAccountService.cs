@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ApplicationCore.Entities;
 using ApplicationCore.DTOs;
-namespace Infrastructure.Persistence.Services
+namespace ApplicationCore.Services
 {
     public interface IAccountService : IService<Account, AccountDTO, AccountDTO>
     {

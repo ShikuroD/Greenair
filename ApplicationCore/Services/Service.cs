@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using AutoMapper;
 using System;
 using ApplicationCore.Interfaces;
-namespace Infrastructure.Persistence.Services
+namespace ApplicationCore.Services
 {
     public class Service<Entity, Dto, SaveDto> : IService<Entity, Dto, SaveDto>
     {

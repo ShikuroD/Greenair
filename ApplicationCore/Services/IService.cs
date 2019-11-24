@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-namespace Infrastructure.Persistence.Services
+namespace ApplicationCore.Services
 {
     public interface IService<Entity, Dto, SaveDto>
     {
