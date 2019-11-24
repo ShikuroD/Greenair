@@ -31,6 +31,23 @@ namespace Infrastructure.Persistence
                 );
                 context.SaveChanges();
             }
+            if (!context.Airports.Any())
+            {
+                Address add = new Address("472", "Mac Cua", "An Lan", "Cai Chien", "Ha Noi", "Viet Nam");
+                Address add2 = new Address("472", "Cong Hoa", "5", "Tan Binh", "Ho Chi Minh", "Viet Nam");
+                context.Airports.AddRange(
+                    new Airport("000", "Noi Bai", add),
+                    new Airport("001", "Tan Son Nhat", add2),
+                    new Airport("003", "San Francisco", new Address("25/78", "HeHe", "TuTu", "MeMe", "California", "USA")),
+                    new Airport("004", "Dallas", new Address("2547", "TonTon", "ChiChi", "Goku", "Texas", "USA")),
+                    new Airport("005", "Los Angeles", new Address("2547", "TonTon", "ChiChi", "Goku", "California", "USA")),
+                    new Airport("006", "Tokyo", new Address("2547", "TonTon", "ChiChi", "Goku", "Tokyo", "Japan")),
+                    new Airport("007", "Osaka", new Address("2547", "TonTon", "ChiChi", "Goku", "Osaka", "Japan")),
+                    new Airport("008", "Liverpool John Lennon", new Address("2547", "TonTon", "ChiChi", "Goku", "Liverpool", "UK")),
+                    new Airport("009", "London City", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK"))
+                );
+                context.SaveChanges();
+            }
             if (!context.Planes.Any())
             {
                 context.Planes.AddRange(
@@ -52,30 +69,10 @@ namespace Infrastructure.Persistence
             {
                 var addr = new Address("123", "ABC", "hahahaha", "Gotham", "Newyork", "USA");
                 context.Employers.AddRange(
-                new Employer
-                    (
-                        "001",
-                        "Trieu Ng Quoc",
-                        "Viet",
-                        new DateTime(1999, 12, 7),
-                        "0904897191",
-                        addr,
-                        STATUS.AVAILABLE,
-                        15000,
-                        "001"
-                    ),
-                new Employer
-                    (
-                        "002",
-                        "Vu Tuong",
-                        "Giang",
-                        new DateTime(1999, 12, 8),
-                        "0904891597",
-                        new Address("123", "gfd", "fsd", "sdf", "fs", "fsd"),
-                        STATUS.AVAILABLE,
-                        18000,
-                        "002"
-                    )
+                    new Employer("00001", "Trieu Ng Quoc", "Viet", new DateTime(1999, 12, 7), "0904897191", addr, STATUS.AVAILABLE, 15000, "001"),
+                    new Employer("00002", "Vu Tuong", "Giang", new DateTime(1999, 12, 8), "0904891597", new Address("123", "gfd", "fsd", "sdf", "fs", "fsd"), STATUS.AVAILABLE, 18000, "002"),
+                    new Employer("00003", "Do Trung", "Hieu", new DateTime(1999, 7, 10), "0903774110", new Address("456", "gfd", "fsd", "sdf", "fs", "fsd"), STATUS.AVAILABLE, 19000, "003"),
+                    new Employer("00004", "Trieu Trung", "Gia", new DateTime(2000, 5, 5), "0903775781", new Address("456", "Tran Phu", "Phu Tho", "Tan Phu", "Ho Chi Minh", "Viet Nam"), STATUS.AVAILABLE, 20000, "004")
                 );
                 context.SaveChanges();
             }
@@ -83,34 +80,12 @@ namespace Infrastructure.Persistence
             if (!context.Customers.Any())
             {
                 context.Customers.AddRange(
-                new Customer
-                    (
-                        "003",
-                        "Do Trung",
-                        "Hieu",
-                        new DateTime(1999, 12, 10),
-                        "0903774110",
-                        new Address("456", "gfd", "fsd", "sdf", "fs", "fsd"),
-                        STATUS.AVAILABLE,
-                        "abc@gmail.com"
-                    ),
-                    new Customer
-                    (
-                        "004",
-                        "Phung Quoc",
-                        "Hai",
-                        new DateTime(1999, 12, 5),
-                        "0903774147",
-                        new Address("789", "gfd", "fsd", "sdf", "fs", "fsd"),
-                        STATUS.AVAILABLE,
-                        "abrrc@gmail.com"
-                    )
+                    new Customer("00005", "Phung Quoc", "Hai", new DateTime(1999, 12, 5), "0802774147", new Address("142", "An Duong Vuong", "10", "5", "Ho Chi Minh", "Viet Nam"), STATUS.AVAILABLE, "abrrc@gmail.com"),
+                    new Customer("00006", "Luu Minh", "Hoang", new DateTime(1999, 4, 30), "0801774147", new Address("472", "Mac Cua", "An Lan", "Cai Chien", "Ha Noi", "Viet Nam"), STATUS.AVAILABLE, "abrrfsc@gmail.com"),
+                    new Customer("00007", "Tran Van", "Hoang", new DateTime(1999, 6, 1), "0908774147", new Address("789", "gfd", "fsd", "sdf", "fs", "fsd"), STATUS.AVAILABLE, "abrrfsc@gmail.com")
                 );
                 context.SaveChanges();
             }
-
-
-
         }
 
     }
