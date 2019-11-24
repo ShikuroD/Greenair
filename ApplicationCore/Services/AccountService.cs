@@ -34,11 +34,14 @@ namespace ApplicationCore.Services
             {
                 var acc = this.toEntity(dto);
                 await unitOfWork.Accounts.AddAsync(acc);
+                await unitOfWork.CompleteAsync();
             }
 
 
         }
-        public async Task removeAccount(string person_id);
+        public async Task removeAccount(string person_id){
+
+        }
         public async Task updateAccount(AccountDTO dto);
 
         public async Task<bool> isExistedUsername(string username);
