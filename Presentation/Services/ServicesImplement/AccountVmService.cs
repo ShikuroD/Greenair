@@ -12,12 +12,12 @@ using System;
 
 namespace Presentation.Services.ServicesImplement
 {
-    public class AirportVmService : IAirportVmService
+    public class AccountVmService : IAccountVmService
     {
-        private readonly IAirportService _service;
-        public AirportVMService(IAirportService airportService)
+        private readonly IAccountService _service;
+        public AirportVMService(IAccountService accounttService)
         {
-            _service = flightService;
+            _service = accountService;
         }
     }
 }
