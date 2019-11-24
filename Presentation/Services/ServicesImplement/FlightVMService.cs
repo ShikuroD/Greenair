@@ -6,7 +6,7 @@ using ApplicationCore.DTOs;
 using ApplicationCore.Entities;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Infrastructure.Persistence.Services;
+using ApplicationCore.Services;
 using AutoMapper;
 using System;
 

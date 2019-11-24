@@ -17,7 +17,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using ApplicationCore;
 using AutoMapper;
-using Infrastructure.Persistence.Services;
+using ApplicationCore.Services;
 
 namespace Presentation
 {
