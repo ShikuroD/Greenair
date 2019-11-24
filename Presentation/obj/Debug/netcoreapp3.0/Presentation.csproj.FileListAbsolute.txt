@@ -624,3 +624,9 @@ C:\Users\Administrator\Desktop\Greenair-1\Presentation\obj\Debug\netcoreapp3.0\P
 C:\Users\Administrator\Desktop\Greenair-1\Presentation\obj\Debug\netcoreapp3.0\Presentation.dll
 C:\Users\Administrator\Desktop\Greenair-1\Presentation\obj\Debug\netcoreapp3.0\Presentation.pdb
 >>>>>>> 307c80cbfe62ed6102fd84858ea307d9965439ac
+D:\Code\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Customer.cshtml.g.cs
+D:\Code\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Dashboard.cshtml.g.cs
+D:\Code\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Employer.cshtml.g.cs
+D:\Code\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Flight.cshtml.g.cs
+D:\Code\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Index.cshtml.g.cs
+D:\Code\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Maker.cshtml.g.cs
