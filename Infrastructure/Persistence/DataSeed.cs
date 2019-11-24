@@ -26,8 +26,19 @@ namespace Infrastructure.Persistence
                 var address2 = new Address("123", "ABC", "Hogwart", "Gotham", "Newyork", "USA");
                 context.Makers.AddRange(
                     new Maker("000", "BOEING", new Address("123", "ABC", "Hahaha", "Gotham", "Newyork", "USA")),
-                    new Maker("001", "BAMBOO", address2)
-                //new Maker("002", "Mc.King", "456 XYZ, weq, fdg rtry LA")
+                    new Maker("001", "BAMBOO", address2),
+                    new Maker("002", "Mc.King", new Address("457", "AN Duong Vuong", "10", "5", "", "Viet Nam"))
+                );
+                context.SaveChanges();
+            }
+            if (!context.Planes.Any())
+            {
+                context.Planes.AddRange(
+                    new Plane("000", 40, "000"),
+                    new Plane("001", 50, "000"),
+                    new Plane("002", 30, "001"),
+                    new Plane("003", 40, "001"),
+                    new Plane("004", 35, "002")
                 );
                 context.SaveChanges();
             }
