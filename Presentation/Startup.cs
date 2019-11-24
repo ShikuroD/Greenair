@@ -15,9 +15,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using ApplicationCore.Services;
 using ApplicationCore;
 using AutoMapper;
-using Infrastructure.Persistence.Services;
+
 
 namespace Presentation
 {
@@ -41,7 +42,8 @@ namespace Presentation
             {
                 options.AllowSynchronousIO = true;
             });
-            services.AddAntiforgery(o => {
+            services.AddAntiforgery(o =>
+            {
                 o.HeaderName = "XSRF-TOKEN";
             });
             // services.AddMvc();
