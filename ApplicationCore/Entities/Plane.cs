@@ -14,5 +14,18 @@ namespace ApplicationCore.Entities
         public Maker Maker { get; set; }
 
         public IList<Flight> Flights { get; set; }
+        public Plane() { }
+        public Plane(string planeid, int seatnum, string makerid)
+        {
+            this.PlaneId = planeid;
+            this.SeatNum = seatnum;
+            this.MakerId = makerid;
+        }
+        public Plane(Plane plane)
+        {
+            this.PlaneId = plane.PlaneId;
+            this.SeatNum = plane.SeatNum;
+            this.MakerId = plane.MakerId;
+        }
     }
 }
