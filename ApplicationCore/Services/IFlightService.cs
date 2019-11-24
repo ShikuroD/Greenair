@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 //using ApplicationCore.Entities;
 using ApplicationCore.DTOs;
 using ApplicationCore.Entities;
-namespace Infrastructure.Persistence.Services
+namespace ApplicationCore.Services
 {
     public interface IFlightService : IService<Flight, FlightDTO, FlightDTO>
     {

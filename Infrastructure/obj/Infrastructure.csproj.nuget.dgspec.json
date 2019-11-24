@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Administrator\\Desktop\\Greenair-1\\Infrastructure\\Infrastructure.csproj": {}
+    "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Infrastructure\\Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Administrator\\Desktop\\Greenair-1\\ApplicationCore\\ApplicationCore.csproj": {
+    "c:\\Users\\Administrator\\Desktop\\Greenair-1\\ApplicationCore\\ApplicationCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\ApplicationCore\\ApplicationCore.csproj",
+        "projectUniqueName": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\ApplicationCore\\ApplicationCore.csproj",
         "projectName": "ApplicationCore",
-        "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\ApplicationCore\\ApplicationCore.csproj",
+        "projectPath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\ApplicationCore\\ApplicationCore.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\ApplicationCore\\obj\\",
+        "outputPath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\ApplicationCore\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -91,14 +91,14 @@
         }
       }
     },
-    "C:\\Users\\Administrator\\Desktop\\Greenair-1\\Infrastructure\\Infrastructure.csproj": {
+    "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\Infrastructure\\Infrastructure.csproj",
+        "projectPath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Infrastructure\\Infrastructure.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\Infrastructure\\obj\\",
+        "outputPath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -115,8 +115,8 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "C:\\Users\\Administrator\\Desktop\\Greenair-1\\ApplicationCore\\ApplicationCore.csproj": {
-                "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\ApplicationCore\\ApplicationCore.csproj"
+              "c:\\Users\\Administrator\\Desktop\\Greenair-1\\ApplicationCore\\ApplicationCore.csproj": {
+                "projectPath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\ApplicationCore\\ApplicationCore.csproj"
               }
             }
           }

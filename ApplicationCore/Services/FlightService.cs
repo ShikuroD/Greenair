@@ -1,20 +1,15 @@
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Numerics;
-using System.Globalization;
-using System.Net;
+
 using System;
 using System.Linq.Expressions;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using ApplicationCore;
 using ApplicationCore.Entities;
 using ApplicationCore.DTOs;
-using Infrastructure;
 using ApplicationCore.Interfaces;
 using AutoMapper;
 using System.Linq;
-namespace Infrastructure.Persistence.Services
+namespace ApplicationCore.Services
 {
     public class FlightService : Service<Flight, FlightDTO, FlightDTO>, IFlightService
     {
