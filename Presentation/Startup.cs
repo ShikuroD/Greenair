@@ -6,7 +6,7 @@ using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
 using Infrastructure.Persistence;
 using Infrastructure.Persistence.Repos;
-using Infrastructure.Persistence.Services;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -14,8 +14,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using ApplicationCore;
 using AutoMapper;
+using Infrastructure.Persistence.Services;
+
 namespace Presentation
 {
     public class Startup
@@ -32,11 +35,18 @@ namespace Presentation
         {
             services.AddRazorPages();
             services.AddDbContext<GreenairContext>(options =>
-               options.UseSqlite(Configuration.GetConnectionString("Greenair"), x => x.MigrationsAssembly("Presentation")));
-
+            options.UseSqlite(Configuration.GetConnectionString("Greenair"), x => x.MigrationsAssembly("Presentation")));
+            services.AddSession();
+            services.Configure<KestrelServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
+            services.AddAntiforgery(o => {
+                o.HeaderName = "XSRF-TOKEN";
+            });
+            // services.AddMvc();
             // Mapping
             services.AddAutoMapper(typeof(Mapping));
-
             // Repositories
             services.AddScoped<IMakerRepository, MakerRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
@@ -50,9 +60,11 @@ namespace Presentation
             services.AddScoped<IPersonRepository, PersonRepository>();
             services.AddScoped<IPlaneRepository, PlaneRepository>();
 
+
+            // Web Services
+
             // Services
             services.AddScoped<IFlightService, FlightService>();
-
             //.....................
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -74,7 +86,7 @@ namespace Presentation
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
