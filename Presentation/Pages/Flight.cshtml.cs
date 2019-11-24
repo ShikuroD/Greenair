@@ -7,14 +7,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using Presentation.Helpers;
 using System.IO;
 
 namespace Presentation.Pages
 {
     public class FlightModel : PageModel
     {
-        public Dictionary<string,object> FlightSearch { get; set; }
+        
         public string Msg { get; set; }
 
         private readonly ILogger<FlightModel> _logger;
@@ -24,10 +23,8 @@ namespace Presentation.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        public void OnGetUser()
         {
-            FlightSearch = SessionHelper.GetObjectFromJson<Dictionary<string,object>>(HttpContext.Session, "FlightSearch");
-            ViewData["From"] = FlightSearch.GetValueOrDefault("from");
         }
         // public IActionResult OnPostLogIn()
         // {
