@@ -60,7 +60,7 @@ namespace Infrastructure.Persistence.Repos
         {
             try
             {
-                return Context.Set<T>().ToList();
+                return Context.Set<T>().AsNoTracking().ToList();
             }
             catch (Exception e)
             {

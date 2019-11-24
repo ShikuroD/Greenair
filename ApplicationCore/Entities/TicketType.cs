@@ -16,10 +16,11 @@ namespace ApplicationCore.Entities
         public IList<Ticket> Tickets { get; set; }
 
         public TicketType() { }
-        public TicketType(string ticket_type_id, string ticket_type_name)
+        public TicketType(string ticket_type_id, string ticket_type_name, decimal base_price)
         {
             this.TicketTypeId = ticket_type_id;
             this.TicketTypeName = ticket_type_name;
+            this.BasePrice = base_price;
         }
     }
 }

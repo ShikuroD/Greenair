@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Presentation.Migrations
 {
     [DbContext(typeof(GreenairContext))]
-    [Migration("20191120182725_Initials")]
+    [Migration("20191124190833_Initials")]
     partial class Initials
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -19,17 +19,18 @@ namespace Presentation.Migrations
             modelBuilder.Entity("ApplicationCore.Entities.Account", b =>
                 {
                     b.Property<string>("Username")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(20);
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(20);
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PersonId")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Username");
 
@@ -42,12 +43,11 @@ namespace Presentation.Migrations
             modelBuilder.Entity("ApplicationCore.Entities.Airport", b =>
                 {
                     b.Property<string>("AirportId")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(5);
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("AirportName")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(30);
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("AirportId");
 
@@ -57,12 +57,13 @@ namespace Presentation.Migrations
             modelBuilder.Entity("ApplicationCore.Entities.Flight", b =>
                 {
                     b.Property<string>("FlightId")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(5);
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PlaneId")
-                        .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("FlightId");
 
@@ -74,8 +75,7 @@ namespace Presentation.Migrations
             modelBuilder.Entity("ApplicationCore.Entities.FlightDetail", b =>
                 {
                     b.Property<string>("FlightDetailId")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(5);
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("FlightId")
                         .HasColumnType("TEXT");
@@ -92,8 +92,6 @@ namespace Presentation.Migrations
 
                     b.HasKey("FlightDetailId", "FlightId");
 
-                    b.HasAlternateKey("FlightDetailId");
-
                     b.HasIndex("FlightId");
 
                     b.HasIndex("RouteId");
@@ -108,6 +106,7 @@ namespace Presentation.Migrations
                         .HasMaxLength(3);
 
                     b.Property<string>("JobName")
+                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasMaxLength(20);
 
@@ -137,17 +136,30 @@ namespace Presentation.Migrations
                         .HasColumnType("TEXT")
                         .HasMaxLength(5);
 
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("TEXT")
-                        .HasMaxLength(25);
+                        .HasMaxLength(30);
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(20);
 
                     b.Property<string>("Phone")
+                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasMaxLength(10);
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -211,18 +223,18 @@ namespace Presentation.Migrations
 
                     b.Property<string>("AssignedCus")
                         .HasColumnType("TEXT")
-                        .HasMaxLength(25);
+                        .HasMaxLength(30);
 
                     b.Property<string>("CustomerId")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("TicketTypeId")
                         .IsRequired()
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("status")
-                        .HasColumnType("INTEGER");
 
                     b.HasKey("TicketId", "FlightId");
 
@@ -245,8 +257,9 @@ namespace Presentation.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("TicketTypeName")
+                        .IsRequired()
                         .HasColumnType("TEXT")
-                        .HasMaxLength(10);
+                        .HasMaxLength(20);
 
                     b.HasKey("TicketTypeId");
 
@@ -333,9 +346,7 @@ namespace Presentation.Migrations
                 {
                     b.HasOne("ApplicationCore.Entities.Plane", "Plane")
                         .WithMany("Flights")
-                        .HasForeignKey("PlaneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PlaneId");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entities.FlightDetail", b =>
