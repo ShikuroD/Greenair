@@ -15,14 +15,9 @@ namespace Presentation.Services.ServicesImplement
     public class AirportVmService : IAirportVmService
     {
         private readonly IAirportService _service;
-        public FlightVMService(IFlightService flightService)
+        public AirportVMService(IAirportService airportService)
         {
             _service = flightService;
-        }
-        public AirportVM GetFlightListVm(string origin_id, string destination_id, DateTime dep_date, DateTime arr_date,int adults_num, int childs_num)
-        {
-            var FlightSearch = _service.searchFlightAsync(origin_id,destination_id,dep_date,arr_date,adults_num,childs_num);
-            return new FlightVM();
         }
     }
 }
