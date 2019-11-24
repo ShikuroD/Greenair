@@ -6,7 +6,7 @@ using ApplicationCore.DTOs;
 using ApplicationCore.Entities;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Infrastructure.Persistence.Services;
+using ApplicationCore.Services;
 using AutoMapper;
 using System;
 
@@ -19,9 +19,9 @@ namespace Presentation.Services.ServicesImplement
         {
             _service = flightService;
         }
-        public FlightVM GetFlightListVm(string origin_id, string destination_id, DateTime dep_date, DateTime arr_date,int adults_num, int childs_num)
+        public FlightVM GetFlightListVm(string origin_id, string destination_id, DateTime dep_date, DateTime arr_date, int adults_num, int childs_num)
         {
-            var FlightSearch = _service.searchFlightAsync(origin_id,destination_id,dep_date,arr_date,adults_num,childs_num);
+            var FlightSearch = _service.searchFlightAsync(origin_id, destination_id, dep_date, arr_date, adults_num, childs_num);
             return new FlightVM();
         }
     }
