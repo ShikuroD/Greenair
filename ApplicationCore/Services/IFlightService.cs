@@ -33,9 +33,9 @@ namespace ApplicationCore.Services
         Task<FlightTimeDTO> getTotalFlightTime(string flight_id);
 
         //Thao tac voi chi tiet =======================================================================================
-        Task<FlightDetailDTO> getFllightdetail(string flight_id, int part);
-        Task<FlightDetailDTO> getFllightdetail(string flight_id, string flightdetail_id);
-        Task<IEnumerable<FlightDetailDTO>> getAllFlightDetail(string flight_id);
+        Task<FlightDetailDTO> getFllightdetailAsync(string flight_id, int part);
+        Task<FlightDetailDTO> getFllightdetailAsync(string flight_id, string flightdetail_id);
+        Task<IEnumerable<FlightDetailDTO>> getAllFlightDetailAsync(string flight_id);
         Task addFlightDetailAsync(FlightDetailDTO det_dto);
         Task addFlightDetailRangeAsync(IEnumerable<FlightDetailDTO> dets_dto);
         Task removeFlightDetailAsync(string flight_id); //xoa detail dung cuoi
@@ -44,7 +44,8 @@ namespace ApplicationCore.Services
         //Thao tac voi ve =======================================================================================
         Task generateTicket(string flight_id);
         Task<TicketDTO> getTicketAsync(string flight_id, string ticket_id);
-        Task<IEnumerable<TicketDTO>> getAllTicketAsync(string flight_id);
+        Task<IEnumerable<TicketDTO>> getAllTicketAsync();
+        Task<IEnumerable<TicketDTO>> getAllTicketByFlightIdAsync(string flight_id);
         Task<IEnumerable<TicketDTO>> getAvailableTicketAsync(string flight_id);
         Task<IEnumerable<TicketDTO>> getOrderedTicketAsync(string flight_id);
         Task<IEnumerable<TicketDTO>> getPaidTicketAsync(string flight_id);

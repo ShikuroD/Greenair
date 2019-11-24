@@ -67,6 +67,7 @@ namespace Presentation
 
             // Services
             services.AddScoped<IFlightService, FlightService>();
+            services.AddScoped<IAccountService, AccountService>();
             //.....................
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();

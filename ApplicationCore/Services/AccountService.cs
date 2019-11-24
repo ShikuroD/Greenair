@@ -16,11 +16,11 @@ namespace ApplicationCore.Services
         }
 
         //query
-        public async Task<IEnumerable<AccountDTO>> getAllAccount()
+        public async Task<IEnumerable<AccountDTO>> getAllAccountAsync()
         {
             return this.toDtoRange(await unitOfWork.Accounts.GetAllAsync());
         }
-        public async Task<AccountDTO> getAccount(string person_id)
+        public async Task<AccountDTO> getAccountAsync(string person_id)
         {
             var acc = await unitOfWork.Accounts.getAccountByPersonId(person_id);
             if (acc == null) return null;
@@ -29,9 +29,10 @@ namespace ApplicationCore.Services
 
 
         //action
-        public async Task addAccount(AccountDTO dto)
+        public async Task addAccountAsync(AccountDTO dto)
         {
-            if (await this.isExistedUsername(dto.Username))
+            var temp = await unitOfWork.Accounts.getAccountByPersonId(dto.PersonId);
+            if (!await this.isExistedUsernameAsync(dto.Username) && temp == null)
             {
                 var acc = this.toEntity(dto);
                 await unitOfWork.Accounts.AddAsync(acc);
@@ -39,7 +40,7 @@ namespace ApplicationCore.Services
             }
 
         }
-        public async Task removeAccount(string person_id)
+        public async Task removeAccountAsync(string person_id)
         {
             var acc = await unitOfWork.Accounts.getAccountByPersonId(person_id);
             if (acc != null)
@@ -48,9 +49,9 @@ namespace ApplicationCore.Services
                 await unitOfWork.CompleteAsync();
             }
         }
-        public async Task updateAccount(AccountDTO dto)
+        public async Task updateAccountAsync(AccountDTO dto)
         {
-            if (await this.isExistedUsername(dto.Username))
+            if (await this.isExistedUsernameAsync(dto.Username))
             {
                 var acc = this.toEntity(dto);
                 await unitOfWork.Accounts.UpdateAsync(acc);
@@ -58,11 +59,11 @@ namespace ApplicationCore.Services
             }
         }
 
-        public async Task<bool> isExistedUsername(string username)
+        public async Task<bool> isExistedUsernameAsync(string username)
         {
             return await unitOfWork.Accounts.GetByAsync(username) != null;
         }
-        public async Task<bool> loginCheck(AccountDTO dto)
+        public async Task<bool> loginCheckAsync(AccountDTO dto)
         {
             var predicate = PredicateBuilder.True<Account>();
             predicate.And(m => m.Username.Equals(dto.Username));
@@ -72,7 +73,7 @@ namespace ApplicationCore.Services
             return true;
         }
 
-        public async Task disableAccount(string person_id)
+        public async Task disableAccountAsync(string person_id)
         {
             var acc = await unitOfWork.Accounts.getAccountByPersonId(person_id);
             if (acc != null)
@@ -81,7 +82,7 @@ namespace ApplicationCore.Services
                 //await unitOfWork.CompleteAsync(); already in above function
             }
         }
-        public async Task activateAccount(string person_id)
+        public async Task activateAccountAsync(string person_id)
         {
             var acc = await unitOfWork.Accounts.getAccountByPersonId(person_id);
             if (acc != null)

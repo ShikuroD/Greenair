@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
 using Microsoft.EntityFrameworkCore;
-
+using ApplicationCore;
 namespace Infrastructure.Persistence.Repos
 {
     public class CustomerRepository : Repository<Customer>, ICustomerRepository
@@ -73,5 +73,52 @@ namespace Infrastructure.Persistence.Repos
         //         return null;
         //     }
         // }
+        private async Task changeCustomerStatus(string cus_id, STATUS status)
+        {
+            try
+            {
+                var cus = await this.GetByAsync(cus_id);
+                cus.Status = status;
+                this.Context.Update(cus);
+                await this.Context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("ChangeCustomerStatus() Unexpected: " + e);
+            }
+        }
+        private async Task changeCustomerStatus(Customer cus, STATUS status)
+        {
+            try
+            {
+                cus.Status = status;
+                this.Context.Update(cus);
+                await this.Context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("ChangeCustomerStatus() Unexpected: " + e);
+            }
+        }
+
+        public async Task activate(string cus_id)
+        {
+            await this.changeCustomerStatus(cus_id, STATUS.AVAILABLE);
+        }
+
+        public async Task disable(string cus_id)
+        {
+            await this.changeCustomerStatus(cus_id, STATUS.DISABLED);
+        }
+
+        public async Task activate(Customer cus)
+        {
+            await this.changeCustomerStatus(cus, STATUS.AVAILABLE);
+        }
+
+        public async Task disable(Customer cus)
+        {
+            await this.changeCustomerStatus(cus, STATUS.DISABLED);
+        }
     }
 }

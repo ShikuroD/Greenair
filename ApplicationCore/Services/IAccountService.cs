@@ -7,20 +7,20 @@ namespace ApplicationCore.Services
     public interface IAccountService : IService<Account, AccountDTO, AccountDTO>
     {
         //query
-        Task<IEnumerable<AccountDTO>> getAllAccount();
-        Task<AccountDTO> getAccount(string person_id);
+        Task<IEnumerable<AccountDTO>> getAllAccountAsync();
+        Task<AccountDTO> getAccountAsync(string person_id);
 
 
         //action
-        Task addAccount(AccountDTO dto);
-        Task removeAccount(string person_id);
-        Task updateAccount(AccountDTO dto);
+        Task addAccountAsync(AccountDTO dto);
+        Task removeAccountAsync(string person_id);
+        Task updateAccountAsync(AccountDTO dto);
 
-        Task<bool> isExistedUsername(string username);
-        Task<bool> loginCheck(AccountDTO dto);
+        Task<bool> isExistedUsernameAsync(string username);
+        Task<bool> loginCheckAsync(AccountDTO dto);
 
-        Task disableAccount(string person_id);
-        Task activateAccount(string person_id);
+        Task disableAccountAsync(string person_id);
+        Task activateAccountAsync(string person_id);
 
     }
 }

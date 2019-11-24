@@ -84,6 +84,7 @@ namespace ApplicationCore.Services
         public async Task removeFlightAsync(string flight_id)
         {
             await unitOfWork.Flights.RemoveAsync(await unitOfWork.Flights.GetByAsync(flight_id));
+            await unitOfWork.CompleteAsync();
         }
 
         public async Task removeAllFlightAsync()
@@ -160,15 +161,15 @@ namespace ApplicationCore.Services
         }
 
         //Thao tac voi chi tiet ============================================================================================
-        public async Task<FlightDetailDTO> getFllightdetail(string flight_id, int part)
+        public async Task<FlightDetailDTO> getFllightdetailAsync(string flight_id, int part)
         {
             return mapper.Map<FlightDetail, FlightDetailDTO>(await unitOfWork.Flights.getFlightDetail(flight_id, part));
         }
-        public async Task<FlightDetailDTO> getFllightdetail(string flight_id, string flightdetail_id)
+        public async Task<FlightDetailDTO> getFllightdetailAsync(string flight_id, string flightdetail_id)
         {
             return mapper.Map<FlightDetail, FlightDetailDTO>(await unitOfWork.Flights.getFlightDetail(flight_id, flightdetail_id));
         }
-        public async Task<IEnumerable<FlightDetailDTO>> getAllFlightDetail(string flight_id)
+        public async Task<IEnumerable<FlightDetailDTO>> getAllFlightDetailAsync(string flight_id)
         {
             return mapper.Map<IEnumerable<FlightDetail>, IEnumerable<FlightDetailDTO>>(await unitOfWork.Flights.getAllFlightDetails(flight_id));
         }
@@ -239,9 +240,14 @@ namespace ApplicationCore.Services
             var ticket = await unitOfWork.Flights.getTicket(flight_id, ticket_id);
             return mapper.Map<Ticket, TicketDTO>(ticket);
         }
-        public async Task<IEnumerable<TicketDTO>> getAllTicketAsync(string flight_id)
+        public async Task<IEnumerable<TicketDTO>> getAllTicketAsync()
         {
-            var tickets = await unitOfWork.Flights.getAllTickets(flight_id);
+            var tickets = await unitOfWork.Flights.getAllTickets();
+            return mapper.Map<IEnumerable<Ticket>, IEnumerable<TicketDTO>>(tickets);
+        }
+        public async Task<IEnumerable<TicketDTO>> getAllTicketByFlightIdAsync(string flight_id)
+        {
+            var tickets = await unitOfWork.Flights.getAllTicketsByFlightId(flight_id);
             return mapper.Map<IEnumerable<Ticket>, IEnumerable<TicketDTO>>(tickets);
         }
         public async Task<IEnumerable<TicketDTO>> getAvailableTicketAsync(string flight_id)

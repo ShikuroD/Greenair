@@ -7,13 +7,24 @@ namespace ApplicationCore.Services
     public interface ICustomerService : IService<Customer, CustomerDTO, CustomerDTO>
     {
         //query
-        Task getCustomer(string cus_id);
-        Task getAllCustomer();
-        Task<IEnumerable<Ticket>> getCustomerTicket(string cus_id);
+        Task<CustomerDTO> getCustomerAsync(string cus_id);
+        Task<IEnumerable<CustomerDTO>> getAllCustomerAsync();
+        Task<IEnumerable<TicketDTO>> getCustomerTicketAsync(string cus_id);
 
         //actions
-        Task orderTicket(string flight_id);
-        Task payTicket(string flight_id, string ticket_id);
-        Task cancelTicket(string flight_id, string ticket_id);
+        Task orderTicketAsync(string flight_id, string cus_id, string assined_cus, string ticket_type_id);
+        Task orderTicketRangeAsync(string flight_id, int adult_num, int child_num, string cus_id);
+        Task payTicketAsync(string flight_id, string ticket_id);
+        Task cancelTicketAsync(string flight_id, string ticket_id);
+
+        Task addCustomerAsync(CustomerDTO dto);
+        Task removeCustomerAsync(string cus_id);
+        Task updateCustomerAsync(CustomerDTO dto);
+
+        Task createAccountAsync(AccountDTO acc_dto);
+        Task updateAccountAsync(AccountDTO acc_dto);
+
+        Task disableCutomerAsync(string cus_id);
+        Task activateCustomerAsync(string cus_id);
     }
 }

@@ -6,7 +6,7 @@ using ApplicationCore;
 using System.Threading.Tasks;
 namespace Infrastructure.Persistence.Repos
 {
-    public class PersonRepository : Repository<Person>, IPersonBaseRepository<Person>, IPersonRepository
+    public class PersonRepository : Repository<Person>, IPersonRepository
     {
         protected new GreenairContext Context => base.Context as GreenairContext;
         public PersonRepository(GreenairContext context) : base(context)

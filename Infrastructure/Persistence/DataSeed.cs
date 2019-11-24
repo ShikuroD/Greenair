@@ -36,6 +36,14 @@ namespace Infrastructure.Persistence
 
                 context.SaveChanges();
             }
+            if (!context.TicketTypes.Any())
+            {
+                context.TicketTypes.AddRange(
+                    new TicketType("000", "Người lớn"),
+                    new TicketType("001", "Trẻ em")
+                );
+                context.SaveChanges();
+            }
 
             if (!context.Employers.Any())
             {

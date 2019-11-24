@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -195,7 +196,7 @@ namespace Infrastructure.Persistence.Repos
         {
             try
             {
-                var arr = await this.getAllTickets(flight_id);
+                var arr = await this.getAllTicketsByFlightId(flight_id);
                 foreach (Ticket ticket in arr)
                 {
                     if (ticket.TicketId.Equals(ticket_id)) return ticket;
@@ -208,7 +209,23 @@ namespace Infrastructure.Persistence.Repos
                 return null;
             }
         }
-        public async Task<IEnumerable<Ticket>> getAllTickets(string flight_id)
+        public async Task<IEnumerable<Ticket>> getAllTickets()
+        {
+            try
+            {
+                var sql =
+                    from m in this.Context.Tickets
+                    orderby m.FlightId
+                    select m;
+                return await sql.AsNoTracking().Distinct().ToListAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("GetAllTicket() Unexpected: " + e);
+                return null;
+            }
+        }
+        public async Task<IEnumerable<Ticket>> getAllTicketsByFlightId(string flight_id)
         {
             try
             {
@@ -280,12 +297,60 @@ namespace Infrastructure.Persistence.Repos
             return await this.getTicketsByStatus(flight_id, STATUS.PAID);
         }
 
+        public async Task<IEnumerable<Ticket>> findTicketAsync(Expression<Func<Ticket, bool>> predicate)
+        {
+            var tickets = await this.getAllTickets();
+            IQueryable<Ticket> res = tickets.AsQueryable();
+            return await res.Where(predicate).AsNoTracking().ToListAsync();
+        }
+        private async Task orderTicketAssignment(Ticket ticket, string cus_id, string assined_cus, string ticket_type_id)
+        {
+            try
+            {
+                ticket.CustomerId = cus_id;
+                ticket.AssignedCus = assined_cus;
+                ticket.TicketTypeId = ticket_type_id;
+                this.Context.Tickets.Update(ticket);
+                await this.Context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("TicketAssignment() Unexpected: " + e);
+
+            }
+        }
         private async Task changeTicketStatus(string flight_id, string ticket_id, STATUS status)
         {
             try
             {
                 var ticket = await this.getTicket(flight_id, ticket_id);
                 ticket.Status = status;
+                if (status == STATUS.AVAILABLE)
+                {
+                    ticket.CustomerId = null;
+                    ticket.AssignedCus = null;
+                    ticket.TicketTypeId = null;
+                }
+                this.Context.Tickets.Update(ticket);
+                await this.Context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("ChangeTicketStatus() Unexpected: " + e);
+
+            }
+        }
+        private async Task changeTicketStatus(Ticket ticket, STATUS status)
+        {
+            try
+            {
+                ticket.Status = status;
+                if (status == STATUS.AVAILABLE)
+                {
+                    ticket.CustomerId = null;
+                    ticket.AssignedCus = null;
+                    ticket.TicketTypeId = null;
+                }
                 this.Context.Tickets.Update(ticket);
                 await this.Context.SaveChangesAsync();
             }
@@ -299,13 +364,29 @@ namespace Infrastructure.Persistence.Repos
         {
             await this.changeTicketStatus(flight_id, ticket_id, STATUS.PAID);
         }
-        public async Task orderTicket(string flight_id, string ticket_id)
+        public async Task orderTicket(string flight_id, string ticket_id, string cus_id, string assined_cus, string ticket_type_id)
         {
+            var ticket = await this.getTicket(flight_id, ticket_id);
+            await this.orderTicketAssignment(ticket, cus_id, assined_cus, ticket_type_id);
             await this.changeTicketStatus(flight_id, ticket_id, STATUS.ORDERED);
         }
         public async Task cancelTicket(string flight_id, string ticket_id)
         {
             await this.changeTicketStatus(flight_id, ticket_id, STATUS.AVAILABLE);
+        }
+
+        public async Task paidTicket(Ticket ticket)
+        {
+            await this.changeTicketStatus(ticket, STATUS.PAID);
+        }
+        public async Task orderTicket(Ticket ticket, string cus_id, string assined_cus, string ticket_type_id)
+        {
+            await this.orderTicketAssignment(ticket, cus_id, assined_cus, ticket_type_id);
+            await this.changeTicketStatus(ticket, STATUS.ORDERED);
+        }
+        public async Task cancelTicket(Ticket ticket)
+        {
+            await this.changeTicketStatus(ticket, STATUS.AVAILABLE);
         }
     }
 }
