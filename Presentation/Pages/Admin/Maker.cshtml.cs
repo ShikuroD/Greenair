@@ -11,7 +11,8 @@ using Newtonsoft.Json;
 using Presentation.ViewModels;
 using Microsoft.AspNetCore.Http;
 using System.IO;
-
+using ApplicationCore.DTOs;
+//https://github.com/ShikuroD/Greenair
 namespace Presentation.Pages.Admin
 {
     public class MakerModel : PageModel
@@ -32,6 +33,7 @@ namespace Presentation.Pages.Admin
             ListPlanes = await _unitofwork.Planes.GetAllAsync();
 
         }
+        // Maker methods
         public IActionResult OnGetEditMaker(string id)
         {
             var maker = _unitofwork.Makers.GetBy(id);
@@ -90,11 +92,66 @@ namespace Presentation.Pages.Admin
             string mes = "Remove " + MakerId + " Success!";
             return new JsonResult(mes);
         }
-        // public async Task OnPostListPlaneBy(string id)
-        // {
-        //      this.ListPlanes = await _unitofwork.Planes.FindAsync(id);
-
-        // }
+        // Plane methods
+        public IActionResult OnGetEditPlane(string id)
+        {
+            var plane = _unitofwork.Planes.GetBy(id);
+            PlaneDTO planeDTO = new PlaneDTO();
+            planeDTO.PlaneId = plane.PlaneId;
+            planeDTO.SeatNum = plane.SeatNum;
+            planeDTO.MakerId = plane.MakerId;
+            return Content(JsonConvert.SerializeObject(planeDTO));
+            // return new JsonResult(planedto);
+        }
+        public async Task<IActionResult> OnPostEditPlane()
+        {
+            string respone = "Successful";
+            MemoryStream stream = new MemoryStream();
+            Request.Body.CopyTo(stream);
+            stream.Position = 0;
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string requestBody = reader.ReadToEnd();
+                if (requestBody.Length > 0)
+                {
+                    var obj = JsonConvert.DeserializeObject<PlaneDTO>(requestBody);
+                    if (obj != null)
+                    {
+                        Plane plane = new Plane();
+                        plane.PlaneId = obj.PlaneId;
+                        plane.SeatNum = obj.SeatNum;
+                        plane.MakerId = obj.MakerId.Substring(0, 3);
+                        await _unitofwork.Planes.UpdateAsync(plane);
+                        await _unitofwork.CompleteAsync();
+                    }
+                }
+            }
+            return new JsonResult(respone);
+        }
+        public async Task<IActionResult> OnPostDeletePlane()
+        {
+            string PlaneId = "";
+            MemoryStream stream = new MemoryStream();
+            Request.Body.CopyTo(stream);
+            stream.Position = 0;
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string requestBody = reader.ReadToEnd();
+                if (requestBody.Length > 0)
+                {
+                    var obj = JsonConvert.DeserializeObject<PlaneDTO>(requestBody);
+                    if (obj != null)
+                    {
+                        PlaneId = obj.PlaneId;
+                        var item = await _unitofwork.Planes.GetByAsync(PlaneId);
+                        await _unitofwork.Planes.RemoveAsync(item);
+                        await _unitofwork.CompleteAsync();
+                    }
+                }
+            }
+            string mes = "Remove " + PlaneId + " Success!";
+            return new JsonResult(mes);
+        }
     }
 
 }
