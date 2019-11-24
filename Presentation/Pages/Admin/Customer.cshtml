@@ -15,14 +15,12 @@
       <div class="card">
         <div class="card-body">
           <h3 align="center">List of Customers </h3>
-          <table class="table table-bordered table-striped table-hover">
+          <table class="table table-bordered table-striped table-hover" id="TableCustomer">
            <thead>
             <tr>
               <th>ID</th>
-              <th>Name</th>
-              <th>Birthday</th>
-              <th>Phone</th>
-              <th>Address</th>
+              <th>First name</th>
+              <th>Last name</th>
               <th>Email</th>
               <th>Status</th>
               <th></th>
@@ -30,21 +28,19 @@
            </thead>
            <tbody>
              <!-- change to code later -->
-            <!-- @foreach (var item in Model.ListCus){
+            @foreach (var item in Model.ListCustomer){
               <tr>
-                <td>item.ID</td>
-                <td>item.Name</td>
-                <td>item.Birthday</td>
-                <td>item.Phone</td>
-                <td>item.Address</td>
+                <td>item.Id</td>
+                <td>item.FirstName</td>
+                <td>item.LastName</td>
                 <td>item.Email</td>
                 <td><label class="badge badge-warning">item.Status</label></td>
                 <td> 
-                  <button type="button" class="btn btn-dark btn-sm  btn-rounded" ><i class="fa fa-cog"></i></button>
-                  <button type="button" class="btn btn-danger btn-sm  btn-rounded"><i class="fa fa-times"></i></button>
+                  <button  id="@item.Id" data-toggle="modal" data-target="#EditCustomerForm"  type="button" class="btn btn-dark btn-sm  btn-rounded EditCustomer"><i class="fa fa-cog"></i></button>
+                  <button  id="@item.Id" type="button" class="btn btn-danger btn-sm  btn-rounded DeleteCustomer"><i class="fa fa-times" ></i></button>
                 </td>
               </tr>
-            } -->
+            }
             </tbody>
           </table>
         </div>

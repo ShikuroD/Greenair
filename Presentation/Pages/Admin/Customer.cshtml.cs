@@ -25,13 +25,11 @@ namespace Presentation.Pages.Admin
         [BindProperty(SupportsGet = true)]
         public string SearchString { get; set; }
 
-        // public CustomerVM CustomersVM { get; set; }
-        public IEnumerable<Customer> ListCus;
+        public IEnumerable<Customer> ListCustomer { get; set; }
 
-        public void OnGet(string searchString, int pageIndex = 1)
+        public async Task OnGet()
         {
-            // CustomersVM = await _service.GetCustomerViewModelAsync(searchString, pageIndex);
-            //ListCus = _unitofwork.Customers.GetAll().ToList();
+            ListCustomer = await _unitofwork.Customers.GetAllAsync();
         }
     }
 }
