@@ -34,6 +34,7 @@ namespace Infrastructure.Persistence.Repos
                 return null;
             }
         }
+
         // new public IEnumerable<Customer> GetAll()
         // {
         //     try
@@ -60,6 +61,14 @@ namespace Infrastructure.Persistence.Repos
                 Console.WriteLine("GetByCustomerAsync() Unexpected: " + e);
                 return null;
             }
+        }
+
+        public async Task<IEnumerable<Customer>> getCustomerByName(string lastname, string firstname)
+        {
+            var predicate = PredicateBuilder.True<Customer>();
+            if (!String.IsNullOrEmpty(lastname)) predicate.And(m => m.LastName.Contains(lastname));
+            if (!String.IsNullOrEmpty(firstname)) predicate.And(m => m.FirstName.Contains(firstname));
+            return await this.FindAsync(predicate);
         }
         // new public async Task<IEnumerable<Customer>> GetAllAsync()
         // {

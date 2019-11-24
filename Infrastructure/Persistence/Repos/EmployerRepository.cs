@@ -30,6 +30,13 @@ namespace Infrastructure.Persistence.Repos
                 return null;
             }
         }
+        public async Task<IEnumerable<Employer>> getEmployerByName(string lastname, string firstname)
+        {
+            var predicate = PredicateBuilder.True<Employer>();
+            if (!String.IsNullOrEmpty(lastname)) predicate.And(m => m.LastName.Contains(lastname));
+            if (!String.IsNullOrEmpty(firstname)) predicate.And(m => m.FirstName.Contains(firstname));
+            return await this.FindAsync(predicate);
+        }
 
         private async Task changeEmployerStatus(string emp_id, STATUS status)
         {

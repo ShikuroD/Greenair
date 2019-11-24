@@ -34,6 +34,16 @@ namespace ApplicationCore.Services
             return mapper.Map<IEnumerable<Ticket>, IEnumerable<TicketDTO>>(tickets);
         }
 
+        public async Task<IEnumerable<CustomerDTO>> getCustomerByName(string lastname, string firstname)
+        {
+            return this.toDtoRange(await unitOfWork.Customers.getCustomerByName(lastname, firstname));
+        }
+
+
+
+
+
+
         //actions
         public async Task orderTicketAsync(string flight_id, string cus_id, string assined_cus, string ticket_type_id)
         {
