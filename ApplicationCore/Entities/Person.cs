@@ -18,6 +18,16 @@ namespace ApplicationCore.Entities
             this.Status = status;
 
         }
+        public Person(string id, string lastName, string firstName, DateTime birthDate, string phone, Address address)
+        {
+            this.Id = id;
+            this.LastName = lastName;
+            this.FirstName = firstName;
+            this.BirthDate = birthDate;
+            this.Phone = phone;
+            this.Address = address;
+
+        }
         public string Id { get; set; }
 
         public string LastName { get; set; }

@@ -66,8 +66,8 @@ namespace Infrastructure.Persistence.Repos
         public async Task<IEnumerable<Customer>> getCustomerByName(string lastname, string firstname)
         {
             var predicate = PredicateBuilder.True<Customer>();
-            if (!String.IsNullOrEmpty(lastname)) predicate.And(m => m.LastName.Contains(lastname));
-            if (!String.IsNullOrEmpty(firstname)) predicate.And(m => m.FirstName.Contains(firstname));
+            if (!String.IsNullOrEmpty(lastname)) predicate.And(m => m.LastName.Contains(lastname, StringComparison.OrdinalIgnoreCase));
+            if (!String.IsNullOrEmpty(firstname)) predicate.And(m => m.FirstName.Contains(firstname, StringComparison.OrdinalIgnoreCase));
             return await this.FindAsync(predicate);
         }
         // new public async Task<IEnumerable<Customer>> GetAllAsync()

@@ -17,9 +17,9 @@ namespace Infrastructure.Persistence.Repos
         public async Task<IEnumerable<Airport>> getAirportByConditions(string airport_name, string city, string country)
         {
             var predicate = PredicateBuilder.True<Airport>();
-            if (!String.IsNullOrEmpty(airport_name)) predicate.And(m => m.AirportName.Contains(airport_name));
-            if (!String.IsNullOrEmpty(city)) predicate.And(m => m.Address.City.Contains(city));
-            if (!String.IsNullOrEmpty(country)) predicate.And(m => m.Address.Country.Contains(country));
+            if (!String.IsNullOrEmpty(airport_name)) predicate.And(m => m.AirportName.Contains(airport_name, StringComparison.OrdinalIgnoreCase));
+            if (!String.IsNullOrEmpty(city)) predicate.And(m => m.Address.City.Contains(city, StringComparison.OrdinalIgnoreCase));
+            if (!String.IsNullOrEmpty(country)) predicate.And(m => m.Address.Country.Contains(country, StringComparison.OrdinalIgnoreCase));
             return await this.FindAsync(predicate);
 
         }

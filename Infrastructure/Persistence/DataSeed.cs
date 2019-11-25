@@ -77,10 +77,10 @@ namespace Infrastructure.Persistence
             {
                 var addr = new Address("123", "ABC", "hahahaha", "Gotham", "Newyork", "USA");
                 context.Employers.AddRange(
-                    new Employer("00001", "Trieu Ng Quoc", "Viet", new DateTime(1999, 12, 7), "0904897191", addr, STATUS.AVAILABLE, 15000, "001"),
-                    new Employer("00002", "Vu Tuong", "Giang", new DateTime(1999, 12, 8), "0904891597", new Address("123", "gfd", "fsd", "sdf", "fs", "fsd"), STATUS.AVAILABLE, 18000, "002"),
-                    new Employer("00003", "Do Trung", "Hieu", new DateTime(1999, 7, 10), "0903774110", new Address("456", "gfd", "fsd", "sdf", "fs", "fsd"), STATUS.AVAILABLE, 19000, "003"),
-                    new Employer("00004", "Trieu Trung", "Gia", new DateTime(2000, 5, 5), "0903775781", new Address("456", "Tran Phu", "Phu Tho", "Tan Phu", "Ho Chi Minh", "Viet Nam"), STATUS.AVAILABLE, 20000, "000")
+                    new Employer("00001", "Trieu Ng Quoc", "Viet", new DateTime(1999, 12, 7), "0904897191", addr, 15000, "001"),
+                    new Employer("00002", "Vu Tuong", "Giang", new DateTime(1999, 12, 8), "0904891597", new Address("123", "gfd", "fsd", "sdf", "fs", "fsd"), 18000, "002"),
+                    new Employer("00003", "Do Trung", "Hieu", new DateTime(1999, 7, 10), "0903774110", new Address("456", "gfd", "fsd", "sdf", "fs", "fsd"), 19000, "003"),
+                    new Employer("00004", "Trieu Trung", "Gia", new DateTime(2000, 5, 5), "0903775781", new Address("456", "Tran Phu", "Phu Tho", "Tan Phu", "Ho Chi Minh", "Viet Nam"), 20000, "000")
                 );
                 context.SaveChanges();
             }
