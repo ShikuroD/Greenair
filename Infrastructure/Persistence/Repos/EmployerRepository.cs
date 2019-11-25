@@ -33,8 +33,8 @@ namespace Infrastructure.Persistence.Repos
         public async Task<IEnumerable<Employer>> getEmployerByName(string lastname, string firstname)
         {
             var predicate = PredicateBuilder.True<Employer>();
-            if (!String.IsNullOrEmpty(lastname)) predicate.And(m => m.LastName.Contains(lastname));
-            if (!String.IsNullOrEmpty(firstname)) predicate.And(m => m.FirstName.Contains(firstname));
+            if (!String.IsNullOrEmpty(lastname)) predicate.And(m => m.LastName.Contains(lastname, StringComparison.OrdinalIgnoreCase));
+            if (!String.IsNullOrEmpty(firstname)) predicate.And(m => m.FirstName.Contains(firstname, StringComparison.OrdinalIgnoreCase));
             return await this.FindAsync(predicate);
         }
 
