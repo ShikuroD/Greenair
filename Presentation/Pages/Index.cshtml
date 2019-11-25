@@ -32,6 +32,7 @@
 					<div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
 						<form method="post" asp-page="Index" class="search-destination">
 							<div class="row">
+								<!-- type -->
 								<div class="col-md align-items-end">
 									<div class="form-group">
 										<label for="#">Type</label>
@@ -46,6 +47,35 @@
 										</div>
 									</div>
 								</div>
+								<!-- adults -->
+								<div class="col-md align-items-end">
+									<div class="form-group">
+										<label for="#">Adults</label>
+										<div class="form-field">
+											<div class="select-wrap">
+												<a style="cursor:pointer" class="icon-up plus" id="plus-adult"><span class="ion-ios-arrow-up"></span></a>
+												<input asp-for="@Model.NumAdults" type="text" id="adult" class="form-control" value="1" />
+												<a style="cursor:pointer" class="icon-down min" id="min-adult"><span class="ion-ios-arrow-down"></span></a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- childs -->
+								<div class="col-md align-items-end">
+									<div class="form-group">
+										<label for="#">Childrens</label>
+										<div class="form-field">
+											<div class="select-wrap">
+												<a style="cursor:pointer" class="icon-up plus" id="plus-child"><span class="ion-ios-arrow-up"></span></a>
+												<input asp-for="@Model.NumChilds" type="text" id="child" class="form-control" value="0" />
+												<a style="cursor:pointer" class="icon-down min" id="min-child"><span class="ion-ios-arrow-down"></span></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">								
+								<!-- from -->
 								<div class="col-md align-items-end">
 									<div class="form-group">
 										<label for="#">From</label>
@@ -55,6 +85,7 @@
 										</div>
 									</div>
 								</div>
+								<!-- where -->
 								<div class="col-md align-items-end">
 									<div class="form-group">
 										<label for="#">Where</label>
@@ -64,6 +95,7 @@
 										</div>
 									</div>
 								</div>
+								<!-- checkin -->
 								<div class="col-md align-items-end">
 									<div class="form-group">
 										<label for="#">Check In</label>
@@ -73,6 +105,7 @@
 										</div>
 									</div>
 								</div>
+								<!-- checkout -->
 								<div id="checkOutContainer" class="col-md align-items-end">
 									<div class="form-group">
 										<label for="#">Check Out</label>
@@ -82,45 +115,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-md align-items-end">
-									<div class="form-group">
-										<label for="#">Adults</label>
-										<div class="form-field">
-											<div class="select-wrap">
-												<a style="cursor:pointer" class="icon-up plus" id="plus-adult"><span class="ion-ios-arrow-up"></span></a>
-												<input asp-for="@Model.NumAdults" type="text" id="adult" class="form-control" value="1" />
-												<a style="cursor:pointer" class="icon-down min" id="min-adult"><span class="ion-ios-arrow-down"></span></a>
-												
-												<!-- <select name="" id="" class="form-control">
-													<option value="">1</option>
-													<option value="">2</option>
-													<option value="">3</option>
-													<option value="">4</option>
-													<option value="">5</option>
-												</select> -->
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-md align-items-end">
-									<div class="form-group">
-										<label for="#">Childrens</label>
-										<div class="form-field">
-											<div class="select-wrap">
-												<a style="cursor:pointer" class="icon-up plus" id="plus-child"><span class="ion-ios-arrow-up"></span></a>
-												<input asp-for="@Model.NumChilds" type="text" id="child" class="form-control" value="0" />
-												<a style="cursor:pointer" class="icon-down min" id="min-child"><span class="ion-ios-arrow-down"></span></a>
-												<!-- <select name="" id="" class="form-control">
-													<option value="">1</option>
-													<option value="">2</option>
-													<option value="">3</option>
-													<option value="">4</option>
-													<option value="">5</option>
-												</select> -->
-											</div>
-										</div>
-									</div>
-								</div>
+								
 								<div class="col-md align-self-end">
 									<div class="form-group">
 										<div class="form-field">

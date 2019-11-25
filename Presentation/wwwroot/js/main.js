@@ -308,12 +308,12 @@
  		}
  	});
 
- 	$('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
- 		disableOn: 700,
- 		type: 'iframe',
- 		mainClass: 'mfp-fade',
- 		removalDelay: 160,
- 		preloader: false,
+	$('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
+		disableOn: 700,
+		type: 'iframe',
+		mainClass: 'mfp-fade',
+		removalDelay: 160,
+		preloader: false,
 
  		fixedContentPos: false
  	});
@@ -324,9 +324,11 @@
  		'autoclose': true
  	});
  	$('.checkout_date').datepicker({
- 		'format': 'dd/mm/yyyy',
- 		'autoclose': true
- 	});
+		'format': 'dd/mm/yyyy',
+		'setDate': $('.checkin_date').val(),
+		'startDate': '0d',
+		'autoclose': true
+	});
 
  	function addUser() {
  		$("#register").dialog("close");
@@ -446,7 +448,6 @@
  	//Autocomplete
  	$("#From").autocomplete({
  		source: '/Index?handler=AirPort',
- 		select:
  	});
  	$("#Where").autocomplete({
  		source: '/Index?handler=AirPort'
