@@ -20,5 +20,12 @@ namespace ApplicationCore.DTOs
         public IList<FlightDetailDTO> FlightDetails { get; set; }
 
         public IList<TicketDTO> Tickets { get; set; }
+        // public FlightDTO(string FlightId, STATUS status, string PlaneId, PlaneDTO plane){
+        //     this.FlightId = FlightId;
+        //     this.Status = status;
+        //     this.PlaneId = PlaneId;
+        //     this.Plane = Plane;
+
+        // }
     }
 }

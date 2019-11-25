@@ -5,40 +5,50 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using ApplicationCore.Interfaces;
+using ApplicationCore.Entities;
+using ApplicationCore.Services;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using Presentation.Helpers;
+using Presentation.ViewModels;
 using System.IO;
+using ApplicationCore.DTOs;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Presentation.Pages
 {
+    
     public class FlightModel : PageModel
     {
-        
+        private readonly IFlightService _flightService;
+        [ActivatorUtilitiesConstructor]
+        public FlightModel (IFlightService flightService)
+        {
+            _flightService = flightService;
+        }
         public string Msg { get; set; }
-
+        
+        public IEnumerable<FlightDTO> ListFlights { get; set; }
         private readonly ILogger<FlightModel> _logger;
 
         public FlightModel(ILogger<FlightModel> logger)
         {
             _logger = logger;
         }
-
-        public void OnGetUser()
+        public async Task OnGet()
         {
+            var FlightSearch = SessionHelper.GetObjectFromJson<Dictionary<string,object>>(HttpContext.Session,"FlightSearch");
+            string vlDepDate = FlightSearch["depdate"].ToString();
+            DateTime depDate = DateTime.ParseExact(vlDepDate, "dd/MM/yyyy", null);
+            string vlArrDate = FlightSearch["arrdate"].ToString();
+            DateTime arrDate = DateTime.ParseExact(vlArrDate, "dd/MM/yyyy", null);
+            string vlAdults = FlightSearch["adults"].ToString();
+            var adults = Convert.ToInt32(vlAdults);
+            string vlChilds = FlightSearch["childs"].ToString();
+            var childs = Convert.ToInt32(vlChilds);
+            ListFlights = await _flightService.searchFlightAsync(FlightSearch["from"].ToString(),FlightSearch["where"].ToString(),depDate,arrDate,adults,childs);
         }
-        // public IActionResult OnPostLogIn()
-        // {
-        //     if (Username.Equals("abc") && Password.Equals("123"))
-        //     {
-        //         HttpContext.Session.SetString("username", Username);
-        //         return RedirectToPage("Welcome");
-        //     }
-        //     else
-        //     {
-        //         Msg = "Invalid";
-        //         return Page();
-        //     }
-        // }
         public IActionResult OnPostLogIn()
         {   
             string username = "";
