@@ -39,11 +39,11 @@
              <!-- change to code later -->
              @foreach (var item in Model.ListEmployers){
               <tr>
-                <td>item.Id</td>
-                <td>item.FirstName</td>
-                <td>item.LastName</td>
-                <td>item.Job</td>
-                <td>item.Salary</td>
+                <td>@item.Id</td>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.Job</td>
+                <td>@item.Salary</td>
                 <td><label class="badge badge-warning">item.Status</label></td>
                 <td> 
                   <button  id="@item.Id" data-toggle="modal" data-target="#EditEmployerForm"  type="button" class="btn btn-dark btn-sm  btn-rounded EditEmployer"><i class="fa fa-cog"></i></button>
@@ -190,13 +190,11 @@
               </div>  
             </div>
             <div class="row" style=" display: flex; justify-content: flex-end;">
-              <button type="submit" class="btn btn-success mr-2"><b>Submit</b></button>
+              <button type="submit" class="btn btn-success mr-2"><b>Create</b></button>
               <button class="btn btn-light" data-dismiss="modal"><b>Cancel</b></button>
             </div>
           </form>
 		    </div>
-		    <!-- <div class="modal-footer">    
-		    </div>   -->
       </div>    
     </div>
 </div>
@@ -329,13 +327,11 @@
               </div>  
             </div>
             <div class="row" style=" display: flex; justify-content: flex-end;">
-              <button type="submit" class="btn btn-success mr-2"><b>Submit</b></button>
+              <button type="submit" class="btn btn-success mr-2"><b>Update</b></button>
               <button class="btn btn-light" data-dismiss="modal"><b>Cancel</b></button>
             </div>
           </form>
 		    </div>
-		    <!-- <div class="modal-footer">    
-		    </div>   -->
       </div>    
     </div>
 </div>
