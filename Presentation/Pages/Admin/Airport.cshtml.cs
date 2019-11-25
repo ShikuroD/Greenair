@@ -91,6 +91,39 @@ namespace Presentation.Pages.Admin
             string mes = "Remove " + AirportId + " Success!";
             return new JsonResult(mes);
         }
+        public async Task<IActionResult> OnPostCreateAirport()
+        {
+            string respone = "True";
+            MemoryStream stream = new MemoryStream();
+            Request.Body.CopyTo(stream);
+            stream.Position = 0;
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string requestBody = reader.ReadToEnd();
+                if (requestBody.Length > 0)
+                {
+                    var obj = JsonConvert.DeserializeObject<AirportVM>(requestBody);
+                    if (obj != null)
+                    {
+                        var aa = await _unitofwork.Airports.GetByAsync(obj.AirportId);
+                        if (aa == null)
+                        {
+                            Address address = new Address();
+                            address.toValue(obj.Address);
+                            Airport Airport = new Airport();
+                            Airport.AirportId = obj.AirportId;
+                            Airport.AirportName = obj.AirportName;
+                            Airport.Address = address;
+                            await _unitofwork.Airports.AddAsync(Airport);
+                            await _unitofwork.CompleteAsync();
+                        }
+                        else respone = "False";
+
+                    }
+                }
+            }
+            return new JsonResult(respone);
+        }
 
     }
 

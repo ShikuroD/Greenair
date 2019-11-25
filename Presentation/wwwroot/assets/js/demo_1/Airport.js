@@ -1,5 +1,8 @@
 (function ($) {
     $(function () {
+        // $('input').blur(function () {
+        //     $(this).css("border-color", "#ced4da");
+        // });
         $(".DeleteAirport").click(function () {
             var id = $(this).attr("id");
             if (confirm('Are you sure you want to delete this item has id: ' + id)) {
@@ -71,10 +74,41 @@
 
             });
         });
-        // $(".list-Airport").click(function () {
-        //     var id = $(this).attr("id");
+        $("#btsubmitCreateAirport").click(function () {
+            var id = $('#CreateAirport-id').val();
+            var name = $("#CreateAirport-name").val();
+            var address = $("#CreateAirport-address").val();
+            event.preventDefault();
+            // event.preventDefault() là để ngăn thằng form nó load lại trang ..
+            $.ajax({
+                type: 'POST',
+                headers: {
+                    "XSRF-TOKEN": $('input:hidden[name="__RequestVerificationToken"]').val()
+                },
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                url: '/Admin/Airport?handler=CreateAirport',
+                data: JSON.stringify({
+                    AirportId: id,
+                    AirportName: name,
+                    Address: address
+                }),
+                success: function (respone) {
+                    // $('#CreateAirport').modal('hide');
+                    if (respone.trim() == "True") {
+                        alert("Create success");
+                        location.reload();
+                    } else {
+                        alert("This Id exists");
+                        $('#CreateAirport-id').focus();
+                    }
+                },
+                failure: function (result) {
+                    alert("fail");
+                }
 
-        // });
+            });
+        });
 
     });
 })(jQuery);
