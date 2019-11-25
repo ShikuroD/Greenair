@@ -641,3 +641,11 @@ D:\Code\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Index
 D:\Code\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Maker.cshtml.g.cs
 >>>>>>> 2b0ae8d0ff66412d8694472ac5f9b1ec66e3cc32
 D:\Code\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Shared\_LayoutAdmin.cshtml.g.cs
+C:\Users\Administrator\Desktop\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Customer.cshtml.g.cs
+C:\Users\Administrator\Desktop\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Dashboard.cshtml.g.cs
+C:\Users\Administrator\Desktop\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Employer.cshtml.g.cs
+C:\Users\Administrator\Desktop\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Flight.cshtml.g.cs
+C:\Users\Administrator\Desktop\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Index.cshtml.g.cs
+C:\Users\Administrator\Desktop\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Maker.cshtml.g.cs
+C:\Users\Administrator\Desktop\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Privacy.cshtml.g.cs
+C:\Users\Administrator\Desktop\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Shared\_LayoutAdmin.cshtml.g.cs

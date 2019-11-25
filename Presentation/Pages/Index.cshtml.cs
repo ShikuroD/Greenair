@@ -15,9 +15,9 @@ namespace Presentation.Pages
         private readonly ILogger<IndexModel> _logger;
 
         [BindProperty]
-        public string RouteFrom { get; set; }
+        public string From { get; set; }
         [BindProperty]
-        public string RouteWhere { get; set; }
+        public string Where { get; set; }
         [BindProperty]
         public string DepDate { get; set; }
         [BindProperty]
@@ -42,7 +42,15 @@ namespace Presentation.Pages
         }
         public IActionResult OnPost()
         {
-            
+            var FlightSearch = new Dictionary<string,object>();
+            FlightSearch.Add("from",From);
+            FlightSearch.Add("where",Where);
+            FlightSearch.Add("depdate",DepDate);
+            FlightSearch.Add("arrdate",ArrDate);
+            FlightSearch.Add("type",FlightType);
+            FlightSearch.Add("adults",NumAdults);
+            FlightSearch.Add("childs",NumChilds);
+            SessionHelper.SetObjectAsJson(HttpContext.Session, "FlightSearch", FlightSearch);
             return RedirectToPage("Flight");
         }
     }
