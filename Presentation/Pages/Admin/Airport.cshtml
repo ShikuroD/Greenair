@@ -1,0 +1,145 @@
+@page
+@model Presentation.Pages.Admin.AirportModel
+@{
+  Layout = "_LayoutAdmin";
+	ViewData["Title"] = "Admin Page";
+}
+<div class="main-panel">
+  <!-- Airport content-wrapper -->
+  <div class="content-wrapper">
+     <!-- row button create -->
+    <div class="row">
+      <div class="col-lg-12 stretch-card">
+        <a href="#CreateAirportForm" data-toggle="modal" id="btCreateAirport" type="button" class="btn  btn-primary btn-lg btn-inverse-*">
+          <i class="mdi mdi-upload"></i>Create Airport
+        </a>
+      </div>
+    </div>
+    <!-- row table -->
+    <div class="row">
+      <div class="col-lg-12 stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <div class="form-group row">
+              <div class="col-sm-7"></div>
+              <div class="col-sm-5">
+                <div class="input-group">
+                  <input type="search" class="form-control" placeholder="Search Here">
+                  <button type="button" class="btn btn-icons btn-rounded btn-outline-primary"><i class="fa fa-search"></i></button>
+                </div> 
+              </div> 
+            </div>
+            <h3 align="center">List of Airports </h3>
+            <table class="table table-bordered table-striped table-hover" id="TableAirport">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody> 
+              @foreach (var item in Model.ListAirports){
+                <tr>
+                <!-- <tr id="@item.AirportId" class="list-Airport"> -->
+                  <td>@item.AirportId</td>
+                  <td>@item.AirportName</td>
+                  <td>@item.Address.toString()</td>
+                  <td> 
+                    <button  id="@item.AirportId" data-toggle="modal" data-target="#EditAirportForm"  type="button" class="btn btn-dark btn-sm  btn-rounded EditAirport"><i class="fa fa-cog"></i></button>
+                    <button  id="@item.AirportId" type="button" class="btn btn-danger btn-sm  btn-rounded DeleteAirport"><i class="fa fa-times" ></i></button>
+                  </td>
+                </tr>
+              }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end table Airport  -->
+
+  </div> 
+  <!-- end content_warper -->
+
+ 
+</div>
+<!-- end main body -->
+
+<!--create Airport form  -->
+<div class="modal fade" id="CreateAirportForm" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content" >
+      <div class="modal-header" style="text-align:center !important; background-color:aliceblue;">
+        <h4 class="modal-title" style=" color:#000; font-weight: bold;font-size:34">Create Airport</h4>
+      </div>
+		  <div class="model-body" style="margin: 15px">
+        <form class="forms-sample">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">ID</label>
+            <div class="col-sm-9">
+              <input id="CreateAirport-id" type="text" class="form-control"  placeholder="Enter ID">
+            </div>
+            <span style="color: red bold" class="z-mak-id"></span>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Name</label>
+            <div class="col-sm-9">
+              <input id="CreateAirport-name" type="text" class="form-control"  placeholder="Enter name">
+            </div>
+            <span style="color: red bold" class="z-mak-name"></span>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Address</label>
+            <div class="col-sm-9">
+              <input id="CreateAirport-address" type="text" class="form-control" placeholder="Enter address">
+            </div>
+            <span style="color: red bold" class="z-mak-address"></span>
+          </div>
+          <button  id="btsubmitCreateAirport" class="btn btn-success mr-2"><b>Create</b></button>
+          <button class="btn btn-light" data-dismiss="modal"><b>Cancel</b></button>
+        </form>
+		  </div>
+    </div> 
+  </div>
+</div>
+
+ <!-- edit Airport form -->
+<div class="modal fade" id="EditAirportForm" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content" >
+      <div class="modal-header" style="text-align:center !important; background-color:aliceblue;">
+        <h4 class="modal-title" style=" color:#000; font-weight: bold;font-size:34">Edit Airport</h4>
+      </div>
+      <div class="model-body" style="margin: 15px" id="bodyEditAirport">
+        <form class="forms-sample">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">ID</label>
+            <div class="col-sm-9">
+              <input id="EditAirport-id" type="text" class="form-control"  placeholder="Enter ID" disabled>
+            </div>
+            <span style="color: red bold" class="z-mak-id"></span>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Name</label>
+            <div class="col-sm-9">
+              <input id="EditAirport-name" type="text" class="form-control"  placeholder="Enter name">
+            </div>
+            <span style="color: red bold" class="z-mak-name"></span>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Address</label>
+            <div class="col-sm-9">
+              <input id="EditAirport-address" type="text" class="form-control" placeholder="Enter address">
+            </div>
+            <span style="color: red bold" class="z-mak-address"></span>
+          </div>
+          <button  id="btsubmitEditAirport" class="btn btn-success mr-2"><b>Update</b></button>
+          <button class="btn btn-light" data-dismiss="modal"><b>Cancel</b></button>
+        </form>
+      </div>
+    </div>    
+  </div>
+</div>
+

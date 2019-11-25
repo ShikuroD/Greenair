@@ -19,10 +19,10 @@ namespace Presentation.Services.ServicesImplement
         {
             _service = flightService;
         }
-        public FlightVM GetFlightListVm(string origin_id, string destination_id, DateTime dep_date, DateTime arr_date, int adults_num, int childs_num)
+        public async Task<IEnumerable<FlightDTO>> GetFlightListVm(string origin_id, string destination_id, DateTime dep_date, DateTime arr_date, int adults_num, int childs_num)
         {
-            var FlightSearch = _service.searchFlightAsync(origin_id, destination_id, dep_date, arr_date, adults_num, childs_num);
-            return new FlightVM();
+            var FlightSearch = await _service.searchFlightAsync(origin_id, destination_id, dep_date, arr_date, adults_num, childs_num);
+            return FlightSearch;
         }
     }
 }
