@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace RazorSample
+namespace Presentation
 {
     public class PaginatedList<T> : List<T>
     {
