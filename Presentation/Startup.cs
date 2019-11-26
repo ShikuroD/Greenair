@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 using ApplicationCore.Services;
 using ApplicationCore;
 using AutoMapper;
-
+using Microsoft.AspNetCore.Http;
 
 namespace Presentation
 {
@@ -37,7 +37,17 @@ namespace Presentation
             services.AddRazorPages();
             services.AddDbContext<GreenairContext>(options =>
             options.UseSqlite(Configuration.GetConnectionString("Greenair"), x => x.MigrationsAssembly("Presentation")));
-            services.AddSession();
+            services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromMinutes(60);
+                // You might want to only set the application cookies over a secure connection:
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                options.Cookie.SameSite = SameSiteMode.Strict;
+                options.Cookie.HttpOnly = true;
+                // Make the session cookie essential
+                options.Cookie.IsEssential = true;
+            });
             services.Configure<KestrelServerOptions>(options =>
             {
                 options.AllowSynchronousIO = true;

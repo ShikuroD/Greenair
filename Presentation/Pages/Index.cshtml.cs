@@ -6,14 +6,22 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Presentation.Helpers;
+using ApplicationCore.DTOs;
+using ApplicationCore.Entities;
 using Microsoft.AspNetCore.Http;
+using ApplicationCore.Interfaces;
 
 namespace Presentation.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        //private readonly ILogger<IndexModel> _logger;
+        private readonly IUnitOfWork _unitofwork;
 
+        public IndexModel(IUnitOfWork unitofwork)
+        {
+            this._unitofwork = unitofwork;
+        }
         [BindProperty]
         public string From { get; set; }
         [BindProperty]
@@ -28,13 +36,13 @@ namespace Presentation.Pages
         public string NumChilds { get; set; }
         [BindProperty]
         public string FlightType { get; set; }
-
+        public IEnumerable<Airport> ListAirports { get; set; }
         //public List<FlightDetail> FlightSearch { get; set; }
         public string Msg { get; set; }
-        public IndexModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
+        // public IndexModel(ILogger<IndexModel> logger)
+        // {
+        //     _logger = logger;
+        // }
 
         public void OnGet()
         {
@@ -52,6 +60,15 @@ namespace Presentation.Pages
             FlightSearch.Add("childs",NumChilds);
             SessionHelper.SetObjectAsJson(HttpContext.Session, "FlightSearch", FlightSearch);
             return RedirectToPage("Flight");
+        }
+        public IActionResult OnGetAirPort(string term)
+        {
+            ListAirports =  _unitofwork.Airports.GetAll();
+            var ListAirportNames = from m in ListAirports
+                                   where m.AirportName.Contains(term)
+                                   select m.AirportName
+                                   ;
+            return new JsonResult(ListAirportNames);
         }
     }
 }
