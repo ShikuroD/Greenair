@@ -7,12 +7,14 @@ namespace ApplicationCore.Entities
     public class Employer : Person, IAggregateRoot
     {
         public Employer() : base() { }
+
         public Employer(string id, string lastName, string firstName, DateTime birthDate, string phone, Address address,
                 STATUS status, double salary, string jobId) : base(id, lastName, firstName, birthDate, phone, address, status)
         {
             this.Salary = salary;
             this.JobId = jobId; ;
         }
+
         public Employer(string id, string lastName, string firstName, DateTime birthDate, string phone, Address address,
                 double salary, string jobId) : base(id, lastName, firstName, birthDate, phone, address)
         {
