@@ -30,18 +30,18 @@
               </div> 
             </div>
             <h3 align="center">List of Airports </h3>
-            <table class="table table-bordered table-striped table-hover" id="TableAirport">
+            <table class="table table-bordered table-striped table-hover" id="TableAirport" >
             <thead>
               <tr>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Address</th>
-                <th></th>
+                <th>Action</th>
               </tr>
             </thead>
-            <tbody> 
-              @foreach (var item in Model.ListAirports){
-                <tr>
+            <tbody > 
+              @foreach (var item in Model.ListAirportsPage.Airports){
+                <tr >
                 <!-- <tr id="@item.AirportId" class="list-Airport"> -->
                   <td>@item.AirportId</td>
                   <td>@item.AirportName</td>
@@ -55,6 +55,30 @@
               </tbody>
             </table>
           </div>
+          @{
+              var preDisabled = !Model.ListAirportsPage.Airports.HasPrevious ? "disabled" : "";
+              var nextDisabled = !Model.ListAirportsPage.Airports.HasNext ? "disabled" : "";
+              var pageNow =Model.ListAirportsPage.Airports.PageIndex;
+          }
+          <!-- pagination -->
+            <div class="pagination" >
+              <a style="cursor:pointer" asp-page="/Admin/Airport" 
+              asp-route-pageIndex="@(Model.ListAirportsPage.Airports.PageIndex - 1)" 
+              class="pagination_link @preDisabled" >Previous</a>
+              @for (int i=1;i<=Model.ListAirportsPage.Airports.TotalPages;++i)
+              {
+                  if(i==pageNow)
+                  {
+                    <a style="cursor:pointer" asp-page="/Admin/Airport" asp-route-pageIndex="@i" class="pagination_link active" >@i</a>
+                  }
+                  else{
+                    <a style="cursor:pointer" asp-page="/Admin/Airport" asp-route-pageIndex="@i" class="pagination_link">@i</a>
+                  }
+              }
+              <a  style="cursor:pointer" asp-page="/Admin/Airport" 
+              asp-route-pageIndex="@(Model.ListAirportsPage.Airports.PageIndex + 1)" 
+              class="pagination_link @nextDisabled">Next</a>
+            </div>
         </div>
       </div>
     </div>

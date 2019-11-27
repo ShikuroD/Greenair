@@ -13,24 +13,27 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using ApplicationCore.DTOs;
 using Presentation.Services.ServicesImplement;
+using Presentation.Services.ServiceInterfaces;
 
 namespace Presentation.Pages.Admin
 {
     public class AirportModel : PageModel
     {
         private readonly IUnitOfWork _unitofwork;
+        private readonly IAirportVMService _services;
 
-        public AirportModel(IUnitOfWork unitofwork)
+        public AirportModel(IAirportVMService services, IUnitOfWork unitofwork)
         {
             this._unitofwork = unitofwork;
+            this._services = services;
+            
         }
-
+        public AirportPageVM ListAirportsPage { get; set; }
         public IEnumerable<Airport> ListAirports { get; set; }
-
-        public async Task OnGet()
+        public void OnGet(int pageIndex = 1)
         {
-            ListAirports = await _unitofwork.Airports.GetAllAsync();
-
+            // ListAirports = await _unitofwork.Airports.GetAllAsync();
+            ListAirportsPage = _services.GetAirportPageViewModel("", pageIndex);
         }
         // Airport methods
         public IActionResult OnGetEditAirport(string id)
@@ -124,7 +127,7 @@ namespace Presentation.Pages.Admin
             }
             return new JsonResult(respone);
         }
-
+        
     }
 
 }

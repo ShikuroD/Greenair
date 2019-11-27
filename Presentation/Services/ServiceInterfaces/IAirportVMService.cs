@@ -7,6 +7,6 @@ namespace Presentation.Services.ServiceInterfaces
 {
     public interface IAirportVMService
     {
-        Task<AirportPageVM> GetAirportPageViewModelAsync(string searchString, int pageIndex = 1);
+        AirportPageVM GetAirportPageViewModel(string searchString, int pageIndex = 1);
     }
 }

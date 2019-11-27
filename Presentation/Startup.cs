@@ -19,6 +19,8 @@ using ApplicationCore.Services;
 using ApplicationCore;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Presentation.Services.ServiceInterfaces;
+using Presentation.Services.ServicesImplement;
 
 namespace Presentation
 {
@@ -80,6 +82,7 @@ namespace Presentation
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IAccountService, AccountService>();
             //.....................
+            services.AddScoped<IAirportVMService, AirportVMService>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }

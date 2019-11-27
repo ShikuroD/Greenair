@@ -9,8 +9,7 @@ using Presentation.Services.ServiceInterfaces;
 using AutoMapper;
 namespace Presentation.Services.ServicesImplement
 {
-    public class AirportVMService
-    // : IAirportVMService
+    public class AirportVMService : IAirportVMService
     {
         private int pageSize = 3;
         private readonly IUnitOfWork _service;
@@ -22,15 +21,16 @@ namespace Presentation.Services.ServicesImplement
             _mapper = mapper;
         }
 
-        public async Task<AirportPageVM> GetAirportPageViewModelAsync(string searchString, int pageIndex = 1)
+        public AirportPageVM GetAirportPageViewModel(string searchString, int pageIndex = 1)
         {
             // var movies = await _service.GetMoviesAsync(searchString, genre);
-            var airports = await _service.Airports.GetAllAsync();
+            var airports = _service.Airports.GetAll();
             // var genres = await _service.GetGenresAsync();
+            var abc = _mapper.Map<IEnumerable<Airport>, IEnumerable<AirportDTO>>(airports);
 
             return new AirportPageVM
             {
-                Airports = PaginatedList<AirportDTO>.Create(_mapper.Map<IEnumerable<Airport>, IEnumerable<AirportDTO>>(airports), pageIndex, pageSize)
+                Airports = PaginatedList<AirportDTO>.Create(abc, pageIndex, pageSize)
             };
         }
 
