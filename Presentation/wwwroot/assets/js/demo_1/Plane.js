@@ -10,7 +10,7 @@
                     },
                     dataType: 'json',
                     contentType: 'application/json; charset=utf-8',
-                    url: '/Admin/Maker?handler=DeletePlane',
+                    url: '/Admin/Plane?handler=DeletePlane',
                     data: JSON.stringify({
                         PlaneId: id
                     }),
@@ -28,7 +28,7 @@
                 type: 'GET',
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
-                url: '/Admin/Maker?handler=EditPlane',
+                url: '/Admin/Plane?handler=EditPlane',
                 data: {
                     id: id
                 },
@@ -53,7 +53,7 @@
                 },
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
-                url: '/Admin/Maker?handler=EditPlane',
+                url: '/Admin/Plane?handler=EditPlane',
                 data: JSON.stringify({
                     PlaneId: id,
                     SeatNum: seatnum,
