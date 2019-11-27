@@ -25,6 +25,7 @@ namespace ApplicationCore.Entities
             this.Address = address;
 
         }
+
         public Maker(string makerId, string makerName, string address)
         {
             this.MakerId = makerId;

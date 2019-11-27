@@ -8,12 +8,14 @@ namespace ApplicationCore.Entities
     public class Customer : Person, IAggregateRoot
     {
         public Customer() : base() { }
+
         public Customer(string id, string lastName, string firstName, DateTime birthDate, string phone, Address address,
                 STATUS status, string email) : base(id, lastName, firstName, birthDate, phone, address, status)
         {
             this.Email = email;
 
         }
+
         public Customer(string id, string lastName, string firstName, DateTime birthDate, string phone, Address address,
                 string email) : base(id, lastName, firstName, birthDate, phone, address)
         {

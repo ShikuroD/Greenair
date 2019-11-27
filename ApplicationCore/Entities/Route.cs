@@ -18,5 +18,27 @@ namespace ApplicationCore.Entities
 
         public FlightTime FlightTime { get; set; }
         public IList<FlightDetail> FlightDetails { get; set; }
+
+        public Route() { }
+
+        public Route(string RouteId, string Origin, Airport OrgAirport, string Destination, Airport DesAirport, FlightTime flightTime)
+        {
+            this.RouteId = RouteId;
+            this.Origin = Origin;
+            this.OrgAirport = OrgAirport;
+            this.Destination = Destination;
+            this.DesAirport = DesAirport;
+            this.FlightTime = flightTime;
+        }
+
+        public Route(Route rou)
+        {
+            this.RouteId = rou.RouteId;
+            this.Origin = rou.Origin;
+            this.OrgAirport = rou.OrgAirport;
+            this.Destination = rou.Destination;
+            this.DesAirport = rou.DesAirport;
+            this.FlightTime = rou.FlightTime;
+        }
     }
 }

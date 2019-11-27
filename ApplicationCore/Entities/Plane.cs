@@ -15,12 +15,14 @@ namespace ApplicationCore.Entities
 
         public IList<Flight> Flights { get; set; }
         public Plane() { }
+
         public Plane(string planeid, int seatnum, string makerid)
         {
             this.PlaneId = planeid;
             this.SeatNum = seatnum;
             this.MakerId = makerid;
         }
+
         public Plane(Plane plane)
         {
             this.PlaneId = plane.PlaneId;

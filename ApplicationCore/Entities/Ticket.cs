@@ -31,5 +31,13 @@ namespace ApplicationCore.Entities
             this.AssignedCus = assinged_cus;
             this.TicketTypeId = tickettype_id;
         }
+        public Ticket(Ticket tic)
+        {
+            this.TicketId = tic.TicketId;
+            this.FlightId = tic.FlightId;
+            this.CustomerId = tic.CustomerId;
+            this.AssignedCus = tic.AssignedCus;
+            this.TicketTypeId = tic.TicketTypeId;
+        }
     }
 }
