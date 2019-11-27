@@ -83,6 +83,8 @@ namespace Presentation
             services.AddScoped<IAccountService, AccountService>();
             //.....................
             services.AddScoped<IAirportVMService, AirportVMService>();
+            services.AddScoped<IPlaneVMService, PlaneVMService>();
+            services.AddScoped<IMakerVMService, MakerVMService>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }

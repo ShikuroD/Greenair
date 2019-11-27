@@ -12,25 +12,31 @@ using Presentation.ViewModels;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using ApplicationCore.DTOs;
-//https://github.com/ShikuroD/Greenair
+using Presentation.Services.ServiceInterfaces;
+
 namespace Presentation.Pages.Admin
 {
     public class MakerModel : PageModel
     {
         private readonly IUnitOfWork _unitofwork;
+        private readonly IMakerVMService _services;
 
-        public MakerModel(IUnitOfWork unitofwork)
+        public MakerModel(IUnitOfWork unitofwork, IMakerVMService services)
         {
             this._unitofwork = unitofwork;
+            this._services = services;
         }
 
         public IEnumerable<Maker> ListMakers { get; set; }
-        public IEnumerable<Plane> ListPlanes { get; set; }
+        // public IEnumerable<Plane> ListPlanes { get; set; }
 
-        public async Task OnGet()
+        public MakerPageVM ListMakerPage { get; set; }
+
+        public async Task OnGet(int pageIndexMaker = 1, int pageIndexPlane = 1)
         {
             ListMakers = await _unitofwork.Makers.GetAllAsync();
-            ListPlanes = await _unitofwork.Planes.GetAllAsync();
+            // ListPlanes = await _unitofwork.Planes.GetAllAsync();
+            ListMakerPage = await _services.GetMakerPageViewModelAsync("", pageIndexMaker);
 
         }
         // Maker methods
@@ -92,66 +98,33 @@ namespace Presentation.Pages.Admin
             string mes = "Remove " + MakerId + " Success!";
             return new JsonResult(mes);
         }
-        // Plane methods
-        public IActionResult OnGetEditPlane(string id)
+
+    }
+    public class MakerVM
+    {
+        public string MakerId { get; set; }
+        public string MakerName { get; set; }
+        public string Address { get; set; }
+        public MakerVM()
         {
-            var plane = _unitofwork.Planes.GetBy(id);
-            PlaneDTO planeDTO = new PlaneDTO();
-            planeDTO.PlaneId = plane.PlaneId;
-            planeDTO.SeatNum = plane.SeatNum;
-            planeDTO.MakerId = plane.MakerId;
-            return Content(JsonConvert.SerializeObject(planeDTO));
-            // return new JsonResult(planedto);
         }
-        public async Task<IActionResult> OnPostEditPlane()
+        public MakerVM(string id, string name, string Address)
         {
-            string respone = "Successful";
-            MemoryStream stream = new MemoryStream();
-            Request.Body.CopyTo(stream);
-            stream.Position = 0;
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                string requestBody = reader.ReadToEnd();
-                if (requestBody.Length > 0)
-                {
-                    var obj = JsonConvert.DeserializeObject<PlaneDTO>(requestBody);
-                    if (obj != null)
-                    {
-                        Plane plane = new Plane();
-                        plane.PlaneId = obj.PlaneId;
-                        plane.SeatNum = obj.SeatNum;
-                        plane.MakerId = obj.MakerId.Substring(0, 3);
-                        await _unitofwork.Planes.UpdateAsync(plane);
-                        await _unitofwork.CompleteAsync();
-                    }
-                }
-            }
-            return new JsonResult(respone);
+            this.MakerId = id;
+            this.MakerName = name;
+            this.Address = Address;
         }
-        public async Task<IActionResult> OnPostDeletePlane()
+        public MakerVM(MakerDTO maker)
         {
-            string PlaneId = "";
-            MemoryStream stream = new MemoryStream();
-            Request.Body.CopyTo(stream);
-            stream.Position = 0;
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                string requestBody = reader.ReadToEnd();
-                if (requestBody.Length > 0)
-                {
-                    var obj = JsonConvert.DeserializeObject<PlaneDTO>(requestBody);
-                    if (obj != null)
-                    {
-                        PlaneId = obj.PlaneId;
-                        var item = await _unitofwork.Planes.GetByAsync(PlaneId);
-                        await _unitofwork.Planes.RemoveAsync(item);
-                        await _unitofwork.CompleteAsync();
-                    }
-                }
-            }
-            string mes = "Remove " + PlaneId + " Success!";
-            return new JsonResult(mes);
+            this.MakerId = maker.MakerId;
+            this.MakerName = maker.MakerName;
+            this.Address = maker.Address.toString();
+        }
+        public MakerVM(Maker maker)
+        {
+            this.MakerId = maker.MakerId;
+            this.MakerName = maker.MakerName;
+            this.Address = maker.Address.toString();
         }
     }
-
 }

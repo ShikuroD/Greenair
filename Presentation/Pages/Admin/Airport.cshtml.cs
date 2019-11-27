@@ -12,7 +12,6 @@ using Presentation.ViewModels;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using ApplicationCore.DTOs;
-using Presentation.Services.ServicesImplement;
 using Presentation.Services.ServiceInterfaces;
 
 namespace Presentation.Pages.Admin
@@ -26,14 +25,14 @@ namespace Presentation.Pages.Admin
         {
             this._unitofwork = unitofwork;
             this._services = services;
-            
+
         }
         public AirportPageVM ListAirportsPage { get; set; }
         public IEnumerable<Airport> ListAirports { get; set; }
-        public void OnGet(int pageIndex = 1)
+        public async Task OnGet(int pageIndex = 1)
         {
             // ListAirports = await _unitofwork.Airports.GetAllAsync();
-            ListAirportsPage = _services.GetAirportPageViewModel("", pageIndex);
+            ListAirportsPage = await _services.GetAirportPageViewModelAsync("", pageIndex);
         }
         // Airport methods
         public IActionResult OnGetEditAirport(string id)
@@ -127,7 +126,35 @@ namespace Presentation.Pages.Admin
             }
             return new JsonResult(respone);
         }
-        
+
+    }
+    public class AirportVM
+    {
+        public string AirportId { get; set; }
+        public string AirportName { get; set; }
+        public string Address { get; set; }
+        public AirportVM()
+        {
+        }
+        public AirportVM(string id, string name, string Address)
+        {
+            this.AirportId = id;
+            this.AirportName = name;
+            this.Address = Address;
+        }
+        public AirportVM(AirportDTO Airport)
+        {
+            this.AirportId = Airport.AirportId;
+            this.AirportName = Airport.AirportName;
+            this.Address = Airport.Address.toString();
+        }
+        public AirportVM(Airport Airport)
+        {
+            this.AirportId = Airport.AirportId;
+            this.AirportName = Airport.AirportName;
+            this.Address = Airport.Address.toString();
+        }
+
     }
 
 }
