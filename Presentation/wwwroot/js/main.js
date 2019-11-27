@@ -450,6 +450,9 @@
  		source: '/Index?handler=AirPort',
  	});
  	$("#Where").autocomplete({
- 		source: '/Index?handler=AirPort'
- 	})
- })(jQuery);
+		source: '/Index?handler=AirPort'
+	})
+	$("#setting").on("click",function(){
+		$(".content").html('<div style="padding-left:50px;height: 1073px">OK</div>');
+	});
+})(jQuery);
