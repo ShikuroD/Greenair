@@ -652,3 +652,4 @@ C:\Users\Administrator\Desktop\Greenair\Presentation\obj\Debug\netcoreapp3.0\Raz
 C:\Users\Administrator\Desktop\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Shared\_LayoutAdmin.cshtml.g.cs
 >>>>>>> cddb677f1612f7e9f41937798cf4545ebd8f4976
 C:\Users\Administrator\Desktop\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Airport.cshtml.g.cs
+D:\Code\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Airport.cshtml.g.cs
