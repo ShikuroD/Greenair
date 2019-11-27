@@ -103,25 +103,25 @@
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">ID</label>
             <div class="col-sm-9">
-              <input id="CreateAirport-id" type="text" class="form-control" maxlength="5" minlength="3"  placeholder="Enter ID">
+              <input id="CreateAirport-id" type="text" class="form-control" maxlength="5" minlength="3"  placeholder="Enter ID" required>
             </div>
             <span style="color: red bold" class="z-CreateAirport-id"></span>
           </div>
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Name</label>
             <div class="col-sm-9">
-              <input id="CreateAirport-name" type="text" class="form-control" maxlength="30" minlength="3"  placeholder="Enter name">
+              <input id="CreateAirport-name" type="text" class="form-control" maxlength="30"  placeholder="Enter name" title="You have to fill in it" required>
             </div>
             <span style="color: red bold" class="z-CreateAirport-name"></span>
           </div>
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Address</label>
             <div class="col-sm-9">
-              <input id="CreateAirport-address" type="text" class="form-control" placeholder="Enter address">
+              <input id="CreateAirport-address" type="text" class="form-control" placeholder="Enter address" title="Don't let it null" required>
             </div>
-            <span style="color: red bold" class="z-CreateAirport-address"></span>
+            <span style="color: red bold" class="z-CreateAirport-address" ></span>
           </div>
-          <button  id="btsubmitCreateAirport" class="btn btn-success mr-2"><b>Create</b></button>
+          <button  id="btsubmitCreateAirport" type="submit" class="btn btn-success mr-2"><b>Create</b></button>
           <button class="btn btn-light" data-dismiss="modal"><b>Cancel</b></button>
         </form>
 		  </div>
@@ -141,25 +141,25 @@
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">ID</label>
             <div class="col-sm-9">
-              <input id="EditAirport-id" type="text" class="form-control" maxlength="5" minlength="3" placeholder="Enter ID" disabled>
+              <input id="EditAirport-id" type="text" class="form-control"  placeholder="Enter ID" disabled>
             </div>
             <span style="color: red bold" class="z-EditAirport-id"></span>
           </div>
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Name</label>
             <div class="col-sm-9">
-              <input id="EditAirport-name" type="text" class="form-control" maxlength="30" minlength="3" placeholder="Enter name">
+              <input id="EditAirport-name" type="text" class="form-control" maxlength="30" placeholder="Enter name"  title="You have to fill in it" required>
             </div>
             <span style="color: red bold" class="z-EditAirport-name"></span>
           </div>
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Address</label>
             <div class="col-sm-9">
-              <input id="EditAirport-address" type="text" class="form-control" placeholder="Enter address">
+              <input id="EditAirport-address" type="text" class="form-control" placeholder="Enter address" title="You have to fill in it" required>
             </div>
             <span style="color: red bold" class="z-EditAirport-address"></span>
           </div>
-          <button  id="btsubmitEditAirport" class="btn btn-success mr-2"><b>Update</b></button>
+          <button  id="btsubmitEditAirport" type="submit" class="btn btn-success mr-2"><b>Update</b></button>
           <button class="btn btn-light" data-dismiss="modal"><b>Cancel</b></button>
         </form>
       </div>
