@@ -14054,3 +14054,61 @@ textarea.form-control {
   -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
+.grid_1, .grid_2, .grid_3, .grid_4, .grid_5, .grid_6, .grid_7, .grid_8, .grid_9, .grid_10, .grid_11, .grid_12, .grid_13, .grid_14, .grid_15, .grid_16 {
+  display: inline;
+
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.grid_3{
+  width: 190px;
+  float: left;
+  margin-left: 0;
+  margin-right: 0;
+}
+.side-menu{
+  padding: 0;
+  margin: 20px 0 0;
+  font-family: 'HelveticaNeueW01',Arial,sans-serif;
+  list-style: none;
+  font-size: 13px
+}
+.side-menu--large{
+  padding-bottom: 2px;
+  margin-top: 48px;
+  border-bottom: 1px solid #f6f6f6;
+}
+.side-menu--large .side-menu--items {
+  margin-bottom: 18px;
+  font-size: 15px;
+  line-height: 22px;
+}
+.side-menu--items a{
+  cursor:pointer;
+}
+.side-menu--items a:hover{
+  color: #ff5115;
+  
+}
+.side-menu--text {
+  padding-left: 5px;
+  font-weight: 600;
+  color: #000;
+}
+.side-menu--text:hover{
+  color: #ff5115;
+}
+.content {
+  border-left: 1px solid #f6f6f6;
+  margin-left: 50px;
+  padding-left: 50px;
+  min-height: 100%;
+  padding-bottom: 80px;
+}
+.grid_12{
+  width: 700px;
+  
+}
+.prefix_1{
+  padding-left: 60px;
+}
