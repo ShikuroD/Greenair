@@ -22,6 +22,7 @@
     <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="../assets/css/demo_1/style.css">
+    <link rel="stylesheet" href="../assets/css/shared/pagination.css">
     <!-- End Layout styles -->
     <link rel="shortcut icon" href="../assets/images/favicon.png" />
 
@@ -187,7 +188,12 @@
             </li><li class="nav-item">
               <a class="nav-link" asp-page="/Admin/Maker">
                 <i class="menu-icon typcn typcn-shopping-bag"></i>
-                <span class="menu-title">Maker and Plane</span>
+                <span class="menu-title">Maker</span>
+              </a>
+            </li><li class="nav-item">
+              <a class="nav-link" asp-page="/Admin/Plane">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Plane</span>
               </a>
             </li><li class="nav-item">
               <a class="nav-link" asp-page="/Admin/Airport">
@@ -227,7 +233,7 @@
     <script src="../assets/js/demo_1/Plane.js"></script>
     <script src="../assets/js/demo_1/Airport.js"></script>
     <script src="../assets/js/demo_1/Customer.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="../assets/js/shared/jquery-ui.js"></script>
     
 
     @RenderSection("Scripts", required: false)

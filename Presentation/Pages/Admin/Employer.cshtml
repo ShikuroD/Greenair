@@ -27,8 +27,7 @@
            <thead>
             <tr>
               <th>ID</th>
-              <th>First name</th>
-              <th>Last name</th>
+              <th>Full name</th>
               <th>Job</th>
               <th>Salary</th>
               <th>Status</th>
@@ -40,9 +39,9 @@
              @foreach (var item in Model.ListEmployers){
               <tr>
                 <td>@item.Id</td>
-                <td>@item.FirstName</td>
-                <td>@item.LastName</td>
-                <td>@item.Job</td>
+                <td> @item.LastName
+                  @item.FirstName</td>
+                <td>@item.JobId</td>
                 <td>@item.Salary</td>
                 <td><label class="badge badge-warning">item.Status</label></td>
                 <td> 
@@ -59,6 +58,37 @@
     </div>
   </div> 
   <!-- end content_warper -->
+
+  <!-- Table job -->
+  <div class="content-wrapper">
+    <div class="row">
+    <div class="col-lg-6 stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h3 align="center">List of Jobs </h3>
+          <table class="table table-bordered table-striped table-hover">
+           <thead>
+            <tr>
+              <th>Job ID</th>
+              <th>Job name</th>
+            </tr>
+           </thead>
+           <tbody>
+             <!-- change to code later -->
+             @foreach (var item in Model.ListJobs){
+              <tr>
+                <td>@item.JobId</td>
+                <td>@item.JobName</td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
 </div>
 <!-- end main body -->
 
@@ -204,7 +234,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content" >
             <div class="modal-header" style=" background-color:aliceblue;">
-                <h4 class="modal-title" style="margin: 10px 0 10px 510px; color:#000; font-weight: bold;font-size:34">New Employee</h4>
+                <h4 class="modal-title" style="margin: 10px 0 10px 510px; color:#000; font-weight: bold;font-size:34">Edit Employee</h4>
             </div>
 		    <div class="model-body" style="margin: 15px">
 				  <form class="form-sample" action="post">

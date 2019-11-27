@@ -38,7 +38,6 @@ namespace Presentation
                 }
             }
             host.Run();
-
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

@@ -9,28 +9,28 @@ using Presentation.Services.ServiceInterfaces;
 using AutoMapper;
 namespace Presentation.Services.ServicesImplement
 {
-    public class AirportVMService : IAirportVMService
+    public class PlaneVMService : IPlaneVMService
     {
         private int pageSize = 3;
         private readonly IUnitOfWork _service;
         private readonly IMapper _mapper;
 
-        public AirportVMService(IUnitOfWork movieService, IMapper mapper)
+        public PlaneVMService(IUnitOfWork movieService, IMapper mapper)
         {
             _service = movieService;
             _mapper = mapper;
         }
 
-        public async Task<AirportPageVM> GetAirportPageViewModelAsync(string searchString, int pageIndex = 1)
+        public async Task<PlanePageVM> GetPlanePageViewModelAsync(string searchMakerId, int pageIndex = 1)
         {
             // var movies = await _service.GetMoviesAsync(searchString, genre);
-            var airports = await _service.Airports.GetAllAsync();
+            var Planes = await _service.Planes.GetAllAsync();
             // var genres = await _service.GetGenresAsync();
-            var abc = _mapper.Map<IEnumerable<Airport>, IEnumerable<AirportDTO>>(airports);
+            var abc = _mapper.Map<IEnumerable<Plane>, IEnumerable<PlaneDTO>>(Planes);
 
-            return new AirportPageVM
+            return new PlanePageVM
             {
-                Airports = PaginatedList<AirportDTO>.Create(abc, pageIndex, pageSize)
+                Planes = PaginatedList<PlaneDTO>.Create(abc, pageIndex, pageSize)
             };
         }
 
