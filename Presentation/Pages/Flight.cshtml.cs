@@ -18,17 +18,17 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Presentation.Pages
 {
-    
+
     public class FlightModel : PageModel
     {
         private readonly IFlightService _flightService;
         [ActivatorUtilitiesConstructor]
-        public FlightModel (IFlightService flightService)
+        public FlightModel(IFlightService flightService)
         {
             _flightService = flightService;
         }
         public string Msg { get; set; }
-        
+
         public IEnumerable<FlightDTO> ListFlights { get; set; }
         private readonly ILogger<FlightModel> _logger;
 
@@ -40,29 +40,30 @@ namespace Presentation.Pages
         public async Task OnGet()
         {
             Msg = "a";
-            var FlightSearch = SessionHelper.GetObjectFromJson<Dictionary<string,object>>(HttpContext.Session,"FlightSearch");
+            var FlightSearch = SessionHelper.GetObjectFromJson<Dictionary<string, object>>(HttpContext.Session, "FlightSearch");
             string type = FlightSearch["type"].ToString();
             string vlDepDate = FlightSearch["depdate"].ToString();
-            DateTime depDate = DateTime.ParseExact(vlDepDate, "dd/MM/yyyy", null); 
+            DateTime depDate = DateTime.ParseExact(vlDepDate, "dd/MM/yyyy", null);
             DateTime arrDate = DateTime.ParseExact(vlDepDate, "dd/MM/yyyy", null);
             // DateTime arrDate = DateTime.;
-            if(type == "round"){
+            if (type == "round")
+            {
                 string vlArrDate = FlightSearch["arrdate"].ToString();
                 arrDate = DateTime.ParseExact(vlArrDate, "dd/MM/yyyy", null);
             }
-                
+
             string vlAdults = FlightSearch["adults"].ToString();
             var adults = Convert.ToInt32(vlAdults);
             string vlChilds = FlightSearch["childs"].ToString();
             var childs = Convert.ToInt32(vlChilds);
-            ListFlights = await _flightService.searchFlightAsync(FlightSearch["from"].ToString(),FlightSearch["where"].ToString(),depDate,arrDate,adults,childs);
-            if(ListFlights.Count() == 0)
+            ListFlights = await _flightService.searchFlightAsync(FlightSearch["from"].ToString(), FlightSearch["where"].ToString(), depDate, adults, childs);
+            if (ListFlights.Count() == 0)
             {
                 Msg = "No flights found!";
             }
         }
         public IActionResult OnPostLogIn()
-        {   
+        {
             string username = "";
             string password = "";
             {
@@ -72,14 +73,14 @@ namespace Presentation.Pages
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     string requestBody = reader.ReadToEnd();
-                    if(requestBody.Length > 0)
+                    if (requestBody.Length > 0)
                     {
                         var obj = JsonConvert.DeserializeObject<Account>(requestBody);
-                        if(obj != null)
+                        if (obj != null)
                         {
                             username = obj.Username;
                             password = obj.Password;
-                            if(username.Equals("abc") && password.Equals("123"))
+                            if (username.Equals("abc") && password.Equals("123"))
                             {
                                 HttpContext.Session.SetString("username", username);
                                 Msg = "true";
@@ -93,12 +94,13 @@ namespace Presentation.Pages
                 }
             }
             Dictionary<string, string> lstString = new Dictionary<string, string>();
-            lstString.Add("username",username);
-            lstString.Add("msg",Msg);
+            lstString.Add("username", username);
+            lstString.Add("msg", Msg);
             return new JsonResult(lstString);
         }
     }
-    public class Account{
+    public class Account
+    {
         public string Username { get; set; }
         public string Password { get; set; }
     }

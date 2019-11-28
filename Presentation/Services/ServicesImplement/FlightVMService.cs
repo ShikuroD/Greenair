@@ -1,5 +1,6 @@
 using Presentation.Services.ServiceInterfaces;
 using System.Collections.Generic;
+using System.Collections;
 using ApplicationCore.Interfaces;
 using Presentation.ViewModels;
 using ApplicationCore.DTOs;
@@ -21,7 +22,7 @@ namespace Presentation.Services.ServicesImplement
         }
         public async Task<IEnumerable<FlightDTO>> GetFlightListVm(string origin_id, string destination_id, DateTime dep_date, DateTime arr_date, int adults_num, int childs_num)
         {
-            var FlightSearch = await _service.searchFlightAsync(origin_id, destination_id, dep_date, arr_date, adults_num, childs_num);
+            var FlightSearch = await _service.searchFlightAsync(origin_id, destination_id, dep_date, adults_num, childs_num);
             return FlightSearch;
         }
     }

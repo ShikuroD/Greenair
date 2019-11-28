@@ -23,5 +23,10 @@ namespace Infrastructure.Persistence.Repos
             return await this.FindAsync(predicate);
 
         }
+        public async Task<bool> isDomestic(string airport_id)
+        {
+            var airport = await this.GetByAsync(airport_id);
+            return airport.Address.isDomestic();
+        }
     }
 }

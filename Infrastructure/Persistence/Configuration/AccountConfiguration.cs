@@ -11,8 +11,8 @@ namespace Infrastructure.Persistence.Configuration
         {
             builder.HasKey(x => x.Username);
 
-            builder.Property(x => x.Password).IsRequired();
-            builder.Property(x => x.PersonId).IsRequired();
+            builder.Property(x => x.Password).HasMaxLength(20).IsRequired();
+            builder.Property(x => x.PersonId).HasMaxLength(20).IsRequired();
 
         }
     }
