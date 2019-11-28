@@ -22,12 +22,14 @@ namespace Presentation.Pages.Admin
     {
         // private readonly ICustomerVMService _service;
         private readonly ICustomerService _service;
+        private readonly IUnitOfWork _unitofwork;
         public STATUS Status { get; set; }
 
-        public CustomerModel(ICustomerService service)
+        public CustomerModel(ICustomerService service, IUnitOfWork unitofwork)
         {
             this.Status = STATUS.AVAILABLE;
             this._service = service;
+            this._unitofwork = unitofwork;
         }
 
         [BindProperty(SupportsGet = true)]
@@ -40,23 +42,23 @@ namespace Presentation.Pages.Admin
             ListCustomer = await _service.getAllCustomerAsync();
         }
 
-        public IActionResult OnGetDetailCustomer(string id)
+        public async Task<IActionResult> OnGetDetailCustomer(string id)
         {
-            var Customer = _service.getCustomerAsync(id);
-            // CustomerDTO CustomerVM = new CustomerDTO(Customer);
-            // return Content(JsonConvert.SerializeObject(CustomerDTO));
-            // return new JsonResult(CustomerVM);
-            return new JsonResult("Abc");
+            // var Customer = await _service.getCustomerAsync(id);
+            var Customer = await _unitofwork.Customers.GetByAsync(id);
+            CustomerVM customerVM = new CustomerVM(Customer);
+            // return Content(JsonConvert.SerializeObject(customerVM));
+            return new JsonResult(customerVM);
+            // return new JsonResult("Abc");
         }
 
-        // public IActionResult OnGetEditCustomer(string id)
-        // {
-        //     // var Customer = _service.Customers.GetBy(id);
-        //     // CustomerDTO CustomerVM = new CustomerDTO(Customer);
-        //     // return Content(JsonConvert.SerializeObject(CustomerDTO));
-        //     // return new JsonResult(CustomerVM);
-        //     return new JsonResult("Abc");
-        // }
+        public async Task<IActionResult> OnGetEditCustomer(string id)
+        {
+            var Customer = await _unitofwork.Customers.GetByAsync(id);
+            CustomerVM customerVM = new CustomerVM(Customer);
+            // return Content(JsonConvert.SerializeObject(customerVM));
+            return new JsonResult(customerVM);
+        }
         // public async Task<IActionResult> OnPostEditCustomer()
         // {
         //     string respone = "Successful";
@@ -108,5 +110,49 @@ namespace Presentation.Pages.Admin
         //     string mes = "Remove " + CustomerId + " Success!";
         //     return new JsonResult(mes);
         // }
+    }
+    class CustomerVM
+    {
+        public string Id { get; set; }
+        public string LastName { get; set; }
+        public string FirstName { get; set; }
+        public string Birthdate { get; set; }
+        public string Phone { get; set; }
+        public string Address { get; set; }
+        public Account Account { get; set; }
+        public string Email { get; set; }
+        public STATUS Status { get; set; }
+        public CustomerVM() { }
+
+        public CustomerVM(string id, string lastname, string firstname, string birthdate, string phone,
+        string address, string email, STATUS sttus)
+        {
+            this.Id = id; this.LastName = lastname; this.FirstName = firstname; this.Birthdate = birthdate;
+            this.Phone = phone; this.Email = email; this.Address = address;
+            this.Status = sttus;
+        }
+        public CustomerVM(CustomerDTO cus)
+        {
+            this.Id = cus.Id;
+            this.LastName = cus.LastName;
+            this.FirstName = cus.FirstName;
+            this.Birthdate = cus.Birthdate.ToString();
+            this.Phone = cus.Phone; this.Email = cus.Email; this.Address = cus.Address.toString();
+            this.Status = cus.Status;
+            this.Account.Username = cus.Account.Username;
+            this.Account.Password = cus.Account.Password;
+        }
+        public CustomerVM(Customer cus)
+        {
+            this.Id = cus.Id;
+            this.LastName = cus.LastName;
+            this.FirstName = cus.FirstName;
+            this.Birthdate = cus.BirthDate.ToString();
+            this.Phone = cus.Phone; this.Email = cus.Email; this.Address = cus.Address.toString();
+            this.Status = cus.Status;
+            this.Account.Username = cus.Account.Username;
+            this.Account.Password = cus.Account.Password;
+        }
+
     }
 }

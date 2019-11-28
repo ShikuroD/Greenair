@@ -24,6 +24,7 @@
 
         $(".EditPlane").click(function () {
             var id = $(this).attr("id");
+            alert(id);
             $.ajax({
                 type: 'GET',
                 dataType: 'json',
@@ -33,6 +34,7 @@
                     id: id
                 },
                 success: function (result) {
+                    // alert(result.PlaneId);
                     $("#EditPlane-id").val(result.PlaneId);
                     $("#EditPlane-seatnum").val(result.SeatNum);
                     $("#EditPlane-default").text(result.MakerId);
