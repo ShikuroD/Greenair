@@ -19,5 +19,6 @@ namespace ApplicationCore.DTOs
         public MakerDTO Maker { get; set; }
 
         public IList<FlightDTO> Flights { get; set; }
+
     }
 }
