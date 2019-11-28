@@ -1,9 +1,11 @@
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ApplicationCore.DTOs;
 using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
 using AutoMapper;
+using System;
 namespace ApplicationCore.Services
 {
     public class JobService : Service<Job, JobDTO, JobDTO>, IJobService
@@ -26,6 +28,11 @@ namespace ApplicationCore.Services
             return this.toDtoRange(await unitOfWork.Jobs.getJobByName(job_name));
         }
         //actions
+        private async Task generateJobId(Job job)
+        {
+            var res = await unitOfWork.Jobs.GetAllAsync();
+            job.JobId = String.Format("{0:000}", res.Count());
+        }
         public async Task addJobAsync(JobDTO dto)
         {
             if (await unitOfWork.Jobs.GetByAsync(dto.JobId) == null)
