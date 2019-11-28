@@ -652,4 +652,28 @@ C:\Users\Administrator\Desktop\Greenair\Presentation\obj\Debug\netcoreapp3.0\Raz
 C:\Users\Administrator\Desktop\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Shared\_LayoutAdmin.cshtml.g.cs
 >>>>>>> cddb677f1612f7e9f41937798cf4545ebd8f4976
 C:\Users\Administrator\Desktop\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Airport.cshtml.g.cs
+D:\Code\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Airport.cshtml.g.cs
 C:\Users\Administrator\Desktop\Greenair-1\presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Plane.cshtml.g.cs
+>>>>>>> ff025e1aa15c2a07d2defaa6421321c1b3bde545
+<<<<<<< HEAD
+D:\Code\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Plane.cshtml.g.cs
+=======
+C:\Users\Administrator\Desktop\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Plane.cshtml.g.cs
+C:\Users\ASUS\Desktop\C#\Greenair\Presentation\bin\Debug\netcoreapp3.0\AutoMapper.dll
+C:\Users\ASUS\Desktop\C#\Greenair\Presentation\bin\Debug\netcoreapp3.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\ASUS\Desktop\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\About.cshtml.g.cs
+C:\Users\ASUS\Desktop\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Account.cshtml.g.cs
+C:\Users\ASUS\Desktop\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Airport.cshtml.g.cs
+C:\Users\ASUS\Desktop\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Customer.cshtml.g.cs
+C:\Users\ASUS\Desktop\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Dashboard.cshtml.g.cs
+C:\Users\ASUS\Desktop\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Employer.cshtml.g.cs
+C:\Users\ASUS\Desktop\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Flight.cshtml.g.cs
+C:\Users\ASUS\Desktop\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Index.cshtml.g.cs
+C:\Users\ASUS\Desktop\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Maker.cshtml.g.cs
+C:\Users\ASUS\Desktop\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Plane.cshtml.g.cs
+C:\Users\ASUS\Desktop\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Blog.cshtml.g.cs
+C:\Users\ASUS\Desktop\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Contact.cshtml.g.cs
+C:\Users\ASUS\Desktop\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Flight.cshtml.g.cs
+C:\Users\ASUS\Desktop\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Payment.cshtml.g.cs
+C:\Users\ASUS\Desktop\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Shared\_LayoutAdmin.cshtml.g.cs
+>>>>>>> 38f3dd4f24d9e23abd1f2a7e1aa8e035f1082482

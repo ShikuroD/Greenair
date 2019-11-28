@@ -70,6 +70,12 @@ namespace Infrastructure.Persistence.Repos
             if (!String.IsNullOrEmpty(firstname)) predicate.And(m => m.FirstName.Contains(firstname, StringComparison.OrdinalIgnoreCase));
             return await this.FindAsync(predicate);
         }
+        public async Task<IEnumerable<Customer>> getCustomerByName(string fullname)
+        {
+            var predicate = PredicateBuilder.True<Customer>();
+            if (!String.IsNullOrEmpty(fullname)) predicate.And(m => m.FullName.Contains(fullname, StringComparison.OrdinalIgnoreCase));
+            return await this.FindAsync(predicate);
+        }
         // new public async Task<IEnumerable<Customer>> GetAllAsync()
         // {
         //     try

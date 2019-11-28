@@ -120,13 +120,17 @@ namespace ApplicationCore.Services
         }
         public async Task updateCustomerAsync(CustomerDTO dto)
         {
-            var cus = await unitOfWork.Customers.GetByAsync(dto.Id);
-            if (cus != null)
+            if (await unitOfWork.Customers.GetByAsync(dto.Id) != null)
             {
-                this.convertDtoToEntity(dto, cus);
+                var cus = this.toEntity(dto);
                 await unitOfWork.Customers.UpdateAsync(cus);
-                await unitOfWork.CompleteAsync();
             }
+            else
+            {
+                var cus = this.toEntity(dto);
+                await unitOfWork.Customers.UpdateAsync(cus);
+            }
+            await unitOfWork.CompleteAsync();
         }
 
         public async Task createAccountAsync(AccountDTO acc_dto)

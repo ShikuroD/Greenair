@@ -37,7 +37,7 @@ namespace ApplicationCore.Services
             return num <= tickets.Count();
         }
 
-        public async Task<IEnumerable<FlightDTO>> searchFlightAsync(string origin_id, string destination_id, DateTime dep_date, DateTime arr_date,
+        public async Task<IEnumerable<FlightDTO>> searchFlightAsync(string origin_id, string destination_id, DateTime dep_date,
                      int adults_num, int childs_num)
         {
             //Expression<Func<Flight, bool>> predicate = m => true;
@@ -50,41 +50,60 @@ namespace ApplicationCore.Services
             predicate.And(m => Task.Run(() => this.getDestinationId(m.FlightId)).GetAwaiter().GetResult().Equals(destination_id));
             if (dep_date != null)
                 predicate.And(m => DateTime.Compare(Task.Run(() => this.getDepDate(m.FlightId)).GetAwaiter().GetResult(), dep_date) >= 0);
-            if (arr_date != null)
-                predicate.And(m => DateTime.Compare(Task.Run(() => this.getArrDate(m.FlightId)).GetAwaiter().GetResult(), arr_date) <= 0);
             predicate.And(m => Task.Run(() => this.checkOrderNum(m.FlightId, num)).GetAwaiter().GetResult().Equals(origin_id));
 
             var flights = await unitOfWork.Flights.FindAsync(predicate);
             return mapper.Map<IEnumerable<Flight>, IEnumerable<FlightDTO>>(flights);
         }
+        public async Task<IEnumerable<FlightDTO>> getLimitFlightAsync(IEnumerable<FlightDTO> flights, DateTime arr_date)
+        {
+            await Task.Run(() => true);
+            var predicate = PredicateBuilder.True<FlightDTO>();
+            if (arr_date != null)
+                predicate.And(m => DateTime.Compare(Task.Run(() => this.getArrDate(m.FlightId)).GetAwaiter().GetResult(), arr_date) <= 0);
+            IQueryable<FlightDTO> res = flights.AsQueryable();
+            return res.Where(predicate).ToList();
+        }
         private async Task generateFlightId(Flight flight)
         {
-            if (String.IsNullOrEmpty(flight.FlightId))
-            {
-                var res = await unitOfWork.Flights.GetAllAsync();
-                flight.FlightId = String.Format("{0:00000}", res.Count());
-            }
+            var res = await unitOfWork.Flights.GetAllAsync();
+            flight.FlightId = String.Format("{0:00000}", res.Count());
         }
 
         public async Task addFlightAsync(FlightDTO flightDto)
         {
-            var flight = this.toEntity(flightDto);
-            await generateFlightId(flight);
-            await unitOfWork.Flights.AddAsync(flight);
-            await unitOfWork.CompleteAsync();
+            if (await unitOfWork.Flights.GetByAsync(flightDto.FlightId) == null)
+            {
+                var flight = this.toEntity(flightDto);
+                await generateFlightId(flight);
+                await unitOfWork.Flights.AddAsync(flight);
+                await unitOfWork.CompleteAsync();
+            }
         }
         public async Task updateFlightAsync(FlightDTO flightDto)
         {
-            var flight = await unitOfWork.Flights.GetByAsync(flightDto.FlightId);
-            if (flight == null) return;
-            this.convertDtoToEntity(flightDto, flight);
+            if (await unitOfWork.Flights.GetByAsync(flightDto.FlightId) != null)
+            {
+                var flight = this.toEntity(flightDto);
+                await unitOfWork.Flights.UpdateAsync(flight);
+            }
+            else
+            {
+                var flight = this.toEntity(flightDto);
+                await generateFlightId(flight);
+                await unitOfWork.Flights.AddAsync(flight);
+            }
             await unitOfWork.CompleteAsync();
         }
 
         public async Task removeFlightAsync(string flight_id)
         {
-            await unitOfWork.Flights.RemoveAsync(await unitOfWork.Flights.GetByAsync(flight_id));
-            await unitOfWork.CompleteAsync();
+            var flight = await unitOfWork.Flights.GetByAsync(flight_id);
+            if (flight != null)
+            {
+                await unitOfWork.Flights.RemoveAsync(flight);
+                await unitOfWork.CompleteAsync();
+            }
         }
 
         public async Task removeAllFlightAsync()
