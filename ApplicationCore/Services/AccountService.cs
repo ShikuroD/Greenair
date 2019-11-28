@@ -55,8 +55,13 @@ namespace ApplicationCore.Services
             {
                 var acc = this.toEntity(dto);
                 await unitOfWork.Accounts.UpdateAsync(acc);
-                await unitOfWork.CompleteAsync();
             }
+            else
+            {
+                var acc = this.toEntity(dto);
+                await unitOfWork.Accounts.AddAsync(acc);
+            }
+            await unitOfWork.CompleteAsync();
         }
 
         public async Task<bool> isExistedUsernameAsync(string username)

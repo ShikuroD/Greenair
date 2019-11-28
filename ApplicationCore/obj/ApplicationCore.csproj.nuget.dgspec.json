@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Code\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj": {}
+    "C:\\Users\\ASUS\\Desktop\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj": {}
   },
   "projects": {
-    "D:\\Code\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj": {
+    "C:\\Users\\ASUS\\Desktop\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Code\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\Desktop\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj",
         "projectName": "ApplicationCore",
-        "projectPath": "D:\\Code\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj",
-        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-        "outputPath": "D:\\Code\\C#\\Greenair\\ApplicationCore\\obj\\",
+        "projectPath": "C:\\Users\\ASUS\\Desktop\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ASUS\\Desktop\\C#\\Greenair\\ApplicationCore\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"

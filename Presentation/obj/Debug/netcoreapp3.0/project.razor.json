@@ -1,5 +1,5 @@
 {
-  "FilePath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Presentation.csproj",
+  "FilePath": "c:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Presentation.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "3.0",
@@ -35,7 +35,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": null,
+            "Documentation": "\n            <summary>\n            The content that will be displayed while asynchronous authorization is in progress.\n            </summary>\n        ",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Authorizing",
@@ -50,7 +50,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": null,
+            "Documentation": "\n            <summary>\n            The content that will be displayed if the user is not authorized.\n            </summary>\n        ",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "NotAuthorized",
@@ -132,7 +132,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": null,
+            "Documentation": "\n            <summary>\n            The content that will be displayed while asynchronous authorization is in progress.\n            </summary>\n        ",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Authorizing",
@@ -147,7 +147,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": null,
+            "Documentation": "\n            <summary>\n            The content that will be displayed if the user is not authorized.\n            </summary>\n        ",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "NotAuthorized",
@@ -210,7 +210,7 @@
         "Kind": "Components.ChildContent",
         "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
         "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-        "Documentation": null,
+        "Documentation": "\n            <summary>\n            The content that will be displayed while asynchronous authorization is in progress.\n            </summary>\n        ",
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
@@ -235,7 +235,7 @@
         "Kind": "Components.ChildContent",
         "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.Authorizing",
         "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-        "Documentation": null,
+        "Documentation": "\n            <summary>\n            The content that will be displayed while asynchronous authorization is in progress.\n            </summary>\n        ",
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
@@ -261,7 +261,7 @@
         "Kind": "Components.ChildContent",
         "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
         "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-        "Documentation": null,
+        "Documentation": "\n            <summary>\n            The content that will be displayed if the user is not authorized.\n            </summary>\n        ",
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
@@ -301,7 +301,7 @@
         "Kind": "Components.ChildContent",
         "Name": "Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.NotAuthorized",
         "AssemblyName": "Microsoft.AspNetCore.Components.Authorization",
-        "Documentation": null,
+        "Documentation": "\n            <summary>\n            The content that will be displayed if the user is not authorized.\n            </summary>\n        ",
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
@@ -9524,7 +9524,7 @@
         "Kind": "ITagHelper",
         "Name": "Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper",
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
-        "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;a&gt; elements.\n            </summary>\n        ",
+        "Documentation": null,
         "TagOutputHint": null,
         "CaseSensitive": false,
         "TagMatchingRules": [
@@ -9713,7 +9713,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The name of the action method.\n            </summary>\n            <remarks>\n            Must be <c>null</c> if <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Route\" /> or <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page\" /> is non-<c>null</c>.\n            </remarks>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Action"
@@ -9727,7 +9727,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The name of the area.\n            </summary>\n            <remarks>\n            Must be <c>null</c> if <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Route\" /> is non-<c>null</c>.\n            </remarks>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Area"
@@ -9741,7 +9741,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The name of the controller.\n            </summary>\n            <remarks>\n            Must be <c>null</c> if <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Route\" /> or <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page\" /> is non-<c>null</c>.\n            </remarks>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Controller"
@@ -9755,7 +9755,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The URL fragment name.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Fragment"
@@ -9769,7 +9769,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The host name.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Host"
@@ -9783,7 +9783,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The name of the page.\n            </summary>\n            <remarks>\n            Must be <c>null</c> if <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Route\" /> or <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Action\" />, <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Controller\" />\n            is non-<c>null</c>.\n            </remarks>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Page"
@@ -9797,7 +9797,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The name of the page handler.\n            </summary>\n            <remarks>\n            Must be <c>null</c> if <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Route\" /> or <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Action\" />, or <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Controller\" />\n            is non-<c>null</c>.\n            </remarks>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "PageHandler"
@@ -9811,7 +9811,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The protocol for the URL, such as \"http\" or \"https\".\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Protocol"
@@ -9825,7 +9825,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            Name of the route.\n            </summary>\n            <remarks>\n            Must be <c>null</c> if one of <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Action\" />, <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Controller\" />, <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Area\" /> \n            or <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page\" /> is non-<c>null</c>.\n            </remarks>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Route"
@@ -9839,7 +9839,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": "asp-route-",
             "IndexerTypeName": "System.String",
-            "Documentation": "\n            <summary>\n            Additional parameters for the route.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "RouteValues"
@@ -14344,113 +14344,113 @@
   "RootNamespace": "Presentation",
   "Documents": [
     {
-      "FilePath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Pages\\Shared\\_Layout.cshtml",
-      "TargetPath": "Pages\\Shared\\_Layout.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Pages\\Index.cshtml",
-      "TargetPath": "Pages\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Pages\\Admin\\Index.cshtml",
-      "TargetPath": "Pages\\Admin\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Pages\\_ViewImports.cshtml",
-      "TargetPath": "Pages\\_ViewImports.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Pages\\Account.cshtml",
-      "TargetPath": "Pages\\Account.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Pages\\Admin\\Flight.cshtml",
-      "TargetPath": "Pages\\Admin\\Flight.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Pages\\Error.cshtml",
-      "TargetPath": "Pages\\Error.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Pages\\Admin\\Maker.cshtml",
-      "TargetPath": "Pages\\Admin\\Maker.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Pages\\Shared\\_ValidationScriptsPartial.cshtml",
+      "FilePath": "c:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Pages\\Shared\\_ValidationScriptsPartial.cshtml",
       "TargetPath": "Pages\\Shared\\_ValidationScriptsPartial.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Pages\\About.cshtml",
-      "TargetPath": "Pages\\About.cshtml",
+      "FilePath": "c:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Pages\\Shared\\_Layout.cshtml",
+      "TargetPath": "Pages\\Shared\\_Layout.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Pages\\Admin\\Employer.cshtml",
-      "TargetPath": "Pages\\Admin\\Employer.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Pages\\Blog.cshtml",
+      "FilePath": "c:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Pages\\Blog.cshtml",
       "TargetPath": "Pages\\Blog.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Pages\\Contact.cshtml",
-      "TargetPath": "Pages\\Contact.cshtml",
+      "FilePath": "c:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Pages\\Error.cshtml",
+      "TargetPath": "Pages\\Error.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Pages\\Payment.cshtml",
-      "TargetPath": "Pages\\Payment.cshtml",
+      "FilePath": "c:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Pages\\Admin\\Maker.cshtml",
+      "TargetPath": "Pages\\Admin\\Maker.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Pages\\Admin\\Airport.cshtml",
+      "FilePath": "c:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Pages\\Admin\\Airport.cshtml",
       "TargetPath": "Pages\\Admin\\Airport.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Pages\\_ViewStart.cshtml",
-      "TargetPath": "Pages\\_ViewStart.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Pages\\Shared\\_LayoutAdmin.cshtml",
-      "TargetPath": "Pages\\Shared\\_LayoutAdmin.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Pages\\Admin\\Plane.cshtml",
-      "TargetPath": "Pages\\Admin\\Plane.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Pages\\Admin\\Customer.cshtml",
+      "FilePath": "c:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Pages\\Admin\\Customer.cshtml",
       "TargetPath": "Pages\\Admin\\Customer.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Pages\\Flight.cshtml",
+      "FilePath": "c:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Pages\\Admin\\Employer.cshtml",
+      "TargetPath": "Pages\\Admin\\Employer.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Pages\\Index.cshtml",
+      "TargetPath": "Pages\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Pages\\Admin\\Plane.cshtml",
+      "TargetPath": "Pages\\Admin\\Plane.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Pages\\_ViewImports.cshtml",
+      "TargetPath": "Pages\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Pages\\_ViewStart.cshtml",
+      "TargetPath": "Pages\\_ViewStart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Pages\\Flight.cshtml",
       "TargetPath": "Pages\\Flight.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Pages\\Admin\\Dashboard.cshtml",
+      "FilePath": "c:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Pages\\Admin\\Flight.cshtml",
+      "TargetPath": "Pages\\Admin\\Flight.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Pages\\Admin\\Index.cshtml",
+      "TargetPath": "Pages\\Admin\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Pages\\Shared\\_LayoutAdmin.cshtml",
+      "TargetPath": "Pages\\Shared\\_LayoutAdmin.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Pages\\Admin\\Dashboard.cshtml",
       "TargetPath": "Pages\\Admin\\Dashboard.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Pages\\Privacy.cshtml",
+      "FilePath": "c:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Pages\\About.cshtml",
+      "TargetPath": "Pages\\About.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Pages\\Privacy.cshtml",
       "TargetPath": "Pages\\Privacy.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Pages\\Payment.cshtml",
+      "TargetPath": "Pages\\Payment.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Pages\\Contact.cshtml",
+      "TargetPath": "Pages\\Contact.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Pages\\Account.cshtml",
+      "TargetPath": "Pages\\Account.cshtml",
       "FileKind": "mvc"
     }
   ],

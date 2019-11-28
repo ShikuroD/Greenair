@@ -58,5 +58,13 @@ namespace ApplicationCore.DTOs
                 this.Country = list[5];
             }
         }
+        public bool isDomestic()
+        {
+            switch (this.Country)
+            {
+                case "VN": case "vn": case "Việt Nam": case "Viet Nam": return true;
+                default: return false;
+            }
+        }
     }
 }
