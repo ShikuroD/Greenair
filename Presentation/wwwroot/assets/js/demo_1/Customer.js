@@ -27,9 +27,6 @@
             $.ajax({
                 type: 'GET',
                 dataType: 'json',
-                headers: {
-                    "XSRF-TOKEN": $('input:hidden[name="__RequestVerificationToken"]').val()
-                },
                 contentType: 'application/json; charset=utf-8',
                 url: '/Admin/Customer?handler=DetailCustomer',
                 data: {

@@ -19,7 +19,7 @@ namespace Infrastructure.Persistence.Repos
         {
             try
             {
-                var res = await Task.Run(() => this.Context.Employers.AsNoTracking().Where(emp => emp.Id.Equals(id)));
+                var res = await Task.Run(() => this.Context.Employers.AsNoTracking().Where(m => String.Equals(m.Id, id)).ToList());
                 if (res.Count() != 1) return null;
                 else return res.ElementAt(0);
 

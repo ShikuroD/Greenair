@@ -7,7 +7,7 @@ namespace ApplicationCore.Entities
     public class Person : IAggregateRoot
     {
         public Person() { }
-        public Person(string id, string lastName, string firstName, DateTime birthDate, string phone, Address address, STATUS status)
+        public Person(string id, string lastName, string firstName, DateTime birthDate, string phone, Address address, STATUS status, Account account)
         {
             this.Id = id;
             this.LastName = lastName;
@@ -16,9 +16,10 @@ namespace ApplicationCore.Entities
             this.Phone = phone;
             this.Address = address;
             this.Status = status;
+            this.Account = account;
 
         }
-        public Person(string id, string lastName, string firstName, DateTime birthDate, string phone, Address address)
+        public Person(string id, string lastName, string firstName, DateTime birthDate, string phone, Address address, Account account)
         {
             this.Id = id;
             this.LastName = lastName;
@@ -26,6 +27,7 @@ namespace ApplicationCore.Entities
             this.BirthDate = birthDate;
             this.Phone = phone;
             this.Address = address;
+            this.Account = account;
 
         }
         public string Id { get; set; }

@@ -44,18 +44,27 @@ namespace Presentation.Pages.Admin
 
         public async Task<IActionResult> OnGetDetailCustomer(string id)
         {
-            // var Customer = await _service.getCustomerAsync(id);
-            var Customer = await _unitofwork.Customers.GetByAsync(id);
-            CustomerVM customerVM = new CustomerVM(Customer);
-            // return Content(JsonConvert.SerializeObject(customerVM));
-            return new JsonResult(customerVM);
+            var Customer = await _service.getCustomerAsync(id);
+            //var Customer = await _unitofwork.Customers.GetByAsync(id);
+            if (Customer == null)
+                Console.WriteLine("NULL");
+            else Console.WriteLine(Customer.Id);
+            Account acc = await _unitofwork.Accounts.getAccountByPersonId(id);
+
+            if (acc == null)
+                Console.WriteLine("NULL");
+            else Console.WriteLine(acc.Username);
+            CustomerVM customerVM = new CustomerVM(Customer, acc);
+            return Content(JsonConvert.SerializeObject(customerVM));
+            // return new JsonResult(Customer);
             // return new JsonResult("Abc");
         }
 
         public async Task<IActionResult> OnGetEditCustomer(string id)
         {
             var Customer = await _unitofwork.Customers.GetByAsync(id);
-            CustomerVM customerVM = new CustomerVM(Customer);
+            Account acc = await _unitofwork.Accounts.getAccountByPersonId(Customer.Id);
+            CustomerVM customerVM = new CustomerVM(Customer, acc);
             // return Content(JsonConvert.SerializeObject(customerVM));
             return new JsonResult(customerVM);
         }
@@ -119,7 +128,8 @@ namespace Presentation.Pages.Admin
         public string Birthdate { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }
-        public Account Account { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
         public string Email { get; set; }
         public STATUS Status { get; set; }
         public CustomerVM() { }
@@ -131,7 +141,7 @@ namespace Presentation.Pages.Admin
             this.Phone = phone; this.Email = email; this.Address = address;
             this.Status = sttus;
         }
-        public CustomerVM(CustomerDTO cus)
+        public CustomerVM(CustomerDTO cus, Account acc)
         {
             this.Id = cus.Id;
             this.LastName = cus.LastName;
@@ -139,10 +149,10 @@ namespace Presentation.Pages.Admin
             this.Birthdate = cus.Birthdate.ToString();
             this.Phone = cus.Phone; this.Email = cus.Email; this.Address = cus.Address.toString();
             this.Status = cus.Status;
-            this.Account.Username = cus.Account.Username;
-            this.Account.Password = cus.Account.Password;
+            this.Username = acc.Username;
+            this.Password = acc.Password;
         }
-        public CustomerVM(Customer cus)
+        public CustomerVM(Customer cus, Account acc)
         {
             this.Id = cus.Id;
             this.LastName = cus.LastName;
@@ -150,8 +160,8 @@ namespace Presentation.Pages.Admin
             this.Birthdate = cus.BirthDate.ToString();
             this.Phone = cus.Phone; this.Email = cus.Email; this.Address = cus.Address.toString();
             this.Status = cus.Status;
-            this.Account.Username = cus.Account.Username;
-            this.Account.Password = cus.Account.Password;
+            this.Username = acc.Username;
+            this.Password = acc.Password;
         }
 
     }

@@ -10,14 +10,14 @@ namespace ApplicationCore.Entities
         public Customer() : base() { }
 
         public Customer(string id, string lastName, string firstName, DateTime birthDate, string phone, Address address,
-                STATUS status, string email) : base(id, lastName, firstName, birthDate, phone, address, status)
+                STATUS status, Account account, string email) : base(id, lastName, firstName, birthDate, phone, address, status, account)
         {
             this.Email = email;
 
         }
 
-        public Customer(string id, string lastName, string firstName, DateTime birthDate, string phone, Address address,
-                string email) : base(id, lastName, firstName, birthDate, phone, address)
+        public Customer(string id, string lastName, string firstName, DateTime birthDate, string phone, Address address, Account account,
+                string email) : base(id, lastName, firstName, birthDate, phone, address, account)
         {
             this.Email = email;
 

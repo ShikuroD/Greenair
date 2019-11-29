@@ -9,14 +9,14 @@ namespace ApplicationCore.Entities
         public Employer() : base() { }
 
         public Employer(string id, string lastName, string firstName, DateTime birthDate, string phone, Address address,
-                STATUS status, double salary, string jobId) : base(id, lastName, firstName, birthDate, phone, address, status)
+                STATUS status, Account account, double salary, string jobId) : base(id, lastName, firstName, birthDate, phone, address, status, account)
         {
             this.Salary = salary;
             this.JobId = jobId; ;
         }
 
-        public Employer(string id, string lastName, string firstName, DateTime birthDate, string phone, Address address,
-                double salary, string jobId) : base(id, lastName, firstName, birthDate, phone, address)
+        public Employer(string id, string lastName, string firstName, DateTime birthDate, string phone, Address address, Account account,
+                double salary, string jobId) : base(id, lastName, firstName, birthDate, phone, address, account)
         {
             this.Salary = salary;
             this.JobId = jobId; ;

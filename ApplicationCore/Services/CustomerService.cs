@@ -19,6 +19,7 @@ namespace ApplicationCore.Services
         public async Task<CustomerDTO> getCustomerAsync(string cus_id)
         {
             var cus = await unitOfWork.Customers.GetByAsync(cus_id);
+            Console.WriteLine("qwerty {0}", cus.FullName);
             if (cus == null) return null;
             return toDto(cus);
         }
