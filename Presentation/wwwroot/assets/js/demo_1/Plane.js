@@ -10,7 +10,7 @@
                     },
                     dataType: 'json',
                     contentType: 'application/json; charset=utf-8',
-                    url: '/Admin/Maker?handler=DeletePlane',
+                    url: '/Admin/Plane?handler=DeletePlane',
                     data: JSON.stringify({
                         PlaneId: id
                     }),
@@ -24,15 +24,17 @@
 
         $(".EditPlane").click(function () {
             var id = $(this).attr("id");
+            alert(id);
             $.ajax({
                 type: 'GET',
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
-                url: '/Admin/Maker?handler=EditPlane',
+                url: '/Admin/Plane?handler=EditPlane',
                 data: {
                     id: id
                 },
                 success: function (result) {
+                    // alert(result.PlaneId);
                     $("#EditPlane-id").val(result.PlaneId);
                     $("#EditPlane-seatnum").val(result.SeatNum);
                     $("#EditPlane-default").text(result.MakerId);
@@ -53,7 +55,7 @@
                 },
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
-                url: '/Admin/Maker?handler=EditPlane',
+                url: '/Admin/Plane?handler=EditPlane',
                 data: JSON.stringify({
                     PlaneId: id,
                     SeatNum: seatnum,

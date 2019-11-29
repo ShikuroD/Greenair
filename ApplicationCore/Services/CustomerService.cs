@@ -19,6 +19,7 @@ namespace ApplicationCore.Services
         public async Task<CustomerDTO> getCustomerAsync(string cus_id)
         {
             var cus = await unitOfWork.Customers.GetByAsync(cus_id);
+            Console.WriteLine("qwerty {0}", cus.FullName);
             if (cus == null) return null;
             return toDto(cus);
         }
@@ -120,13 +121,17 @@ namespace ApplicationCore.Services
         }
         public async Task updateCustomerAsync(CustomerDTO dto)
         {
-            var cus = await unitOfWork.Customers.GetByAsync(dto.Id);
-            if (cus != null)
+            if (await unitOfWork.Customers.GetByAsync(dto.Id) != null)
             {
-                this.convertDtoToEntity(dto, cus);
+                var cus = this.toEntity(dto);
                 await unitOfWork.Customers.UpdateAsync(cus);
-                await unitOfWork.CompleteAsync();
             }
+            else
+            {
+                var cus = this.toEntity(dto);
+                await unitOfWork.Customers.UpdateAsync(cus);
+            }
+            await unitOfWork.CompleteAsync();
         }
 
         public async Task createAccountAsync(AccountDTO acc_dto)

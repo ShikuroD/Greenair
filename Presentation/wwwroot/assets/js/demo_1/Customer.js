@@ -21,7 +21,32 @@
                 });
             }
         });
+        $(".DetailCustomer").click(function () {
+            var id = $(this).attr("id");
+            // alert("Id1 " + id);
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                url: '/Admin/Customer?handler=DetailCustomer',
+                data: {
+                    id: id
+                },
+                success: function (result) {
+                    alert("Id2 " + result.Id);
+                    $("#DetailCustomer-lastname").val(result.LastName);
+                    $("#DetailCustomer-firstname").val(result.FirstName);
+                    $("#DetailCustomer-birthday").val(result.Birthdate);
+                    $("#DetailCustomer-phone").val(result.Phone);
+                    $("#DetailCustomer-email").val(result.Email);
+                    $("#DetailCustomer-address").val(result.Address.toString());
+                    $("#DetailCustomer-status").val(result.Status);
+                    $("#DetailCustomer-username").val(result.Account.Username);
+                    $("#DetailCustomer-password").val(result.Account.Password);
 
+                }
+            });
+        });
         $(".EditCustomer").click(function () {
             var id = $(this).attr("id");
             $.ajax({
@@ -33,9 +58,17 @@
                     id: id
                 },
                 success: function (result) {
-                    $("#EditCustomer-name").val(result.CustomerName);
-                    $("#EditCustomer-address").val(result.Address);
-                    $("#EditCustomer-id").val(result.CustomerId);
+                    alert("Id2 " + result.Id);
+                    $("#EditCustomer-id").val(result.Id);
+                    $("#EditCustomer-lastname").val(result.LastName);
+                    $("#EditCustomer-lastname").val(result.FirstName);
+                    $("#EditCustomer-birthday").val(result.Birthdate);
+                    $("#EditCustomer-phone").val(result.Phone);
+                    $("#EditCustomer-email").val(result.Email);
+                    $("#EditCustomer-address").val(result.Address.toString());
+                    $("#EditCustomer-status").val(result.Status);
+                    $("#EditCustomer-username").val(result.Account.Username);
+                    $("#EditCustomer-password").val(result.Account.Password);
 
                 }
             });

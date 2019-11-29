@@ -5,7 +5,6 @@
 	ViewData["Title"] = "Admin Page";
 }
 <div class="main-panel">
-      <!-- Plane content-wrapper -->
   <div class="content-wrapper">
     <!-- row button create -->
     <div class="row">
@@ -17,7 +16,7 @@
     </div>
     <!-- row table -->
     <div class="row">
-    <div class="col-lg-9 stretch-card">
+    <div class="col-lg-12 stretch-card">
       <div class="card">
         <div class="card-body">
           <h3 align="center">List of Planes </h3>
@@ -44,19 +43,20 @@
             }
             </tbody>
           </table>
+          <br />
           @{
-              var preDisabled1 = !Model.ListPlanePage.Planes.HasPrevious ? "disabled" : "";
-              var nextDisabled1 = !Model.ListPlanePage.Planes.HasNext ? "disabled" : "";
-              var pageNow1 =Model.ListPlanePage.Planes.PageIndex;
-              }
+              var preDisabled = !Model.ListPlanePage.Planes.HasPrevious ? "disabled" : "";
+              var nextDisabled = !Model.ListPlanePage.Planes.HasNext ? "disabled" : "";
+              var pageNow =Model.ListPlanePage.Planes.PageIndex;
+            }
               <!-- pagination -->
               <div class="pagination" >
                 <a style="cursor:pointer" asp-page="/Admin/Plane" 
                 asp-route-pageIndex="@(Model.ListPlanePage.Planes.PageIndex - 1)" 
-                class="pagination_link @preDisabled1" >Previous</a>
+                class="pagination_link @preDisabled" >Previous</a>
                 @for (int i=1;i<=Model.ListPlanePage.Planes.TotalPages;++i)
                 {
-                    if(i==pageNow1)
+                    if(i==pageNow)
                     {
                       <a style="cursor:pointer" asp-page="/Admin/Plane" asp-route-pageIndex="@i" class="pagination_link active" >@i</a>
                     }
@@ -66,7 +66,7 @@
                 }
                 <a  style="cursor:pointer" asp-page="/Admin/Plane" 
                 asp-route-pageIndex="@(Model.ListPlanePage.Planes.PageIndex + 1)" 
-                class="pagination_link @nextDisabled1">Next</a>
+                class="pagination_link @nextDisabled">Next</a>
               </div>
         </div>
       </div>

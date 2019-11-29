@@ -37,16 +37,15 @@ namespace Presentation.Pages.Admin
             ListPlanePage = await _services.GetPlanePageViewModelAsync("", pageIndex);
 
         }
-        // Plane methods
-        public IActionResult OnGetEditPlane(string id)
+        public async Task<IActionResult> OnGetEditPlane(string id)
         {
-            var plane = _unitofwork.Planes.GetBy(id);
+            var plane = await _unitofwork.Planes.GetByAsync(id);
             PlaneDTO planeDTO = new PlaneDTO();
             planeDTO.PlaneId = plane.PlaneId;
             planeDTO.SeatNum = plane.SeatNum;
-            planeDTO.PlaneId = plane.PlaneId;
+            planeDTO.MakerId = plane.MakerId;
             return Content(JsonConvert.SerializeObject(planeDTO));
-            // return new JsonResult(planedto);
+            // return new JsonResult(planeDTO);
         }
         public async Task<IActionResult> OnPostEditPlane()
         {

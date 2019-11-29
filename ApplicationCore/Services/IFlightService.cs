@@ -1,3 +1,4 @@
+using System.Collections;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,8 +11,9 @@ namespace ApplicationCore.Services
     {
         Task<FlightDTO> getFlightAsync(string flight_id);
         Task<IEnumerable<FlightDTO>> getAllFlightAsync();
-        Task<IEnumerable<FlightDTO>> searchFlightAsync(string origin_id, string destination_id, DateTime dep_date, DateTime arr_date,
+        Task<IEnumerable<FlightDTO>> searchFlightAsync(string origin_id, string destination_id, DateTime dep_date,
                      int adults_num, int childs_num);
+        Task<IEnumerable<FlightDTO>> getLimitFlightAsync(IEnumerable<FlightDTO> flights, DateTime arr_date);
         //Task generateId(Flight flight);
         Task addFlightAsync(FlightDTO flightDto);
         Task updateFlightAsync(FlightDTO flightDto);

@@ -27,8 +27,10 @@ namespace Presentation
                     IUnitOfWork unit = new UnitOfWork(greenairContext);
                     //unit.Employers.RemoveRange(unit.Employers.GetAll());
                     //unit.Customers.RemoveRange(unit.Customers.GetAll());
-                    //greenairContext.SaveChanges();
+                    unit.Customers.RemoveRange(unit.Customers.GetAll());
+                    greenairContext.SaveChanges();
                     DataSeed.Initialize(greenairContext);
+
 
                 }
                 catch (Exception ex)

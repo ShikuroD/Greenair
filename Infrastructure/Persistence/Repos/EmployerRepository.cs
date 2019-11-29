@@ -19,7 +19,7 @@ namespace Infrastructure.Persistence.Repos
         {
             try
             {
-                var res = await Task.Run(() => this.Context.Employers.AsNoTracking().Where(emp => emp.Id.Equals(id)));
+                var res = await Task.Run(() => this.Context.Employers.AsNoTracking().Where(m => String.Equals(m.Id, id)).ToList());
                 if (res.Count() != 1) return null;
                 else return res.ElementAt(0);
 
@@ -35,6 +35,12 @@ namespace Infrastructure.Persistence.Repos
             var predicate = PredicateBuilder.True<Employer>();
             if (!String.IsNullOrEmpty(lastname)) predicate.And(m => m.LastName.Contains(lastname, StringComparison.OrdinalIgnoreCase));
             if (!String.IsNullOrEmpty(firstname)) predicate.And(m => m.FirstName.Contains(firstname, StringComparison.OrdinalIgnoreCase));
+            return await this.FindAsync(predicate);
+        }
+        public async Task<IEnumerable<Employer>> getEmployerByName(string fullname)
+        {
+            var predicate = PredicateBuilder.True<Employer>();
+            if (!String.IsNullOrEmpty(fullname)) predicate.And(m => m.FullName.Contains(fullname, StringComparison.OrdinalIgnoreCase));
             return await this.FindAsync(predicate);
         }
 
