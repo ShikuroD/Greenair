@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Presentation.csproj": {}
+    "C:\\Users\\Administrator\\Desktop\\Greenair-1\\presentation\\Presentation.csproj": {}
   },
   "projects": {
     "C:\\Users\\Administrator\\Desktop\\Greenair-1\\ApplicationCore\\ApplicationCore.csproj": {
@@ -174,14 +174,14 @@
         }
       }
     },
-    "C:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Presentation.csproj": {
+    "C:\\Users\\Administrator\\Desktop\\Greenair-1\\presentation\\Presentation.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Presentation.csproj",
+        "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\presentation\\Presentation.csproj",
         "projectName": "Presentation",
-        "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\Presentation.csproj",
+        "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\presentation\\Presentation.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\Presentation\\obj\\",
+        "outputPath": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\presentation\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
