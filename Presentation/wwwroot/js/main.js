@@ -335,16 +335,13 @@
 		'autoclose': true
 	})
 	//end of datepicker
-	function addUser() {
-		$("#register").dialog("close");
-		alert("Succesful");
-	}
+
 	//dialog,form
  	var dialog, form;
  	$("#register").dialog({
  		autoOpen: false,
- 		height: 400,
- 		width: 300,
+ 		height: 600,
+ 		width: 500,
  		modal: true,
  		closeOnEscape: true,
  		buttons: {
@@ -356,7 +353,11 @@
  		close: function () {
  			$(this).dialog("close");
  		}
- 	});
+	 });
+	 function addUser() {
+		$("#register").dialog("close");
+		alert("Succesful");
+	}
  	$("#logIn").on("click", function () {
  		console.log();
  		var username = $("#username").val();
