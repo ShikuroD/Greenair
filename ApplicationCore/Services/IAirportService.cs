@@ -11,6 +11,7 @@ namespace ApplicationCore.Services
         Task<AirportDTO> getAirportAsync(string airport_id);
         Task<IEnumerable<AirportDTO>> getAllAirportAsync();
         Task<IEnumerable<AirportDTO>> getAirportByConditionsAsync(string airport_name, string city, string country);
+        Task<bool> isDomestic(string airport_id);
 
         //actions
         Task addAirportAsync(AirportDTO dto);

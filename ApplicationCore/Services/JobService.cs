@@ -38,6 +38,7 @@ namespace ApplicationCore.Services
             if (await unitOfWork.Jobs.GetByAsync(dto.JobId) == null)
             {
                 var job = this.toEntity(dto);
+                await this.generateJobId(job);
                 await unitOfWork.Jobs.AddAsync(job);
                 await unitOfWork.CompleteAsync();
             }
@@ -61,6 +62,7 @@ namespace ApplicationCore.Services
             else
             {
                 var job = this.toEntity(dto);
+                await this.generateJobId(job);
                 await unitOfWork.Jobs.AddAsync(job);
             }
             await unitOfWork.CompleteAsync();

@@ -11,7 +11,8 @@ namespace Infrastructure.Persistence.Configuration
         {
             builder.HasKey(s => s.AirportId);
 
-            builder.Property(s => s.AirportName).IsRequired();
+            builder.Property(s => s.AirportId).HasMaxLength(3);
+            builder.Property(s => s.AirportName).HasMaxLength(30).IsRequired();
 
             builder.HasMany<Route>(s => s.RouteStarts)
                 .WithOne(a => a.OrgAirport)
