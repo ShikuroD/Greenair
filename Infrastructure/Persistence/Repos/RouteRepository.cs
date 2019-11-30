@@ -36,7 +36,7 @@ namespace Infrastructure.Persistence.Repos
         public async Task<bool> isExisted(string origin, string dest)
         {
             var predicate = PredicateBuilder.New<Route>();
-            predicate = predicate.And(m => m.Destination.Equals(dest));
+            predicate = predicate.And(m => m.Origin.Equals(origin) && m.Destination.Equals(dest));
             var res = await this.FindAsync(predicate);
             if (res == null || res.Count() == 0) return false;
             return true;

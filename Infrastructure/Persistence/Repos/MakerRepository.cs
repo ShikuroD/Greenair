@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ApplicationCore.Entities;
@@ -17,9 +18,9 @@ namespace Infrastructure.Persistence.Repos
 
         public async Task<IEnumerable<Maker>> getMakerByName(string name)
         {
-            var predicate = PredicateBuilder.New<Maker>();
-            predicate = predicate.And(m => m.MakerName.Contains(name, StringComparison.OrdinalIgnoreCase));
-            return await this.FindAsync(predicate);
+            var res = await this.GetAllAsync();
+            res = res.Where(m => m.MakerName.Contains(name, StringComparison.OrdinalIgnoreCase));
+            return res;
         }
     }
 }

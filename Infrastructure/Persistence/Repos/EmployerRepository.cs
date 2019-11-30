@@ -36,14 +36,14 @@ namespace Infrastructure.Persistence.Repos
         public async Task<IEnumerable<Employee>> getEmployeeByName(string lastname, string firstname)
         {
             var res = await this.GetAllAsync();
-            if (!String.IsNullOrEmpty(lastname)) res.Where(m => m.LastName.Contains(lastname, StringComparison.OrdinalIgnoreCase));
-            if (!String.IsNullOrEmpty(firstname)) res.Where(m => m.FirstName.Contains(firstname, StringComparison.OrdinalIgnoreCase));
+            if (!String.IsNullOrEmpty(lastname)) res = res.Where(m => m.LastName.Contains(lastname, StringComparison.OrdinalIgnoreCase));
+            if (!String.IsNullOrEmpty(firstname)) res = res.Where(m => m.FirstName.Contains(firstname, StringComparison.OrdinalIgnoreCase));
             return res;
         }
         public async Task<IEnumerable<Employee>> getEmployeeByName(string fullname)
         {
             var res = await this.GetAllAsync();
-            if (!String.IsNullOrEmpty(fullname)) res.Where(m => m.FullName.Contains(fullname, StringComparison.OrdinalIgnoreCase));
+            if (!String.IsNullOrEmpty(fullname)) res = res.Where(m => m.FullName.Contains(fullname, StringComparison.OrdinalIgnoreCase));
             return res;
         }
 

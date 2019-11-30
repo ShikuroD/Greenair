@@ -40,6 +40,10 @@ namespace ApplicationCore.Services
         {
             return this.toDtoRange(await unitOfWork.Customers.getCustomerByName(lastname, firstname));
         }
+        public async Task<IEnumerable<CustomerDTO>> getCustomerByName(string fullname)
+        {
+            return this.toDtoRange(await unitOfWork.Customers.getCustomerByName(fullname));
+        }
 
 
 

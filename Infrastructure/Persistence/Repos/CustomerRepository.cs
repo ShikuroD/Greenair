@@ -76,7 +76,7 @@ namespace Infrastructure.Persistence.Repos
         public async Task<IEnumerable<Customer>> getCustomerByName(string fullname)
         {
             var res = await this.GetAllAsync(); //String.Format("{0} {1}", m.LastName, m.FirstName)    , StringComparison.OrdinalIgnoreCase
-            if (!String.IsNullOrEmpty(fullname)) res.Where(m => m.FullName.Contains(fullname, StringComparison.OrdinalIgnoreCase));
+            if (!String.IsNullOrEmpty(fullname)) res = res.Where(m => m.FullName.Contains(fullname, StringComparison.OrdinalIgnoreCase));
 
             return res;
         }
