@@ -7,7 +7,7 @@ using System.Linq;
 using System.Collections.Generic;
 using ApplicationCore;
 using LinqKit;
-namespace Infrastructure.Persistence.Repos
+namespace Infrastructure.Persistence.Repos 
 {
     public class EmployeeRepository : Repository<Employee>, IEmployeeRepository
     {
