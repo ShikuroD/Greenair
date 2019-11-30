@@ -8,7 +8,7 @@ namespace ApplicationCore.Interfaces
         IAirportRepository Airports { get; }
         IPersonRepository Persons { get; }
         ICustomerRepository Customers { get; }
-        IEmployerRepository Employers { get; }
+        IEmployeeRepository Employees { get; }
         IFlightRepository Flights { get; }
         IJobRepository Jobs { get; }
         IMakerRepository Makers { get; }

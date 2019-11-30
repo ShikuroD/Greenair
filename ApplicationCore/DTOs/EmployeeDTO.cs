@@ -4,7 +4,7 @@ using ApplicationCore.Interfaces;
 using ApplicationCore.Entities;
 namespace ApplicationCore.DTOs
 {
-    public class EmployerDTO : PersonDTO
+    public class EmployeeDTO : PersonDTO
     {
         [DataType(DataType.Currency)]
         [Column(TypeName = "decimal(18,2)")]

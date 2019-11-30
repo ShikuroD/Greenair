@@ -14,7 +14,7 @@ namespace ApplicationCore.DTOs
         [StringLength(20, MinimumLength = 5)]
         public string JobName { get; set; }
 
-        public IList<EmployerDTO> Employers { get; set; }
+        public IList<EmployeeDTO> Employees { get; set; }
 
         public JobDTO(string jobId, string jobName)
         {

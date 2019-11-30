@@ -4,7 +4,7 @@ using ApplicationCore.Interfaces;
 using System;
 namespace ApplicationCore.Entities
 {
-    public class Employer : Person, IAggregateRoot
+    public class Employee : Person, IAggregateRoot
     {
         public Employer() : base() { }
 

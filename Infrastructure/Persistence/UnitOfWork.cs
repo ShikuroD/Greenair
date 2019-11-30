@@ -13,7 +13,7 @@ namespace Infrastructure.Persistence
             this.Airports = new AirportRepository(_context);
             this.Persons = new PersonRepository(_context);
             this.Customers = new CustomerRepository(_context);
-            this.Employers = new EmployerRepository(_context);
+            this.Employees = new EmployeeRepository(_context);
             this.Flights = new FlightRepository(_context);
             this.Jobs = new JobRepository(_context);
             this.Makers = new MakerRepository(_context);
@@ -31,7 +31,7 @@ namespace Infrastructure.Persistence
 
         public ICustomerRepository Customers { get; private set; }
 
-        public IEmployerRepository Employers { get; private set; }
+        public IEmployeeRepository Employees { get; private set; }
 
         public IFlightRepository Flights { get; private set; }
 

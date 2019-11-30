@@ -23,8 +23,8 @@ namespace ApplicationCore
             CreateMap<Customer, CustomerDTO>();
             CreateMap<CustomerDTO, Customer>();
 
-            CreateMap<Employer, EmployerDTO>();
-            CreateMap<EmployerDTO, Employer>();
+            CreateMap<Employee, EmployeeDTO>();
+            CreateMap<EmployeeDTO, Employee>();
 
             CreateMap<FlightTime, FlightTimeDTO>();
             CreateMap<FlightTimeDTO, FlightTime>();

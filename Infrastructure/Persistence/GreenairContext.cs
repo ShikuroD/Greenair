@@ -1,4 +1,4 @@
-using System.Security.AccessControl;
+
 using ApplicationCore.Entities;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Persistence.Configuration;
@@ -21,7 +21,7 @@ namespace Infrastructure.Persistence
             modelBuilder.ApplyConfiguration(new MakerConfiguration());
             modelBuilder.ApplyConfiguration(new PlaneConfiguration());
             modelBuilder.ApplyConfiguration(new RouteConfiguration());
-            modelBuilder.ApplyConfiguration(new EmployerConfiguration());
+            modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
             modelBuilder.ApplyConfiguration(new CustomerConfiguration());
             modelBuilder.ApplyConfiguration(new FlightDetailConfiguration());
             modelBuilder.ApplyConfiguration(new TicketConfiguration());
@@ -43,7 +43,7 @@ namespace Infrastructure.Persistence
         public DbSet<Job> Jobs { get; set; }
         public DbSet<Person> Persons { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Employer> Employers { get; set; }
+        public DbSet<Employee> Employees { get; set; }
         public DbSet<Account> Accounts { get; set; }
     }
 
