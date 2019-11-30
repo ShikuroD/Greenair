@@ -16,19 +16,21 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using ApplicationCore.DTOs;
 using ApplicationCore.Services;
+using Presentation.Services.ServiceInterfaces;
 namespace Presentation.Pages.Admin
 {
     public class CustomerModel : PageModel
     {
-        // private readonly ICustomerVMService _service;
         private readonly ICustomerService _service;
+        private readonly ICustomerVMService _serviceVM;
         private readonly IUnitOfWork _unitofwork;
         public STATUS Status { get; set; }
 
-        public CustomerModel(ICustomerService service, IUnitOfWork unitofwork)
+        public CustomerModel(ICustomerService service, ICustomerVMService serviceVM, IUnitOfWork unitofwork)
         {
             this.Status = STATUS.AVAILABLE;
             this._service = service;
+            this._serviceVM = serviceVM;
             this._unitofwork = unitofwork;
         }
 
@@ -36,28 +38,20 @@ namespace Presentation.Pages.Admin
         public string SearchString { get; set; }
 
         public IEnumerable<CustomerDTO> ListCustomer { get; set; }
-
-        public async Task OnGet()
+        public CustomerPageVM ListCustomerPage { get; set; }
+        public async Task OnGet(string searchString, int pageIndex = 1)
         {
-            ListCustomer = await _service.getAllCustomerAsync();
+            ListCustomerPage = await _serviceVM.GetCustomerPageViewModelAsync(SearchString, pageIndex);
         }
 
         public async Task<IActionResult> OnGetDetailCustomer(string id)
         {
             var Customer = await _service.getCustomerAsync(id);
             //var Customer = await _unitofwork.Customers.GetByAsync(id);
-            if (Customer == null)
-                Console.WriteLine("NULL");
-            else Console.WriteLine(Customer.Id);
             Account acc = await _unitofwork.Accounts.getAccountByPersonId(id);
-
-            if (acc == null)
-                Console.WriteLine("NULL");
-            else Console.WriteLine(acc.Username);
             CustomerVM customerVM = new CustomerVM(Customer, acc);
             return Content(JsonConvert.SerializeObject(customerVM));
             // return new JsonResult(Customer);
-            // return new JsonResult("Abc");
         }
 
         public async Task<IActionResult> OnGetEditCustomer(string id)
@@ -68,57 +62,51 @@ namespace Presentation.Pages.Admin
             // return Content(JsonConvert.SerializeObject(customerVM));
             return new JsonResult(customerVM);
         }
-        // public async Task<IActionResult> OnPostEditCustomer()
-        // {
-        //     string respone = "Successful";
-        //     MemoryStream stream = new MemoryStream();
-        //     Request.Body.CopyTo(stream);
-        //     stream.Position = 0;
-        //     using (StreamReader reader = new StreamReader(stream))
-        //     {
-        //         string requestBody = reader.ReadToEnd();
-        //         if (requestBody.Length > 0)
-        //         {
-        //             var obj = JsonConvert.DeserializeObject<CustomerDTO>(requestBody);
-        //             if (obj != null)
-        //             {
-        //                 // Address address = new Address();
-        //                 // address.toValue(obj.Address);
-        //                 // Customer Customer = new Customer();
-        //                 // Customer.CustomerId = obj.CustomerId;
-        //                 // Customer.CustomerName = obj.CustomerName;
-        //                 // Customer.Address = address;
-        //                 // await _service.Customers.UpdateAsync(Customer);
-        //                 // await _service.CompleteAsync();
-        //             }
-        //         }
-        //     }
-        //     return new JsonResult(respone);
-        // }
-        // public async Task<IActionResult> OnPostDeleteCustomer()
-        // {
-        //     string CustomerId = "";
-        //     MemoryStream stream = new MemoryStream();
-        //     Request.Body.CopyTo(stream);
-        //     stream.Position = 0;
-        //     using (StreamReader reader = new StreamReader(stream))
-        //     {
-        //         string requestBody = reader.ReadToEnd();
-        //         if (requestBody.Length > 0)
-        //         {
-        //             var obj = JsonConvert.DeserializeObject<CustomerDTO>(requestBody);
-        //             if (obj != null)
-        //             {
-        //                 // CustomerId = obj.CustomerId;
-        //                 // var item = await _service.Customers.GetByAsync(CustomerId);
-        //                 // await _service.Customers.RemoveAsync(item);
-        //                 // await _service.CompleteAsync();
-        //             }
-        //         }
-        //     }
-        //     string mes = "Remove " + CustomerId + " Success!";
-        //     return new JsonResult(mes);
-        // }
+        public async Task<IActionResult> OnPostEditCustomer()
+        {
+            string respone = "Successful";
+            MemoryStream stream = new MemoryStream();
+            Request.Body.CopyTo(stream);
+            stream.Position = 0;
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string requestBody = reader.ReadToEnd();
+                if (requestBody.Length > 0)
+                {
+                    var obj = JsonConvert.DeserializeObject<CustomerDTO>(requestBody);
+                    if (obj != null)
+                    {
+                        string id = obj.Id;
+                        await _service.disableCutomerAsync(id);
+                        // _service
+                    }
+                }
+            }
+            return new JsonResult(respone);
+        }
+        public async Task<IActionResult> OnPostDeleteCustomer()
+        {
+            string CustomerId = "";
+            MemoryStream stream = new MemoryStream();
+            Request.Body.CopyTo(stream);
+            stream.Position = 0;
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string requestBody = reader.ReadToEnd();
+                if (requestBody.Length > 0)
+                {
+                    var obj = JsonConvert.DeserializeObject<CustomerDTO>(requestBody);
+                    if (obj != null)
+                    {
+                        CustomerId = obj.Id;
+                        await _service.removeCustomerAsync(obj.Id);
+                        // await _servic
+                    }
+                }
+            }
+            string mes = "Remove " + CustomerId + " Success!";
+            return new JsonResult(mes);
+        }
     }
     class CustomerVM
     {
@@ -131,15 +119,15 @@ namespace Presentation.Pages.Admin
         public string Username { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-        public STATUS Status { get; set; }
+        public string Status { get; set; }
         public CustomerVM() { }
 
         public CustomerVM(string id, string lastname, string firstname, string birthdate, string phone,
-        string address, string email, STATUS sttus)
+        string address, string email, STATUS status)
         {
             this.Id = id; this.LastName = lastname; this.FirstName = firstname; this.Birthdate = birthdate;
             this.Phone = phone; this.Email = email; this.Address = address;
-            this.Status = sttus;
+            this.getStatusToString(status);
         }
         public CustomerVM(CustomerDTO cus, Account acc)
         {
@@ -148,7 +136,7 @@ namespace Presentation.Pages.Admin
             this.FirstName = cus.FirstName;
             this.Birthdate = cus.Birthdate.ToString();
             this.Phone = cus.Phone; this.Email = cus.Email; this.Address = cus.Address.toString();
-            this.Status = cus.Status;
+            this.getStatusToString(cus.Status);
             this.Username = acc.Username;
             this.Password = acc.Password;
         }
@@ -159,9 +147,21 @@ namespace Presentation.Pages.Admin
             this.FirstName = cus.FirstName;
             this.Birthdate = cus.BirthDate.ToString();
             this.Phone = cus.Phone; this.Email = cus.Email; this.Address = cus.Address.toString();
-            this.Status = cus.Status;
+            this.getStatusToString(cus.Status);
             this.Username = acc.Username;
             this.Password = acc.Password;
+        }
+        public void getStatusToString(STATUS status)
+        {
+            if (status == STATUS.AVAILABLE)
+            {
+                this.Status = "AVAILABLE";
+            }
+            else if (status == STATUS.DISABLED)
+            {
+                this.Status = "DISABLED";
+            }
+            else this.Status = null;
         }
 
     }

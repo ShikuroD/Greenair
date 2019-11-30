@@ -11,6 +11,8 @@ namespace ApplicationCore.Services
     {
         Task<FlightDTO> getFlightAsync(string flight_id);
         Task<IEnumerable<FlightDTO>> getAllFlightAsync();
+        Task<IEnumerable<FlightDTO>> getAllAvailableFlightAsync();
+        Task<IEnumerable<FlightDTO>> getAllDisabledFlightAsync();
         Task<IEnumerable<FlightDTO>> searchFlightAsync(string origin_id, string destination_id, DateTime dep_date,
                      int adults_num, int childs_num);
         Task<IEnumerable<FlightDTO>> getLimitFlightAsync(IEnumerable<FlightDTO> flights, DateTime arr_date);

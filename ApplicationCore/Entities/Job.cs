@@ -9,7 +9,7 @@ namespace ApplicationCore.Entities
         public string JobId { get; set; }
 
         public string JobName { get; set; }
-        public IList<Employer> Employers { get; set; }
+        public IList<Employee> Employees { get; set; }
 
         public Job(string jobId, string jobName)
         {

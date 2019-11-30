@@ -9,6 +9,7 @@ using ApplicationCore.DTOs;
 using ApplicationCore.Interfaces;
 using AutoMapper;
 using System.Linq;
+using LinqKit;
 namespace ApplicationCore.Services
 {
     public class FlightService : Service<Flight, FlightDTO, FlightDTO>, IFlightService
@@ -29,6 +30,18 @@ namespace ApplicationCore.Services
             var flights = await unitOfWork.Flights.GetAllAsync();
             return mapper.Map<IEnumerable<Flight>, IEnumerable<FlightDTO>>(flights);
         }
+        public async Task<IEnumerable<FlightDTO>> getAllAvailableFlightAsync()
+        {
+            var flights = await unitOfWork.Flights.GetAllAsync();
+            flights = flights.Where(m => m.Status == STATUS.AVAILABLE);
+            return mapper.Map<IEnumerable<Flight>, IEnumerable<FlightDTO>>(flights);
+        }
+        public async Task<IEnumerable<FlightDTO>> getAllDisabledFlightAsync()
+        {
+            var flights = await unitOfWork.Flights.GetAllAsync();
+            flights = flights.Where(m => m.Status == STATUS.DISABLED);
+            return mapper.Map<IEnumerable<Flight>, IEnumerable<FlightDTO>>(flights);
+        }
 
         //Tim kiem ============================================================================================================================
         private async Task<bool> checkOrderNum(string flight_id, int num)
@@ -41,28 +54,28 @@ namespace ApplicationCore.Services
                      int adults_num, int childs_num)
         {
             //Expression<Func<Flight, bool>> predicate = m => true;
-            var predicate = PredicateBuilder.True<Flight>();
+            //var predicate = PredicateBuilder.New<Flight>();
+            if (!String.IsNullOrEmpty(origin_id) && !String.IsNullOrEmpty(destination_id))
+            {
+                int num = adults_num + childs_num;
+                var res = await this.getAllAvailableFlightAsync();
 
-            int num = adults_num + childs_num;
+                res = res.Where(m => Task.Run(() => this.getOriginId(m.FlightId)).GetAwaiter().GetResult().Equals(origin_id))
+                    .Where(m => Task.Run(() => this.getDestinationId(m.FlightId)).GetAwaiter().GetResult().Equals(destination_id));
+                if (dep_date != null)
+                    res = res.Where(m => DateTime.Compare(Task.Run(() => this.getDepDate(m.FlightId)).GetAwaiter().GetResult(), dep_date) >= 0);
+                res = res.Where(m => Task.Run(() => this.checkOrderNum(m.FlightId, num)).GetAwaiter().GetResult().Equals(origin_id));
 
-            predicate.And(m => m.Status == STATUS.AVAILABLE);
-            predicate.And(m => Task.Run(() => this.getOriginId(m.FlightId)).GetAwaiter().GetResult().Equals(origin_id));
-            predicate.And(m => Task.Run(() => this.getDestinationId(m.FlightId)).GetAwaiter().GetResult().Equals(destination_id));
-            if (dep_date != null)
-                predicate.And(m => DateTime.Compare(Task.Run(() => this.getDepDate(m.FlightId)).GetAwaiter().GetResult(), dep_date) >= 0);
-            predicate.And(m => Task.Run(() => this.checkOrderNum(m.FlightId, num)).GetAwaiter().GetResult().Equals(origin_id));
-
-            var flights = await unitOfWork.Flights.FindAsync(predicate);
-            return mapper.Map<IEnumerable<Flight>, IEnumerable<FlightDTO>>(flights);
+                return res;
+            }
+            else return null;
         }
         public async Task<IEnumerable<FlightDTO>> getLimitFlightAsync(IEnumerable<FlightDTO> flights, DateTime arr_date)
         {
             await Task.Run(() => true);
-            var predicate = PredicateBuilder.True<FlightDTO>();
             if (arr_date != null)
-                predicate.And(m => DateTime.Compare(Task.Run(() => this.getArrDate(m.FlightId)).GetAwaiter().GetResult(), arr_date) <= 0);
-            IQueryable<FlightDTO> res = flights.AsQueryable();
-            return res.Where(predicate).ToList();
+                flights = flights.Where(m => DateTime.Compare(Task.Run(() => this.getArrDate(m.FlightId)).GetAwaiter().GetResult(), arr_date) <= 0);
+            return flights;
         }
         private async Task generateFlightId(Flight flight)
         {

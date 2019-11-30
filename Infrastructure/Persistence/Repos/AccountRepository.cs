@@ -8,7 +8,7 @@ using ApplicationCore;
 using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
 using Microsoft.EntityFrameworkCore;
-
+using LinqKit;
 namespace Infrastructure.Persistence.Repos
 {
     public class AccountRepository : Repository<Account>, IAccountRepository
@@ -21,8 +21,8 @@ namespace Infrastructure.Persistence.Repos
 
         public async Task<Account> getAccountByPersonId(string person_id)
         {
-            var predicate = PredicateBuilder.True<Account>();
-            predicate.And(m => m.PersonId.Equals(person_id));
+            var predicate = PredicateBuilder.New<Account>();
+            predicate = predicate.And(m => m.PersonId.Equals(person_id));
             var acc = await this.FindAsync(predicate);
             if (acc.Count() != 1) return null;
             return acc.ElementAt(0);

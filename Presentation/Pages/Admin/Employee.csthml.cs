@@ -14,19 +14,19 @@ using System.IO;
 using ApplicationCore.DTOs;
 namespace Presentation.Pages.Admin
 {
-    public class EmployerModel : PageModel
+    public class EmployeeModel : PageModel
     {
         private readonly IUnitOfWork _unitofwork;
 
-        public EmployerModel(IUnitOfWork unitofwork)
+        public EmployeeModel(IUnitOfWork unitofwork)
         {
             _unitofwork = unitofwork;
         }
-        public IEnumerable<Employer> ListEmployers { get; set; }
+        public IEnumerable<Employee> ListEmployees { get; set; }
         public IEnumerable<Job> ListJobs { get; set; }
         public async Task OnGet()
         {
-            ListEmployers = await _unitofwork.Employers.GetAllAsync();
+            ListEmployees = await _unitofwork.Employees.GetAllAsync();
             ListJobs = await _unitofwork.Jobs.GetAllAsync();
         }
     }

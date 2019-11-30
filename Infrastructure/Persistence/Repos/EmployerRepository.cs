@@ -6,45 +6,48 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using ApplicationCore;
-namespace Infrastructure.Persistence.Repos
+using LinqKit;
+namespace Infrastructure.Persistence.Repos 
 {
-    public class EmployerRepository : Repository<Employer>, IEmployerRepository
+    public class EmployeeRepository : Repository<Employee>, IEmployeeRepository
     {
         protected new GreenairContext Context => base.Context as GreenairContext;
-        public EmployerRepository(GreenairContext context) : base(context)
+        public EmployeeRepository(GreenairContext context) : base(context)
         {
         }
 
-        new public async Task<Employer> GetByAsync(string id)
+        new public async Task<Employee> GetByAsync(string id)
         {
             try
             {
-                var res = await Task.Run(() => this.Context.Employers.AsNoTracking().Where(m => String.Equals(m.Id, id)).ToList());
+                var predicate = PredicateBuilder.New<Employee>();
+                predicate = predicate.And(m => m.Id.Equals(id));
+                var res = await Task.Run(() => this.Context.Employees.AsNoTracking().Where(predicate).ToList());
                 if (res.Count() != 1) return null;
                 else return res.ElementAt(0);
 
             }
             catch (Exception e)
             {
-                Console.WriteLine("GetByEmployerAsync() Unexpected: " + e);
+                Console.WriteLine("GetByEmployeeAsync() Unexpected: " + e);
                 return null;
             }
         }
-        public async Task<IEnumerable<Employer>> getEmployerByName(string lastname, string firstname)
+        public async Task<IEnumerable<Employee>> getEmployeeByName(string lastname, string firstname)
         {
-            var predicate = PredicateBuilder.True<Employer>();
-            if (!String.IsNullOrEmpty(lastname)) predicate.And(m => m.LastName.Contains(lastname, StringComparison.OrdinalIgnoreCase));
-            if (!String.IsNullOrEmpty(firstname)) predicate.And(m => m.FirstName.Contains(firstname, StringComparison.OrdinalIgnoreCase));
-            return await this.FindAsync(predicate);
+            var res = await this.GetAllAsync();
+            if (!String.IsNullOrEmpty(lastname)) res = res.Where(m => m.LastName.Contains(lastname, StringComparison.OrdinalIgnoreCase));
+            if (!String.IsNullOrEmpty(firstname)) res = res.Where(m => m.FirstName.Contains(firstname, StringComparison.OrdinalIgnoreCase));
+            return res;
         }
-        public async Task<IEnumerable<Employer>> getEmployerByName(string fullname)
+        public async Task<IEnumerable<Employee>> getEmployeeByName(string fullname)
         {
-            var predicate = PredicateBuilder.True<Employer>();
-            if (!String.IsNullOrEmpty(fullname)) predicate.And(m => m.FullName.Contains(fullname, StringComparison.OrdinalIgnoreCase));
-            return await this.FindAsync(predicate);
+            var res = await this.GetAllAsync();
+            if (!String.IsNullOrEmpty(fullname)) res = res.Where(m => m.FullName.Contains(fullname, StringComparison.OrdinalIgnoreCase));
+            return res;
         }
 
-        private async Task changeEmployerStatus(string emp_id, STATUS status)
+        private async Task changeEmployeeStatus(string emp_id, STATUS status)
         {
             try
             {
@@ -55,10 +58,10 @@ namespace Infrastructure.Persistence.Repos
             }
             catch (Exception e)
             {
-                Console.WriteLine("ChangeEmployerStatus() Unexpected: " + e);
+                Console.WriteLine("ChangeEmployeeStatus() Unexpected: " + e);
             }
         }
-        private async Task changeEmployerStatus(Employer emp, STATUS status)
+        private async Task changeEmployeeStatus(Employee emp, STATUS status)
         {
             try
             {
@@ -68,28 +71,28 @@ namespace Infrastructure.Persistence.Repos
             }
             catch (Exception e)
             {
-                Console.WriteLine("ChangeEmployerStatus() Unexpected: " + e);
+                Console.WriteLine("ChangeEmployeeStatus() Unexpected: " + e);
             }
         }
 
         public async Task activate(string emp_id)
         {
-            await this.changeEmployerStatus(emp_id, STATUS.AVAILABLE);
+            await this.changeEmployeeStatus(emp_id, STATUS.AVAILABLE);
         }
 
         public async Task disable(string emp_id)
         {
-            await this.changeEmployerStatus(emp_id, STATUS.DISABLED);
+            await this.changeEmployeeStatus(emp_id, STATUS.DISABLED);
         }
 
-        public async Task activate(Employer emp)
+        public async Task activate(Employee emp)
         {
-            await this.changeEmployerStatus(emp, STATUS.AVAILABLE);
+            await this.changeEmployeeStatus(emp, STATUS.AVAILABLE);
         }
 
-        public async Task disable(Employer emp)
+        public async Task disable(Employee emp)
         {
-            await this.changeEmployerStatus(emp, STATUS.DISABLED);
+            await this.changeEmployeeStatus(emp, STATUS.DISABLED);
         }
     }
 }

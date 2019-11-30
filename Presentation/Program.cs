@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,9 +26,23 @@ namespace Presentation
                     var greenairContext = services.GetRequiredService<GreenairContext>();
 
                     IUnitOfWork unit = new UnitOfWork(greenairContext);
-                    //unit.Employers.RemoveRange(unit.Employers.GetAll());
+                    //unit.Employees.RemoveRange(unit.Employees.GetAll());
                     //unit.Customers.RemoveRange(unit.Customers.GetAll());
-                    unit.Customers.RemoveRange(unit.Customers.GetAll());
+                    
+                    // var cus = unit.Customers.GetByAsync("00006").GetAwaiter().GetResult();
+                    // if (cus == null) Console.WriteLine("NULL cus"); else Console.WriteLine(cus.FullName);
+
+
+                    // var cus2 = unit.Customers.getCustomerByName("Phung qUoc hai").GetAwaiter().GetResult();
+                    // if (cus2 == null) Console.WriteLine("NULL cus"); else Console.WriteLine("{0} {1}", cus2.ElementAt(0).Id, cus2.ElementAt(0).FullName);
+
+
+                    // var acc = unit.Accounts.GetByAsync("cus4").GetAwaiter().GetResult();
+                    // if (acc == null) Console.WriteLine("NULL acc"); else Console.WriteLine(acc.Username);
+
+                    // var acc2 = unit.Accounts.getAccountByPersonId("00006").GetAwaiter().GetResult();
+                    // if (acc2 == null) Console.WriteLine("NULL acc"); else Console.WriteLine(acc2.Username);
+
                     greenairContext.SaveChanges();
                     DataSeed.Initialize(greenairContext);
 

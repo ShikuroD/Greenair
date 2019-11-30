@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Presentation.Migrations
 {
     [DbContext(typeof(GreenairContext))]
-    [Migration("20191124190833_Initials")]
-    partial class Initials
+    [Migration("20191130150037_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,11 +25,13 @@ namespace Presentation.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(20);
 
                     b.Property<string>("PersonId")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(20);
 
                     b.Property<int>("Status")
                         .HasColumnType("INTEGER");
@@ -45,11 +47,13 @@ namespace Presentation.Migrations
             modelBuilder.Entity("ApplicationCore.Entities.Airport", b =>
                 {
                     b.Property<string>("AirportId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(3);
 
                     b.Property<string>("AirportName")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(30);
 
                     b.HasKey("AirportId");
 
@@ -279,7 +283,7 @@ namespace Presentation.Migrations
                     b.HasDiscriminator().HasValue("Customer");
                 });
 
-            modelBuilder.Entity("ApplicationCore.Entities.Employer", b =>
+            modelBuilder.Entity("ApplicationCore.Entities.Employee", b =>
                 {
                     b.HasBaseType("ApplicationCore.Entities.Person");
 
@@ -292,7 +296,7 @@ namespace Presentation.Migrations
 
                     b.HasIndex("JobId");
 
-                    b.HasDiscriminator().HasValue("Employer");
+                    b.HasDiscriminator().HasValue("Employee");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entities.Account", b =>
@@ -512,10 +516,10 @@ namespace Presentation.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ApplicationCore.Entities.Employer", b =>
+            modelBuilder.Entity("ApplicationCore.Entities.Employee", b =>
                 {
                     b.HasOne("ApplicationCore.Entities.Job", "Job")
-                        .WithMany("Employers")
+                        .WithMany("Employees")
                         .HasForeignKey("JobId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
