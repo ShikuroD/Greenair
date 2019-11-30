@@ -27,6 +27,7 @@ namespace Presentation.Pages.Admin
             this._services = services;
         }
 
+        public string SearchString { get; set; }
         public IEnumerable<Maker> ListMakers { get; set; }
 
         public PlanePageVM ListPlanePage { get; set; }

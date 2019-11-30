@@ -27,16 +27,17 @@ namespace Presentation.Pages.Admin
             this._services = services;
         }
 
+        public string SearchString { get; set; }
         public IEnumerable<Maker> ListMakers { get; set; }
         // public IEnumerable<Plane> ListPlanes { get; set; }
 
         public MakerPageVM ListMakerPage { get; set; }
 
-        public async Task OnGet(int pageIndexMaker = 1, int pageIndexPlane = 1)
+        public async Task OnGet(string searchString, int pageIndex = 1)
         {
             ListMakers = await _unitofwork.Makers.GetAllAsync();
             // ListPlanes = await _unitofwork.Planes.GetAllAsync();
-            ListMakerPage = await _services.GetMakerPageViewModelAsync("", pageIndexMaker);
+            ListMakerPage = await _services.GetMakerPageViewModelAsync(SearchString, pageIndex);
 
         }
         // Maker methods

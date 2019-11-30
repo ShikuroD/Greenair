@@ -29,7 +29,7 @@ namespace Presentation.Services.ServicesImplement
             // var genres = await _service.GetGenresAsync();
             if (searchString != null)
             {
-                Customers = await service.getCustomerByName(searchString, searchString);
+                Customers = await service.getCustomerByName(searchString);
             }
             // var abc = _mapper.Map<IEnumerable<Customer>, IEnumerable<CustomerDTO>>(Customers);
 

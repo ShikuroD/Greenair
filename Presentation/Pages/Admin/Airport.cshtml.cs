@@ -27,12 +27,14 @@ namespace Presentation.Pages.Admin
             this._services = services;
 
         }
+
+        public string SearchString { get; set; }
         public AirportPageVM ListAirportsPage { get; set; }
         public IEnumerable<Airport> ListAirports { get; set; }
-        public async Task OnGet(int pageIndex = 1)
+        public async Task OnGet(string searchString, int pageIndex = 1)
         {
             // ListAirports = await _unitofwork.Airports.GetAllAsync();
-            ListAirportsPage = await _services.GetAirportPageViewModelAsync("", pageIndex);
+            ListAirportsPage = await _services.GetAirportPageViewModelAsync(SearchString, pageIndex);
         }
         // Airport methods
         public IActionResult OnGetEditAirport(string id)
