@@ -9,6 +9,7 @@ using ApplicationCore.DTOs;
 using ApplicationCore.Interfaces;
 using AutoMapper;
 using System.Linq;
+using LinqKit;
 namespace ApplicationCore.Services
 {
     public class FlightService : Service<Flight, FlightDTO, FlightDTO>, IFlightService
@@ -41,16 +42,16 @@ namespace ApplicationCore.Services
                      int adults_num, int childs_num)
         {
             //Expression<Func<Flight, bool>> predicate = m => true;
-            var predicate = PredicateBuilder.True<Flight>();
+            var predicate = PredicateBuilder.New<Flight>();
 
             int num = adults_num + childs_num;
 
-            predicate.And(m => m.Status == STATUS.AVAILABLE);
-            predicate.And(m => Task.Run(() => this.getOriginId(m.FlightId)).GetAwaiter().GetResult().Equals(origin_id));
-            predicate.And(m => Task.Run(() => this.getDestinationId(m.FlightId)).GetAwaiter().GetResult().Equals(destination_id));
+            predicate = predicate.And(m => m.Status == STATUS.AVAILABLE);
+            predicate = predicate.And(m => Task.Run(() => this.getOriginId(m.FlightId)).GetAwaiter().GetResult().Equals(origin_id));
+            predicate = predicate.And(m => Task.Run(() => this.getDestinationId(m.FlightId)).GetAwaiter().GetResult().Equals(destination_id));
             if (dep_date != null)
-                predicate.And(m => DateTime.Compare(Task.Run(() => this.getDepDate(m.FlightId)).GetAwaiter().GetResult(), dep_date) >= 0);
-            predicate.And(m => Task.Run(() => this.checkOrderNum(m.FlightId, num)).GetAwaiter().GetResult().Equals(origin_id));
+                predicate = predicate.And(m => DateTime.Compare(Task.Run(() => this.getDepDate(m.FlightId)).GetAwaiter().GetResult(), dep_date) >= 0);
+            predicate = predicate.And(m => Task.Run(() => this.checkOrderNum(m.FlightId, num)).GetAwaiter().GetResult().Equals(origin_id));
 
             var flights = await unitOfWork.Flights.FindAsync(predicate);
             return mapper.Map<IEnumerable<Flight>, IEnumerable<FlightDTO>>(flights);
@@ -58,9 +59,9 @@ namespace ApplicationCore.Services
         public async Task<IEnumerable<FlightDTO>> getLimitFlightAsync(IEnumerable<FlightDTO> flights, DateTime arr_date)
         {
             await Task.Run(() => true);
-            var predicate = PredicateBuilder.True<FlightDTO>();
+            var predicate = PredicateBuilder.New<FlightDTO>();
             if (arr_date != null)
-                predicate.And(m => DateTime.Compare(Task.Run(() => this.getArrDate(m.FlightId)).GetAwaiter().GetResult(), arr_date) <= 0);
+                predicate = predicate.And(m => DateTime.Compare(Task.Run(() => this.getArrDate(m.FlightId)).GetAwaiter().GetResult(), arr_date) <= 0);
             IQueryable<FlightDTO> res = flights.AsQueryable();
             return res.Where(predicate).ToList();
         }

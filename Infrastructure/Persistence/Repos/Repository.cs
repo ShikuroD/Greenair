@@ -166,7 +166,7 @@ namespace Infrastructure.Persistence.Repos
             }
             catch (Exception e)
             {
-                Console.WriteLine("Find() Unexpected: " + e);
+                Console.WriteLine("FindAsync() Unexpected: " + e);
                 return null;
             }
         }

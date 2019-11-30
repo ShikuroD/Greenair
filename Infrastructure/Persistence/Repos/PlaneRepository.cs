@@ -4,7 +4,7 @@ using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
 using ApplicationCore;
 using Microsoft.EntityFrameworkCore;
-
+using LinqKit;
 namespace Infrastructure.Persistence.Repos
 {
     public class PlaneRepository : Repository<Plane>, IPlaneRepository
@@ -15,8 +15,8 @@ namespace Infrastructure.Persistence.Repos
         }
         public async Task<IEnumerable<Plane>> getPlanebyMakerId(string maker_id)
         {
-            var predicate = PredicateBuilder.True<Plane>();
-            predicate.And(m => m.MakerId.Equals(maker_id));
+            var predicate = PredicateBuilder.New<Plane>();
+            predicate = predicate.And(m => m.MakerId.Equals(maker_id));
             return await this.FindAsync(predicate);
         }
     }

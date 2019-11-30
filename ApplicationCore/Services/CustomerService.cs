@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using System;
+using LinqKit;
 namespace ApplicationCore.Services
 {
     public class CustomerService : Service<Customer, CustomerDTO, CustomerDTO>, ICustomerService
@@ -29,8 +30,8 @@ namespace ApplicationCore.Services
         }
         public async Task<IEnumerable<TicketDTO>> getCustomerTicketAsync(string cus_id)
         {
-            var predicate = PredicateBuilder.True<Ticket>();
-            predicate.And(m => m.CustomerId.Equals(cus_id));
+            var predicate = PredicateBuilder.New<Ticket>();
+            predicate = predicate.And(m => m.CustomerId.Equals(cus_id));
             var tickets = await unitOfWork.Flights.findTicketAsync(predicate);
             return mapper.Map<IEnumerable<Ticket>, IEnumerable<TicketDTO>>(tickets);
         }

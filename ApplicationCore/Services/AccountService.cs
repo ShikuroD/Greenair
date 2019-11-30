@@ -6,6 +6,7 @@ using ApplicationCore.Entities;
 using ApplicationCore.DTOs;
 using ApplicationCore.Interfaces;
 using AutoMapper;
+using LinqKit;
 namespace ApplicationCore.Services
 {
     public class AccountService : Service<Account, AccountDTO, AccountDTO>, IAccountService
@@ -70,9 +71,9 @@ namespace ApplicationCore.Services
         }
         public async Task<bool> loginCheckAsync(AccountDTO dto)
         {
-            var predicate = PredicateBuilder.True<Account>();
-            predicate.And(m => m.Username.Equals(dto.Username));
-            predicate.And(m => m.Password.Equals(dto.Password));
+            var predicate = PredicateBuilder.New<Account>();
+            predicate = predicate.And(m => m.Username.Equals(dto.Username));
+            predicate = predicate.And(m => m.Password.Equals(dto.Password));
             var res = await unitOfWork.Accounts.FindAsync(predicate);
             if (res.Count() != 1) return false;
             return true;

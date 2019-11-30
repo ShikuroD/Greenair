@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using ApplicationCore;
 using System.Collections.Generic;
+using LinqKit;
 namespace Infrastructure.Persistence.Repos
 {
     public class JobRepository : Repository<Job>, IJobRepository
@@ -16,8 +17,8 @@ namespace Infrastructure.Persistence.Repos
 
         public async Task<IEnumerable<Job>> getJobByName(string job_name)
         {
-            var predicate = PredicateBuilder.True<Job>();
-            predicate.And(m => m.JobName.Contains(job_name, StringComparison.OrdinalIgnoreCase));
+            var predicate = PredicateBuilder.New<Job>();
+            predicate = predicate.And(m => m.JobName.Contains(job_name, StringComparison.OrdinalIgnoreCase));
             return await this.FindAsync(predicate);
         }
     }

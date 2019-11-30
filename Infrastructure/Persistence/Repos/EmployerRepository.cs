@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using ApplicationCore;
+using LinqKit;
 namespace Infrastructure.Persistence.Repos
 {
     public class EmployerRepository : Repository<Employer>, IEmployerRepository
@@ -32,15 +33,15 @@ namespace Infrastructure.Persistence.Repos
         }
         public async Task<IEnumerable<Employer>> getEmployerByName(string lastname, string firstname)
         {
-            var predicate = PredicateBuilder.True<Employer>();
-            if (!String.IsNullOrEmpty(lastname)) predicate.And(m => m.LastName.Contains(lastname, StringComparison.OrdinalIgnoreCase));
-            if (!String.IsNullOrEmpty(firstname)) predicate.And(m => m.FirstName.Contains(firstname, StringComparison.OrdinalIgnoreCase));
+            var predicate = PredicateBuilder.New<Employer>();
+            if (!String.IsNullOrEmpty(lastname)) predicate = predicate.And(m => m.LastName.Contains(lastname, StringComparison.OrdinalIgnoreCase));
+            if (!String.IsNullOrEmpty(firstname)) predicate = predicate.And(m => m.FirstName.Contains(firstname, StringComparison.OrdinalIgnoreCase));
             return await this.FindAsync(predicate);
         }
         public async Task<IEnumerable<Employer>> getEmployerByName(string fullname)
         {
-            var predicate = PredicateBuilder.True<Employer>();
-            if (!String.IsNullOrEmpty(fullname)) predicate.And(m => m.FullName.Contains(fullname, StringComparison.OrdinalIgnoreCase));
+            var predicate = PredicateBuilder.New<Employer>();
+            if (!String.IsNullOrEmpty(fullname)) predicate = predicate.And(m => m.FullName.Contains(fullname, StringComparison.OrdinalIgnoreCase));
             return await this.FindAsync(predicate);
         }
 
