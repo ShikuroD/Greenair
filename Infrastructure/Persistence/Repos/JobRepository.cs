@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
@@ -17,9 +18,9 @@ namespace Infrastructure.Persistence.Repos
 
         public async Task<IEnumerable<Job>> getJobByName(string job_name)
         {
-            var predicate = PredicateBuilder.New<Job>();
-            predicate = predicate.And(m => m.JobName.Contains(job_name, StringComparison.OrdinalIgnoreCase));
-            return await this.FindAsync(predicate);
+            var res = await this.GetAllAsync();
+            res = res.Where(m => m.JobName.Contains(job_name, StringComparison.OrdinalIgnoreCase));
+            return res;
         }
     }
 }
