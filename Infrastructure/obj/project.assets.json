@@ -8473,39 +8473,23 @@
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
     "C:\\Users\\Administrator\\.nuget\\packages\\": {},
-=======
-    "C:\\Users\\PC\\.nuget\\packages\\": {},
->>>>>>> 359c42395c8a663c075bf78a627405b987c876f5
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\Infrastructure\\Infrastructure.csproj",
       "projectName": "Infrastructure",
       "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\Infrastructure\\Infrastructure.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\Infrastructure\\obj\\",
-=======
-      "projectUniqueName": "D:\\Code\\C#\\Greenair\\Infrastructure\\Infrastructure.csproj",
-      "projectName": "Infrastructure",
-      "projectPath": "D:\\Code\\C#\\Greenair\\Infrastructure\\Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-      "outputPath": "D:\\Code\\C#\\Greenair\\Infrastructure\\obj\\",
->>>>>>> 359c42395c8a663c075bf78a627405b987c876f5
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-<<<<<<< HEAD
         "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config"
-=======
-        "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config"
->>>>>>> 359c42395c8a663c075bf78a627405b987c876f5
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.0"
@@ -8516,13 +8500,8 @@
       "frameworks": {
         "netcoreapp3.0": {
           "projectReferences": {
-<<<<<<< HEAD
             "C:\\Users\\Administrator\\Desktop\\Greenair-1\\ApplicationCore\\ApplicationCore.csproj": {
               "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\ApplicationCore\\ApplicationCore.csproj"
-=======
-            "D:\\Code\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj": {
-              "projectPath": "D:\\Code\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj"
->>>>>>> 359c42395c8a663c075bf78a627405b987c876f5
             }
           }
         }
