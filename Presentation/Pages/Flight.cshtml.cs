@@ -40,50 +40,26 @@ namespace Presentation.Pages
         public async Task OnGet()
         {
             Msg = "a";
+                var FlightSearch = SessionHelper.GetObjectFromJson<Dictionary<string,object>>(HttpContext.Session,"FlightSearch");
+                string type = FlightSearch["type"].ToString();
+                string vlDepDate = FlightSearch["depdate"].ToString();
+                DateTime depDate = DateTime.ParseExact(vlDepDate, "dd/MM/yyyy", null); 
+                DateTime arrDate = DateTime.ParseExact(vlDepDate, "dd/MM/yyyy", null);
+                // DateTime arrDate = DateTime.;
+                if(type == "round"){
+                    string vlArrDate = FlightSearch["arrdate"].ToString();
+                    arrDate = DateTime.ParseExact(vlArrDate, "dd/MM/yyyy", null);
+                }
 
-            //     var FlightSearch = SessionHelper.GetObjectFromJson<Dictionary<string,object>>(HttpContext.Session,"FlightSearch");
-            //     string type = FlightSearch["type"].ToString();
-            //     string vlDepDate = FlightSearch["depdate"].ToString();
-            //     DateTime depDate = DateTime.ParseExact(vlDepDate, "dd/MM/yyyy", null); 
-            //     DateTime arrDate = DateTime.ParseExact(vlDepDate, "dd/MM/yyyy", null);
-            //     // DateTime arrDate = DateTime.;
-            //     if(type == "round"){
-            //         string vlArrDate = FlightSearch["arrdate"].ToString();
-            //         arrDate = DateTime.ParseExact(vlArrDate, "dd/MM/yyyy", null);
-            //     }
-
-            //     string vlAdults = FlightSearch["adults"].ToString();
-            //     var adults = Convert.ToInt32(vlAdults);
-            //     string vlChilds = FlightSearch["childs"].ToString();
-            //     var childs = Convert.ToInt32(vlChilds);
+                string vlAdults = FlightSearch["adults"].ToString();
+                var adults = Convert.ToInt32(vlAdults);
+                string vlChilds = FlightSearch["childs"].ToString();
+                var childs = Convert.ToInt32(vlChilds);
             //     ListFlights = await _flightService.searchFlightAsync(FlightSearch["from"].ToString(),FlightSearch["where"].ToString(),depDate,arrDate,adults,childs);
             //     if(ListFlights.Count() == 0)
             //     {
             //         Msg = "No flights found!";
             // }
-
-            var FlightSearch = SessionHelper.GetObjectFromJson<Dictionary<string, object>>(HttpContext.Session, "FlightSearch");
-            string type = FlightSearch["type"].ToString();
-            string vlDepDate = FlightSearch["depdate"].ToString();
-            DateTime depDate = DateTime.ParseExact(vlDepDate, "dd/MM/yyyy", null);
-            DateTime arrDate = DateTime.ParseExact(vlDepDate, "dd/MM/yyyy", null);
-            // DateTime arrDate = DateTime.;
-            if (type == "round")
-            {
-                string vlArrDate = FlightSearch["arrdate"].ToString();
-                arrDate = DateTime.ParseExact(vlArrDate, "dd/MM/yyyy", null);
-            }
-
-            string vlAdults = FlightSearch["adults"].ToString();
-            var adults = Convert.ToInt32(vlAdults);
-            string vlChilds = FlightSearch["childs"].ToString();
-            var childs = Convert.ToInt32(vlChilds);
-            ListFlights = await _flightService.searchFlightAsync(FlightSearch["from"].ToString(), FlightSearch["where"].ToString(), depDate, adults, childs);
-            if (ListFlights.Count() == 0)
-            {
-                Msg = "No flights found!";
-            }
-
         }
         public IActionResult OnPostLogIn()
         {
@@ -122,17 +98,9 @@ namespace Presentation.Pages
             return new JsonResult(lstString);
         }
     }
-
     // private class Account
     // {
     //     public string Username { get; set; }
     //     public string Password { get; set; }
     // }
-
-    // public class Account
-    // {
-    //     public string Username { get; set; }
-    //     public string Password { get; set; }
-    // }
-
 }

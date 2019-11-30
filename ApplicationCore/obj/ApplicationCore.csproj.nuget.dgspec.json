@@ -1,17 +1,25 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
+    "C:\\Users\\Administrator\\Desktop\\Greenair\\ApplicationCore\\ApplicationCore.csproj": {}
+=======
     "C:\\Users\\Administrator\\Desktop\\Greenair-1\\ApplicationCore\\ApplicationCore.csproj": {}
+>>>>>>> e2146077ab28a5eb97d12a689549a17462d6f9d5
   },
   "projects": {
-    "C:\\Users\\Administrator\\Desktop\\Greenair-1\\ApplicationCore\\ApplicationCore.csproj": {
+    "C:\\Users\\Administrator\\Desktop\\Greenair\\ApplicationCore\\ApplicationCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\ApplicationCore\\ApplicationCore.csproj",
+        "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\Greenair\\ApplicationCore\\ApplicationCore.csproj",
         "projectName": "ApplicationCore",
-        "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\ApplicationCore\\ApplicationCore.csproj",
+        "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\ApplicationCore\\ApplicationCore.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+<<<<<<< HEAD
+        "outputPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\ApplicationCore\\obj\\",
+=======
         "outputPath": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\ApplicationCore\\obj\\",
+>>>>>>> e2146077ab28a5eb97d12a689549a17462d6f9d5
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

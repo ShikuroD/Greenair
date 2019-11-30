@@ -8546,11 +8546,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
+      "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\Greenair\\Presentation\\Presentation.csproj",
+=======
       "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\presentation\\Presentation.csproj",
+>>>>>>> e2146077ab28a5eb97d12a689549a17462d6f9d5
       "projectName": "Presentation",
-      "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\presentation\\Presentation.csproj",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\Presentation\\Presentation.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+<<<<<<< HEAD
+      "outputPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\Presentation\\obj\\",
+=======
       "outputPath": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\presentation\\obj\\",
+>>>>>>> e2146077ab28a5eb97d12a689549a17462d6f9d5
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -8567,11 +8575,19 @@
       "frameworks": {
         "netcoreapp3.0": {
           "projectReferences": {
+<<<<<<< HEAD
+            "C:\\Users\\Administrator\\Desktop\\Greenair\\ApplicationCore\\ApplicationCore.csproj": {
+              "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\ApplicationCore\\ApplicationCore.csproj"
+            },
+            "C:\\Users\\Administrator\\Desktop\\Greenair\\Infrastructure\\Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\Infrastructure\\Infrastructure.csproj"
+=======
             "C:\\Users\\Administrator\\Desktop\\Greenair-1\\ApplicationCore\\ApplicationCore.csproj": {
               "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\ApplicationCore\\ApplicationCore.csproj"
             },
             "C:\\Users\\Administrator\\Desktop\\Greenair-1\\Infrastructure\\Infrastructure.csproj": {
               "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\Infrastructure\\Infrastructure.csproj"
+>>>>>>> e2146077ab28a5eb97d12a689549a17462d6f9d5
             }
           }
         }
