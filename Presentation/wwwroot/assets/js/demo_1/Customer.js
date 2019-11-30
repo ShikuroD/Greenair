@@ -33,7 +33,7 @@
                     id: id
                 },
                 success: function (result) {
-                    alert("Id2 " + result.Id);
+                    // alert("Id2 " + result.Id);
                     $("#DetailCustomer-lastname").val(result.LastName);
                     $("#DetailCustomer-firstname").val(result.FirstName);
                     $("#DetailCustomer-birthday").val(result.Birthdate);
@@ -41,8 +41,8 @@
                     $("#DetailCustomer-email").val(result.Email);
                     $("#DetailCustomer-address").val(result.Address.toString());
                     $("#DetailCustomer-status").val(result.Status);
-                    $("#DetailCustomer-username").val(result.Account.Username);
-                    $("#DetailCustomer-password").val(result.Account.Password);
+                    $("#DetailCustomer-username").val(result.Username);
+                    $("#DetailCustomer-password").val(result.Password);
 
                 }
             });
@@ -58,7 +58,7 @@
                     id: id
                 },
                 success: function (result) {
-                    alert("Id2 " + result.Id);
+                    // alert("Id2 " + result.Id);
                     $("#EditCustomer-id").val(result.Id);
                     $("#EditCustomer-lastname").val(result.LastName);
                     $("#EditCustomer-lastname").val(result.FirstName);
@@ -67,8 +67,8 @@
                     $("#EditCustomer-email").val(result.Email);
                     $("#EditCustomer-address").val(result.Address.toString());
                     $("#EditCustomer-status").val(result.Status);
-                    $("#EditCustomer-username").val(result.Account.Username);
-                    $("#EditCustomer-password").val(result.Account.Password);
+                    $("#EditCustomer-username").val(result.Username);
+                    $("#EditCustomer-password").val(result.Password);
 
                 }
             });

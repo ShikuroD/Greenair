@@ -21,29 +21,21 @@ namespace Presentation.Services.ServicesImplement
         {
             _service = flightService;
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-        public async Task<IEnumerable<FlightDTO>> GetFlightListVm(string origin_id, string destination_id, DateTime dep_date, DateTime arr_date, int adults_num, int childs_num)
-        {
-            // var FlightSearch = await _service.searchFlightAsync(origin_id, destination_id, dep_date, arr_date, adults_num, childs_num);
-            // return FlightSearch;
-            return null;
-        }
-=======
-=======
-
+        // public async Task<IEnumerable<FlightDTO>> GetFlightListVm(string origin_id, string destination_id, DateTime dep_date, DateTime arr_date, int adults_num, int childs_num)
+        // {
+        //     var FlightSearch = await _service.searchFlightAsync(origin_id, destination_id, dep_date, arr_date, adults_num, childs_num);
+        //     return FlightSearch;
+        //     return null;
+        // }
         // public async Task<IEnumerable<FlightDTO>> GetFlightListVm(string origin_id, string destination_id, DateTime dep_date, DateTime arr_date, int adults_num, int childs_num)
         // {
         //     var FlightSearch = await _service.searchFlightAsync(origin_id, destination_id, dep_date, arr_date, adults_num, childs_num);
         //     return FlightSearch;
         // }
-
->>>>>>> 359c42395c8a663c075bf78a627405b987c876f5
         public async Task<IEnumerable<FlightDTO>> GetFlightListVm(string origin_id, string destination_id, DateTime dep_date, DateTime arr_date, int adults_num, int childs_num)
         {
-            // var FlightSearch = await _service.searchFlightAsync(origin_id, destination_id, dep_date, adults_num, childs_num);
-            // return FlightSearch;
-            return null;
+            var FlightSearch = await _service.searchFlightAsync(origin_id, destination_id, dep_date, adults_num, childs_num);
+            return FlightSearch;
         }
 
     }
