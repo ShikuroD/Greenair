@@ -21,10 +21,14 @@ namespace Presentation.Services.ServicesImplement
             _mapper = mapper;
         }
 
-        public async Task<PlanePageVM> GetPlanePageViewModelAsync(string searchMakerId, int pageIndex = 1)
+        public async Task<PlanePageVM> GetPlanePageViewModelAsync(string searchString, int pageIndex = 1)
         {
             // var movies = await _service.GetMoviesAsync(searchString, genre);
             var Planes = await _service.Planes.GetAllAsync();
+            // if (searchString != null)
+            // {
+            //     Planes = await _service.Planes.getPlanebyMakerId(searchString);
+            // }
             // var genres = await _service.GetGenresAsync();
             var abc = _mapper.Map<IEnumerable<Plane>, IEnumerable<PlaneDTO>>(Planes);
 

@@ -21,14 +21,16 @@
         <div class="card">
           <div class="card-body">
             <div class="form-group row">
-              <div class="col-sm-7"></div>
-              <div class="col-sm-5">
+            <div class="col-sm-7"></div>
+            <div class="col-sm-5">
+              <form>
                 <div class="input-group">
-                  <input type="search" class="form-control" placeholder="Search Here">
-                  <button type="button" class="btn btn-icons btn-rounded btn-outline-primary"><i class="fa fa-search"></i></button>
-                </div> 
-              </div> 
-            </div>
+                  <input type="search" id="SearchAirport" class="form-control" placeholder="Search Here" name="searchString"  asp-for="SearchString">
+                  <button type="submit" id="btsubmitSearchAirport" class="btn btn-icons btn-rounded btn-outline-primary"><i class="fa fa-search"></i></button>
+                </div>
+              </form> 
+            </div> 
+          </div>
             <h3 align="center">List of Airports </h3>
             <table class="table table-bordered table-striped table-hover" id="TableAirport" >
             <thead>

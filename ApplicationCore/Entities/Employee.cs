@@ -12,7 +12,7 @@ namespace ApplicationCore.Entities
                 STATUS status, Account account, double salary, string jobId) : base(id, lastName, firstName, birthDate, phone, address, status, account)
         {
             this.Salary = salary;
-            this.JobId = jobId; ;
+            this.JobId = jobId;
         }
 
         public Employee(string id, string lastName, string firstName, DateTime birthDate, string phone, Address address, Account account,
