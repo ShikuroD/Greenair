@@ -21,10 +21,14 @@ namespace Presentation.Services.ServicesImplement
             _mapper = mapper;
         }
 
-        public async Task<MakerPageVM> GetMakerPageViewModelAsync(string searchMakerId, int pageIndex = 1)
+        public async Task<MakerPageVM> GetMakerPageViewModelAsync(string searchString, int pageIndex = 1)
         {
             // var movies = await _service.GetMoviesAsync(searchString, genre);
             var Makers = await _service.Makers.GetAllAsync();
+            if (searchString != null)
+            {
+                Makers = await _service.Makers.getMakerByName(searchString);
+            }
             // var genres = await _service.GetGenresAsync();
             var abc = _mapper.Map<IEnumerable<Maker>, IEnumerable<MakerDTO>>(Makers);
 

@@ -25,6 +25,10 @@ namespace Presentation.Services.ServicesImplement
         {
             // var movies = await _service.GetMoviesAsync(searchString, genre);
             var airports = await _service.Airports.GetAllAsync();
+            if (searchString != null)
+            {
+                airports = await _service.Airports.getAirportByConditions(searchString, "", "");
+            }
             // var genres = await _service.GetGenresAsync();
             var abc = _mapper.Map<IEnumerable<Airport>, IEnumerable<AirportDTO>>(airports);
 

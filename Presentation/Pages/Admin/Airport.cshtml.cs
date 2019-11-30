@@ -27,7 +27,7 @@ namespace Presentation.Pages.Admin
             this._services = services;
 
         }
-
+        [BindProperty(SupportsGet = true)]
         public string SearchString { get; set; }
         public AirportPageVM ListAirportsPage { get; set; }
         public IEnumerable<Airport> ListAirports { get; set; }

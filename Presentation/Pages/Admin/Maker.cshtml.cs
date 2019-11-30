@@ -26,7 +26,7 @@ namespace Presentation.Pages.Admin
             this._unitofwork = unitofwork;
             this._services = services;
         }
-
+        [BindProperty(SupportsGet = true)]
         public string SearchString { get; set; }
         public IEnumerable<Maker> ListMakers { get; set; }
         // public IEnumerable<Plane> ListPlanes { get; set; }
