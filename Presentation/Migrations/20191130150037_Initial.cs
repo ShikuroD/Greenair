@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Presentation.Migrations
 {
-    public partial class Initials : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,8 +11,8 @@ namespace Presentation.Migrations
                 name: "Airports",
                 columns: table => new
                 {
-                    AirportId = table.Column<string>(nullable: false),
-                    AirportName = table.Column<string>(nullable: false),
+                    AirportId = table.Column<string>(maxLength: 3, nullable: false),
+                    AirportName = table.Column<string>(maxLength: 30, nullable: false),
                     AddressNum = table.Column<string>(nullable: true),
                     Street = table.Column<string>(nullable: true),
                     District = table.Column<string>(nullable: true),
@@ -151,9 +151,9 @@ namespace Presentation.Migrations
                 columns: table => new
                 {
                     Username = table.Column<string>(nullable: false),
-                    Password = table.Column<string>(nullable: false),
+                    Password = table.Column<string>(maxLength: 20, nullable: false),
                     Status = table.Column<int>(nullable: false),
-                    PersonId = table.Column<string>(nullable: false)
+                    PersonId = table.Column<string>(maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {

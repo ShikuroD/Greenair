@@ -5,6 +5,7 @@ using ApplicationCore.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using ApplicationCore;
 using System;
+using System.Linq;
 using LinqKit;
 namespace Infrastructure.Persistence.Repos
 {
@@ -17,11 +18,11 @@ namespace Infrastructure.Persistence.Repos
 
         public async Task<IEnumerable<Airport>> getAirportByConditions(string airport_name, string city, string country)
         {
-            var predicate = PredicateBuilder.New<Airport>();
-            if (!String.IsNullOrEmpty(airport_name)) predicate = predicate.And(m => m.AirportName.Contains(airport_name, StringComparison.OrdinalIgnoreCase));
-            if (!String.IsNullOrEmpty(city)) predicate = predicate.And(m => m.Address.City.Contains(city, StringComparison.OrdinalIgnoreCase));
-            if (!String.IsNullOrEmpty(country)) predicate = predicate.And(m => m.Address.Country.Contains(country, StringComparison.OrdinalIgnoreCase));
-            return await this.FindAsync(predicate);
+            var res = await this.GetAllAsync();
+            if (!String.IsNullOrEmpty(airport_name)) res.Where(m => m.AirportName.Contains(airport_name, StringComparison.OrdinalIgnoreCase));
+            if (!String.IsNullOrEmpty(city)) res.Where(m => m.Address.City.Contains(city, StringComparison.OrdinalIgnoreCase));
+            if (!String.IsNullOrEmpty(country)) res.Where(m => m.Address.Country.Contains(country, StringComparison.OrdinalIgnoreCase));
+            return res;
 
         }
         public async Task<bool> isDomestic(string airport_id)

@@ -635,7 +635,6 @@ C:\Users\Administrator\Desktop\Greenair-1\presentation\obj\Debug\netcoreapp3.0\R
 >>>>>>> masster
 D:\Code\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Customer.cshtml.g.cs
 D:\Code\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Dashboard.cshtml.g.cs
-D:\Code\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Employer.cshtml.g.cs
 D:\Code\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Flight.cshtml.g.cs
 D:\Code\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Index.cshtml.g.cs
 D:\Code\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Maker.cshtml.g.cs
@@ -676,3 +675,4 @@ C:\Users\ASUS\Desktop\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pag
 C:\Users\ASUS\Desktop\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Shared\_LayoutAdmin.cshtml.g.cs
 >>>>>>> 38f3dd4f24d9e23abd1f2a7e1aa8e035f1082482
 D:\Code\C#\Greenair\Presentation\bin\Debug\netcoreapp3.0\LinqKit.Core.dll
+D:\Code\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Employee.cshtml.g.cs
