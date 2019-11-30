@@ -6,16 +6,16 @@ namespace ApplicationCore.Entities
 {
     public class Employee : Person, IAggregateRoot
     {
-        public Employer() : base() { }
+        public Employee() : base() { }
 
-        public Employer(string id, string lastName, string firstName, DateTime birthDate, string phone, Address address,
+        public Employee(string id, string lastName, string firstName, DateTime birthDate, string phone, Address address,
                 STATUS status, Account account, double salary, string jobId) : base(id, lastName, firstName, birthDate, phone, address, status, account)
         {
             this.Salary = salary;
-            this.JobId = jobId; ;
+            this.JobId = jobId;
         }
 
-        public Employer(string id, string lastName, string firstName, DateTime birthDate, string phone, Address address, Account account,
+        public Employee(string id, string lastName, string firstName, DateTime birthDate, string phone, Address address, Account account,
                 double salary, string jobId) : base(id, lastName, firstName, birthDate, phone, address, account)
         {
             this.Salary = salary;
