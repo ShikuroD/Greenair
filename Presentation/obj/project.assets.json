@@ -31,6 +31,15 @@
       "jQuery/1.8.0": {
         "type": "package"
       },
+      "LinqKit.Core/1.1.17": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/LinqKit.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/LinqKit.Core.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -2695,6 +2704,7 @@
         "dependencies": {
           "AutoMapper": "9.0.0",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "7.0.0",
+          "LINQKit.Core": "1.1.17",
           "Microsoft.EntityFrameworkCore.SQLite": "3.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "3.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.0.0"
@@ -2711,6 +2721,7 @@
         "framework": ".NETCoreApp,Version=v3.0",
         "dependencies": {
           "ApplicationCore": "1.0.0",
+          "LINQKit.Core": "1.1.17",
           "Microsoft.EntityFrameworkCore.SQLite": "3.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "3.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.0.0"
@@ -2772,6 +2783,36 @@
         "Tools/uninstall.ps1",
         "jquery.1.8.0.nupkg.sha512",
         "jquery.nuspec"
+      ]
+    },
+    "LinqKit.Core/1.1.17": {
+      "sha512": "fFtJEE8DG27urpjRhWt4p75hJpSnoCQNf/J8DLv8wlyVsCYLY6P9+6KOUnnFzU1KECYKP+tSoNf4vYX2YqIZpQ==",
+      "type": "package",
+      "path": "linqkit.core/1.1.17",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net35/LinqKit.Core.dll",
+        "lib/net35/LinqKit.Core.xml",
+        "lib/net40/LinqKit.Core.dll",
+        "lib/net40/LinqKit.Core.xml",
+        "lib/net45/LinqKit.Core.dll",
+        "lib/net45/LinqKit.Core.xml",
+        "lib/netstandard1.3/LinqKit.Core.dll",
+        "lib/netstandard1.3/LinqKit.Core.xml",
+        "lib/netstandard2.0/LinqKit.Core.dll",
+        "lib/netstandard2.0/LinqKit.Core.xml",
+        "lib/netstandard2.1/LinqKit.Core.dll",
+        "lib/netstandard2.1/LinqKit.Core.xml",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/LinqKit.Core.dll",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/LinqKit.Core.xml",
+        "lib/portable-net45+win8+wp8+wpa81/LinqKit.Core.dll",
+        "lib/portable-net45+win8+wp8+wpa81/LinqKit.Core.xml",
+        "lib/uap10.0/LinqKit.Core.dll",
+        "lib/uap10.0/LinqKit.Core.pri",
+        "lib/uap10.0/LinqKit.Core.xml",
+        "linqkit.core.1.1.17.nupkg.sha512",
+        "linqkit.core.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
@@ -8489,6 +8530,7 @@
       "AutoMapper >= 9.0.0",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 7.0.0",
       "Infrastructure >= 1.0.0",
+      "LINQKit.Core >= 1.1.17",
       "Microsoft.EntityFrameworkCore.Design >= 3.0.0",
       "Microsoft.EntityFrameworkCore.SQLite >= 3.0.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.0.0",
@@ -8498,23 +8540,39 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\Administrator\\.nuget\\packages\\": {},
+=======
+    "C:\\Users\\PC\\.nuget\\packages\\": {},
+>>>>>>> 359c42395c8a663c075bf78a627405b987c876f5
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\presentation\\Presentation.csproj",
       "projectName": "Presentation",
       "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\presentation\\Presentation.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\presentation\\obj\\",
+=======
+      "projectUniqueName": "D:\\Code\\C#\\Greenair\\Presentation\\Presentation.csproj",
+      "projectName": "Presentation",
+      "projectPath": "D:\\Code\\C#\\Greenair\\Presentation\\Presentation.csproj",
+      "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+      "outputPath": "D:\\Code\\C#\\Greenair\\Presentation\\obj\\",
+>>>>>>> 359c42395c8a663c075bf78a627405b987c876f5
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
+<<<<<<< HEAD
         "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config"
+=======
+        "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config"
+>>>>>>> 359c42395c8a663c075bf78a627405b987c876f5
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.0"
@@ -8525,11 +8583,19 @@
       "frameworks": {
         "netcoreapp3.0": {
           "projectReferences": {
+<<<<<<< HEAD
             "C:\\Users\\Administrator\\Desktop\\Greenair-1\\ApplicationCore\\ApplicationCore.csproj": {
               "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\ApplicationCore\\ApplicationCore.csproj"
             },
             "C:\\Users\\Administrator\\Desktop\\Greenair-1\\Infrastructure\\Infrastructure.csproj": {
               "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair-1\\Infrastructure\\Infrastructure.csproj"
+=======
+            "D:\\Code\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj": {
+              "projectPath": "D:\\Code\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj"
+            },
+            "D:\\Code\\C#\\Greenair\\Infrastructure\\Infrastructure.csproj": {
+              "projectPath": "D:\\Code\\C#\\Greenair\\Infrastructure\\Infrastructure.csproj"
+>>>>>>> 359c42395c8a663c075bf78a627405b987c876f5
             }
           }
         }
@@ -8550,6 +8616,10 @@
           "AutoMapper.Extensions.Microsoft.DependencyInjection": {
             "target": "Package",
             "version": "[7.0.0, )"
+          },
+          "LINQKit.Core": {
+            "target": "Package",
+            "version": "[1.1.17, )"
           },
           "Microsoft.EntityFrameworkCore.Design": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",

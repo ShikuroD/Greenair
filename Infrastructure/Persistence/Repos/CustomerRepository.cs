@@ -7,6 +7,7 @@ using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using ApplicationCore;
+using LinqKit;
 namespace Infrastructure.Persistence.Repos
 {
     public class CustomerRepository : Repository<Customer>, ICustomerRepository
@@ -57,9 +58,11 @@ namespace Infrastructure.Persistence.Repos
         {
             try
             {
-
+                // var predicate = PredicateBuilder.True<Customer>();
+                // predicate = predicate.And(m => m.Id.Equals(id));
+                Expression<Func<Customer, bool>> predicate = m => String.Equals(m.Id, id) && true;
                 var res = await Task.Run(() => this.Context.Customers.AsNoTracking()
-                    .Where(m => String.Equals(m.Id, id)).ToList());
+                    .Where(predicate).ToList());
                 if (res != null && res.Count() == 1) return res.ElementAt(0);
                 else return null;
 
@@ -73,15 +76,16 @@ namespace Infrastructure.Persistence.Repos
 
         public async Task<IEnumerable<Customer>> getCustomerByName(string lastname, string firstname)
         {
-            var predicate = PredicateBuilder.True<Customer>();
-            if (!String.IsNullOrEmpty(lastname)) predicate.And(m => m.LastName.Contains(lastname, StringComparison.OrdinalIgnoreCase));
-            if (!String.IsNullOrEmpty(firstname)) predicate.And(m => m.FirstName.Contains(firstname, StringComparison.OrdinalIgnoreCase));
+            var predicate = PredicateBuilder.New<Customer>();
+            if (!String.IsNullOrEmpty(lastname)) predicate = predicate.And(m => m.LastName.Contains(lastname, StringComparison.OrdinalIgnoreCase));
+            if (!String.IsNullOrEmpty(firstname)) predicate = predicate.And(m => m.FirstName.Contains(firstname, StringComparison.OrdinalIgnoreCase));
+
             return await this.FindAsync(predicate);
         }
         public async Task<IEnumerable<Customer>> getCustomerByName(string fullname)
         {
-            var predicate = PredicateBuilder.True<Customer>();
-            if (!String.IsNullOrEmpty(fullname)) predicate.And(m => m.FullName.Contains(fullname, StringComparison.OrdinalIgnoreCase));
+            var predicate = PredicateBuilder.New<Customer>();
+            if (!String.IsNullOrEmpty(fullname)) predicate = predicate.And(m => !String.IsNullOrEmpty(fullname) && m.FullName.Contains(fullname, StringComparison.OrdinalIgnoreCase));
             return await this.FindAsync(predicate);
         }
         // new public async Task<IEnumerable<Customer>> GetAllAsync()

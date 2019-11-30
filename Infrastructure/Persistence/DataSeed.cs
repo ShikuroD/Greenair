@@ -1,3 +1,4 @@
+using System.Threading;
 using ApplicationCore.Entities;
 using System.Linq;
 using System;
@@ -95,6 +96,7 @@ namespace Infrastructure.Persistence
                 );
                 context.SaveChanges();
             }
+            
         }
 
     }

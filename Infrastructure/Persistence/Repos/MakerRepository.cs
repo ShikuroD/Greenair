@@ -5,6 +5,7 @@ using ApplicationCore.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using ApplicationCore;
 using System;
+using LinqKit;
 namespace Infrastructure.Persistence.Repos
 {
     public class MakerRepository : Repository<Maker>, IMakerRepository
@@ -16,8 +17,8 @@ namespace Infrastructure.Persistence.Repos
 
         public async Task<IEnumerable<Maker>> getMakerByName(string name)
         {
-            var predicate = PredicateBuilder.True<Maker>();
-            predicate.And(m => m.MakerName.Contains(name, StringComparison.OrdinalIgnoreCase));
+            var predicate = PredicateBuilder.New<Maker>();
+            predicate = predicate.And(m => m.MakerName.Contains(name, StringComparison.OrdinalIgnoreCase));
             return await this.FindAsync(predicate);
         }
     }
