@@ -37,7 +37,7 @@ namespace Presentation.Pages
             _logger = logger;
         }
 
-        public async Task OnGet()
+        public void OnGet()
         {
             Msg = "a";
                 var FlightSearch = SessionHelper.GetObjectFromJson<Dictionary<string,object>>(HttpContext.Session,"FlightSearch");
