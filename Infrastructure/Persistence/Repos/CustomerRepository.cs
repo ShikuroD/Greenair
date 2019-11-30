@@ -58,9 +58,9 @@ namespace Infrastructure.Persistence.Repos
         {
             try
             {
-                // var predicate = PredicateBuilder.True<Customer>();
-                // predicate = predicate.And(m => m.Id.Equals(id));
-                Expression<Func<Customer, bool>> predicate = m => String.Equals(m.Id, id) && true;
+                var predicate = PredicateBuilder.New<Customer>();
+                predicate = predicate.And(m => m.Id.Equals(id));
+                //Expression<Func<Customer, bool>> predicate = m => String.Equals(m.Id, id) && true;
                 var res = await Task.Run(() => this.Context.Customers.AsNoTracking()
                     .Where(predicate).ToList());
                 if (res != null && res.Count() == 1) return res.ElementAt(0);
@@ -73,21 +73,22 @@ namespace Infrastructure.Persistence.Repos
                 return null;
             }
         }
-
-        public async Task<IEnumerable<Customer>> getCustomerByName(string lastname, string firstname)
-        {
-            var predicate = PredicateBuilder.New<Customer>();
-            if (!String.IsNullOrEmpty(lastname)) predicate = predicate.And(m => m.LastName.Contains(lastname, StringComparison.OrdinalIgnoreCase));
-            if (!String.IsNullOrEmpty(firstname)) predicate = predicate.And(m => m.FirstName.Contains(firstname, StringComparison.OrdinalIgnoreCase));
-
-            return await this.FindAsync(predicate);
-        }
         public async Task<IEnumerable<Customer>> getCustomerByName(string fullname)
         {
-            var predicate = PredicateBuilder.New<Customer>();
-            if (!String.IsNullOrEmpty(fullname)) predicate = predicate.And(m => !String.IsNullOrEmpty(fullname) && m.FullName.Contains(fullname, StringComparison.OrdinalIgnoreCase));
-            return await this.FindAsync(predicate);
+            var res = await this.GetAllAsync(); //String.Format("{0} {1}", m.LastName, m.FirstName)    , StringComparison.OrdinalIgnoreCase
+            if (!String.IsNullOrEmpty(fullname)) res.Where(m => m.FullName.Contains(fullname, StringComparison.OrdinalIgnoreCase));
+
+            return res;
         }
+        public async Task<IEnumerable<Customer>> getCustomerByName(string lastname, string firstname)
+        {
+            var res = await this.GetAllAsync();
+            if (!String.IsNullOrEmpty(lastname)) res = res.Where(m => m.LastName.Contains(lastname, StringComparison.OrdinalIgnoreCase));
+            if (!String.IsNullOrEmpty(firstname)) res = res.Where(m => m.FirstName.Contains(firstname, StringComparison.OrdinalIgnoreCase));
+
+            return res;
+        }
+
         // new public async Task<IEnumerable<Customer>> GetAllAsync()
         // {
         //     try

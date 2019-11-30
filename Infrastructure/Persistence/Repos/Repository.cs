@@ -171,6 +171,20 @@ namespace Infrastructure.Persistence.Repos
             }
         }
 
+        public async Task<IEnumerable<T>> ClientFindAsync(Func<T, bool> predicate)
+        {
+            try
+            {
+                var res = await Context.Set<T>().AsNoTracking().ToListAsync();
+                return res.Where(predicate).ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("ClientFindAsync() Unexpected: " + e);
+                return null;
+            }
+        }
+
         public async Task<IEnumerable<T>> GetAllAsync()
         {
             try
