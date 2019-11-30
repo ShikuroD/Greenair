@@ -60,23 +60,11 @@
                 success: function (result) {
                     // alert("Id2 " + result.Id);
                     $("#EditCustomer-id").val(result.Id);
-                    $("#EditCustomer-lastname").val(result.LastName);
-                    $("#EditCustomer-lastname").val(result.FirstName);
-                    $("#EditCustomer-birthday").val(result.Birthdate);
-                    $("#EditCustomer-phone").val(result.Phone);
-                    $("#EditCustomer-email").val(result.Email);
-                    $("#EditCustomer-address").val(result.Address.toString());
-                    $("#EditCustomer-status").val(result.Status);
-                    $("#EditCustomer-username").val(result.Username);
-                    $("#EditCustomer-password").val(result.Password);
-
                 }
             });
         });
         $("#btsubmitEditCustomer").click(function () {
             var id = $('#EditCustomer-id').val();
-            var name = $("#EditCustomer-name").val();
-            var address = $("#EditCustomer-address").val();
             event.preventDefault();
             // event.preventDefault() là để ngăn thằng form nó load lại trang ..
             $.ajax({
@@ -88,13 +76,10 @@
                 contentType: 'application/json; charset=utf-8',
                 url: '/Admin/Customer?handler=EditCustomer',
                 data: JSON.stringify({
-                    Id: id,
-                    CustomerName: name,
-                    Address: address
+                    Id: id
                 }),
                 success: function (respone) {
-                    $('#EditCustomerForm').modal('hide');
-                    alert(respone);
+                    alert("Disabled success");
                     location.reload();
                 },
                 failure: function (result) {
@@ -103,6 +88,30 @@
 
             });
         });
+        // $("#btsubmitSearchCustomer").click(function () {
+        //     var search = $('#SearchCustomer').val();
+        //     event.preventDefault();
+        //     // event.preventDefault() là để ngăn thằng form nó load lại trang ..
+        //     $.ajax({
+        //         type: 'POST',
+        //         headers: {
+        //             "XSRF-TOKEN": $('input:hidden[name="__RequestVerificationToken"]').val()
+        //         },
+        //         dataType: 'json',
+        //         contentType: 'application/json; charset=utf-8',
+        //         url: '/Admin/Customer?handler=EditCustomer',
+        //         data: {
+        //             searchString: search
+        //         },
+        //         success: function (respone) {
+        //             location.reload();
+        //         },
+        //         failure: function (result) {
+        //             alert("fail");
+        //         }
+
+        //     });
+        // });
 
     });
 })(jQuery);

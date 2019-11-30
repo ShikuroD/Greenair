@@ -17,10 +17,12 @@
           <div class="form-group row">
             <div class="col-sm-7"></div>
             <div class="col-sm-5">
-              <div class="input-group">
-                <input type="search" class="form-control" placeholder="Search Here">
-                <button type="button" class="btn btn-icons btn-rounded btn-outline-primary"><i class="fa fa-search"></i></button>
-              </div> 
+              <form>
+                <div class="input-group">
+                  <input type="search" id="SearchCustomer" class="form-control" placeholder="Search Here" name="searchString"  asp-for="SearchString">
+                  <button type="submit" id="btsubmitSearchCustomer" class="btn btn-icons btn-rounded btn-outline-primary"><i class="fa fa-search"></i></button>
+                </div>
+              </form> 
             </div> 
           </div>
           <h3 align="center">List of Customers </h3>
@@ -36,7 +38,7 @@
            </thead>
            <tbody>
              <!-- change to code later -->
-            @foreach (var item in Model.ListCustomer){
+            @foreach (var item in Model.ListCustomerPage.Customers){
               <tr>
                 <td>@item.Id</td>
                 <td>
@@ -63,6 +65,30 @@
             </tbody>
           </table>
         </div>
+         @{
+              var preDisabled = !Model.ListCustomerPage.Customers.HasPrevious ? "disabled" : "";
+              var nextDisabled = !Model.ListCustomerPage.Customers.HasNext ? "disabled" : "";
+              var pageNow =Model.ListCustomerPage.Customers.PageIndex;
+          }
+          <!-- pagination -->
+            <div class="pagination" >
+              <a style="cursor:pointer" asp-page="/Admin/Customer" 
+              asp-route-pageIndex="@(Model.ListCustomerPage.Customers.PageIndex - 1)" 
+              class="pagination_link @preDisabled" >Previous</a>
+              @for (int i=1;i<=Model.ListCustomerPage.Customers.TotalPages;++i)
+              {
+                  if(i==pageNow)
+                  {
+                    <a style="cursor:pointer" asp-page="/Admin/Customer" asp-route-pageIndex="@i" class="pagination_link active" >@i</a>
+                  }
+                  else{
+                    <a style="cursor:pointer" asp-page="/Admin/Customer" asp-route-pageIndex="@i" class="pagination_link">@i</a>
+                  }
+              }
+              <a  style="cursor:pointer" asp-page="/Admin/Customer" 
+              asp-route-pageIndex="@(Model.ListCustomerPage.Customers.PageIndex + 1)" 
+              class="pagination_link @nextDisabled">Next</a>
+            </div>
       </div>
     </div>
     </div> 
@@ -73,106 +99,15 @@
 
 <!-- edit form -->
 <div class="modal fade" id="EditCustomerForm" role="dialog">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
         <div class="modal-content" >
             <div class="modal-header" style=" background-color:aliceblue;">
-                <h4 class="modal-title" style="margin: 10px 0 10px 510px; color:#000; font-weight: bold;font-size:34">Edit customer</h4>
+                <h4 class="modal-title" style="color:#000; font-weight: bold;font-size:34">Edit customer</h4>
             </div>
 		    <div class="model-body" style="margin: 15px">
 				  <form class="form-sample" action="post">
-            <input id="EditCustomer-id" type="text" class="form-control" hidden/>
-            <div class="row">
-              <div class="col-6">
-                <p style="font-weight:600" class="card-description"> Personal info </p>
-              </div>
-              <div class="col-6">
-                <p style="font-weight:600" class="card-description">Personal account </p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">First Name</label>
-                  <div class="col-sm-9">
-                    <input id="EditCustomer-firstname" type="text" class="form-control" required/>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Username</label>
-                  <div class="col-sm-9">
-                    <input id="EditCustomer-username" type="text" class="form-control" disabled/>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Last Name</label>
-                  <div class="col-sm-9">
-                    <input id="EditCustomer-lastname" type="text" class="form-control" required/>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Password</label>
-                  <div class="col-sm-9">
-                    <input id="EditCustomer-password" type="password" class="form-control" disabled/>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Date of Birth</label>
-                  <div class="col-sm-9">
-                    <input id="EditCustomer-birthday" type="date" class="form-control" placeholder="dd/mm/yyyy" />
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Status</label>
-                  <div class="col-sm-9">
-                    <input id="EditCustomer-status" type="text" class="form-control" required/>
-                  </div>
-                </div>
-              </div>   
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Phone</label>
-                  <div class="col-sm-9">
-                    <input id="EditCustomer-phone" type="tel" class="form-control" pattern="0[0-9]{9,10}" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Address</label>
-                  <div class="col-sm-9">
-                    <input id="EditCustomer-address" type="text" class="form-control" />
-                  </div>
-                </div>
-              </div>           
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Email</label>
-                  <div class="col-sm-9">
-                    <input id="EditCustomer-email" type="text" class="form-control" />
-                  </div>
-                </div>
-              </div>                  
-            </div>
+            <input type="text" id="EditCustomer-id" hidden/>
+            <h3> Are you sure to lock this person</h3>
             <div class="row" style=" display: flex; justify-content: flex-end;">
               <button id="btsubmitEditCustomer" type="submit" class="btn btn-success mr-2"><b>Update</b></button>
               <button class="btn btn-light" data-dismiss="modal"><b>Cancel</b></button>
