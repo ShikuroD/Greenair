@@ -74,14 +74,14 @@ namespace Infrastructure.Persistence
                 context.SaveChanges();
             }
 
-            if (!context.Employers.Any())
+            if (!context.Employees.Any())
             {
                 var addr = new Address("123", "ABC", "hahahaha", "Gotham", "Newyork", "USA");
-                context.Employers.AddRange(
-                    new Employer("00001", "Trieu Ng Quoc", "Viet", new DateTime(1999, 12, 7), "0904897191", addr, new Account("admin1", "12345"), 15000, "001"),
-                    new Employer("00002", "Vu Tuong", "Giang", new DateTime(1999, 12, 8), "0904891597", new Address("123", "gfd", "fsd", "sdf", "fs", "fsd"), new Account("admin2", "12345"), 18000, "002"),
-                    new Employer("00003", "Do Trung", "Hieu", new DateTime(1999, 7, 10), "0903774110", new Address("456", "gfd", "fsd", "sdf", "fs", "fsd"), new Account("admin3", "12345"), 19000, "003"),
-                    new Employer("00004", "Trieu Trung", "Gia", new DateTime(2000, 5, 5), "0903775781", new Address("456", "Tran Phu", "Phu Tho", "Tan Phu", "Ho Chi Minh", "Viet Nam"), new Account("admin4", "12345"), 20000, "000")
+                context.Employees.AddRange(
+                    new Employee("00001", "Trieu Ng Quoc", "Viet", new DateTime(1999, 12, 7), "0904897191", addr, new Account("admin1", "12345"), 15000, "001"),
+                    new Employee("00002", "Vu Tuong", "Giang", new DateTime(1999, 12, 8), "0904891597", new Address("123", "gfd", "fsd", "sdf", "fs", "fsd"), new Account("admin2", "12345"), 18000, "002"),
+                    new Employee("00003", "Do Trung", "Hieu", new DateTime(1999, 7, 10), "0903774110", new Address("456", "gfd", "fsd", "sdf", "fs", "fsd"), new Account("admin3", "12345"), 19000, "003"),
+                    new Employee("00004", "Trieu Trung", "Gia", new DateTime(2000, 5, 5), "0903775781", new Address("456", "Tran Phu", "Phu Tho", "Tan Phu", "Ho Chi Minh", "Viet Nam"), new Account("admin4", "12345"), 20000, "000")
                 );
                 context.SaveChanges();
             }
@@ -96,7 +96,7 @@ namespace Infrastructure.Persistence
                 );
                 context.SaveChanges();
             }
-            
+
         }
 
     }

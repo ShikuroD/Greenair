@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ApplicationCore.Entities;
 namespace Infrastructure.Persistence.Configuration
 {
-    public class EmployerConfiguration : IEntityTypeConfiguration<Employer>
+    public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
     {
-        public void Configure(EntityTypeBuilder<Employer> builder)
+        public void Configure(EntityTypeBuilder<Employee> builder)
         {
             builder.HasBaseType<Person>();
             //builder.OwnsOne(m => m.Address);
@@ -14,7 +14,7 @@ namespace Infrastructure.Persistence.Configuration
             builder.Property(s => s.JobId).IsRequired();
 
             builder.HasOne<Job>(s => s.Job)
-                .WithMany(a => a.Employers)
+                .WithMany(a => a.Employees)
                 .HasForeignKey(s => s.JobId);
         }
     }

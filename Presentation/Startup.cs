@@ -65,7 +65,7 @@ namespace Presentation
             services.AddScoped<IMakerRepository, MakerRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
-            services.AddScoped<IEmployerRepository, EmployerRepository>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IJobRepository, JobRepository>();
             services.AddScoped<IAirportRepository, AirportRepository>();
             services.AddScoped<IRouteRepository, RouteRepository>();
