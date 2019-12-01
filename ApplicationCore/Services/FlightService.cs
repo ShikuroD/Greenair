@@ -236,7 +236,7 @@ namespace ApplicationCore.Services
         }
 
         //Thao tac voi ve =======================================================================================
-        public async Task generateTicket(string flight_id)
+        private async Task generateTicket(string flight_id)
         {
             var flight = await unitOfWork.Flights.GetByAsync(flight_id);
             var plane = await unitOfWork.Planes.GetByAsync(flight.PlaneId);
