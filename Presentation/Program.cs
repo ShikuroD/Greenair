@@ -34,8 +34,11 @@ namespace Presentation
                     //unit.Employees.RemoveRange(unit.Employees.GetAll());
                     //unit.Customers.RemoveRange(unit.Customers.GetAll());
 
-                    // var cus = unit.Customers.GetByAsync("00005").GetAwaiter().GetResult();
-                    // unit.Customers.disable(cus);
+                    // var cus = unit.Customers.GetByAsync("00007").GetAwaiter().GetResult();
+                    // unit.Customers.activate(cus);
+
+                    // cus = unit.Customers.GetByAsync("00008").GetAwaiter().GetResult();
+                    // unit.Customers.disable(cus).GetAwaiter().GetResult();
 
                     // if (cus == null) Console.WriteLine("NULL cus"); else Console.WriteLine(cus.FullName);
 
