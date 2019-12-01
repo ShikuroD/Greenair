@@ -24,7 +24,7 @@
 
         $(".EditPlane").click(function () {
             var id = $(this).attr("id");
-            alert(id);
+            // alert(id);
             $.ajax({
                 type: 'GET',
                 dataType: 'json',
@@ -67,6 +67,42 @@
                     // $("#tablePlane").empty();
                     location.reload();
                     // $('#tablePlane').load("/Admin/Plane" + "  #tablePlane");
+                },
+                failure: function (result) {
+                    alert("fail");
+                }
+
+            });
+        });
+        $("#btsubmitCreatePlane").click(function () {
+            alert("Create");
+            var id = $('#CreatePlane-id').val();
+            var seatnum = $("#CreatePlane-seatnum").val();
+            var makerid = $("#CreatePlane-makerid").val();
+            event.preventDefault();
+            // event.preventDefault() là để ngăn thằng form nó load lại trang ..
+            $.ajax({
+                type: 'POST',
+                headers: {
+                    "XSRF-TOKEN": $('input:hidden[name="__RequestVerificationToken"]').val()
+                },
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                url: '/Admin/Plane?handler=CreatePlane',
+                data: JSON.stringify({
+                    PlaneId: id,
+                    SeatNum: seatnum,
+                    MakerId: makerid
+                }),
+                success: function (respone) {
+                    // $('#CreatePlane').modal('hide');
+                    if (respone.trim() == "True") {
+                        alert("Create success");
+                        location.reload();
+                    } else {
+                        alert("This Id exists");
+                        $('#CreatePlane-id').focus();
+                    }
                 },
                 failure: function (result) {
                     alert("fail");

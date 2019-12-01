@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using ApplicationCore.Entities;
 
 namespace Presentation
 {
@@ -28,7 +29,7 @@ namespace Presentation
                     IUnitOfWork unit = new UnitOfWork(greenairContext);
                     //unit.Employees.RemoveRange(unit.Employees.GetAll());
                     //unit.Customers.RemoveRange(unit.Customers.GetAll());
-                    
+
                     // var cus = unit.Customers.GetByAsync("00006").GetAwaiter().GetResult();
                     // if (cus == null) Console.WriteLine("NULL cus"); else Console.WriteLine(cus.FullName);
 
@@ -42,8 +43,17 @@ namespace Presentation
 
                     // var acc2 = unit.Accounts.getAccountByPersonId("00006").GetAwaiter().GetResult();
                     // if (acc2 == null) Console.WriteLine("NULL acc"); else Console.WriteLine(acc2.Username);
-
-                    greenairContext.SaveChanges();
+                    // Maker a = new Maker();
+                    // a.MakerId = null;
+                    // a.MakerName = "ABC";
+                    // a.Address = new Address("123", "acv", "cfr", "edf", "ace", "vbt");
+                    // unit.Makers.AddAsync(a);
+                    // greenairContext.SaveChanges();
+                    // var list = unit.Makers.GetAll();
+                    // foreach (Maker item in list)
+                    // {
+                    //     Console.WriteLine(item.MakerId + " " + item.MakerName);
+                    // }
                     DataSeed.Initialize(greenairContext);
 
 

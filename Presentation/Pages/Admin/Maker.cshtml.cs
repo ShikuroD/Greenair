@@ -99,6 +99,39 @@ namespace Presentation.Pages.Admin
             string mes = "Remove " + MakerId + " Success!";
             return new JsonResult(mes);
         }
+        public async Task<IActionResult> OnPostCreateMaker()
+        {
+            string respone = "True";
+            MemoryStream stream = new MemoryStream();
+            Request.Body.CopyTo(stream);
+            stream.Position = 0;
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string requestBody = reader.ReadToEnd();
+                if (requestBody.Length > 0)
+                {
+                    var obj = JsonConvert.DeserializeObject<MakerVM>(requestBody);
+                    if (obj != null)
+                    {
+                        var aa = await _unitofwork.Makers.GetByAsync(obj.MakerId);
+                        if (aa == null)
+                        {
+                            Address address = new Address();
+                            address.toValue(obj.Address);
+                            Maker Maker = new Maker();
+                            Maker.MakerId = null;
+                            Maker.MakerName = obj.MakerName;
+                            Maker.Address = address;
+                            await _unitofwork.Makers.AddAsync(Maker);
+                            await _unitofwork.CompleteAsync();
+                        }
+                        else respone = "False";
+
+                    }
+                }
+            }
+            return new JsonResult(respone);
+        }
 
     }
     public class MakerVM
