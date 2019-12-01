@@ -1,4 +1,5 @@
 
+using System.Runtime.CompilerServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-
+using ApplicationCore.Services;
+using AutoMapper;
 namespace Presentation
 {
     public class Program
@@ -26,11 +28,12 @@ namespace Presentation
                     var greenairContext = services.GetRequiredService<GreenairContext>();
 
                     IUnitOfWork unit = new UnitOfWork(greenairContext);
+
                     //unit.Employees.RemoveRange(unit.Employees.GetAll());
                     //unit.Customers.RemoveRange(unit.Customers.GetAll());
 
-                    var cus = unit.Planes.GetByAsync(null).GetAwaiter().GetResult();
-                    if (cus == null) Console.WriteLine("NULL cus"); else Console.WriteLine(cus.MakerId);
+                    // var cus = unit.Planes.GetByAsync(null).GetAwaiter().GetResult();
+                    // if (cus == null) Console.WriteLine("NULL cus"); else Console.WriteLine(cus.MakerId);
 
 
                     // var cus2 = unit.Customers.getCustomerByName("Phung qUoc hai").GetAwaiter().GetResult();
