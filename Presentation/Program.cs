@@ -28,9 +28,9 @@ namespace Presentation
                     IUnitOfWork unit = new UnitOfWork(greenairContext);
                     //unit.Employees.RemoveRange(unit.Employees.GetAll());
                     //unit.Customers.RemoveRange(unit.Customers.GetAll());
-                    
-                    // var cus = unit.Customers.GetByAsync("00006").GetAwaiter().GetResult();
-                    // if (cus == null) Console.WriteLine("NULL cus"); else Console.WriteLine(cus.FullName);
+
+                    var cus = unit.Planes.GetByAsync(null).GetAwaiter().GetResult();
+                    if (cus == null) Console.WriteLine("NULL cus"); else Console.WriteLine(cus.MakerId);
 
 
                     // var cus2 = unit.Customers.getCustomerByName("Phung qUoc hai").GetAwaiter().GetResult();
