@@ -34,8 +34,8 @@ namespace Presentation
                     //unit.Employees.RemoveRange(unit.Employees.GetAll());
                     //unit.Customers.RemoveRange(unit.Customers.GetAll());
 
-                    var cus = unit.Customers.GetByAsync("00005").GetAwaiter().GetResult();
-                    unit.Customers.disable(cus);
+                    // var cus = unit.Customers.GetByAsync("00005").GetAwaiter().GetResult();
+                    // unit.Customers.disable(cus);
 
                     // if (cus == null) Console.WriteLine("NULL cus"); else Console.WriteLine(cus.FullName);
 
