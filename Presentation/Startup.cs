@@ -85,6 +85,7 @@ namespace Presentation
             services.AddScoped<IAirportService, AirportService>();
             services.AddScoped<IRouteService, RouteService>();
             services.AddScoped<ITicketTypeService, TicketTypeService>();
+            services.AddScoped<IMakerService, MakerService>();
             //.....................
             services.AddScoped<IAirportVMService, AirportVMService>();
             services.AddScoped<IPlaneVMService, PlaneVMService>();
