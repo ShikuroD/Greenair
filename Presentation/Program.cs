@@ -11,8 +11,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+<<<<<<< HEAD
 using ApplicationCore.Services;
 using AutoMapper;
+=======
+using ApplicationCore.Entities;
+
+>>>>>>> cf44b5a26bc02ef83df2184ef6b8a3ccc989a0cf
 namespace Presentation
 {
     public class Program
@@ -32,6 +37,11 @@ namespace Presentation
                     //unit.Employees.RemoveRange(unit.Employees.GetAll());
                     //unit.Customers.RemoveRange(unit.Customers.GetAll());
 
+<<<<<<< HEAD
+=======
+                    // var cus = unit.Customers.GetByAsync("00006").GetAwaiter().GetResult();
+                    // if (cus == null) Console.WriteLine("NULL cus"); else Console.WriteLine(cus.FullName);
+>>>>>>> cf44b5a26bc02ef83df2184ef6b8a3ccc989a0cf
                     // var cus = unit.Planes.GetByAsync(null).GetAwaiter().GetResult();
                     // if (cus == null) Console.WriteLine("NULL cus"); else Console.WriteLine(cus.MakerId);
 
@@ -45,8 +55,17 @@ namespace Presentation
 
                     // var acc2 = unit.Accounts.getAccountByPersonId("00006").GetAwaiter().GetResult();
                     // if (acc2 == null) Console.WriteLine("NULL acc"); else Console.WriteLine(acc2.Username);
-
-                    greenairContext.SaveChanges();
+                    // Maker a = new Maker();
+                    // a.MakerId = null;
+                    // a.MakerName = "ABC";
+                    // a.Address = new Address("123", "acv", "cfr", "edf", "ace", "vbt");
+                    // unit.Makers.AddAsync(a);
+                    // greenairContext.SaveChanges();
+                    // var list = unit.Makers.GetAll();
+                    // foreach (Maker item in list)
+                    // {
+                    //     Console.WriteLine(item.MakerId + " " + item.MakerName);
+                    // }
                     DataSeed.Initialize(greenairContext);
 
 
