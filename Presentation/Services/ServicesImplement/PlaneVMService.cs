@@ -25,11 +25,11 @@ namespace Presentation.Services.ServicesImplement
         {
             // var movies = await _service.GetMoviesAsync(searchString, genre);
             var Planes = await _service.Planes.GetAllAsync();
-            // if (searchString != null)
-            // {
-            //     Planes = await _service.Planes.getPlanebyMakerId(searchString);
-            // }
-            // var genres = await _service.GetGenresAsync();
+            if (searchString != null)
+            {
+                // var makerName = _service.Makers.get;
+                Planes = await _service.Planes.getPlanebyMakerId(searchString.Substring(0, 3));
+            }
             var abc = _mapper.Map<IEnumerable<Plane>, IEnumerable<PlaneDTO>>(Planes);
 
             return new PlanePageVM
