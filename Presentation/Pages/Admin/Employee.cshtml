@@ -22,37 +22,90 @@
     <div class="col-lg-12 stretch-card">
       <div class="card">
         <div class="card-body">
+          <div class="form-group row">
+            <div class="col-sm-7"></div>
+            <div class="col-sm-5">
+              <form>
+                <div class="input-group">
+                  <input type="search" id="SearchEmployee" class="form-control" placeholder="Search Here" name="searchString"  asp-for="SearchString">
+                  <button type="submit" id="btsubmitSearchEmployee" class="btn btn-icons btn-rounded btn-outline-primary"><i class="fa fa-search"></i></button>
+                </div>
+              </form> 
+            </div> 
+          </div>
           <h3 align="center">List of Employees </h3>
-          <table class="table table-bordered table-striped table-hover">
+          <table class="table table-bordered table-striped table-hover" id="TableEmployee">
            <thead>
             <tr>
               <th>ID</th>
               <th>Full name</th>
-              <th>Job</th>
+              <th>Job Id</th>
               <th>Salary</th>
               <th>Status</th>
-              <th></th>
+              <th>Action</th>
             </tr>
            </thead>
            <tbody>
              <!-- change to code later -->
-             @foreach (var item in Model.ListEmployees){
+            @foreach (var item in Model.ListEmployeePage.Employees){
               <tr>
                 <td>@item.Id</td>
-                <td> @item.LastName
-                  @item.FirstName</td>
+                <td>
+                  @item.LastName
+                  @item.FirstName
+                </td>
                 <td>@item.JobId</td>
                 <td>@item.Salary</td>
-                <td><label class="badge badge-warning">item.Status</label></td>
+                @{
+                  if (item.Status==Model.Status){
+                    <td><label class="badge badge-success">@item.Status</label></td>
+                  }
+                  else {
+                    <td><label class="badge badge-danger">@item.Status</label></td>
+                  }
+                }
+                
                 <td> 
-                  <button  id="@item.Id" data-toggle="modal" data-target="#EditEmployeeForm"  type="button" class="btn btn-dark btn-sm  btn-rounded EditEmployee"><i class="fa fa-cog"></i></button>
+                  <button  id="@item.Id" data-toggle="modal" data-target="#DetailEmployeeForm"  type="button" class="btn btn-info btn-sm  btn-rounded DetailEmployee"><i class="fa fa-vcard-o"></i></button>
+                  @{
+                    if (item.Status==Model.Status){
+                      <button  id="@item.Id" data-toggle="modal" data-target="#EditEmployeeFormLock"  type="button" class="btn btn-dark btn-sm  btn-rounded EditEmployee"><i class="fa fa-cog"></i></button>
+                    }
+                    else {
+                      <button  id="@item.Id" data-toggle="modal" data-target="#EditEmployeeFormUnlock"  type="button" class="btn btn-dark btn-sm  btn-rounded EditEmployee"><i class="fa fa-cog"></i></button>
+                    }
+                  }
                   <button  id="@item.Id" type="button" class="btn btn-danger btn-sm  btn-rounded DeleteEmployee"><i class="fa fa-times" ></i></button>
                 </td>
               </tr>
-              }
+            }
             </tbody>
           </table>
         </div>
+        @{
+              var preDisabled = !Model.ListEmployeePage.Employees.HasPrevious ? "disabled" : "";
+              var nextDisabled = !Model.ListEmployeePage.Employees.HasNext ? "disabled" : "";
+              var pageNow =Model.ListEmployeePage.Employees.PageIndex;
+          }
+          <!-- pagination -->
+            <div class="pagination" >
+              <a style="cursor:pointer" asp-page="/Admin/Employee" 
+              asp-route-pageIndex="@(Model.ListEmployeePage.Employees.PageIndex - 1)" 
+              class="pagination_link @preDisabled" >Previous</a>
+              @for (int i=1;i<=Model.ListEmployeePage.Employees.TotalPages;++i)
+              {
+                  if(i==pageNow)
+                  {
+                    <a style="cursor:pointer" asp-page="/Admin/Employee" asp-route-pageIndex="@i" class="pagination_link active" >@i</a>
+                  }
+                  else{
+                    <a style="cursor:pointer" asp-page="/Admin/Employee" asp-route-pageIndex="@i" class="pagination_link">@i</a>
+                  }
+              }
+              <a  style="cursor:pointer" asp-page="/Admin/Employee" 
+              asp-route-pageIndex="@(Model.ListEmployeePage.Employees.PageIndex + 1)" 
+              class="pagination_link @nextDisabled">Next</a>
+            </div>
       </div>
     </div>
     </div>
@@ -114,7 +167,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">First Name</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" required/>
+                    <input id="CreateEmployee-firstname" type="text" class="form-control" required/>
                   </div>
                 </div>
               </div>
@@ -122,7 +175,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Username</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" required/>
+                    <input id="CreateEmployee-username" type="text" class="form-control" required/>
                   </div>
                 </div>
               </div>
@@ -132,7 +185,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Last Name</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" required/>
+                    <input id="CreateEmployee-lastname" type="text" class="form-control" required/>
                   </div>
                 </div>
               </div>
@@ -140,7 +193,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Password</label>
                   <div class="col-sm-9">
-                    <input type="password" class="form-control" required/>
+                    <input id="CreateEmployee-password" type="password" class="form-control" required/>
                   </div>
                 </div>
               </div>
@@ -150,7 +203,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Date of Birth</label>
                   <div class="col-sm-9">
-                    <input type="date" class="form-control" placeholder="dd/mm/yyyy" />
+                    <input id="CreateEmployee-birthdate" type="date" class="form-control" placeholder="dd/mm/yyyy" />
                   </div>
                 </div>
               </div>
@@ -158,7 +211,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Enter Password</label>
                   <div class="col-sm-9">
-                    <input type="password" class="form-control" required/>
+                    <input id="CreateEmployee-password2" type="password" class="form-control" required/>
                   </div>
                 </div>
               </div>   
@@ -168,7 +221,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Phone</label>
                   <div class="col-sm-9">
-                    <input type="tel" class="form-control" pattern="0[0-9]{9,10}" />
+                    <input id="CreateEmployee-phone" type="tel" class="form-control" pattern="0[0-9]{9,10}" />
                   </div>
                 </div>
               </div>
@@ -176,7 +229,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Status</label>
                   <div class="col-sm-9">
-                    <select class="form-control">
+                    <select id="CreateEmployee-status" class="form-control">
                       <option>Active</option>
                       <option>Disable</option>
                     </select>
@@ -189,15 +242,18 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Address</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" />
+                    <input id="CreateEmployee-address" type="text" class="form-control" />
                   </div>
                 </div>
-              </div>
+              </div>           
+            </div>
+            <div class="row">
               <div class="col-md-6">
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Job</label>
                   <div class="col-sm-9">
-                    <select class="form-control">
+                    <select id="CreateEmployee-job" class="form-control">
+                      <option id="CreateEmployee-default" hidden></option>
                       @foreach (var item in Model.ListJobs){
                         <option>@item.JobId - 
                           @item.JobName</option>
@@ -205,22 +261,20 @@
                     </select>
                   </div>
                 </div>
-              </div>            
+              </div> 
             </div>
-            <div class="row">
-              <div class="col-md-6">
-              </div>                 
+            <div class="row">                
               <div class="col-md-6">
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Salary</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" />
+                    <input id="CreateEmployee-salary" type="number" class="form-control" />
                   </div>
                 </div>
               </div>  
             </div>
             <div class="row" style=" display: flex; justify-content: flex-end;">
-              <button type="submit" class="btn btn-success mr-2"><b>Create</b></button>
+              <button type="submit" id="btsubmitCreateEmployee" class="btn btn-success mr-2"><b>Create</b></button>
               <button class="btn btn-light" data-dismiss="modal"><b>Cancel</b></button>
             </div>
           </form>
@@ -229,12 +283,12 @@
     </div>
 </div>
 
-<!-- edit form -->
-<div class="modal fade" id="EditEmployeeForm" role="dialog">
+<!--form detail  -->
+<div class="modal fade" id="DetailEmployeeForm" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content" >
             <div class="modal-header" style=" background-color:aliceblue;">
-                <h4 class="modal-title" style="margin: 10px 0 10px 510px; color:#000; font-weight: bold;font-size:34">Edit Employee</h4>
+                <h4 class="modal-title" style="margin: 10px 0 10px 510px; color:#000; font-weight: bold;font-size:34">Detail Employee</h4>
             </div>
 		    <div class="model-body" style="margin: 15px">
 				  <form class="form-sample" action="post">
@@ -251,7 +305,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">First Name</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" required/>
+                    <input id="DetailEmployee-firstname" type="text" class="form-control" disabled/>
                   </div>
                 </div>
               </div>
@@ -259,7 +313,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Username</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" required/>
+                    <input id="DetailEmployee-username" type="text" class="form-control" disabled/>
                   </div>
                 </div>
               </div>
@@ -269,7 +323,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Last Name</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" required/>
+                    <input id="DetailEmployee-lastname" type="text" class="form-control" disabled/>
                   </div>
                 </div>
               </div>
@@ -277,7 +331,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Password</label>
                   <div class="col-sm-9">
-                    <input type="password" class="form-control" required/>
+                    <input id="DetailEmployee-password" type="password" class="form-control" disabled/>
                   </div>
                 </div>
               </div>
@@ -287,25 +341,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Date of Birth</label>
                   <div class="col-sm-9">
-                    <input type="date" class="form-control" placeholder="dd/mm/yyyy" />
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Enter Password</label>
-                  <div class="col-sm-9">
-                    <input type="password" class="form-control" required/>
-                  </div>
-                </div>
-              </div>   
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Phone</label>
-                  <div class="col-sm-9">
-                    <input type="tel" class="form-control" pattern="0[0-9]{9,10}" />
+                    <input id="DetailEmployee-birthdate" type="date" class="form-control" placeholder="dd/mm/yyyy" disabled/>
                   </div>
                 </div>
               </div>
@@ -313,10 +349,17 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Status</label>
                   <div class="col-sm-9">
-                    <select class="form-control">
-                      <option>Active</option>
-                      <option>Disable</option>
-                    </select>
+                    <input id="DetailEmployee-status" type="text" class="form-control" disabled/>
+                  </div>
+                </div>
+              </div>  
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Phone</label>
+                  <div class="col-sm-9">
+                    <input id="DetailEmployee-phone" type="tel" class="form-control" pattern="0[0-9]{9,10}" disabled/>
                   </div>
                 </div>
               </div>
@@ -326,38 +369,75 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Address</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" />
+                    <input id="DetailEmployee-address" type="text" class="form-control" disabled/>
                   </div>
                 </div>
-              </div>
+              </div>           
+            </div>
+            <div class="row">
               <div class="col-md-6">
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Job</label>
                   <div class="col-sm-9">
-                    <select class="form-control">
-                      @foreach (var item in Model.ListJobs){
-                        <option>@item.JobId - 
-                          @item.JobName</option>
-                      }
-                    </select>
+                    <input id="DetailEmployee-job" type="text" class="form-control" disabled/>
                   </div>
                 </div>
-              </div>            
+              </div> 
             </div>
-            <div class="row">
-              <div class="col-md-6">
-              </div>                 
+            <div class="row">                
               <div class="col-md-6">
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Salary</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" />
+                    <input id="DetailEmployee-salary" type="number" class="form-control" disabled/>
                   </div>
                 </div>
               </div>  
             </div>
+          </form>
+		    </div>
+         <div class="model-footer" style="margin: 15px">
+          <div class="row" style=" display: flex; justify-content: flex-end;">
+              <button class="btn btn-light" data-dismiss="modal"><b>Back to list</b></button>
+            </div>
+        </div>
+      </div>    
+    </div>
+</div>
+
+<!-- edit form -->
+<div class="modal fade" id="EditEmployeeFormLock" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content" >
+            <div class="modal-header" style=" background-color:aliceblue;">
+                <h4 class="modal-title" style="color:#000; font-weight: bold;font-size:34">Edit Employee</h4>
+            </div>
+		    <div class="model-body" style="margin: 15px">
+				  <form class="form-sample" action="post">
+            <input type="text" id="EditEmployeeLock-id" hidden/>
+            <h3> Are you sure to lock this person</h3>
             <div class="row" style=" display: flex; justify-content: flex-end;">
-              <button type="submit" class="btn btn-success mr-2"><b>Update</b></button>
+              <button id="btsubmitEditEmployeeLock" type="submit" class="btn btn-success mr-2"><b>Update</b></button>
+              <button class="btn btn-light" data-dismiss="modal"><b>Cancel</b></button>
+            </div>
+          </form>
+		    </div>
+      </div>    
+    </div>
+</div>
+
+<div class="modal fade" id="EditEmployeeFormUnlock" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content" >
+            <div class="modal-header" style=" background-color:aliceblue;">
+                <h4 class="modal-title" style="color:#000; font-weight: bold;font-size:34">Edit Employee</h4>
+            </div>
+		    <div class="model-body" style="margin: 15px">
+				  <form class="form-sample" action="post">
+            <input type="text" id="EditEmployeeUnlock-id" hidden/>
+            <h3> Are you sure to unlock this person</h3>
+            <div class="row" style=" display: flex; justify-content: flex-end;">
+              <button id="btsubmitEditEmployeeUnlock" type="submit" class="btn btn-success mr-2"><b>Update</b></button>
               <button class="btn btn-light" data-dismiss="modal"><b>Cancel</b></button>
             </div>
           </form>

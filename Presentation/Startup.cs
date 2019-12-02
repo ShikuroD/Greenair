@@ -91,6 +91,7 @@ namespace Presentation
             services.AddScoped<IPlaneVMService, PlaneVMService>();
             services.AddScoped<IMakerVMService, MakerVMService>();
             services.AddScoped<ICustomerVMService, CustomerVMService>();
+            services.AddScoped<IEmployeeVMService, EmployeeVMService>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }

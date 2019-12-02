@@ -52,11 +52,11 @@ namespace Infrastructure.Persistence
             if (!context.Planes.Any())
             {
                 context.Planes.AddRange(
-                    new Plane("000", 40, "000"),
-                    new Plane("001", 50, "000"),
-                    new Plane("002", 30, "001"),
-                    new Plane("003", 40, "001"),
-                    new Plane("004", 35, "002")
+                    new Plane("00000", 40, "000"),
+                    new Plane("00001", 50, "000"),
+                    new Plane("00002", 30, "001"),
+                    new Plane("00003", 40, "001"),
+                    new Plane("00004", 35, "002")
                 );
                 context.SaveChanges();
             }
@@ -76,7 +76,7 @@ namespace Infrastructure.Persistence
 
             if (!context.Employees.Any())
             {
-                 
+
                 context.Employees.AddRange(
                     new Employee("00001", "Trieu Ng Quoc", "Viet", new DateTime(1999, 12, 7), "0904897191", new Address("123", "ABC", "hahahaha", "Gotham", "Newyork", "USA"), new Account("admin1", "12345"), 15000, "001"),
                     new Employee("00002", "Vu Tuong", "Giang", new DateTime(1999, 12, 8), "0904891597", new Address("123", "gfd", "fsd", "sdf", "fs", "fsd"), new Account("admin2", "12345"), 18000, "002"),
@@ -96,7 +96,7 @@ namespace Infrastructure.Persistence
                 );
                 context.SaveChanges();
             }
-            
+
 
         }
 

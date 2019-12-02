@@ -1,6 +1,6 @@
 (function ($) {
     $(function () {
-        $(".DeleteCustomer").click(function () {
+        $(".DeleteEmployee").click(function () {
             var id = $(this).attr("id");
             if (confirm('Are you sure you want to delete this person has id: ' + id)) {
                 $.ajax({
@@ -10,7 +10,7 @@
                     },
                     dataType: 'json',
                     contentType: 'application/json; charset=utf-8',
-                    url: '/Admin/Customer?handler=DeleteCustomer',
+                    url: '/Admin/Employee?handler=DeleteEmployee',
                     data: JSON.stringify({
                         Id: id
                     }),
@@ -21,52 +21,52 @@
                 });
             }
         });
-        $(".DetailCustomer").click(function () {
+        $(".DetailEmployee").click(function () {
             var id = $(this).attr("id");
-            // alert("Id1 " + id);
+            alert("Id1 " + id);
             $.ajax({
                 type: 'GET',
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
-                url: '/Admin/Customer?handler=DetailCustomer',
-                data: {
-                    id: id
-                },
-                success: function (result) {
-                    // alert("Id2 " + result.Id);
-                    $("#DetailCustomer-lastname").val(result.LastName);
-                    $("#DetailCustomer-firstname").val(result.FirstName);
-                    $("#DetailCustomer-birthday").val(result.Birthdate);
-                    $("#DetailCustomer-phone").val(result.Phone);
-                    $("#DetailCustomer-email").val(result.Email);
-                    $("#DetailCustomer-address").val(result.Address.toString());
-                    $("#DetailCustomer-status").val(result.Status);
-                    $("#DetailCustomer-username").val(result.Username);
-                    $("#DetailCustomer-password").val(result.Password);
-
-                }
-            });
-        });
-        $(".EditCustomer").click(function () {
-            var id = $(this).attr("id");
-            $.ajax({
-                type: 'GET',
-                dataType: 'json',
-                contentType: 'application/json; charset=utf-8',
-                url: '/Admin/Customer?handler=EditCustomer',
+                url: '/Admin/Employee?handler=DetailEmployee',
                 data: {
                     id: id
                 },
                 success: function (result) {
                     alert("Id2 " + result.Id);
-                    $("#EditCustomerLock-id").val(result.Id);
-                    $("#EditCustomerUnlock-id").val(result.Id);
+                    $("#DetailEmployee-lastname").val(result.LastName);
+                    $("#DetailEmployee-firstname").val(result.FirstName);
+                    $("#DetailEmployee-birthday").val(result.Birthdate);
+                    $("#DetailEmployee-phone").val(result.Phone);
+                    $("#DetailEmployee-job").val(result.JobId);
+                    $("#DetailEmployee-salary").val(result.Salary);
+                    $("#DetailEmployee-address").val(result.Address.toString());
+                    $("#DetailEmployee-status").val(result.Status);
+                    $("#DetailEmployee-username").val(result.Username);
+                    $("#DetailEmployee-password").val(result.Password);
+
                 }
             });
         });
-        $("#btsubmitEditCustomerLock").click(function () {
-            var id = $('#EditCustomerLock-id').val();
-            alert(id);
+        $(".EditEmployee").click(function () {
+            var id = $(this).attr("id");
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                url: '/Admin/Employee?handler=EditEmployee',
+                data: {
+                    id: id
+                },
+                success: function (result) {
+                    // alert("Id2 " + result.Id);
+                    $("#EditEmployeeLock-id").val(result.Id);
+                    $("#EditEmployeeUnlock-id").val(result.Id);
+                }
+            });
+        });
+        $("#btsubmitEditEmployeeLock").click(function () {
+            var id = $('#EditEmployee-id').val();
             event.preventDefault();
             // event.preventDefault() là để ngăn thằng form nó load lại trang ..
             $.ajax({
@@ -76,7 +76,7 @@
                 },
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
-                url: '/Admin/Customer?handler=EditCustomerLock',
+                url: '/Admin/Employee?handler=EditEmployeeLock',
                 data: JSON.stringify({
                     Id: id
                 }),
@@ -90,9 +90,8 @@
 
             });
         });
-        $("#btsubmitEditCustomerUnlock").click(function () {
-            var id = $('#EditCustomerUnlock-id').val();
-            alert(id);
+        $("#btsubmitEditEmployeeUnlock").click(function () {
+            var id = $('#EditEmployee-id').val();
             event.preventDefault();
             // event.preventDefault() là để ngăn thằng form nó load lại trang ..
             $.ajax({
@@ -102,7 +101,7 @@
                 },
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
-                url: '/Admin/Customer?handler=EditCustomerUnlock',
+                url: '/Admin/Employee?handler=EditEmployeeUnlock',
                 data: JSON.stringify({
                     Id: id
                 }),
@@ -116,8 +115,8 @@
 
             });
         });
-        // $("#btsubmitSearchCustomer").click(function () {
-        //     var search = $('#SearchCustomer').val();
+        // $("#btsubmitSearchEmployee").click(function () {
+        //     var search = $('#SearchEmployee').val();
         //     event.preventDefault();
         //     // event.preventDefault() là để ngăn thằng form nó load lại trang ..
         //     $.ajax({
@@ -127,7 +126,7 @@
         //         },
         //         dataType: 'json',
         //         contentType: 'application/json; charset=utf-8',
-        //         url: '/Admin/Customer?handler=EditCustomer',
+        //         url: '/Admin/Employee?handler=EditEmployee',
         //         data: {
         //             searchString: search
         //         },

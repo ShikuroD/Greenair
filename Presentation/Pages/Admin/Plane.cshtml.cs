@@ -14,18 +14,20 @@ using System.IO;
 using ApplicationCore.DTOs;
 using Presentation.Services.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc.Rendering;
-
+using ApplicationCore.Services;
 namespace Presentation.Pages.Admin
 {
     public class PlaneModel : PageModel
     {
+        private readonly IPlaneService _services;
         private readonly IUnitOfWork _unitofwork;
-        private readonly IPlaneVMService _services;
+        private readonly IPlaneVMService _servicesVM;
 
-        public PlaneModel(IUnitOfWork unitofwork, IPlaneVMService services)
+        public PlaneModel(IPlaneService services, IUnitOfWork unitofwork, IPlaneVMService servicesVM)
         {
             this._unitofwork = unitofwork;
             this._services = services;
+            this._servicesVM = servicesVM;
         }
 
         public string SearchString { get; set; }
@@ -39,17 +41,12 @@ namespace Presentation.Pages.Admin
         public async Task OnGet(int pageIndex = 1)
         {
             ListMakers = await _unitofwork.Makers.GetAllAsync();
-            ListPlanePage = await _services.GetPlanePageViewModelAsync(SearchMaker, pageIndex);
+            ListPlanePage = await _servicesVM.GetPlanePageViewModelAsync(SearchMaker, pageIndex);
             List<string> listname = new List<string>();
             foreach (var item in ListMakers)
             {
                 listname.Add(item.MakerId + " - " + item.MakerName);
             }
-            // var listname = from m in ListMakers
-            //                select new
-            //                {
-            //                    item = m.MakerId + " - " + m.MakerName
-            //                };
             ListMakerName = new SelectList(listname);
         }
         public async Task<IActionResult> OnGetEditPlane(string id)
@@ -58,7 +55,7 @@ namespace Presentation.Pages.Admin
             PlaneDTO planeDTO = new PlaneDTO();
             planeDTO.PlaneId = plane.PlaneId;
             planeDTO.SeatNum = plane.SeatNum;
-            planeDTO.PlaneId = plane.PlaneId;
+            planeDTO.MakerId = plane.MakerId;
             return Content(JsonConvert.SerializeObject(planeDTO));
             // return new JsonResult(planeDTO);
         }
@@ -79,7 +76,7 @@ namespace Presentation.Pages.Admin
                         Plane plane = new Plane();
                         plane.PlaneId = obj.PlaneId;
                         plane.SeatNum = obj.SeatNum;
-                        plane.PlaneId = obj.PlaneId.Substring(0, 3);
+                        plane.MakerId = obj.MakerId.Substring(0, 3);
                         await _unitofwork.Planes.UpdateAsync(plane);
                         await _unitofwork.CompleteAsync();
                     }
@@ -125,12 +122,12 @@ namespace Presentation.Pages.Admin
                     var obj = JsonConvert.DeserializeObject<PlaneDTO>(requestBody);
                     if (obj != null)
                     {
-                        Plane plane = new Plane();
+                        PlaneDTO plane = new PlaneDTO();
                         // plane.PlaneId = obj.PlaneId;
                         plane.SeatNum = obj.SeatNum;
                         plane.MakerId = obj.MakerId.Substring(0, 3);
-                        await _unitofwork.Planes.AddAsync(plane);
-                        await _unitofwork.CompleteAsync();
+                        await _services.addPlaneAsync(plane);
+
                     }
                 }
             }

@@ -55,7 +55,19 @@ namespace Presentation
 
                     // var acc2 = unit.Accounts.getAccountByPersonId("00006").GetAwaiter().GetResult();
                     // if (acc2 == null) Console.WriteLine("NULL acc"); else Console.WriteLine(acc2.Username);
+                    // IAccountService _accountser = new AccountService(unit,);
+                    // IMapper _mapper = new Mapper(AutoMapper.Configuration.);
+                    // ICustomerService _service = new CustomerService(unit,);
+                    unit.Customers.disable("00008");
+                    // _service.disableCutomerAsync("00008");
+                    var aa = unit.Customers.GetAll();
+                    foreach (var item in aa)
+                    {
+                        Console.WriteLine(item.Id + " - " + item.FullName + " - " + item.Status);
+                    }
+                    var bb = unit.Customers.GetByAsync("00008").GetAwaiter().GetResult();
 
+                    Console.WriteLine(bb.Id + " - " + bb.Status);
                     DataSeed.Initialize(greenairContext);
 
 
