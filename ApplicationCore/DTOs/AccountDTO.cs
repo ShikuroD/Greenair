@@ -10,7 +10,11 @@ namespace ApplicationCore.DTOs
         [StringLength(20, MinimumLength = 6)]
         [Required]
         public string Username { get; set; }
-
+        public AccountDTO(string Username, string Password)
+        {
+            this.Username = Username;
+            this.Password = Password;
+        }
         [StringLength(20, MinimumLength = 6)]
         [Required]
         public string Password { get; set; }

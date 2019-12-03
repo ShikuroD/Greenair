@@ -65,9 +65,9 @@ namespace Presentation.Pages
         {
             ListAirports =  _unitofwork.Airports.GetAll();
             var ListAirportNames = from m in ListAirports
-                                   where m.AirportName.Contains(term)
-                                   select m.AirportName
-                                   ;
+                                where m.AirportName.Contains(term)
+                                select m.AirportName
+                                ;
             return new JsonResult(ListAirportNames);
         }
     }
