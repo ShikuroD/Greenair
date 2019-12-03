@@ -26,11 +26,5 @@ namespace ApplicationCore.Entities
             this.Status = Status;
             this.PlaneId = PlaneId;
         }
-        public Flight(Flight fli)
-        {
-            this.FlightId = fli.FlightId;
-            this.Status = fli.Status;
-            this.PlaneId = fli.PlaneId;
-        }
     }
 }
