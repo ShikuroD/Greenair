@@ -23,7 +23,8 @@ namespace Infrastructure.Persistence.Configuration
             builder.Property(s => s.PlaneId).IsRequired();
             builder.HasOne<Plane>(s => s.Plane)
                 .WithMany(a => a.Flights)
-                .HasForeignKey(s => s.PlaneId);
+                .HasForeignKey(s => s.PlaneId)
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

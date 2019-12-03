@@ -209,7 +209,7 @@ namespace Presentation.Migrations
                         column: x => x.RouteId,
                         principalTable: "Routes",
                         principalColumn: "RouteId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -231,7 +231,7 @@ namespace Presentation.Migrations
                         column: x => x.CustomerId,
                         principalTable: "Persons",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Tickets_Flights_FlightId",
                         column: x => x.FlightId,
@@ -243,7 +243,7 @@ namespace Presentation.Migrations
                         column: x => x.TicketTypeId,
                         principalTable: "TicketTypes",
                         principalColumn: "TicketTypeId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateIndex(

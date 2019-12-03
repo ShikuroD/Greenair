@@ -20,7 +20,8 @@ namespace Infrastructure.Persistence.Configuration
 
             builder.HasMany<FlightDetail>(s => s.FlightDetails)
                 .WithOne(a => a.Route)
-                .HasForeignKey(a => a.RouteId);
+                .HasForeignKey(a => a.RouteId)
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Presentation.Migrations
 {
     [DbContext(typeof(GreenairContext))]
-    [Migration("20191130150037_Initial")]
+    [Migration("20191203183741_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -366,7 +366,7 @@ namespace Presentation.Migrations
                     b.HasOne("ApplicationCore.Entities.Route", "Route")
                         .WithMany("FlightDetails")
                         .HasForeignKey("RouteId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
                 });
 
@@ -500,7 +500,7 @@ namespace Presentation.Migrations
                     b.HasOne("ApplicationCore.Entities.Customer", "Customer")
                         .WithMany("Tickets")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
 
                     b.HasOne("ApplicationCore.Entities.Flight", "Flight")
@@ -512,7 +512,7 @@ namespace Presentation.Migrations
                     b.HasOne("ApplicationCore.Entities.TicketType", "TicketType")
                         .WithMany("Tickets")
                         .HasForeignKey("TicketTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
                 });
 

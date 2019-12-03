@@ -16,11 +16,13 @@ namespace Infrastructure.Persistence.Configuration
 
             builder.HasMany<Route>(s => s.RouteStarts)
                 .WithOne(a => a.OrgAirport)
-                .HasForeignKey(a => a.Origin);
+                .HasForeignKey(a => a.Origin)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasMany<Route>(s => s.RouteEnds)
                 .WithOne(a => a.DesAirport)
-                .HasForeignKey(a => a.Destination);
+                .HasForeignKey(a => a.Destination)
+                .OnDelete(DeleteBehavior.Cascade);
 
             //------------------------------------------------------------------
             builder.OwnsOne(x => x.Address)

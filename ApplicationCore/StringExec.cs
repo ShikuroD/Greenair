@@ -16,7 +16,6 @@ namespace ApplicationCore
 
             Regex r = new Regex(pattern);
             Match m = r.Match(str);
-
             List<string> ret = new List<string>();
 
             for (int i = 1; i < m.Groups.Count; i++)
