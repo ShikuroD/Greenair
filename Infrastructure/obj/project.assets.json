@@ -8479,19 +8479,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
       "projectUniqueName": "D:\\Code\\C#\\Greenair\\Infrastructure\\Infrastructure.csproj",
       "projectName": "Infrastructure",
       "projectPath": "D:\\Code\\C#\\Greenair\\Infrastructure\\Infrastructure.csproj",
       "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
       "outputPath": "D:\\Code\\C#\\Greenair\\Infrastructure\\obj\\",
-=======
-      "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\Greenair\\Infrastructure\\Infrastructure.csproj",
-      "projectName": "Infrastructure",
-      "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\Infrastructure\\Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\Infrastructure\\obj\\",
->>>>>>> e593428ee25b928af64e013df76e2bd8192fa2d1
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -8508,13 +8500,8 @@
       "frameworks": {
         "netcoreapp3.0": {
           "projectReferences": {
-<<<<<<< HEAD
             "D:\\Code\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj": {
               "projectPath": "D:\\Code\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj"
-=======
-            "C:\\Users\\Administrator\\Desktop\\Greenair\\ApplicationCore\\ApplicationCore.csproj": {
-              "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\ApplicationCore\\ApplicationCore.csproj"
->>>>>>> e593428ee25b928af64e013df76e2bd8192fa2d1
             }
           }
         }
@@ -8575,5 +8562,13 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file D:\\Code\\C#\\Greenair\\Infrastructure\\obj\\Infrastructure.csproj.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

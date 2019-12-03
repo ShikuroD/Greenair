@@ -101,11 +101,6 @@ namespace Infrastructure.Persistence
             // Flight 
             if (!context.Routes.Any())
             {
-                var Airports = context.Airports.ToList();
-                var airportHCM = Airports.FirstOrDefault(m => m.AirportId == "001");
-                var airportHN = Airports.FirstOrDefault(m => m.AirportId == "000");
-                var airportTKO = Airports.FirstOrDefault(m => m.AirportId == "006");
-                var airportLA = Airports.FirstOrDefault(m => m.AirportId == "005");
                 context.Routes.AddRange(
                     new Route("00000", "001", "000", new FlightTime(1, 45)),
                     new Route("00001", "000", "001", new FlightTime(1, 45)),
