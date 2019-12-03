@@ -51,14 +51,14 @@ namespace Presentation.Pages.Admin
             // return new JsonResult(Employee);
         }
 
-        // public async Task<IActionResult> OnGetEditCustomer(string id)
-        // {
-        //     var Customer = await _unitofwork.Customers.GetByAsync(id);
-        //     Account acc = await _unitofwork.Accounts.getAccountByPersonId(Customer.Id);
-        //     CustomerVM customerVM = new CustomerVM(Customer, acc);
-        //     // return Content(JsonConvert.SerializeObject(customerVM));
-        //     return new JsonResult(customerVM);
-        // }
+        public async Task<IActionResult> OnGetEditCustomer(string id)
+        {
+            var Employee = await _unitofwork.Employees.GetByAsync(id);
+            Account acc = await _unitofwork.Accounts.getAccountByPersonId(Employee.Id);
+            EmployeeVM EmployeeVM = new EmployeeVM(Employee, acc);
+            // return Content(JsonConvert.SerializeObject(customerVM));
+            return new JsonResult(EmployeeVM);
+        }
         // public async Task<IActionResult> OnPostEditCustomerLock()
         // {
         //     string respone = "Successful";
@@ -103,29 +103,32 @@ namespace Presentation.Pages.Admin
         //     }
         //     return new JsonResult(respone);
         // }
-        // public async Task<IActionResult> OnPostDeleteCustomer()
-        // {
-        //     string CustomerId = "";
-        //     MemoryStream stream = new MemoryStream();
-        //     Request.Body.CopyTo(stream);
-        //     stream.Position = 0;
-        //     using (StreamReader reader = new StreamReader(stream))
-        //     {
-        //         string requestBody = reader.ReadToEnd();
-        //         if (requestBody.Length > 0)
-        //         {
-        //             var obj = JsonConvert.DeserializeObject<CustomerDTO>(requestBody);
-        //             if (obj != null)
-        //             {
-        //                 CustomerId = obj.Id;
-        //                 await _service.removeCustomerAsync(obj.Id);
-        //                 // await _servic
-        //             }
-        //         }
-        //     }
-        //     string mes = "Remove " + CustomerId + " Success!";
-        //     return new JsonResult(mes);
-        // }
+        public async Task<IActionResult> OnPostDeleteCustomer()
+        {
+            string EmployeeId = "";
+            MemoryStream stream = new MemoryStream();
+            Request.Body.CopyTo(stream);
+            stream.Position = 0;
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string requestBody = reader.ReadToEnd();
+                if (requestBody.Length > 0)
+                {
+                    var obj = JsonConvert.DeserializeObject<EmployeeVM>(requestBody);
+                    if (obj != null)
+                    {
+                        EmployeeId = obj.Id;
+                        // await _service.removeCustomerAsync(obj.Id);
+                        var em = await _unitofwork.Employees.GetByAsync(EmployeeId);
+                        await _unitofwork.Employees.RemoveAsync(em);
+                        await _unitofwork.CompleteAsync();
+                        // await _servic
+                    }
+                }
+            }
+            string mes = "Remove " + EmployeeId + " Success!";
+            return new JsonResult(mes);
+        }
     }
     class EmployeeVM
     {
