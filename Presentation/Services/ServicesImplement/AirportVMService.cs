@@ -7,34 +7,36 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Presentation.ViewModels;
 using Presentation.Services.ServiceInterfaces;
 using AutoMapper;
+using ApplicationCore.Services;
+
 namespace Presentation.Services.ServicesImplement
 {
     public class AirportVMService : IAirportVMService
     {
         private int pageSize = 3;
-        private readonly IUnitOfWork _service;
+        private readonly IAirportService _service;
         private readonly IMapper _mapper;
 
-        public AirportVMService(IUnitOfWork movieService, IMapper mapper)
+        public AirportVMService(IAirportService service, IMapper mapper)
         {
-            _service = movieService;
+            _service = service;
             _mapper = mapper;
         }
 
         public async Task<AirportPageVM> GetAirportPageViewModelAsync(string searchString, int pageIndex = 1)
         {
             // var movies = await _service.GetMoviesAsync(searchString, genre);
-            var airports = await _service.Airports.GetAllAsync();
+            var airports = await _service.getAllAirportAsync();
             if (searchString != null)
             {
-                airports = await _service.Airports.getAirportByConditions(searchString, "", "");
+                airports = await _service.getAirportByConditionsAsync(searchString, "", "");
             }
             // var genres = await _service.GetGenresAsync();
-            var abc = _mapper.Map<IEnumerable<Airport>, IEnumerable<AirportDTO>>(airports);
+            // var abc = _mapper.Map<IEnumerable<Airport>, IEnumerable<AirportDTO>>(airports);
 
             return new AirportPageVM
             {
-                Airports = PaginatedList<AirportDTO>.Create(abc, pageIndex, pageSize)
+                Airports = PaginatedList<AirportDTO>.Create(airports, pageIndex, pageSize)
             };
         }
 

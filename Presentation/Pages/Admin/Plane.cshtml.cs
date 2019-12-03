@@ -13,30 +13,41 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using ApplicationCore.DTOs;
 using Presentation.Services.ServiceInterfaces;
-
+using Microsoft.AspNetCore.Mvc.Rendering;
+using ApplicationCore.Services;
 namespace Presentation.Pages.Admin
 {
     public class PlaneModel : PageModel
     {
+        private readonly IPlaneService _services;
         private readonly IUnitOfWork _unitofwork;
-        private readonly IPlaneVMService _services;
+        private readonly IPlaneVMService _servicesVM;
 
-        public PlaneModel(IUnitOfWork unitofwork, IPlaneVMService services)
+        public PlaneModel(IPlaneService services, IUnitOfWork unitofwork, IPlaneVMService servicesVM)
         {
             this._unitofwork = unitofwork;
             this._services = services;
+            this._servicesVM = servicesVM;
         }
 
         public string SearchString { get; set; }
         public IEnumerable<Maker> ListMakers { get; set; }
+        public SelectList ListMakerName { get; set; }
 
         public PlanePageVM ListPlanePage { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public string SearchMaker { get; set; }
 
         public async Task OnGet(int pageIndex = 1)
         {
             ListMakers = await _unitofwork.Makers.GetAllAsync();
-            ListPlanePage = await _services.GetPlanePageViewModelAsync("", pageIndex);
-
+            ListPlanePage = await _servicesVM.GetPlanePageViewModelAsync(SearchMaker, pageIndex);
+            List<string> listname = new List<string>();
+            foreach (var item in ListMakers)
+            {
+                listname.Add(item.MakerId + " - " + item.MakerName);
+            }
+            ListMakerName = new SelectList(listname);
         }
         public async Task<IActionResult> OnGetEditPlane(string id)
         {
@@ -65,7 +76,7 @@ namespace Presentation.Pages.Admin
                         Plane plane = new Plane();
                         plane.PlaneId = obj.PlaneId;
                         plane.SeatNum = obj.SeatNum;
-                        plane.PlaneId = obj.PlaneId.Substring(0, 3);
+                        plane.MakerId = obj.MakerId.Substring(0, 3);
                         await _unitofwork.Planes.UpdateAsync(plane);
                         await _unitofwork.CompleteAsync();
                     }
@@ -96,6 +107,31 @@ namespace Presentation.Pages.Admin
             }
             string mes = "Remove " + PlaneId + " Success!";
             return new JsonResult(mes);
+        }
+        public async Task<IActionResult> OnPostCreatePlane()
+        {
+            string respone = "True";
+            MemoryStream stream = new MemoryStream();
+            Request.Body.CopyTo(stream);
+            stream.Position = 0;
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string requestBody = reader.ReadToEnd();
+                if (requestBody.Length > 0)
+                {
+                    var obj = JsonConvert.DeserializeObject<PlaneDTO>(requestBody);
+                    if (obj != null)
+                    {
+                        PlaneDTO plane = new PlaneDTO();
+                        // plane.PlaneId = obj.PlaneId;
+                        plane.SeatNum = obj.SeatNum;
+                        plane.MakerId = obj.MakerId.Substring(0, 3);
+                        await _services.addPlaneAsync(plane);
+
+                    }
+                }
+            }
+            return new JsonResult(respone);
         }
 
     }

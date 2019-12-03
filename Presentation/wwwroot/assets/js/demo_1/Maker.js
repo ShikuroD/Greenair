@@ -72,10 +72,42 @@
 
             });
         });
-        // $(".list-maker").click(function () {
-        //     var id = $(this).attr("id");
+        $("#btsubmitCreateMaker").click(function () {
+            alert("Create");
+            // var id = $('#CreateMaker-id').val();
+            var name = $("#CreateMaker-name").val();
+            var address = $("#CreateMaker-address").val();
+            event.preventDefault();
+            // event.preventDefault() là để ngăn thằng form nó load lại trang ..
+            $.ajax({
+                type: 'POST',
+                headers: {
+                    "XSRF-TOKEN": $('input:hidden[name="__RequestVerificationToken"]').val()
+                },
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                url: '/Admin/Maker?handler=CreateMaker',
+                data: JSON.stringify({
+                    MakerId: id,
+                    MakerName: name,
+                    Address: address
+                }),
+                success: function (respone) {
+                    // $('#CreateMaker').modal('hide');
+                    if (respone.trim() == "True") {
+                        alert("Create success");
+                        location.reload();
+                    } else {
+                        alert("This Id exists");
+                        $('#CreateMaker-id').focus();
+                    }
+                },
+                failure: function (result) {
+                    alert("fail");
+                }
 
-        // });
+            });
+        });
 
     });
 })(jQuery);

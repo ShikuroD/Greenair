@@ -18,5 +18,19 @@ namespace ApplicationCore.Entities
         public IList<FlightDetail> FlightDetails { get; set; }
 
         public IList<Ticket> Tickets { get; set; }
+
+        public Flight() { }
+        public Flight(string FlightId, STATUS Status, string PlaneId)
+        {
+            this.FlightId = FlightId;
+            this.Status = Status;
+            this.PlaneId = PlaneId;
+        }
+        public Flight(Flight fli)
+        {
+            this.FlightId = fli.FlightId;
+            this.Status = fli.Status;
+            this.PlaneId = fli.PlaneId;
+        }
     }
 }

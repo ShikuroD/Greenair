@@ -59,10 +59,10 @@ namespace Presentation.Pages.Admin
             var Customer = await _unitofwork.Customers.GetByAsync(id);
             Account acc = await _unitofwork.Accounts.getAccountByPersonId(Customer.Id);
             CustomerVM customerVM = new CustomerVM(Customer, acc);
-            // return Content(JsonConvert.SerializeObject(customerVM));
-            return new JsonResult(customerVM);
+            return Content(JsonConvert.SerializeObject(customerVM));
+            // return new JsonResult(customerVM);
         }
-        public async Task<IActionResult> OnPostEditCustomer()
+        public async Task<IActionResult> OnPostEditCustomerLock()
         {
             string respone = "Successful";
             MemoryStream stream = new MemoryStream();
@@ -78,6 +78,28 @@ namespace Presentation.Pages.Admin
                     {
                         string id = obj.Id;
                         await _service.disableCutomerAsync(id);
+                        // _service
+                    }
+                }
+            }
+            return new JsonResult(respone);
+        }
+        public async Task<IActionResult> OnPostEditCustomerUnlock()
+        {
+            string respone = "Successful";
+            MemoryStream stream = new MemoryStream();
+            Request.Body.CopyTo(stream);
+            stream.Position = 0;
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string requestBody = reader.ReadToEnd();
+                if (requestBody.Length > 0)
+                {
+                    var obj = JsonConvert.DeserializeObject<CustomerDTO>(requestBody);
+                    if (obj != null)
+                    {
+                        string id = obj.Id;
+                        await _service.activateCustomerAsync(id);
                         // _service
                     }
                 }
