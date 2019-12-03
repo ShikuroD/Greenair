@@ -50,6 +50,7 @@ namespace Presentation
                 // Make the session cookie essential
                 options.Cookie.IsEssential = true;
             });
+            services.AddDistributedMemoryCache();
             services.Configure<KestrelServerOptions>(options =>
             {
                 options.AllowSynchronousIO = true;

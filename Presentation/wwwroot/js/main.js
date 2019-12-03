@@ -359,15 +359,12 @@
 		alert("Succesful");
 	}
  	$("#logIn").on("click", function () {
- 		console.log();
+		event.preventDefault();
  		var username = $("#username").val();
  		var password = $("#password").val();
- 		if (username == "") {
- 			alert("aaa");
- 		}
  		$.ajax({
  			type: "POST",
- 			url: "/Flight?handler=LogIn",
+ 			url: "/Account?handler=LogIn",
  			headers: {
  				"XSRF-TOKEN": $('input:hidden[name="__RequestVerificationToken"]').val()
  			},
@@ -397,7 +394,7 @@
  	});
 	dialog = $("#dialog").dialog({
 		autoOpen: false,
-		height: 350,	
+		height: 270,	
 		width: 320,
 		maxHeight: 350,
 		maxWidth: 320,
@@ -405,29 +402,19 @@
 		modal: true,
 		dialogClass: 'myTitleClass',
 		position: 'center',	
-		buttons: {
-			Register: {
-				text: "Register",
-				id: "open-register",
-				click: function () {
-					$("#register").dialog("open");
-					$(this).dialog("close");
-				}
-			},
-			Cancel: function () {
-				$(this).dialog("close");
-			}
-			},
-			close: function () {
- 			//form[0].reset();
-			$(this).dialog("close")
+		close: function () {
+		//form[0].reset();
+		$(this).dialog("close")
 
 		}
 	});
 	$("#opener").on("click", function () {
 		$("#dialog").dialog("open");
 	});
-	
+	$("#open-register").on("click",function(){
+		$("#register").dialog("open");
+		$("#dialog").dialog("close");
+	})
 	$("#dialog").dialog("option", "closeOnEscape", true);
 	$(".info-show").on("click", function () {
 		$(".info-show").css("display", "none");
