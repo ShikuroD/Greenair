@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "C:\\Users\\Administrator\\Desktop\\Greenair\\ApplicationCore\\ApplicationCore.csproj": {}
   },
   "projects": {
@@ -12,12 +13,25 @@
         "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\ApplicationCore\\ApplicationCore.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\ApplicationCore\\obj\\",
+=======
+    "D:\\Code\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj": {}
+  },
+  "projects": {
+    "D:\\Code\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Code\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj",
+        "projectName": "ApplicationCore",
+        "projectPath": "D:\\Code\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj",
+        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+        "outputPath": "D:\\Code\\C#\\Greenair\\ApplicationCore\\obj\\",
+>>>>>>> c805377134fb075ad1fcb53e68cd020fbcfccdc0
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"

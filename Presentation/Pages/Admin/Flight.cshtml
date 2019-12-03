@@ -4,4 +4,66 @@
   Layout = "_LayoutAdmin";
 	ViewData["Title"] = "Admin Page";
 }
-<h2>This is Flight Page</h2>
+<div class="main-panel">
+  <div class="content-wrapper">
+     <!-- row button create -->
+    <div class="row">
+      <div class="col-lg-12 stretch-card">
+        <a href="#CreateFlightForm" data-toggle="modal" id="btCreateFlight" type="button" class="btn  btn-primary btn-lg btn-inverse-*">
+          <i class="mdi mdi-upload"></i>Create Flight
+        </a>
+      </div>
+    </div>
+    <!-- row table -->
+    <div class="row">
+      <div class="col-lg-12 stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <div class="form-group row">
+              <div class="col-sm-7"></div>
+              <div class="col-sm-5">
+                <form>
+                  <div class="input-group">
+                    <input type="search" id="SearchFlight" class="form-control" placeholder="Search Here" name="searchString"  asp-for="SearchString">
+                    <button type="submit" id="btsubmitSearchFlight" class="btn btn-icons btn-rounded btn-outline-primary"><i class="fa fa-search"></i></button>
+                  </div>
+                </form> 
+              </div> 
+            </div>
+            <h3 align="center">List of Flights </h3>
+            <table class="table table-bordered table-striped table-hover" id="TableFlight">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Status</th>
+                <th>Plane ID</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody> 
+              @foreach (var item in Model.ListFlights){
+                <tr>
+                <!-- <tr id="@item.FlightId" class="list-Flight"> -->
+                  <td>@item.FlightId</td>
+                  <td>@item.Status</td>
+                  <td>@item.PlaneId</td>
+                  <td> 
+                    <button  id="@item.FlightId" data-toggle="modal" data-target="#EditFlightForm"  type="button" class="btn btn-dark btn-sm  btn-rounded EditFlight"><i class="fa fa-cog"></i></button>
+                    <button  id="@item.FlightId" type="button" class="btn btn-danger btn-sm  btn-rounded DeleteFlight"><i class="fa fa-times" ></i></button>
+                  </td>
+                </tr>
+              }
+              </tbody>
+            </table>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end table Flight  -->
+
+  </div> 
+  <!-- end content_warper -->
+</div>
+<!-- end main body -->

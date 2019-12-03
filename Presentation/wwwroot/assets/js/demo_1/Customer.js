@@ -58,7 +58,7 @@
                     id: id
                 },
                 success: function (result) {
-                    alert("Id2 " + result.Id);
+                    // alert("Id2 " + result.Id);
                     $("#EditCustomerLock-id").val(result.Id);
                     $("#EditCustomerUnlock-id").val(result.Id);
                 }
@@ -66,7 +66,7 @@
         });
         $("#btsubmitEditCustomerLock").click(function () {
             var id = $('#EditCustomerLock-id').val();
-            alert(id);
+            // alert(id);
             event.preventDefault();
             // event.preventDefault() là để ngăn thằng form nó load lại trang ..
             $.ajax({
@@ -92,7 +92,7 @@
         });
         $("#btsubmitEditCustomerUnlock").click(function () {
             var id = $('#EditCustomerUnlock-id').val();
-            alert(id);
+            // alert(id);
             event.preventDefault();
             // event.preventDefault() là để ngăn thằng form nó load lại trang ..
             $.ajax({

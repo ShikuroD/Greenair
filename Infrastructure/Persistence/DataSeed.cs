@@ -3,6 +3,7 @@ using ApplicationCore.Entities;
 using System.Linq;
 using System;
 using ApplicationCore;
+using ApplicationCore.Interfaces;
 namespace Infrastructure.Persistence
 {
     public class DataSeed
@@ -26,10 +27,10 @@ namespace Infrastructure.Persistence
                 var address = new Address("123", "ABC", "Hogwart", "Gotham", "Newyork", "USA");
                 var address2 = new Address("123", "ABC", "Hogwart", "Gotham", "Newyork", "USA");
                 context.Makers.AddRange(
-                    new Maker("000", "BOEING", new Address("123", "ABC", "Hahaha", "Gotham", "Newyork", "USA")),
-                    new Maker("001", "BAMBOO", address2),
-                    new Maker("002", "Mc.King", new Address("457", "AN Duong Vuong", "10", "5", "", "Viet Nam"))
-                );
+                                new Maker("000", "BOEING", new Address("123", "ABC", "Hahaha", "Gotham", "Newyork", "USA")),
+                                new Maker("001", "BAMBOO", address2),
+                                new Maker("002", "Mc.King", new Address("457", "AN Duong Vuong", "10", "5", "", "Viet Nam"))
+                            );
                 context.SaveChanges();
             }
             if (!context.Airports.Any())
@@ -97,7 +98,48 @@ namespace Infrastructure.Persistence
                 context.SaveChanges();
             }
 
+            // Flight 
+            if (!context.Routes.Any())
+            {
+                context.Routes.AddRange(
+                    new Route("00000", "001", "000", new FlightTime(1, 45)),
+                    new Route("00001", "000", "001", new FlightTime(1, 45)),
+                    new Route("00002", "000", "006", new FlightTime(4, 0)),
+                    new Route("00003", "006", "000", new FlightTime(4, 0)),
+                    new Route("00004", "001", "006", new FlightTime(4, 30)),
+                    new Route("00005", "006", "001", new FlightTime(4, 30)),
+                    new Route("00006", "001", "005", new FlightTime(10, 30)),
+                    new Route("00007", "005", "001", new FlightTime(10, 30)),
+                    new Route("00008", "000", "005", new FlightTime(10, 0)),
+                    new Route("00009", "005", "000", new FlightTime(10, 0))
+                );
+                context.SaveChanges();
+            }
 
+            if (!context.Flights.Any())
+            {
+                context.Flights.AddRange(
+                    new Flight("00000", STATUS.AVAILABLE, "00000"),
+                    new Flight("00001", STATUS.AVAILABLE, "00001"),
+                    new Flight("00002", STATUS.AVAILABLE, "00003"),
+                    new Flight("00003", STATUS.AVAILABLE, "00004"),
+                    new Flight("00004", STATUS.AVAILABLE, "00002"),
+                    new Flight("00005", STATUS.AVAILABLE, "00000")
+                );
+                context.SaveChanges();
+            }
+
+            if (!context.FlightDetails.Any())
+            {
+                context.FlightDetails.AddRange(
+                    new FlightDetail("00000", "00000", "00000", new DateTime(2019, 12, 1, 10, 0, 0), new DateTime(2019, 12, 1, 11, 45, 0)),
+                    new FlightDetail("00001", "00001", "00001", new DateTime(2019, 12, 1, 12, 0, 0), new DateTime(2019, 12, 1, 14, 45, 0)),
+                    new FlightDetail("00002", "00002", "00000", new DateTime(2019, 12, 2, 12, 0, 0), new DateTime(2019, 12, 2, 14, 45, 0)),
+                    new FlightDetail("00003", "00002", "00002", new DateTime(2019, 12, 2, 15, 0, 0), new DateTime(2019, 12, 2, 19, 30, 0)),
+                    new FlightDetail("00004", "00003", "00006", new DateTime(2019, 12, 3, 6, 0, 0), new DateTime(2019, 12, 3, 16, 30, 0))
+                );
+                context.SaveChanges();
+            }
         }
 
     }

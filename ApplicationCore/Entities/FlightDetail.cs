@@ -8,6 +8,7 @@ namespace ApplicationCore.Entities
     public class FlightDetail
     {
 
+        public FlightDetail() { }
         public FlightDetail(string flightDetailId, string flightId, string routeId, DateTime depDate, DateTime arrDate)
         {
             this.FlightDetailId = flightDetailId;
@@ -16,7 +17,6 @@ namespace ApplicationCore.Entities
             this.DepDate = depDate;
             this.ArrDate = arrDate;
         }
-
 
         public string FlightDetailId { get; set; }
 
@@ -31,8 +31,6 @@ namespace ApplicationCore.Entities
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy HH:mm}")]
         public DateTime ArrDate { get; set; }
-
-
 
     }
 }
