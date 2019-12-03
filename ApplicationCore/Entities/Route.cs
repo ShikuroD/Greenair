@@ -21,13 +21,11 @@ namespace ApplicationCore.Entities
 
         public Route() { }
 
-        public Route(string RouteId, string Origin, Airport OrgAirport, string Destination, Airport DesAirport, FlightTime flightTime)
+        public Route(string RouteId, string Origin, string Destination, FlightTime flightTime)
         {
             this.RouteId = RouteId;
             this.Origin = Origin;
-            this.OrgAirport = OrgAirport;
             this.Destination = Destination;
-            this.DesAirport = DesAirport;
             this.FlightTime = flightTime;
         }
 
