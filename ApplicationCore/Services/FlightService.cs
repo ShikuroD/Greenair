@@ -213,6 +213,10 @@ namespace ApplicationCore.Services
                 det.FlightDetailId = String.Format("{0:000}", res.Count());
             }
         }
+        public DateTime calArrDate(DateTime depDate, FlightTime time)
+        {
+            return depDate.AddMinutes(time.toMinutes());
+        }
         public async Task addFlightDetailAsync(FlightDetailDTO det_dto)
         {
             var det = mapper.Map<FlightDetailDTO, FlightDetail>(det_dto);
