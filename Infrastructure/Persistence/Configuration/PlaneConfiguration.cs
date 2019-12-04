@@ -13,7 +13,8 @@ namespace Infrastructure.Persistence.Configuration
             builder.Property(s => s.MakerId).IsRequired();
             builder.HasOne<Maker>(s => s.Maker)
                 .WithMany(a => a.Planes)
-                .HasForeignKey(s => s.MakerId);
+                .HasForeignKey(s => s.MakerId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

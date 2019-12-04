@@ -1,4 +1,4 @@
-using System.Security.Cryptography.X509Certificates;
+//using System.Security.Cryptography.X509Certificates;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ApplicationCore.Entities;
@@ -12,7 +12,8 @@ namespace Infrastructure.Persistence.Configuration
             builder.HasKey(x => x.Id);
             builder.HasOne<Account>(x => x.Account)
                 .WithOne(y => y.Person)
-                .HasForeignKey<Account>(y => y.PersonId);
+                .HasForeignKey<Account>(y => y.PersonId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(s => s.Id).HasMaxLength(5);
             builder.Property(s => s.LastName).HasMaxLength(20).IsRequired();

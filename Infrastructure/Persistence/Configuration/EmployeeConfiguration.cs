@@ -15,7 +15,8 @@ namespace Infrastructure.Persistence.Configuration
 
             builder.HasOne<Job>(s => s.Job)
                 .WithMany(a => a.Employees)
-                .HasForeignKey(s => s.JobId);
+                .HasForeignKey(s => s.JobId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

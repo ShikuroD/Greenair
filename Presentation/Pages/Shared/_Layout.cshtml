@@ -119,7 +119,8 @@
     </footer>
     <!-- diaglog -->
 <div id="dialog" title="Log In">
-        <fieldset>
+    <form method="post">
+            <fieldset>
             <div class="input-group">
                 <span class="input-group-addon">
                     <i class="ion-ios-person"></i>
@@ -133,7 +134,12 @@
                 <input id="password" type="password" class="form-control" placeholder="Password" required /> 
             </div>
         </fieldset>
-		<button id="logIn">Login</button>
+        <div style="float:right">
+            <a style="cursor:pointer" id="open-register">Register</a>
+            <input type="submit" value="Login" class="btn" id="logIn">
+        </div>
+		
+    </form>   
 </div>
 <!-- register -->
 <div id="register" title="Register">

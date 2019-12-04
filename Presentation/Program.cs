@@ -30,44 +30,12 @@ namespace Presentation
                     var greenairContext = services.GetRequiredService<GreenairContext>();
 
                     IUnitOfWork unit = new UnitOfWork(greenairContext);
-
+                    //unit.Planes.RemoveRange(unit.Planes.GetAll());
                     //unit.Employees.RemoveRange(unit.Employees.GetAll());
                     //unit.Customers.RemoveRange(unit.Customers.GetAll());
 
-                    // var cus = unit.Customers.GetByAsync("00007").GetAwaiter().GetResult();
-                    // unit.Customers.activate(cus);
 
-                    // cus = unit.Customers.GetByAsync("00008").GetAwaiter().GetResult();
-                    // unit.Customers.disable(cus).GetAwaiter().GetResult();
-
-                    // if (cus == null) Console.WriteLine("NULL cus"); else Console.WriteLine(cus.FullName);
-
-                    // var cus = unit.Planes.GetByAsync(null).GetAwaiter().GetResult();
-                    // if (cus == null) Console.WriteLine("NULL cus"); else Console.WriteLine(cus.MakerId);
-
-
-                    // var cus2 = unit.Customers.getCustomerByName("Phung qUoc hai").GetAwaiter().GetResult();
-                    // if (cus2 == null) Console.WriteLine("NULL cus"); else Console.WriteLine("{0} {1}", cus2.ElementAt(0).Id, cus2.ElementAt(0).FullName);
-
-
-                    // var acc = unit.Accounts.GetByAsync("cus4").GetAwaiter().GetResult();
-                    // if (acc == null) Console.WriteLine("NULL acc"); else Console.WriteLine(acc.Username);
-
-                    // var acc2 = unit.Accounts.getAccountByPersonId("00006").GetAwaiter().GetResult();
-                    // if (acc2 == null) Console.WriteLine("NULL acc"); else Console.WriteLine(acc2.Username);
-                    // IAccountService _accountser = new AccountService(unit,);
-                    // IMapper _mapper = new Mapper(AutoMapper.Configuration.);
-                    // ICustomerService _service = new CustomerService(unit,);
-                    unit.Customers.disable("00008");
-                    // _service.disableCutomerAsync("00008");
-                    var aa = unit.Customers.GetAll();
-                    foreach (var item in aa)
-                    {
-                        Console.WriteLine(item.Id + " - " + item.FullName + " - " + item.Status);
-                    }
-                    var bb = unit.Customers.GetByAsync("00008").GetAwaiter().GetResult();
-
-                    Console.WriteLine(bb.Id + " - " + bb.Status);
+                    greenairContext.SaveChanges();
                     DataSeed.Initialize(greenairContext);
 
 

@@ -1,10 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using ApplicationCore.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Presentation.Helpers;
 
 namespace Presentation.Pages
@@ -27,6 +31,7 @@ namespace Presentation.Pages
         public string FlightType { get; set; }
         private readonly ILogger<AboutModel> _logger;
 
+        
         public AboutModel(ILogger<AboutModel> logger)
         {
             _logger = logger;
@@ -49,5 +54,6 @@ namespace Presentation.Pages
             SessionHelper.SetObjectAsJson(HttpContext.Session, "FlightSearch", FlightSearch);
             return RedirectToPage("Flight");
         }
+        
     }
 }

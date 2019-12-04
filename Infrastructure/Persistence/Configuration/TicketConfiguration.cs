@@ -15,12 +15,14 @@ namespace Infrastructure.Persistence.Configuration
             builder.Property(s => s.TicketTypeId).IsRequired();
             builder.HasOne<TicketType>(s => s.TicketType)
                 .WithMany(a => a.Tickets)
-                .HasForeignKey(s => s.TicketTypeId);
+                .HasForeignKey(s => s.TicketTypeId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             builder.Property(s => s.CustomerId).IsRequired();
             builder.HasOne<Customer>(s => s.Customer)
                 .WithMany(a => a.Tickets)
-                .HasForeignKey(s => s.CustomerId);
+                .HasForeignKey(s => s.CustomerId)
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

@@ -40,7 +40,12 @@ namespace Presentation.Pages
         public void OnGet()
         {
             Msg = "a";
-                var FlightSearch = SessionHelper.GetObjectFromJson<Dictionary<string,object>>(HttpContext.Session,"FlightSearch");
+            var FlightSearch = SessionHelper.GetObjectFromJson<Dictionary<string,object>>(HttpContext.Session,"FlightSearch");
+            if(FlightSearch == null)
+            {
+                RedirectToPage("Index");
+            }
+            else{
                 string type = FlightSearch["type"].ToString();
                 string vlDepDate = FlightSearch["depdate"].ToString();
                 DateTime depDate = DateTime.ParseExact(vlDepDate, "dd/MM/yyyy", null); 
@@ -51,52 +56,17 @@ namespace Presentation.Pages
                     arrDate = DateTime.ParseExact(vlArrDate, "dd/MM/yyyy", null);
                 }
 
-                string vlAdults = FlightSearch["adults"].ToString();
-                var adults = Convert.ToInt32(vlAdults);
-                string vlChilds = FlightSearch["childs"].ToString();
-                var childs = Convert.ToInt32(vlChilds);
-            //     ListFlights = await _flightService.searchFlightAsync(FlightSearch["from"].ToString(),FlightSearch["where"].ToString(),depDate,arrDate,adults,childs);
-            //     if(ListFlights.Count() == 0)
-            //     {
-            //         Msg = "No flights found!";
-            // }
-        }
-        public IActionResult OnPostLogIn()
-        {
-            string username = "";
-            string password = "";
-            {
-                MemoryStream stream = new MemoryStream();
-                Request.Body.CopyTo(stream);
-                stream.Position = 0;
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    string requestBody = reader.ReadToEnd();
-                    if (requestBody.Length > 0)
-                    {
-                        var obj = JsonConvert.DeserializeObject<Account>(requestBody);
-                        if (obj != null)
-                        {
-                            username = obj.Username;
-                            password = obj.Password;
-                            if (username.Equals("abc") && password.Equals("123"))
-                            {
-                                HttpContext.Session.SetString("username", username);
-                                Msg = "true";
-                            }
-                            else
-                            {
-                                Msg = "false";
-                            }
-                        }
-                    }
-                }
+                int Adults = Convert.ToInt32(FlightSearch["adults"]);
+                int Childs = Convert.ToInt32(FlightSearch["childs"]);
             }
-            Dictionary<string, string> lstString = new Dictionary<string, string>();
-            lstString.Add("username", username);
-            lstString.Add("msg", Msg);
-            return new JsonResult(lstString);
+            
+        //     ListFlights = await _flightService.searchFlightAsync(FlightSearch["from"].ToString(),FlightSearch["where"].ToString(),depDate,arrDate,adults,childs);
+        //     if(ListFlights.Count() == 0)
+        //     {
+        //         Msg = "No flights found!";
+        // }
         }
+        
     }
     // private class Account
     // {

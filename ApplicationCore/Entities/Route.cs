@@ -29,14 +29,5 @@ namespace ApplicationCore.Entities
             this.FlightTime = flightTime;
         }
 
-        public Route(Route rou)
-        {
-            this.RouteId = rou.RouteId;
-            this.Origin = rou.Origin;
-            this.OrgAirport = rou.OrgAirport;
-            this.Destination = rou.Destination;
-            this.DesAirport = rou.DesAirport;
-            this.FlightTime = rou.FlightTime;
-        }
     }
 }

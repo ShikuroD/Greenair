@@ -364,7 +364,7 @@ namespace Presentation.Migrations
                     b.HasOne("ApplicationCore.Entities.Route", "Route")
                         .WithMany("FlightDetails")
                         .HasForeignKey("RouteId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
                 });
 
@@ -498,7 +498,7 @@ namespace Presentation.Migrations
                     b.HasOne("ApplicationCore.Entities.Customer", "Customer")
                         .WithMany("Tickets")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
 
                     b.HasOne("ApplicationCore.Entities.Flight", "Flight")
@@ -510,7 +510,7 @@ namespace Presentation.Migrations
                     b.HasOne("ApplicationCore.Entities.TicketType", "TicketType")
                         .WithMany("Tickets")
                         .HasForeignKey("TicketTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
                 });
 
