@@ -64,6 +64,7 @@
 
   </div> 
   <!-- end content_warper -->
+  
 </div>
 <!-- end main body -->
 
@@ -76,8 +77,8 @@
                 <h4 class="modal-title" style="margin: 10px 0 10px 510px; color:#000; font-weight: bold;font-size:34">Detail Flight</h4>
             </div>
 		    <div class="model-body" style="margin: 15px">
-           <form class="form-sample">
-				   <p style="font-weight:600" class="card-description"> Flight info </p>
+          <form class="form-sample">
+				    <p style="font-weight:600" class="card-description"> Flight info </p>
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group row">
@@ -105,27 +106,8 @@
               </div>
             </div> 
             <p style="font-weight:600" class="card-description"> Flight detail </p>
-            @foreach (var item in Model.FlightDetail)
-            {
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Last Name</label>
-                    <div class="col-sm-9">
-                      <input id="DetailFlight-lastname" type="text" class="form-control" disabled/>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Password</label>
-                    <div class="col-sm-9">
-                      <input id="DetailFlight-password" type="password" class="form-control" disabled/>
-                    </div>
-                  </div>
-                </div>
-              </div>   
-            }
+            <div id="DetailFlight-context"></div>
+
             
           </form>
 		    </div>
