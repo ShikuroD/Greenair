@@ -18,6 +18,7 @@ namespace ApplicationCore.Services
 
         Task<bool> isExistedUsernameAsync(string username);
         Task<bool> loginCheckAsync(AccountDTO dto);
+        Task<Person> getPersonByAccount(string username);
 
         Task disableAccountAsync(string person_id);
         Task activateAccountAsync(string person_id);
