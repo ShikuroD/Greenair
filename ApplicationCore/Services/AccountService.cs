@@ -77,6 +77,11 @@ namespace ApplicationCore.Services
             if (res.Count() != 1) return false;
             return true;
         }
+        public async Task<Person> getPersonByAccount(string username)
+        {
+            var acc = await unitOfWork.Accounts.GetByAsync(username);
+            return await unitOfWork.Persons.GetByAsync(acc.PersonId);
+        }
 
         public async Task disableAccountAsync(string person_id)
         {
