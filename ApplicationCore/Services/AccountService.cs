@@ -64,7 +64,6 @@ namespace ApplicationCore.Services
             }
             await unitOfWork.CompleteAsync();
         }
-
         public async Task<bool> isExistedUsernameAsync(string username)
         {
             return await unitOfWork.Accounts.GetByAsync(username) != null;

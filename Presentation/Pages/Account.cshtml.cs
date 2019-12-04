@@ -56,6 +56,7 @@ namespace Presentation.Pages
                             AccountDTO account = new AccountDTO(username,password);
                             if(await _accountService.loginCheckAsync(account))
                             {
+                                HttpContext.Session.SetString("username",username);
                                 Msg = "true";
                             }
                             else{

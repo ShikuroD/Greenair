@@ -1,4 +1,5 @@
 ﻿<!DOCTYPE html>
+@using Microsoft.AspNetCore.Http
 @Html.AntiForgeryToken()
 <html lang="en">
 <head>
@@ -42,10 +43,20 @@
                         <li class="nav-item"><a asp-page="/blog" class="nav-link">Blog</a></li>
                         <li class="nav-item"><a asp-page="/contact" class="nav-link">Contact</a></li>   
                         <li class="nav-item">
-                            <a id="opener" style="cursor:pointer" class="nav-link">
-                                <span class="ion-ios-person"></span>
-                                Log in
-                            </a>
+                            @if(Context.Session.GetString("username") != null)
+                                {
+                                    <a id="user" style="cursor:pointer" class="nav-link">
+                                        <span class="ion-ios-person"></span>
+                                    </a>
+                                }
+                                else
+                                {
+                                        <a id="opener" style="cursor:pointer" class="nav-link">
+                                            <span class="ion-ios-person"></span>
+                                            Log in
+                                        </a>
+                                }
+                            
                         </li>
                     </ul>
                 </div>

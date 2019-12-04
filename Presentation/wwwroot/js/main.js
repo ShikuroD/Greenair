@@ -360,38 +360,36 @@
 	}
  	$("#logIn").on("click", function () {
 		event.preventDefault();
- 		var username = $("#username").val();
- 		var password = $("#password").val();
- 		$.ajax({
- 			type: "POST",
- 			url: "/Account?handler=LogIn",
- 			headers: {
- 				"XSRF-TOKEN": $('input:hidden[name="__RequestVerificationToken"]').val()
- 			},
- 			contentType: "application/json; charset=utf-8",
- 			dataType: "json",
+		var username = $("#username").val();
+		var password = $("#password").val();
+		$.ajax({
+			type: "POST",
+			url: "/Account?handler=LogIn",
+			headers: {
+				"XSRF-TOKEN": $('input:hidden[name="__RequestVerificationToken"]').val()
+			},
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
  			// data: JSON.stringify({UserName : username,PassWord: password}),
- 			data: JSON.stringify({
- 				Username: username,
- 				Password: password
- 			}),
- 			success: function (response) {
- 				if ($.trim(response.msg) == "true") {
- 					var a = $("#opener");
- 					a.html('<span class="ion-ios-person" style="margin-right:5px"></span>' + response.username + '');
- 					$("#dialog").dialog("close");
- 				} else {
- 					alert("Tài khoản hoặc mật khẩu bị sai!");
- 				}
- 			},
- 			failure: function (response) {
- 				alert(response);
- 			},
- 			error: function (xhr) {
- 				alert(xhr.status);
- 			}
- 		});
- 	});
+			data: JSON.stringify({
+				Username: username,
+				Password: password
+			}),
+			success: function (response) {
+				if ($.trim(response.msg) == "true") {
+					$("#dialog").dialog("close");
+				} else {
+					alert("Tài khoản hoặc mật khẩu bị sai!");
+				}
+			},
+			failure: function (response) {
+				alert(response);
+			},
+			error: function (xhr) {
+				alert(xhr.status);
+			}
+			});	
+		});
 	dialog = $("#dialog").dialog({
 		autoOpen: false,
 		height: 270,	
