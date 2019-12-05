@@ -37,7 +37,7 @@
                 <th>ID</th>
                 <th>Status</th>
                 <th>Plane ID</th>
-                <th></th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody> 
@@ -48,6 +48,7 @@
                   <td>@item.Status</td>
                   <td>@item.PlaneId</td>
                   <td> 
+                    <button  id="@item.FlightId" data-toggle="modal" data-target="#DetailFlightForm"  type="button" class="btn btn-info btn-sm  btn-rounded DetailFlight"><i class="fa fa-vcard-o"></i></button>
                     <button  id="@item.FlightId" data-toggle="modal" data-target="#EditFlightForm"  type="button" class="btn btn-dark btn-sm  btn-rounded EditFlight"><i class="fa fa-cog"></i></button>
                     <button  id="@item.FlightId" type="button" class="btn btn-danger btn-sm  btn-rounded DeleteFlight"><i class="fa fa-times" ></i></button>
                   </td>
@@ -55,8 +56,6 @@
               }
               </tbody>
             </table>
-            
-            
           </div>
         </div>
       </div>
@@ -65,5 +64,58 @@
 
   </div> 
   <!-- end content_warper -->
+  
 </div>
 <!-- end main body -->
+
+
+<!--detail flight form  -->
+<div class="modal fade" id="DetailFlightForm" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content" >
+            <div class="modal-header" style=" background-color:aliceblue;">
+                <h4 class="modal-title" style="margin: 10px 0 10px 510px; color:#000; font-weight: bold;font-size:34">Detail Flight</h4>
+            </div>
+		    <div class="model-body" style="margin: 15px">
+          <form class="form-sample">
+				    <p style="font-weight:600" class="card-description"> Flight info </p>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Flight ID</label>
+                  <div class="col-sm-9">
+                    <span id="DetailFlight-flightid"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Plane ID</label>
+                  <div class="col-sm-9">
+                    <span id="DetailFlight-planeid"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Status</label>
+                  <div class="col-sm-9">
+                    <span id="DetailFlight-status"></span>
+                  </div>
+                </div>
+              </div>
+            </div> 
+            <p style="font-weight:600" class="card-description"> Flight detail </p>
+            <div id="DetailFlight-context"></div>
+
+            
+          </form>
+		    </div>
+        <div class="model-footer" style="margin: 15px">
+          <div class="row" style=" display: flex; justify-content: flex-end;">
+              <button class="btn btn-light" data-dismiss="modal"><b>Back to list</b></button>
+            </div>
+        </div>
+      </div>    
+    </div>
+</div>

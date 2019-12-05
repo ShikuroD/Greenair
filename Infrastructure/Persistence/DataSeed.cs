@@ -119,12 +119,12 @@ namespace Infrastructure.Persistence
             if (!context.Flights.Any())
             {
                 context.Flights.AddRange(
-                    new Flight("00000", STATUS.AVAILABLE, "00000"),
-                    new Flight("00001", STATUS.AVAILABLE, "00001"),
-                    new Flight("00002", STATUS.AVAILABLE, "00003"),
-                    new Flight("00003", STATUS.AVAILABLE, "00004"),
-                    new Flight("00004", STATUS.AVAILABLE, "00002"),
-                    new Flight("00005", STATUS.AVAILABLE, "00000")
+                    new Flight("00000", "00000", STATUS.AVAILABLE),
+                    new Flight("00001", "00001", STATUS.AVAILABLE),
+                    new Flight("00002", "00003", STATUS.AVAILABLE),
+                    new Flight("00003", "00004", STATUS.AVAILABLE),
+                    new Flight("00004", "00002", STATUS.AVAILABLE),
+                    new Flight("00005", "00000", STATUS.AVAILABLE)
                 );
                 context.SaveChanges();
             }
@@ -133,8 +133,8 @@ namespace Infrastructure.Persistence
             {
                 context.FlightDetails.AddRange(
                     new FlightDetail("00000", "00000", "00000", new DateTime(2019, 12, 1, 10, 0, 0), new DateTime(2019, 12, 1, 11, 45, 0)),
-                    new FlightDetail("00001", "00001", "00001", new DateTime(2019, 12, 1, 12, 0, 0), new DateTime(2019, 12, 1, 14, 45, 0)),
-                    new FlightDetail("00002", "00002", "00000", new DateTime(2019, 12, 2, 12, 0, 0), new DateTime(2019, 12, 2, 14, 45, 0)),
+                    new FlightDetail("00001", "00001", "00001", new DateTime(2019, 12, 1, 12, 0, 0), new DateTime(2019, 12, 1, 13, 45, 0)),
+                    new FlightDetail("00002", "00002", "00000", new DateTime(2019, 12, 2, 12, 0, 0), new DateTime(2019, 12, 2, 13, 45, 0)),
                     new FlightDetail("00003", "00002", "00002", new DateTime(2019, 12, 2, 15, 0, 0), new DateTime(2019, 12, 2, 19, 30, 0)),
                     new FlightDetail("00004", "00003", "00006", new DateTime(2019, 12, 3, 6, 0, 0), new DateTime(2019, 12, 3, 16, 30, 0))
                 );

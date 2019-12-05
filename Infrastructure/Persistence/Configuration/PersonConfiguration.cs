@@ -23,18 +23,15 @@ namespace Infrastructure.Persistence.Configuration
 
 
             //----------------------------------------------------------------------------------
-            builder.OwnsOne(x => x.Address)
-                .Property(x => x.Num).HasColumnName("AddressNum");
-            builder.OwnsOne(x => x.Address)
-                .Property(x => x.Street).HasColumnName("Street");
-            builder.OwnsOne(x => x.Address)
-                .Property(x => x.District).HasColumnName("District");
-            builder.OwnsOne(x => x.Address)
-                .Property(x => x.City).HasColumnName("City");
-            builder.OwnsOne(x => x.Address)
-                .Property(x => x.State).HasColumnName("State");
-            builder.OwnsOne(x => x.Address)
-                .Property(x => x.Country).HasColumnName("Country");
+            builder.OwnsOne(x => x.Address, a =>
+            {
+                a.Property(x => x.Num).HasColumnName("AddressNum");
+                a.Property(x => x.Street).HasColumnName("Street");
+                a.Property(x => x.District).HasColumnName("District");
+                a.Property(x => x.City).HasColumnName("City");
+                a.Property(x => x.State).HasColumnName("State");
+                a.Property(x => x.Country).HasColumnName("Country");
+            });
         }
     }
 }

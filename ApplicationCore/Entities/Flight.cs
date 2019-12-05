@@ -20,7 +20,7 @@ namespace ApplicationCore.Entities
         public IList<Ticket> Tickets { get; set; }
 
         public Flight() { }
-        public Flight(string FlightId, STATUS Status, string PlaneId)
+        public Flight(string FlightId, string PlaneId, STATUS Status)
         {
             this.FlightId = FlightId;
             this.Status = Status;
