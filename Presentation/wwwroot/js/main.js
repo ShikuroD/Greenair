@@ -223,90 +223,90 @@
  	}
  	counter();
 
- 	var contentWayPoint = function () {
- 		var i = 0;
- 		$('.ftco-animate').waypoint(function (direction) {
+var contentWayPoint = function () {
+var i = 0;
+$('.ftco-animate').waypoint(function (direction) {
 
- 			if (direction === 'down' && !$(this.element).hasClass('ftco-animated')) {
+	if (direction === 'down' && !$(this.element).hasClass('ftco-animated')) {
 
- 				i++;
+		i++;
 
- 				$(this.element).addClass('item-animate');
- 				setTimeout(function () {
+		$(this.element).addClass('item-animate');
+		setTimeout(function () {
 
- 					$('body .ftco-animate.item-animate').each(function (k) {
- 						var el = $(this);
- 						setTimeout(function () {
- 							var effect = el.data('animate-effect');
- 							if (effect === 'fadeIn') {
- 								el.addClass('fadeIn ftco-animated');
- 							} else if (effect === 'fadeInLeft') {
- 								el.addClass('fadeInLeft ftco-animated');
- 							} else if (effect === 'fadeInRight') {
- 								el.addClass('fadeInRight ftco-animated');
- 							} else {
- 								el.addClass('fadeInUp ftco-animated');
- 							}
- 							el.removeClass('item-animate');
- 						}, k * 50, 'easeInOutExpo');
- 					});
+			$('body .ftco-animate.item-animate').each(function (k) {
+				var el = $(this);
+				setTimeout(function () {
+					var effect = el.data('animate-effect');
+					if (effect === 'fadeIn') {
+						el.addClass('fadeIn ftco-animated');
+					} else if (effect === 'fadeInLeft') {
+						el.addClass('fadeInLeft ftco-animated');
+					} else if (effect === 'fadeInRight') {
+						el.addClass('fadeInRight ftco-animated');
+					} else {
+						el.addClass('fadeInUp ftco-animated');
+					}
+					el.removeClass('item-animate');
+				}, k * 50, 'easeInOutExpo');
+			});
 
- 				}, 100);
+		}, 100);
 
- 			}
+	}
 
- 		}, {
- 			offset: '95%'
- 		});
- 	};
- 	contentWayPoint();
+}, {
+	offset: '95%'
+});
+};
+contentWayPoint();
 
 
  	// navigation
- 	var OnePageNav = function () {
- 		$(".smoothscroll[href^='#'], #ftco-nav ul li a[href^='#']").on('click', function (e) {
- 			e.preventDefault();
+	var OnePageNav = function () {
+		$(".smoothscroll[href^='#'], #ftco-nav ul li a[href^='#']").on('click', function (e) {
+			e.preventDefault();
 
- 			var hash = this.hash,
- 				navToggler = $('.navbar-toggler');
- 			$('html, body').animate({
- 				scrollTop: $(hash).offset().top
- 			}, 700, 'easeInOutExpo', function () {
- 				window.location.hash = hash;
- 			});
+			var hash = this.hash,
+				navToggler = $('.navbar-toggler');
+			$('html, body').animate({
+				scrollTop: $(hash).offset().top
+			}, 700, 'easeInOutExpo', function () {
+				window.location.hash = hash;
+			});
 
 
- 			if (navToggler.is(':visible')) {
- 				navToggler.click();
- 			}
- 		});
- 		$('body').on('activate.bs.scrollspy', function () {
- 			console.log('nice');
- 		})
- 	};
- 	OnePageNav();
+			if (navToggler.is(':visible')) {
+				navToggler.click();
+			}
+		});
+		$('body').on('activate.bs.scrollspy', function () {
+			console.log('nice');
+		})
+	};
+	OnePageNav();
 
 
  	// magnific popup
- 	$('.image-popup').magnificPopup({
- 		type: 'image',
- 		closeOnContentClick: true,
- 		closeBtnInside: false,
- 		fixedContentPos: true,
- 		mainClass: 'mfp-no-margins mfp-with-zoom', // class to remove default margin from left and right side
- 		gallery: {
- 			enabled: true,
- 			navigateByImgClick: true,
- 			preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
- 		},
- 		image: {
- 			verticalFit: true
- 		},
- 		zoom: {
- 			enabled: true,
- 			duration: 300 // don't foget to change the duration also in CSS
- 		}
- 	});
+		$('.image-popup').magnificPopup({
+			type: 'image',
+			closeOnContentClick: true,
+			closeBtnInside: false,
+			fixedContentPos: true,
+			mainClass: 'mfp-no-margins mfp-with-zoom', // class to remove default margin from left and right side
+			gallery: {
+				enabled: true,
+				navigateByImgClick: true,
+				preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
+			},
+			image: {
+				verticalFit: true
+			},
+			zoom: {
+				enabled: true,
+				duration: 300 // don't foget to change the duration also in CSS
+			}
+		});
 
 	$('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
 		disableOn: 700,
@@ -337,61 +337,27 @@
 	//end of datepicker
 
 	//dialog,form
- 	var dialog, form;
- 	$("#register").dialog({
- 		autoOpen: false,
- 		height: 600,
- 		width: 500,
- 		modal: true,
- 		closeOnEscape: true,
- 		buttons: {
- 			"Create an account": addUser,
- 			Cancel: function () {
- 				$(this).dialog("close");
- 			}
- 		},
- 		close: function () {
- 			$(this).dialog("close");
- 		}
-	 });
-	 function addUser() {
+		var dialog, form;
+		$("#register").dialog({
+		autoOpen: false,
+		height: 600,
+		width: 500,
+		modal: true,
+		closeOnEscape: true,
+		buttons: {
+			"Create an account": addUser,
+			Cancel: function () {
+				$(this).dialog("close");
+			}
+		},
+		close: function () {
+			$(this).dialog("close");
+		}
+		});
+		function addUser() {
 		$("#register").dialog("close");
 		alert("Succesful");
 	}
- 	$("#logIn").on("click", function () {
-		event.preventDefault();
- 		var username = $("#username").val();
- 		var password = $("#password").val();
- 		$.ajax({
- 			type: "POST",
- 			url: "/Account?handler=LogIn",
- 			headers: {
- 				"XSRF-TOKEN": $('input:hidden[name="__RequestVerificationToken"]').val()
- 			},
- 			contentType: "application/json; charset=utf-8",
- 			dataType: "json",
- 			// data: JSON.stringify({UserName : username,PassWord: password}),
- 			data: JSON.stringify({
- 				Username: username,
- 				Password: password
- 			}),
- 			success: function (response) {
- 				if ($.trim(response.msg) == "true") {
- 					var a = $("#opener");
- 					a.html('<span class="ion-ios-person" style="margin-right:5px"></span>' + response.username + '');
- 					$("#dialog").dialog("close");
- 				} else {
- 					alert("Tài khoản hoặc mật khẩu bị sai!");
- 				}
- 			},
- 			failure: function (response) {
- 				alert(response);
- 			},
- 			error: function (xhr) {
- 				alert(xhr.status);
- 			}
- 		});
- 	});
 	dialog = $("#dialog").dialog({
 		autoOpen: false,
 		height: 270,	
@@ -427,28 +393,31 @@
 		$(".fare__details").css("display", "none");
 	})
 	//end of dialog
- 	$(window).resize(function () {
- 		$("#dialog").dialog("option", "position", {
- 			my: "center",
- 			at: "center",
- 			of: window
- 		});
- 		$("#register").dialog("option", "position", {
- 			my: "center",
- 			at: "center",
- 			of: window
- 		});
- 	});
- 	
-
+	$(window).resize(function () {
+		$("#dialog").dialog("option", "position", {
+			my: "center",
+			at: "center",
+			of: window
+		});
+		$("#register").dialog("option", "position", {
+			my: "center",
+			at: "center",
+			of: window
+		});
+		});
+		
  	//Autocomplete
- 	$("#From").autocomplete({
- 		source: '/Index?handler=AirPort',
- 	});
- 	$("#Where").autocomplete({
+	$("#From").autocomplete({
+		source: '/Index?handler=AirPort',
+	});
+	$("#Where").autocomplete({
 		source: '/Index?handler=AirPort'
 	})
 	// End autocomplete
+	//click everything
+	$("#profile").on("click",function(){
+		location.replace("/Account");
+	})
 	//Open close class
 	$(".open-user").on("click",function(){
 		$(".user-show").addClass("hidden");
