@@ -119,12 +119,12 @@ namespace Infrastructure.Persistence
             if (!context.Flights.Any())
             {
                 context.Flights.AddRange(
-                    new Flight("00000", "00000", STATUS.AVAILABLE),
-                    new Flight("00001", "00001", STATUS.AVAILABLE),
-                    new Flight("00002", "00003", STATUS.AVAILABLE),
-                    new Flight("00003", "00004", STATUS.AVAILABLE),
-                    new Flight("00004", "00002", STATUS.AVAILABLE),
-                    new Flight("00005", "00000", STATUS.AVAILABLE)
+                    new Flight("00000", STATUS.AVAILABLE,"00000" ),
+                    new Flight("00001", STATUS.AVAILABLE ,"00001"),
+                    new Flight("00002", STATUS.AVAILABLE, "00003"),
+                    new Flight("00003", STATUS.AVAILABLE, "00004"),
+                    new Flight("00004", STATUS.AVAILABLE, "00002"),
+                    new Flight("00005", STATUS.AVAILABLE, "00000")
                 );
                 context.SaveChanges();
             }
