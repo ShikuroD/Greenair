@@ -19,6 +19,21 @@ namespace ApplicationCore.Services
         {
             return this.toDto(await unitOfWork.Airports.GetByAsync(airport_id));
         }
+        public async Task<IEnumerable<Object>> searchAirport(string term)
+        {
+            var airports = await this.getAllAirportAsync();
+            var res = airports.Where(t =>
+                                t.AirportName.ToLower().StartsWith(term.ToLower())).Select(t => new{Name = t.AirportName,Id = t.AirportId} 
+                                ).ToList();
+            return res;
+        }
+        public async Task<IEnumerable<Object>> getAirportName()
+        {
+            var airports = await this.getAllAirportAsync();
+            var res = airports.Select(t => new{Name = t.AirportName,Id = t.AirportId} 
+                                ).ToList();
+            return res;
+        }
         public async Task<IEnumerable<AirportDTO>> getAllAirportAsync()
         {
             return this.toDtoRange(await unitOfWork.Airports.GetAllAsync());

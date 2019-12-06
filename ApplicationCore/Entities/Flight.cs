@@ -23,8 +23,8 @@ namespace ApplicationCore.Entities
         public Flight(string FlightId, string PlaneId, STATUS Status)
         {
             this.FlightId = FlightId;
-            this.Status = Status;
             this.PlaneId = PlaneId;
+            this.Status = Status;
         }
     }
 }

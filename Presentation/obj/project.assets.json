@@ -8546,19 +8546,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\Greenair\\Presentation\\Presentation.csproj",
       "projectName": "Presentation",
       "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\Presentation\\Presentation.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\Presentation\\obj\\",
-=======
-      "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\Greenair\\presentation\\Presentation.csproj",
-      "projectName": "Presentation",
-      "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\presentation\\Presentation.csproj",
-      "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\presentation\\obj\\",
->>>>>>> a18b9cc680330c368c63190ae1eaed9d545e8c7d
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

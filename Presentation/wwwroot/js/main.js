@@ -408,7 +408,37 @@ contentWayPoint();
 		
  	//Autocomplete
 	$("#From").autocomplete({
-		source: '/Index?handler=AirPort',
+		source: function(request,response){
+			$.ajax({
+				url: '/Index?handler=AirPort',
+				datatype: "json",
+
+				data:{term: request.term},
+				contentType: "application/json; charset=utf-8",
+				success: function(data){
+					response($.map(data,function(item){
+						return {
+							label: item.name,
+							value: item.name,
+							CategoryId: item.id
+						}
+					}))
+				},
+				error: function(response){
+					alert("Cant found");
+				}
+			});
+		},
+		minLength: 1,
+		select: function(e,i)
+		{
+			$("#AirportId").val(i.item.CategoryId);
+			//bind airport dropdown
+			
+		},
+		
+	}).focus(function(){
+		$(this).autocomplete("search");
 	});
 	$("#Where").autocomplete({
 		source: '/Index?handler=AirPort'
