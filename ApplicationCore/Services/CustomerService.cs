@@ -11,10 +11,9 @@ namespace ApplicationCore.Services
 {
     public class CustomerService : Service<Customer, CustomerDTO, CustomerDTO>, ICustomerService
     {
-        protected readonly IAccountService accountService;
-        public CustomerService(IUnitOfWork _unitOfWork, IMapper _mapper, IAccountService _account) : base(_unitOfWork, _mapper)
+
+        public CustomerService(IUnitOfWork _unitOfWork, IMapper _mapper) : base(_unitOfWork, _mapper)
         {
-            accountService = _account;
         }
         //query
         public async Task<CustomerDTO> getCustomerAsync(string cus_id)
@@ -139,14 +138,6 @@ namespace ApplicationCore.Services
             await unitOfWork.CompleteAsync();
         }
 
-        public async Task createAccountAsync(AccountDTO acc_dto)
-        {
-            await accountService.addAccountAsync(acc_dto);
-        }
-        public async Task updateAccountAsync(AccountDTO acc_dto)
-        {
-            await accountService.updateAccountAsync(acc_dto);
-        }
 
         public async Task disableCutomerAsync(string cus_id)
         {

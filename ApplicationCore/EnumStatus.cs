@@ -5,6 +5,7 @@ namespace ApplicationCore
         AVAILABLE,
         DISABLED,
         ORDERED,
-        PAID
+        PAID,
+        DEPARTED
     }
 }
