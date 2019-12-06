@@ -14379,6 +14379,14 @@
       "FileKind": "mvc"
     },
     {
+<<<<<<< HEAD
+=======
+      "FilePath": "c:\\Users\\Administrator\\Desktop\\Greenair\\Presentation\\Pages\\Admin\\Account.cshtml",
+      "TargetPath": "Pages\\Admin\\Account.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+>>>>>>> 6d4ff30bed07935ca7dd387e3df339a2d635ee0b
       "FilePath": "c:\\Users\\Administrator\\Desktop\\Greenair\\Presentation\\Pages\\Shared\\_Layout.cshtml",
       "TargetPath": "Pages\\Shared\\_Layout.cshtml",
       "FileKind": "mvc"

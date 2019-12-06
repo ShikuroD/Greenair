@@ -18,26 +18,34 @@ namespace Presentation.Pages.Admin
     {
         private readonly IUnitOfWork _unitofwork;
         private readonly IFlightService _services;
+        private readonly IPlaneService _servicesPlane;
 
-        public FlightModel(IFlightService services, IUnitOfWork unitofwork)
+        public FlightModel(IFlightService services, IUnitOfWork unitofwork,IPlaneService servicesPlane)
         {
             _unitofwork = unitofwork;
             _services = services;
+            _servicesPlane=servicesPlane;
         }
 
         [BindProperty(SupportsGet = true)]
         public string SearchString { get; set; }
 
         public IEnumerable<FlightDTO> ListFlights { get; set; }
-        public IEnumerable<Plane> ListPlanes { get; set; }
+        public IList<string> ListNamePlanes { get; set; }
         public IEnumerable<Route> ListRoutes { get; set; }
         public IEnumerable<Airport> ListAirports { get; set; }
         public IEnumerable<FlightDetail> ListFlightDetail { get; set; }
         public IList<FlightDetailVM> ListFlightDetailVM { get; set; }
         public async Task OnGet()
-        {
+        {   
+            ListNamePlanes =new List<string>();
             ListFlights = await _services.getAllFlightAsync();
-            ListPlanes = await _unitofwork.Planes.GetAllAsync();
+            var ListPlanes = await _servicesPlane.getAllPlaneAsync();
+            foreach( var item in ListPlanes){
+                var s=await _servicesPlane.getPlaneFullname(item.PlaneId);
+                ListNamePlanes.Add(s);
+            }
+
             ListRoutes = await _unitofwork.Routes.GetAllAsync();
             ListAirports = await _unitofwork.Airports.GetAllAsync();
         }

@@ -23,9 +23,6 @@ namespace ApplicationCore.Services
         Task removeCustomerAsync(string cus_id);
         Task updateCustomerAsync(CustomerDTO dto);
 
-        Task createAccountAsync(AccountDTO acc_dto);
-        Task updateAccountAsync(AccountDTO acc_dto);
-
         Task disableCutomerAsync(string cus_id);
         Task activateCustomerAsync(string cus_id);
     }

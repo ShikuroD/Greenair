@@ -119,3 +119,71 @@
       </div>    
     </div>
 </div>
+
+<!--edit flight form  -->
+<div class="modal fade" id="EditFlightForm" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content" >
+            <div class="modal-header" style=" background-color:aliceblue;">
+                <h4 class="modal-title" style="margin: 10px 0 10px 510px; color:#000; font-weight: bold;font-size:34">Edit Flight</h4>
+            </div>
+		    <div class="model-body" style="margin: 15px">
+          <form class="form-sample">
+            <input id="EditFlight-flightid" type="text" class="form-control" hidden/>
+				    <p style="font-weight:600" class="card-description"> Flight info </p>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Plane ID</label>
+                  <div class="col-sm-9">
+                    <select class="form-control form-control-lg" id="EditFlight-planeid">
+                      @foreach (var item in Model.ListNamePlanes){
+                        <option>@item</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Status</label>
+                  <div class="col-sm-9">
+                    <select class="form-control form-control-lg" id="EditFlight-status">
+                      <option>AVAILABLE</option>
+                      <option>DISABLED</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div> 
+            <p style="font-weight:600" class="card-description"> Flight Detail </p>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Plane ID</label>
+                  <div class="col-sm-9">
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Status</label>
+                  <div class="col-sm-9">
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            
+          </form>
+		    </div>
+        <div class="model-footer" style="margin: 15px">
+          <div class="row" style=" display: flex; justify-content: flex-end;">
+              <button class="btn btn-light" data-dismiss="modal"><b>Back to list</b></button>
+            </div>
+        </div>
+      </div>    
+    </div>
+</div>

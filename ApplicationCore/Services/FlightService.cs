@@ -50,8 +50,7 @@ namespace ApplicationCore.Services
             return num <= tickets.Count();
         }
 
-        public async Task<IEnumerable<FlightDTO>> searchFlightAsync(string origin_id, string destination_id, DateTime dep_date,
-                     int adults_num, int childs_num)
+        public async Task<IEnumerable<FlightDTO>> searchFlightAsync(string origin_id, string destination_id, DateTime dep_date, int adults_num, int childs_num)
         {
             //Expression<Func<Flight, bool>> predicate = m => true;
             //var predicate = PredicateBuilder.New<Flight>();
