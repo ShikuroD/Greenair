@@ -15,6 +15,7 @@ namespace Presentation.Pages.Admin
     public class AccountModel : PageModel
     {
         private readonly ILogger<AccountModel> _logger;
+        public string Msg { get; set; }
 
         public AccountModel(ILogger<AccountModel> logger)
         {
@@ -29,19 +30,28 @@ namespace Presentation.Pages.Admin
         {
             string check = "";
             string name = "";
+            string job = "";
             if(HttpContext.Session.GetString("username") == null)
             {
                 check = "null";
             }
             else
             {
-                name = HttpContext.Session.GetString("username");
+                name = HttpContext.Session.GetString("name");
+                job = HttpContext.Session.GetString("job");
                 check = "not";
             }
             Dictionary<string,string> Results = new Dictionary<string,string>();
             Results.Add("name",name);
             Results.Add("check",check);
+            Results.Add("job",job);
             return new JsonResult(Results);
+        }
+        public IActionResult OnPostLogout()
+        {
+            Msg = "";
+            HttpContext.Session.Remove("username");
+            return new JsonResult(Msg);
         }
     }
 }

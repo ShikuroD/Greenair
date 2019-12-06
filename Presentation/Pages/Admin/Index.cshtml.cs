@@ -51,7 +51,7 @@ namespace Presentation.Pages.Admin
                 if (a.GetType().IsInstanceOfType(new Employee()))
                 {
                     var b = await _EmployeeService.Employees.GetByAsync(a.Id);
-                    HttpContext.Session.SetString("name", b.LastName);
+                    HttpContext.Session.SetString("name", b.FirstName);
                     HttpContext.Session.SetString("job", b.JobId);
                     Msg = "ok";
                     return RedirectToPage("Dashboard");

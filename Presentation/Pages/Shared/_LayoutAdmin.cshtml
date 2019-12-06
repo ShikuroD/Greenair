@@ -47,7 +47,10 @@
             <li class="nav-item dropdown d-none d-xl-inline-block user-dropdown">
               <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                 <!-- <img class="img-xs rounded-circle" src="../assets/images/faces/face8.jpg" alt="Profile image">  -->
-                <div id="personName"></div>
+                <div >
+                  <span id="personName"></span>
+
+                </div>
               </a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                 <div class="dropdown-header text-center">
@@ -158,27 +161,12 @@
     <script src="../assets/js/demo_1/Employee.js"></script>
     <script src="../assets/js/demo_1/Flight.js"></script>
     <script src="../assets/js/demo_1/Layout.js"></script>
+    <script src="../assets/js/shared/jquery.min.js"></script>
     <script src="../assets/js/shared/jquery-ui.js"></script>
     <script>
       (function ($) {
-        loadUser();
-        function loadUser()
-        {
-          $.ajax({
-            type: 'GET',
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            url: '/Admin/Account?handler=User',
-            success: function(response)
-            {
-              if($.trim(response.check) == "not")
-              {
-                $("#userId").text(response.name);
-              }
-            }
-          })
-        }
-		  });
+        
+		  })(jQuery);
     </script>
     @RenderSection("Scripts", required: false)
 </body>
