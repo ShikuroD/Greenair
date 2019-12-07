@@ -31,7 +31,7 @@ namespace ApplicationCore.Services
 
         public async Task<AccountDTO> getAccountAsync(string username)
         {
-            var acc = await unitOfWork.Accounts.getAccountByPersonId(username);
+            var acc = await unitOfWork.Accounts.GetByAsync(username);
             if (acc == null) return null;
             return this.toDto(acc);
         }
