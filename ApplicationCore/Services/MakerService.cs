@@ -11,10 +11,10 @@ namespace ApplicationCore.Services
 {
     public class MakerService : Service<Maker, MakerDTO, MakerDTO>, IMakerService
     {
-        public IEnumerable<Maker> List { get; set; }
+        // public IEnumerable<Maker> List { get; set; }
         public MakerService(IUnitOfWork _unitOfWork, IMapper _mapper) : base(_unitOfWork, _mapper)
         {
-            List = unitOfWork.Makers.GetAllAsync().GetAwaiter().GetResult();
+            // List = unitOfWork.Makers.GetAllAsync().GetAwaiter().GetResult();
         }
         //query
         public async Task<MakerDTO> getMakerAsync(string Maker_id)

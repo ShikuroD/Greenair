@@ -10,10 +10,10 @@ namespace ApplicationCore.Services
 {
     public class AirportService : Service<Airport, AirportDTO, AirportDTO>, IAirportService
     {
-        public IEnumerable<Airport> List { get; set; }
+        //public IEnumerable<Airport> List { get; set; }
         public AirportService(IUnitOfWork _unitOfWork, IMapper _mapper) : base(_unitOfWork, _mapper)
         {
-            List = unitOfWork.Airports.GetAllAsync().GetAwaiter().GetResult();
+            // List = unitOfWork.Airports.GetAllAsync().GetAwaiter().GetResult();
         }
         //query
         public async Task<AirportDTO> getAirportAsync(string airport_id)

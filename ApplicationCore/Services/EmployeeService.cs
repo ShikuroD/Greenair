@@ -11,10 +11,10 @@ namespace ApplicationCore.Services
 {
     public class EmployeeService : Service<Employee, EmployeeDTO, EmployeeDTO>, IEmployeeService
     {
-        public IEnumerable<Employee> List { get; set; }
+        // public IEnumerable<Employee> List { get; set; }
         public EmployeeService(IUnitOfWork _unitOfWork, IMapper _mapper) : base(_unitOfWork, _mapper)
         {
-            List = unitOfWork.Employees.GetAllAsync().GetAwaiter().GetResult();
+            // List = unitOfWork.Employees.GetAllAsync().GetAwaiter().GetResult();
         }
         //query
         public async Task<EmployeeDTO> getEmployeeAsync(string emp_id)
@@ -38,7 +38,10 @@ namespace ApplicationCore.Services
         {
             return this.toDtoRange(await unitOfWork.Employees.getEmployeeByName(fullname));
         }
-
+        public async Task<IEnumerable<EmployeeDTO>> getEmployeeByJobAsync(string job_id)
+        {
+            return this.toDtoRange(await unitOfWork.Employees.getEmployeeByJob(job_id));
+        }
 
 
 

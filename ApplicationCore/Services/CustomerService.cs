@@ -12,10 +12,10 @@ namespace ApplicationCore.Services
     public class CustomerService : Service<Customer, CustomerDTO, CustomerDTO>, ICustomerService
     {
 
-        public IEnumerable<Customer> List { get; set; }
+        // public IEnumerable<Customer> List { get; set; }
         public CustomerService(IUnitOfWork _unitOfWork, IMapper _mapper) : base(_unitOfWork, _mapper)
         {
-            List = unitOfWork.Customers.GetAllAsync().GetAwaiter().GetResult();
+            // List = unitOfWork.Customers.GetAllAsync().GetAwaiter().GetResult();
         }
         //query
         public async Task<CustomerDTO> getCustomerAsync(string cus_id)

@@ -10,10 +10,10 @@ namespace ApplicationCore.Services
 {
     public class RouteService : Service<Route, RouteDTO, RouteDTO>, IRouteService
     {
-        public IEnumerable<Route> List { get; set; }
+        // public IEnumerable<Route> List { get; set; }
         public RouteService(IUnitOfWork _unitOfWork, IMapper _mapper) : base(_unitOfWork, _mapper)
         {
-            List = unitOfWork.Routes.GetAllAsync().GetAwaiter().GetResult();
+            // List = unitOfWork.Routes.GetAllAsync().GetAwaiter().GetResult();
         }
         //query
         public async Task<RouteDTO> getRouteAsync(string route_id)

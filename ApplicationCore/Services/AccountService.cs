@@ -11,10 +11,10 @@ namespace ApplicationCore.Services
 {
     public class AccountService : Service<Account, AccountDTO, AccountDTO>, IAccountService
     {
-        public IEnumerable<Account> List { get; set; }
+        //public IEnumerable<Account> List { get; set; }
         public AccountService(IUnitOfWork _unitOfWork, IMapper _mapper) : base(_unitOfWork, _mapper)
         {
-            List = unitOfWork.Accounts.GetAllAsync().GetAwaiter().GetResult();
+            //List = unitOfWork.Accounts.GetAllAsync().GetAwaiter().GetResult();
         }
 
         //query

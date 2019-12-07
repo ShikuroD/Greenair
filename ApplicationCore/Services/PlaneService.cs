@@ -11,10 +11,10 @@ namespace ApplicationCore.Services
 {
     public class PlaneService : Service<Plane, PlaneDTO, PlaneDTO>, IPlaneService
     {
-        public IEnumerable<Plane> List { get; set; }
+        // public IEnumerable<Plane> List { get; set; }
         public PlaneService(IUnitOfWork _unitOfWork, IMapper _mapper) : base(_unitOfWork, _mapper)
         {
-            List = unitOfWork.Planes.GetAllAsync().GetAwaiter().GetResult();
+            // List = unitOfWork.Planes.GetAllAsync().GetAwaiter().GetResult();
         }
         //query
         public async Task<PlaneDTO> getPlaneAsync(string plane_id)

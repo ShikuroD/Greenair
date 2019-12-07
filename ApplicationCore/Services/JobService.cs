@@ -10,10 +10,10 @@ namespace ApplicationCore.Services
 {
     public class JobService : Service<Job, JobDTO, JobDTO>, IJobService
     {
-        public IEnumerable<Job> List { get; set; }
+        // public IEnumerable<Job> List { get; set; }
         public JobService(IUnitOfWork _unitOfWork, IMapper _mapper) : base(_unitOfWork, _mapper)
         {
-            List = unitOfWork.Jobs.GetAllAsync().GetAwaiter().GetResult();
+            // List = unitOfWork.Jobs.GetAllAsync().GetAwaiter().GetResult();
         }
         //query
         public async Task<JobDTO> getJobAsync(string job_id)

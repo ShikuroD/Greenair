@@ -14,10 +14,10 @@ namespace ApplicationCore.Services
 {
     public class FlightService : Service<Flight, FlightDTO, FlightDTO>, IFlightService
     {
-        public IEnumerable<Flight> List { get; set; }
+        // public IEnumerable<Flight> List { get; set; }
         public FlightService(IUnitOfWork _unitOfWork, IMapper _mapper) : base(_unitOfWork, _mapper)
         {
-            List = unitOfWork.Flights.GetAllAsync().GetAwaiter().GetResult();
+            // List = unitOfWork.Flights.GetAllAsync().GetAwaiter().GetResult();
         }
 
         public async Task<FlightDTO> getFlightAsync(string flight_id)

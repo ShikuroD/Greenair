@@ -10,7 +10,7 @@ namespace ApplicationCore.Services
         //query
         Task<EmployeeDTO> getEmployeeAsync(string emp_id);
         Task<IEnumerable<EmployeeDTO>> getAllEmployeeAsync();
-        //Task<IEnumerable<EmployeeDTO>> getEmployeeByJobAsync();
+        Task<IEnumerable<EmployeeDTO>> getEmployeeByJobAsync(string job_id);
         Task<IEnumerable<EmployeeDTO>> getEmployeeByName(string lastname, string firstname);
         Task<IEnumerable<EmployeeDTO>> getEmployeeByName(string fullname);
 

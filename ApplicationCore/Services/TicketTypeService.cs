@@ -10,10 +10,10 @@ namespace ApplicationCore.Services
 {
     public class TicketTypeService : Service<TicketType, TicketTypeDTO, TicketTypeDTO>, ITicketTypeService
     {
-        public IEnumerable<TicketType> List { get; set; }
+        // public IEnumerable<TicketType> List { get; set; }
         public TicketTypeService(IUnitOfWork _unitOfWork, IMapper _mapper) : base(_unitOfWork, _mapper)
         {
-            List = unitOfWork.TicketTypes.GetAllAsync().GetAwaiter().GetResult();
+            // List = unitOfWork.TicketTypes.GetAllAsync().GetAwaiter().GetResult();
         }
         //query
         public async Task<TicketTypeDTO> getTicketTypeAsync(string ticket_type_id)
