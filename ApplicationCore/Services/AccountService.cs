@@ -22,9 +22,16 @@ namespace ApplicationCore.Services
         {
             return this.toDtoRange(await unitOfWork.Accounts.GetAllAsync());
         }
-        public async Task<AccountDTO> getAccountAsync(string person_id)
+        public async Task<AccountDTO> getAccountByPersonIdAsync(string person_id)
         {
             var acc = await unitOfWork.Accounts.getAccountByPersonId(person_id);
+            if (acc == null) return null;
+            return this.toDto(acc);
+        }
+
+        public async Task<AccountDTO> getAccountAsync(string username)
+        {
+            var acc = await unitOfWork.Accounts.getAccountByPersonId(username);
             if (acc == null) return null;
             return this.toDto(acc);
         }
