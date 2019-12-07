@@ -53,7 +53,7 @@ namespace Infrastructure.Persistence
                     new Airport("CXR", "Nha Trang", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK")),
                     new Airport("PQC", "Phu Quoc", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK")),
                     new Airport("PXU", "Pleiku", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK")),
-                    new Airport("BMV", "Ban Me Thuot", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK")),
+                    new Airport("BMV", "Buon Me Thuot", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK")),
                     new Airport("DLI", "Da Lat", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK")),
                     new Airport("SIN", "Singapore", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK")),
                     new Airport("BKK", "Bangkok", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK")),
@@ -63,7 +63,7 @@ namespace Infrastructure.Persistence
                     new Airport("KIX", "Osaka Kansai", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK")),
                     new Airport("SYD", "Sydney", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK")),
                     new Airport("MEl", "Melbourne", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK"))
-                    
+
                 );
                 context.SaveChanges();
             }
@@ -119,16 +119,16 @@ namespace Infrastructure.Persistence
             if (!context.Routes.Any())
             {
                 context.Routes.AddRange(
-                    new Route("00000", "001", "000", new FlightTime(1, 45)),
-                    new Route("00001", "000", "001", new FlightTime(1, 45)),
-                    new Route("00002", "000", "006", new FlightTime(4, 0)),
-                    new Route("00003", "006", "000", new FlightTime(4, 0)),
-                    new Route("00004", "001", "006", new FlightTime(4, 30)),
-                    new Route("00005", "006", "001", new FlightTime(4, 30)),
-                    new Route("00006", "001", "005", new FlightTime(10, 30)),
-                    new Route("00007", "005", "001", new FlightTime(10, 30)),
-                    new Route("00008", "000", "005", new FlightTime(10, 0)),
-                    new Route("00009", "005", "000", new FlightTime(10, 0))
+                    new Route("00000", "HAN", "SGN", new FlightTime(1, 45)),
+                    new Route("00001", "SGN", "HAN", new FlightTime(1, 45)),
+                    new Route("00002", "HAN", "THD", new FlightTime(4, 0)),
+                    new Route("00003", "THD", "HAN", new FlightTime(4, 0)),
+                    new Route("00004", "DLI", "BMV", new FlightTime(4, 30)),
+                    new Route("00005", "BMV", "DLI", new FlightTime(4, 30)),
+                    new Route("00006", "SGN", "DLI", new FlightTime(10, 30)),
+                    new Route("00007", "DLI", "SGN", new FlightTime(10, 30)),
+                    new Route("00008", "BMV", "HAN", new FlightTime(10, 0)),
+                    new Route("00009", "HAN", "BMV", new FlightTime(10, 0))
                 );
                 context.SaveChanges();
             }
@@ -136,8 +136,8 @@ namespace Infrastructure.Persistence
             if (!context.Flights.Any())
             {
                 context.Flights.AddRange(
-                    new Flight("00000","00000", STATUS.AVAILABLE ),
-                    new Flight("00001","00001", STATUS.AVAILABLE ),
+                    new Flight("00000", "00000", STATUS.AVAILABLE),
+                    new Flight("00001", "00001", STATUS.AVAILABLE),
                     new Flight("00002", "00003", STATUS.AVAILABLE),
                     new Flight("00003", "00004", STATUS.AVAILABLE),
                     new Flight("00004", "00002", STATUS.AVAILABLE),

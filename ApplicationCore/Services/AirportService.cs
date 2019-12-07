@@ -84,5 +84,16 @@ namespace ApplicationCore.Services
             }
             await unitOfWork.CompleteAsync();
         }
+
+        public async Task disableAirportAsync(string cus_id)
+        {
+            var cus = await unitOfWork.Airports.GetByAsync(cus_id);
+            if (cus != null) await unitOfWork.Airports.disable(cus);
+        }
+        public async Task activateAirportAsync(string cus_id)
+        {
+            var cus = await unitOfWork.Airports.GetByAsync(cus_id);
+            if (cus != null) await unitOfWork.Airports.activate(cus);
+        }
     }
 }

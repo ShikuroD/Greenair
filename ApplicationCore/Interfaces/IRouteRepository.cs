@@ -9,5 +9,10 @@ namespace ApplicationCore.Interfaces
         Task<IEnumerable<Route>> getRouteByDestinationAsync(string destination);
         Task<bool> isExisted(Route route);
         Task<bool> isExisted(string origin, string dest);
+
+        Task disable(string Route_id);
+        Task activate(string Route_id);
+        Task disable(Route acc);
+        Task activate(Route acc);
     }
 }

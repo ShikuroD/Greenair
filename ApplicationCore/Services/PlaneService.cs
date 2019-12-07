@@ -78,5 +78,16 @@ namespace ApplicationCore.Services
             }
             await unitOfWork.CompleteAsync();
         }
+
+        public async Task disablePlaneAsync(string cus_id)
+        {
+            var cus = await unitOfWork.Planes.GetByAsync(cus_id);
+            if (cus != null) await unitOfWork.Planes.disable(cus);
+        }
+        public async Task activatePlaneAsync(string cus_id)
+        {
+            var cus = await unitOfWork.Planes.GetByAsync(cus_id);
+            if (cus != null) await unitOfWork.Planes.activate(cus);
+        }
     }
 }

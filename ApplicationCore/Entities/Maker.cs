@@ -14,6 +14,8 @@ namespace ApplicationCore.Entities
 
         public Address Address { get; set; }
 
+        public STATUS Status { get; set; }
+
         public IList<Plane> Planes { get; set; }
 
         public Maker() { }

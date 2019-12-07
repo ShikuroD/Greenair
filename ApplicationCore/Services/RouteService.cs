@@ -81,5 +81,16 @@ namespace ApplicationCore.Services
             }
             await unitOfWork.CompleteAsync();
         }
+
+        public async Task disableRouteAsync(string cus_id)
+        {
+            var cus = await unitOfWork.Routes.GetByAsync(cus_id);
+            if (cus != null) await unitOfWork.Routes.disable(cus);
+        }
+        public async Task activateRouteAsync(string cus_id)
+        {
+            var cus = await unitOfWork.Routes.GetByAsync(cus_id);
+            if (cus != null) await unitOfWork.Routes.activate(cus);
+        }
     }
 }

@@ -13,6 +13,8 @@ namespace ApplicationCore.Entities
 
         public decimal BasePrice { get; set; }
 
+        public STATUS Status { get; set; }
+
         public IList<Ticket> Tickets { get; set; }
 
         public TicketType() { }

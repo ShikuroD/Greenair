@@ -13,5 +13,8 @@ namespace ApplicationCore.Services
         Task addTicketTypeAsync(TicketTypeDTO dto);
         Task removeTicketTypeAsync(string ticketType_id);
         Task updateTicketTypeAsync(TicketTypeDTO dto);
+
+        Task disableTicketTypeAsync(string TicketType_id);
+        Task activateTicketTypeAsync(string TicketType_id);
     }
 }

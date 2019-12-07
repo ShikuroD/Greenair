@@ -24,11 +24,11 @@ namespace ApplicationCore.DTOs
 
         [Required]
         public string FlightId { get; set; }
-        public FlightDTO Flight { get; set; }
+        //public FlightDTO Flight { get; set; }
 
         [Required]
         public string RouteId { get; set; }
-        public RouteDTO Route { get; set; }
+        //public RouteDTO Route { get; set; }
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy HH:mm}")]
         [Display(Name = "Departure date")]

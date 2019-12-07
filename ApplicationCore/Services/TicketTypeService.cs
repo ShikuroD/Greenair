@@ -69,5 +69,16 @@ namespace ApplicationCore.Services
             }
             await unitOfWork.CompleteAsync();
         }
+
+        public async Task disableTicketTypeAsync(string cus_id)
+        {
+            var cus = await unitOfWork.TicketTypes.GetByAsync(cus_id);
+            if (cus != null) await unitOfWork.TicketTypes.disable(cus);
+        }
+        public async Task activateTicketTypeAsync(string cus_id)
+        {
+            var cus = await unitOfWork.TicketTypes.GetByAsync(cus_id);
+            if (cus != null) await unitOfWork.TicketTypes.activate(cus);
+        }
     }
 }

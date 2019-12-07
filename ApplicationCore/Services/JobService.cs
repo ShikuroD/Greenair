@@ -71,5 +71,16 @@ namespace ApplicationCore.Services
             }
             await unitOfWork.CompleteAsync();
         }
+
+        public async Task disableJobAsync(string cus_id)
+        {
+            var cus = await unitOfWork.Jobs.GetByAsync(cus_id);
+            if (cus != null) await unitOfWork.Jobs.disable(cus);
+        }
+        public async Task activateJobAsync(string cus_id)
+        {
+            var cus = await unitOfWork.Jobs.GetByAsync(cus_id);
+            if (cus != null) await unitOfWork.Jobs.activate(cus);
+        }
     }
 }

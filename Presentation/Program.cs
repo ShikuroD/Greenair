@@ -35,6 +35,12 @@ namespace Presentation
                     //unit.Customers.RemoveRange(unit.Customers.GetAll());
 
 
+                    // var acc = unit.Accounts.GetByAsync("cus1").GetAwaiter().GetResult();
+                    // //acc.Username = "customer1";
+                    // acc.Password = "12345";
+                    // Console.WriteLine(acc.PersonId);
+                    // unit.Accounts.UpdateAsync(acc);
+
                     greenairContext.SaveChanges();
                     DataSeed.Initialize(greenairContext);
 

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Presentation.Migrations
 {
     [DbContext(typeof(GreenairContext))]
-    [Migration("20191206024107_Initals")]
-    partial class Initals
+    [Migration("20191207181049_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,6 +54,9 @@ namespace Presentation.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT")
                         .HasMaxLength(30);
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("AirportId");
 
@@ -116,6 +119,9 @@ namespace Presentation.Migrations
                         .HasColumnType("TEXT")
                         .HasMaxLength(20);
 
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("JobId");
 
                     b.ToTable("Jobs");
@@ -130,6 +136,9 @@ namespace Presentation.Migrations
                     b.Property<string>("MakerName")
                         .HasColumnType("TEXT")
                         .HasMaxLength(20);
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("MakerId");
 
@@ -187,6 +196,9 @@ namespace Presentation.Migrations
                     b.Property<int>("SeatNum")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("PlaneId");
 
                     b.HasIndex("MakerId");
@@ -207,6 +219,9 @@ namespace Presentation.Migrations
                     b.Property<string>("Origin")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("RouteId");
 
@@ -261,6 +276,9 @@ namespace Presentation.Migrations
 
                     b.Property<decimal>("BasePrice")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("TicketTypeName")
                         .IsRequired()

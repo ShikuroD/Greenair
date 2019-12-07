@@ -24,7 +24,7 @@ namespace ApplicationCore.DTOs
 
         [Required]
         public string PersonId { get; set; }
-        public PersonDTO Person { get; set; }
+        //public PersonDTO Person { get; set; }
 
     }
 }

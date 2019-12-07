@@ -72,5 +72,16 @@ namespace ApplicationCore.Services
             }
             await unitOfWork.CompleteAsync();
         }
+
+        public async Task disableMakerAsync(string cus_id)
+        {
+            var cus = await unitOfWork.Makers.GetByAsync(cus_id);
+            if (cus != null) await unitOfWork.Makers.disable(cus);
+        }
+        public async Task activateMakerAsync(string cus_id)
+        {
+            var cus = await unitOfWork.Makers.GetByAsync(cus_id);
+            if (cus != null) await unitOfWork.Makers.activate(cus);
+        }
     }
 }
