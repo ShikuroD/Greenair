@@ -10,7 +10,7 @@ namespace ApplicationCore.Services
         //query
         Task<EmployeeDTO> getEmployeeAsync(string emp_id);
         Task<IEnumerable<EmployeeDTO>> getAllEmployeeAsync();
-        Task<IEnumerable<EmployeeDTO>> getEmployeeByJobAsync();
+        //Task<IEnumerable<EmployeeDTO>> getEmployeeByJobAsync();
         Task<IEnumerable<EmployeeDTO>> getEmployeeByName(string lastname, string firstname);
         Task<IEnumerable<EmployeeDTO>> getEmployeeByName(string fullname);
 
@@ -20,8 +20,6 @@ namespace ApplicationCore.Services
         Task removeEmployeeAsync(string emp_id);
         Task updateEmployeeAsync(EmployeeDTO dto);
 
-        Task createAccountAsync(AccountDTO acc_dto);
-        Task updateAccountAsync(AccountDTO acc_dto);
 
         Task disableCutomerAsync(string emp_id);
         Task activateEmployeeAsync(string emp_id);
