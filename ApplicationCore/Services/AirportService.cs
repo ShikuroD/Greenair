@@ -10,9 +10,10 @@ namespace ApplicationCore.Services
 {
     public class AirportService : Service<Airport, AirportDTO, AirportDTO>, IAirportService
     {
+        public IEnumerable<Airport> List { get; set; }
         public AirportService(IUnitOfWork _unitOfWork, IMapper _mapper) : base(_unitOfWork, _mapper)
         {
-
+            List = unitOfWork.Airports.GetAllAsync().GetAwaiter().GetResult();
         }
         //query
         public async Task<AirportDTO> getAirportAsync(string airport_id)
@@ -23,14 +24,14 @@ namespace ApplicationCore.Services
         {
             var airports = await this.getAllAirportAsync();
             var res = airports.Where(t =>
-                                t.AirportName.ToLower().StartsWith(term.ToLower())).Select(t => new{Name = t.AirportName,Id = t.AirportId} 
+                                t.AirportName.ToLower().StartsWith(term.ToLower())).Select(t => new { Name = t.AirportName, Id = t.AirportId }
                                 ).ToList();
             return res;
         }
         public async Task<IEnumerable<Object>> getAirportName()
         {
             var airports = await this.getAllAirportAsync();
-            var res = airports.Select(t => new{Name = t.AirportName,Id = t.AirportId} 
+            var res = airports.Select(t => new { Name = t.AirportName, Id = t.AirportId }
                                 ).ToList();
             return res;
         }

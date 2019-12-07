@@ -14,9 +14,10 @@ namespace ApplicationCore.Services
 {
     public class FlightService : Service<Flight, FlightDTO, FlightDTO>, IFlightService
     {
+        public IEnumerable<Flight> List { get; set; }
         public FlightService(IUnitOfWork _unitOfWork, IMapper _mapper) : base(_unitOfWork, _mapper)
         {
-
+            List = unitOfWork.Flights.GetAllAsync().GetAwaiter().GetResult();
         }
 
         public async Task<FlightDTO> getFlightAsync(string flight_id)
@@ -76,10 +77,13 @@ namespace ApplicationCore.Services
                 flights = flights.Where(m => DateTime.Compare(Task.Run(() => this.getArrDate(m.FlightId)).GetAwaiter().GetResult(), arr_date) <= 0);
             return flights;
         }
-        private async Task generateFlightId(Flight flight)
+        private async Task generateFlightId(Flight Flight)
         {
             var res = await unitOfWork.Flights.GetAllAsync();
-            flight.FlightId = String.Format("{0:00000}", res.Count());
+            var id = res.LastOrDefault().FlightId;
+            var code = 0;
+            Int32.TryParse(id, out code);
+            Flight.FlightId = String.Format("{0:00000}", code);
         }
 
         public async Task addFlightAsync(FlightDTO flightDto)

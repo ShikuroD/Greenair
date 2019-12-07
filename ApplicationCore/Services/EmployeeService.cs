@@ -90,21 +90,20 @@ namespace ApplicationCore.Services
             }
         }
 
-        private async Task generateEmployeeIDAsync(Employee emp)
+        private async Task generateEmployeeId(Employee Employee)
         {
-            if (String.IsNullOrEmpty(emp.Id))
-            {
-                var res = await unitOfWork.Employees.GetAllAsync();
-                emp.Id = String.Format("{0:00000}", res.Count());
-            }
-
+            var res = await unitOfWork.Persons.GetAllAsync();
+            var id = res.LastOrDefault().Id;
+            var code = 0;
+            Int32.TryParse(id, out code);
+            Employee.Id = String.Format("{0:00000}", code);
         }
         public async Task addEmployeeAsync(EmployeeDTO dto)
         {
             if (await unitOfWork.Employees.GetByAsync(dto.Id) == null)
             {
                 var emp = this.toEntity(dto);
-                await this.generateEmployeeIDAsync(emp);
+                await this.generateEmployeeId(emp);
                 await unitOfWork.Employees.AddAsync(emp);
                 await unitOfWork.CompleteAsync();
             }
@@ -128,7 +127,8 @@ namespace ApplicationCore.Services
             else
             {
                 var emp = this.toEntity(dto);
-                await unitOfWork.Employees.UpdateAsync(emp);
+                await this.generateEmployeeId(emp);
+                await unitOfWork.Employees.AddAsync(emp);
             }
             await unitOfWork.CompleteAsync();
         }

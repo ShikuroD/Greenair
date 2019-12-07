@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,9 +11,10 @@ namespace ApplicationCore.Services
 {
     public class MakerService : Service<Maker, MakerDTO, MakerDTO>, IMakerService
     {
+        public IEnumerable<Maker> List { get; set; }
         public MakerService(IUnitOfWork _unitOfWork, IMapper _mapper) : base(_unitOfWork, _mapper)
         {
-
+            List = unitOfWork.Makers.GetAllAsync().GetAwaiter().GetResult();
         }
         //query
         public async Task<MakerDTO> getMakerAsync(string Maker_id)
@@ -31,7 +33,10 @@ namespace ApplicationCore.Services
         private async Task generateMakerId(Maker Maker)
         {
             var res = await unitOfWork.Makers.GetAllAsync();
-            Maker.MakerId = String.Format("{0:000}", res.Count());
+            var id = res.LastOrDefault().MakerId;
+            var code = 0;
+            Int32.TryParse(id, out code);
+            Maker.MakerId = String.Format("{0:000}", code);
         }
         public async Task addMakerAsync(MakerDTO dto)
         {

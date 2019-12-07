@@ -10,9 +10,10 @@ namespace ApplicationCore.Services
 {
     public class RouteService : Service<Route, RouteDTO, RouteDTO>, IRouteService
     {
+        public IEnumerable<Route> List { get; set; }
         public RouteService(IUnitOfWork _unitOfWork, IMapper _mapper) : base(_unitOfWork, _mapper)
         {
-
+            List = unitOfWork.Routes.GetAllAsync().GetAwaiter().GetResult();
         }
         //query
         public async Task<RouteDTO> getRouteAsync(string route_id)
@@ -33,10 +34,13 @@ namespace ApplicationCore.Services
         }
 
         //actions
-        private async Task generateRouteId(Route route)
+        private async Task generateRouteId(Route Route)
         {
             var res = await unitOfWork.Routes.GetAllAsync();
-            route.RouteId = String.Format("{0:00000}", res.Count());
+            var id = res.LastOrDefault().RouteId;
+            var code = 0;
+            Int32.TryParse(id, out code);
+            Route.RouteId = String.Format("{0:00000}", code);
         }
         private async Task<bool> isExisted(Route route)
         {

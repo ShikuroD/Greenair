@@ -10,9 +10,10 @@ namespace ApplicationCore.Services
 {
     public class JobService : Service<Job, JobDTO, JobDTO>, IJobService
     {
+        public IEnumerable<Job> List { get; set; }
         public JobService(IUnitOfWork _unitOfWork, IMapper _mapper) : base(_unitOfWork, _mapper)
         {
-
+            List = unitOfWork.Jobs.GetAllAsync().GetAwaiter().GetResult();
         }
         //query
         public async Task<JobDTO> getJobAsync(string job_id)
@@ -28,10 +29,13 @@ namespace ApplicationCore.Services
             return this.toDtoRange(await unitOfWork.Jobs.getJobByName(job_name));
         }
         //actions
-        private async Task generateJobId(Job job)
+        private async Task generateJobId(Job Job)
         {
             var res = await unitOfWork.Jobs.GetAllAsync();
-            job.JobId = String.Format("{0:000}", res.Count());
+            var id = res.LastOrDefault().JobId;
+            var code = 0;
+            Int32.TryParse(id, out code);
+            Job.JobId = String.Format("{0:000}", code);
         }
         public async Task addJobAsync(JobDTO dto)
         {
