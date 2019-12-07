@@ -8,7 +8,8 @@ namespace ApplicationCore.Services
     {
         //query
         Task<IEnumerable<AccountDTO>> getAllAccountAsync();
-        Task<AccountDTO> getAccountAsync(string person_id);
+        Task<AccountDTO> getAccountAsync(string username);
+        Task<AccountDTO> getAccountByPersonIdAsync(string person_id);
 
 
         //action

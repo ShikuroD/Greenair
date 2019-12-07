@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Presentation.Migrations
 {
-    public partial class Initals : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,7 +18,8 @@ namespace Presentation.Migrations
                     District = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
                     State = table.Column<string>(nullable: true),
-                    Country = table.Column<string>(nullable: true)
+                    Country = table.Column<string>(nullable: true),
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,7 +31,8 @@ namespace Presentation.Migrations
                 columns: table => new
                 {
                     JobId = table.Column<string>(maxLength: 3, nullable: false),
-                    JobName = table.Column<string>(maxLength: 20, nullable: false)
+                    JobName = table.Column<string>(maxLength: 20, nullable: false),
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -48,7 +50,8 @@ namespace Presentation.Migrations
                     District = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
                     State = table.Column<string>(nullable: true),
-                    Country = table.Column<string>(nullable: true)
+                    Country = table.Column<string>(nullable: true),
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -61,7 +64,8 @@ namespace Presentation.Migrations
                 {
                     TicketTypeId = table.Column<string>(maxLength: 3, nullable: false),
                     TicketTypeName = table.Column<string>(maxLength: 20, nullable: false),
-                    BasePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    BasePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -76,7 +80,8 @@ namespace Presentation.Migrations
                     Origin = table.Column<string>(nullable: false),
                     Destination = table.Column<string>(nullable: false),
                     FlightHour = table.Column<int>(nullable: true),
-                    FlightMinute = table.Column<int>(nullable: true)
+                    FlightMinute = table.Column<int>(nullable: true),
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -133,7 +138,8 @@ namespace Presentation.Migrations
                 {
                     PlaneId = table.Column<string>(maxLength: 5, nullable: false),
                     SeatNum = table.Column<int>(nullable: false),
-                    MakerId = table.Column<string>(nullable: false)
+                    MakerId = table.Column<string>(nullable: false),
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

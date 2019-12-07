@@ -25,7 +25,21 @@ namespace Infrastructure.Persistence.Repos
             }
             catch (Exception e)
             {
-                Console.WriteLine("ChangeAccountStatus() Unexpected: " + e);
+                Console.WriteLine("ChangePersonStatus() Unexpected: " + e);
+            }
+        }
+
+        private async Task changePersonStatus(Person person, STATUS status)
+        {
+            try
+            {
+                person.Status = status;
+                this.Context.Update(person);
+                await this.Context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("ChangePersonStatus() Unexpected: " + e);
             }
         }
 
@@ -38,5 +52,17 @@ namespace Infrastructure.Persistence.Repos
         {
             await this.changePersonStatus(person_id, STATUS.DISABLED);
         }
+
+        public async Task activate(Person person)
+        {
+            await this.changePersonStatus(person, STATUS.AVAILABLE);
+        }
+
+        public async Task disable(Person person)
+        {
+            await this.changePersonStatus(person, STATUS.DISABLED);
+        }
+
+
     }
 }

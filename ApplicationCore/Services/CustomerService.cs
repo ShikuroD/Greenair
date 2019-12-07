@@ -12,8 +12,10 @@ namespace ApplicationCore.Services
     public class CustomerService : Service<Customer, CustomerDTO, CustomerDTO>, ICustomerService
     {
 
+        // public IEnumerable<Customer> List { get; set; }
         public CustomerService(IUnitOfWork _unitOfWork, IMapper _mapper) : base(_unitOfWork, _mapper)
         {
+            // List = unitOfWork.Customers.GetAllAsync().GetAwaiter().GetResult();
         }
         //query
         public async Task<CustomerDTO> getCustomerAsync(string cus_id)
@@ -95,21 +97,20 @@ namespace ApplicationCore.Services
             }
         }
 
-        private async Task generateCustomerIDAsync(Customer cus)
+        private async Task generateCustomerId(Customer Customer)
         {
-            if (String.IsNullOrEmpty(cus.Id))
-            {
-                var res = await unitOfWork.Customers.GetAllAsync();
-                cus.Id = String.Format("{0:00000}", res.Count());
-            }
-
+            var res = await unitOfWork.Persons.GetAllAsync();
+            var id = res.LastOrDefault().Id;
+            var code = 0;
+            Int32.TryParse(id, out code);
+            Customer.Id = String.Format("{0:00000}", code);
         }
         public async Task addCustomerAsync(CustomerDTO dto)
         {
             if (await unitOfWork.Customers.GetByAsync(dto.Id) == null)
             {
                 var cus = this.toEntity(dto);
-                await this.generateCustomerIDAsync(cus);
+                await this.generateCustomerId(cus);
                 await unitOfWork.Customers.AddAsync(cus);
                 await unitOfWork.CompleteAsync();
             }
@@ -133,13 +134,14 @@ namespace ApplicationCore.Services
             else
             {
                 var cus = this.toEntity(dto);
-                await unitOfWork.Customers.UpdateAsync(cus);
+                await this.generateCustomerId(cus);
+                await unitOfWork.Customers.AddAsync(cus);
             }
             await unitOfWork.CompleteAsync();
         }
 
 
-        public async Task disableCutomerAsync(string cus_id)
+        public async Task disableCustomerAsync(string cus_id)
         {
             var cus = await unitOfWork.Customers.GetByAsync(cus_id);
             if (cus != null) await unitOfWork.Customers.disable(cus);

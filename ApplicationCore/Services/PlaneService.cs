@@ -11,9 +11,10 @@ namespace ApplicationCore.Services
 {
     public class PlaneService : Service<Plane, PlaneDTO, PlaneDTO>, IPlaneService
     {
+        // public IEnumerable<Plane> List { get; set; }
         public PlaneService(IUnitOfWork _unitOfWork, IMapper _mapper) : base(_unitOfWork, _mapper)
         {
-
+            // List = unitOfWork.Planes.GetAllAsync().GetAwaiter().GetResult();
         }
         //query
         public async Task<PlaneDTO> getPlaneAsync(string plane_id)
@@ -35,10 +36,13 @@ namespace ApplicationCore.Services
             return String.Format("{0}-{1}", maker.MakerName, plane.PlaneId);
         }
         //actions
-        private async Task generatePlaneId(Plane plane)
+        private async Task generatePlaneId(Plane Plane)
         {
             var res = await unitOfWork.Planes.GetAllAsync();
-            plane.PlaneId = String.Format("{0:00000}", res.Count());
+            var id = res.LastOrDefault().PlaneId;
+            var code = 0;
+            Int32.TryParse(id, out code);
+            Plane.PlaneId = String.Format("{0:00000}", code);
         }
         public async Task addPlaneAsync(PlaneDTO dto)
         {
@@ -73,6 +77,17 @@ namespace ApplicationCore.Services
                 await unitOfWork.Planes.AddAsync(plane);
             }
             await unitOfWork.CompleteAsync();
+        }
+
+        public async Task disablePlaneAsync(string cus_id)
+        {
+            var cus = await unitOfWork.Planes.GetByAsync(cus_id);
+            if (cus != null) await unitOfWork.Planes.disable(cus);
+        }
+        public async Task activatePlaneAsync(string cus_id)
+        {
+            var cus = await unitOfWork.Planes.GetByAsync(cus_id);
+            if (cus != null) await unitOfWork.Planes.activate(cus);
         }
     }
 }

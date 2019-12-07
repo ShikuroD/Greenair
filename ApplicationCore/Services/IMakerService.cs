@@ -16,5 +16,8 @@ namespace ApplicationCore.Services
         Task addMakerAsync(MakerDTO dto);
         Task removeMakerAsync(string Maker_id);
         Task updateMakerAsync(MakerDTO dto);
+
+        Task disableMakerAsync(string Maker_id);
+        Task activateMakerAsync(string Maker_id);
     }
 }

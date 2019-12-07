@@ -39,7 +39,7 @@ namespace ApplicationCore.DTOs
 
         public AddressDTO Address { get; set; }
 
-        public AccountDTO Account { get; set; }
+        //public AccountDTO Account { get; set; }
 
         public STATUS Status { get; set; }
     }

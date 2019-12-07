@@ -17,5 +17,8 @@ namespace ApplicationCore.Services
         Task addPlaneAsync(PlaneDTO dto);
         Task removePlaneAsync(string plane_id);
         Task updatePlaneAsync(PlaneDTO dto);
+
+        Task disablePlaneAsync(string Plane_id);
+        Task activatePlaneAsync(string Plane_id);
     }
 }

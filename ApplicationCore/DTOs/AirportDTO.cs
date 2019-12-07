@@ -15,9 +15,11 @@ namespace ApplicationCore.DTOs
 
         public AddressDTO Address { get; set; }
 
-        public IList<RouteDTO> RouteStarts { get; set; }
+        public STATUS Status { get; set; }
 
-        public IList<RouteDTO> RouteEnds { get; set; }
+        // public IList<RouteDTO> RouteStarts { get; set; }
+
+        // public IList<RouteDTO> RouteEnds { get; set; }
     }
 
 

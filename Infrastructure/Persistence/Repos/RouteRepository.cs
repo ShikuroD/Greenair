@@ -41,5 +41,54 @@ namespace Infrastructure.Persistence.Repos
             if (res == null || res.Count() == 0) return false;
             return true;
         }
+
+        private async Task changeRouteStatus(string Route_id, STATUS status)
+        {
+            try
+            {
+                var Route = await this.GetByAsync(Route_id);
+                Route.Status = status;
+                this.Context.Update(Route);
+                await this.Context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("ChangeRouteStatus() Unexpected: " + e);
+            }
+        }
+
+        private async Task changeRouteStatus(Route Route, STATUS status)
+        {
+            try
+            {
+                Route.Status = status;
+                this.Context.Update(Route);
+                await this.Context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("ChangeRouteStatus() Unexpected: " + e);
+            }
+        }
+
+        public async Task activate(string Route_id)
+        {
+            await this.changeRouteStatus(Route_id, STATUS.AVAILABLE);
+        }
+
+        public async Task disable(string Route_id)
+        {
+            await this.changeRouteStatus(Route_id, STATUS.DISABLED);
+        }
+
+        public async Task activate(Route Route)
+        {
+            await this.changeRouteStatus(Route, STATUS.AVAILABLE);
+        }
+
+        public async Task disable(Route Route)
+        {
+            await this.changeRouteStatus(Route, STATUS.DISABLED);
+        }
     }
 }

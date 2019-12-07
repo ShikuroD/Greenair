@@ -22,5 +22,54 @@ namespace Infrastructure.Persistence.Repos
             res = res.Where(m => m.MakerName.Contains(name, StringComparison.OrdinalIgnoreCase));
             return res;
         }
+
+        private async Task changeMakerStatus(string Maker_id, STATUS status)
+        {
+            try
+            {
+                var Maker = await this.GetByAsync(Maker_id);
+                Maker.Status = status;
+                this.Context.Update(Maker);
+                await this.Context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("ChangeMakerStatus() Unexpected: " + e);
+            }
+        }
+
+        private async Task changeMakerStatus(Maker Maker, STATUS status)
+        {
+            try
+            {
+                Maker.Status = status;
+                this.Context.Update(Maker);
+                await this.Context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("ChangeMakerStatus() Unexpected: " + e);
+            }
+        }
+
+        public async Task activate(string Maker_id)
+        {
+            await this.changeMakerStatus(Maker_id, STATUS.AVAILABLE);
+        }
+
+        public async Task disable(string Maker_id)
+        {
+            await this.changeMakerStatus(Maker_id, STATUS.DISABLED);
+        }
+
+        public async Task activate(Maker Maker)
+        {
+            await this.changeMakerStatus(Maker, STATUS.AVAILABLE);
+        }
+
+        public async Task disable(Maker Maker)
+        {
+            await this.changeMakerStatus(Maker, STATUS.DISABLED);
+        }
     }
 }

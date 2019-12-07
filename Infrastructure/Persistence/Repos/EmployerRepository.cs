@@ -7,7 +7,7 @@ using System.Linq;
 using System.Collections.Generic;
 using ApplicationCore;
 using LinqKit;
-namespace Infrastructure.Persistence.Repos 
+namespace Infrastructure.Persistence.Repos
 {
     public class EmployeeRepository : Repository<Employee>, IEmployeeRepository
     {
@@ -45,6 +45,11 @@ namespace Infrastructure.Persistence.Repos
             var res = await this.GetAllAsync();
             if (!String.IsNullOrEmpty(fullname)) res = res.Where(m => m.FullName.Contains(fullname, StringComparison.OrdinalIgnoreCase));
             return res;
+        }
+        public async Task<IEnumerable<Employee>> getEmployeeByJob(string job_id)
+        {
+            var predicate = PredicateBuilder.New<Employee>(m => m.JobId.Equals(job_id));
+            return await this.FindAsync(predicate);
         }
 
         private async Task changeEmployeeStatus(string emp_id, STATUS status)

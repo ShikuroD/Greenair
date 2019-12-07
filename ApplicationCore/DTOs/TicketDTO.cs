@@ -19,15 +19,15 @@ namespace ApplicationCore.DTOs
 
         [Required]
         public string CustomerId { get; set; }
-        public CustomerDTO Customer { get; set; }
+        //public CustomerDTO Customer { get; set; }
 
         [Required]
         public string TicketTypeId { get; set; }
-        public TicketTypeDTO TicketType { get; set; }
+        //public TicketTypeDTO TicketType { get; set; }
 
         [Required]
         public string FlightId { get; set; }
-        public FlightDTO Flight { get; set; }
+        //public FlightDTO Flight { get; set; }
 
     }
 }

@@ -13,6 +13,8 @@ namespace ApplicationCore.Entities
         public string MakerId { get; set; }
         public Maker Maker { get; set; }
 
+        public STATUS Status { get; set; }
+
         public IList<Flight> Flights { get; set; }
         public Plane() { }
 

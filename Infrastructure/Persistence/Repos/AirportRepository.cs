@@ -30,5 +30,54 @@ namespace Infrastructure.Persistence.Repos
             var airport = await this.GetByAsync(airport_id);
             return airport.Address.isDomestic();
         }
+
+        private async Task changeAirportStatus(string Airport_id, STATUS status)
+        {
+            try
+            {
+                var Airport = await this.GetByAsync(Airport_id);
+                Airport.Status = status;
+                this.Context.Update(Airport);
+                await this.Context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("ChangeAirportStatus() Unexpected: " + e);
+            }
+        }
+
+        private async Task changeAirportStatus(Airport Airport, STATUS status)
+        {
+            try
+            {
+                Airport.Status = status;
+                this.Context.Update(Airport);
+                await this.Context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("ChangeAirportStatus() Unexpected: " + e);
+            }
+        }
+
+        public async Task activate(string Airport_id)
+        {
+            await this.changeAirportStatus(Airport_id, STATUS.AVAILABLE);
+        }
+
+        public async Task disable(string Airport_id)
+        {
+            await this.changeAirportStatus(Airport_id, STATUS.DISABLED);
+        }
+
+        public async Task activate(Airport Airport)
+        {
+            await this.changeAirportStatus(Airport, STATUS.AVAILABLE);
+        }
+
+        public async Task disable(Airport Airport)
+        {
+            await this.changeAirportStatus(Airport, STATUS.DISABLED);
+        }
     }
 }

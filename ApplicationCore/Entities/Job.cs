@@ -11,6 +11,8 @@ namespace ApplicationCore.Entities
         public string JobName { get; set; }
         public IList<Employee> Employees { get; set; }
 
+        public STATUS Status { get; set; }
+
         public Job(string jobId, string jobName)
         {
             this.JobId = jobId;

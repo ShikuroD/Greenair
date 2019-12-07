@@ -16,9 +16,11 @@ namespace ApplicationCore.DTOs
 
         [Required]
         public string MakerId { get; set; }
-        public MakerDTO Maker { get; set; }
+        //public MakerDTO Maker { get; set; }
 
-        public IList<FlightDTO> Flights { get; set; }
+        public STATUS Status { get; set; }
+
+        //public IList<FlightDTO> Flights { get; set; }
 
     }
 }

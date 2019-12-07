@@ -19,5 +19,8 @@ namespace ApplicationCore.Services
         Task addAirportAsync(AirportDTO dto);
         Task removeAirportAsync(string airport_id);
         Task updateAirportAsync(AirportDTO dto);
+
+        Task disableAirportAsync(string Airport_id);
+        Task activateAirportAsync(string Airport_id);
     }
 }

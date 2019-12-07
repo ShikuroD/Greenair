@@ -10,9 +10,10 @@ namespace ApplicationCore.Services
 {
     public class TicketTypeService : Service<TicketType, TicketTypeDTO, TicketTypeDTO>, ITicketTypeService
     {
+        // public IEnumerable<TicketType> List { get; set; }
         public TicketTypeService(IUnitOfWork _unitOfWork, IMapper _mapper) : base(_unitOfWork, _mapper)
         {
-
+            // List = unitOfWork.TicketTypes.GetAllAsync().GetAwaiter().GetResult();
         }
         //query
         public async Task<TicketTypeDTO> getTicketTypeAsync(string ticket_type_id)
@@ -26,10 +27,13 @@ namespace ApplicationCore.Services
 
 
         //actions
-        private async Task generateTicketTypeId(TicketType ticket_type)
+        private async Task generateTicketTypeId(TicketType TicketType)
         {
             var res = await unitOfWork.TicketTypes.GetAllAsync();
-            ticket_type.TicketTypeId = String.Format("{0:000}", res.Count());
+            var id = res.LastOrDefault().TicketTypeId;
+            var code = 0;
+            Int32.TryParse(id, out code);
+            TicketType.TicketTypeId = String.Format("{0:000}", code);
         }
         public async Task addTicketTypeAsync(TicketTypeDTO dto)
         {
@@ -64,6 +68,17 @@ namespace ApplicationCore.Services
                 await unitOfWork.TicketTypes.AddAsync(ticket_type);
             }
             await unitOfWork.CompleteAsync();
+        }
+
+        public async Task disableTicketTypeAsync(string cus_id)
+        {
+            var cus = await unitOfWork.TicketTypes.GetByAsync(cus_id);
+            if (cus != null) await unitOfWork.TicketTypes.disable(cus);
+        }
+        public async Task activateTicketTypeAsync(string cus_id)
+        {
+            var cus = await unitOfWork.TicketTypes.GetByAsync(cus_id);
+            if (cus != null) await unitOfWork.TicketTypes.activate(cus);
         }
     }
 }
