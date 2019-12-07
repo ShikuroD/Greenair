@@ -38,7 +38,7 @@ namespace ApplicationCore.DTOs
         public string toString()
         {
             if (string.IsNullOrEmpty(this.State)) return string.Format("{0} {1}, {2}, {3}, {4}", this.Num, this.Street, this.District, this.City, this.Country);
-            return string.Format("{0} {1}, {2}, {3} {4}, {5}", this.Num, this.Street, this.District, this.City, this.State, this.Country);
+            return string.Format("{0} {1}, {2}, {3}, {4}, {5}", this.Num, this.Street, this.District, this.City, this.State, this.Country);
         }
         public void toValue(string address)
         {

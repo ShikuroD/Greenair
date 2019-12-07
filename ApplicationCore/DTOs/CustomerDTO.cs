@@ -3,6 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Collections.Generic;
 using ApplicationCore.Interfaces;
 using ApplicationCore.Entities;
+using System;
+
 namespace ApplicationCore.DTOs
 {
     public class CustomerDTO : PersonDTO
@@ -13,5 +15,9 @@ namespace ApplicationCore.DTOs
         [Required]
         public string Email { get; set; }
         public IList<TicketDTO> Tickets { get; set; }
+        public CustomerDTO()
+        {
+        
+        }
     }
 }
