@@ -283,6 +283,19 @@ namespace ApplicationCore.Services
         }
 
         //Thao tac voi ve =======================================================================================
+
+        public async Task<decimal> calTicketPrice(string flight_id, string ticket_type_id)
+        {
+            var type = await unitOfWork.TicketTypes.GetByAsync(ticket_type_id);
+            if (type == null) return 0;
+            else
+            {
+                var time = await this.getTotalFlightTime(flight_id);
+                return (time.Hour + (decimal)time.Minute / 60) * type.BasePrice;
+            }
+
+        }
+
         private async Task generateTicket(string flight_id)
         {
             var flight = await unitOfWork.Flights.GetByAsync(flight_id);
@@ -299,16 +312,16 @@ namespace ApplicationCore.Services
                 switch (i / mod)
                 {
                     case 0:
-                        tickets.Add(new Ticket(String.Format("A{0:00}", i), flight_id, null, null, null));
+                        tickets.Add(new Ticket(String.Format("A{0:00}", i), flight_id, "000", null, null));
                         break;
                     case 1:
-                        tickets.Add(new Ticket(String.Format("B{0:00}", i), flight_id, null, null, null));
+                        tickets.Add(new Ticket(String.Format("B{0:00}", i), flight_id, "000", null, null));
                         break;
                     case 3:
-                        tickets.Add(new Ticket(String.Format("C{0:00}", i), flight_id, null, null, null));
+                        tickets.Add(new Ticket(String.Format("C{0:00}", i), flight_id, "000", null, null));
                         break;
                     default:
-                        tickets.Add(new Ticket(String.Format("D{0:00}", i), flight_id, null, null, null));
+                        tickets.Add(new Ticket(String.Format("D{0:00}", i), flight_id, "000", null, null));
                         break;
                 }
             }
@@ -356,6 +369,7 @@ namespace ApplicationCore.Services
         {
             var ticket = await unitOfWork.Flights.getTicket(flight_id, ticket_id);
             if (ticket == null) return;
+            ticket.TicketTypeId = "000";
             ticket.CustomerId = null;
             ticket.AssignedCus = null;
             ticket.Status = STATUS.AVAILABLE;

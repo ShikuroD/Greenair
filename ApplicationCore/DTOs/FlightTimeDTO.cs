@@ -36,7 +36,7 @@ namespace ApplicationCore.DTOs
             this.Hour = int.Parse(list[0]);
             this.Minute = int.Parse(list[1]);
         }
-        private int toMinutes()
+        public int toMinutes()
         {
             return this.Hour * 60 + this.Minute;
         }
