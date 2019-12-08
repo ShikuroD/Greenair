@@ -11,6 +11,9 @@ namespace ApplicationCore.Services
         Task<AccountDTO> getAccountAsync(string username);
         Task<AccountDTO> getAccountByPersonIdAsync(string person_id);
 
+        Task<IEnumerable<AccountDTO>> getAvailableAccountAsync();
+        Task<IEnumerable<AccountDTO>> getDisabledAccountAsync();
+
 
         //action
         Task addAccountAsync(AccountDTO dto);

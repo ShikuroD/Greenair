@@ -33,6 +33,45 @@ namespace ApplicationCore.Services
             return this.toDtoRange(await unitOfWork.Routes.getRouteByDestinationAsync(destination));
         }
 
+        public async Task<IEnumerable<RouteDTO>> getAvailableRouteAsync()
+        {
+            var Routes = await unitOfWork.Routes.getAvailableRoute();
+            return this.toDtoRange(Routes);
+        }
+        public async Task<IEnumerable<RouteDTO>> getDisabledRouteAsync()
+        {
+            var Routes = await unitOfWork.Routes.getDisabledRoute();
+            return this.toDtoRange(Routes);
+        }
+
+        new public async Task<IEnumerable<Route>> SortAsync(IEnumerable<Route> entities, ORDER_ENUM col, ORDER_ENUM order)
+        {
+            IEnumerable<Route> res = null;
+            await Task.Run(() => true);
+            if (order == ORDER_ENUM.DESCENDING)
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.ORIGIN_NAME: res = entities.OrderByDescending(m => unitOfWork.Airports.GetByAsync(m.Origin).GetAwaiter().GetResult().AirportName); break;
+                    case ORDER_ENUM.DESTINATION_NAME: res = entities.OrderByDescending(m => unitOfWork.Airports.GetByAsync(m.Destination).GetAwaiter().GetResult().AirportName); break;
+                    case ORDER_ENUM.STATUS: res = entities.OrderByDescending(m => m.Status); break;
+                    default: res = entities.OrderByDescending(m => m.RouteId); break;
+                }
+            }
+            else
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.ORIGIN_NAME: res = entities.OrderBy(m => unitOfWork.Airports.GetByAsync(m.Origin).GetAwaiter().GetResult().AirportName); break;
+                    case ORDER_ENUM.DESTINATION_NAME: res = entities.OrderBy(m => unitOfWork.Airports.GetByAsync(m.Destination).GetAwaiter().GetResult().AirportName); break;
+                    case ORDER_ENUM.STATUS: res = entities.OrderBy(m => m.Status); break;
+                    default: res = entities.OrderBy(m => m.RouteId); break;
+                }
+
+            }
+            return res;
+        }
+
         //actions
         private async Task generateRouteId(Route Route)
         {
@@ -70,8 +109,10 @@ namespace ApplicationCore.Services
         {
             if (await unitOfWork.Routes.GetByAsync(dto.RouteId) != null && await this.isExisted(this.toEntity(dto)))
             {
-                var route = this.toEntity(dto);
-                await unitOfWork.Routes.UpdateAsync(route);
+                // var Route = this.toEntity(dto);
+                // await unitOfWork.Routes.UpdateAsync(Route);
+                var Route = await unitOfWork.Routes.GetByAsync(dto.RouteId);
+                this.convertDtoToEntity(dto, Route);
             }
             else
             {

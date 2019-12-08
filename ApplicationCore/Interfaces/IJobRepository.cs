@@ -10,6 +10,9 @@ namespace ApplicationCore.Interfaces
     {
         Task<IEnumerable<Job>> getJobByName(string job_name);
 
+        Task<IEnumerable<Job>> getAvailableJob();
+        Task<IEnumerable<Job>> getDisabledJob();
+
         Task disable(string job_id);
         Task activate(string job_id);
         Task disable(Job acc);

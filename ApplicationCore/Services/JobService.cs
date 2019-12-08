@@ -28,6 +28,44 @@ namespace ApplicationCore.Services
         {
             return this.toDtoRange(await unitOfWork.Jobs.getJobByName(job_name));
         }
+
+        public async Task<IEnumerable<JobDTO>> getAvailableJobAsync()
+        {
+            var Jobs = await unitOfWork.Jobs.getAvailableJob();
+            return this.toDtoRange(Jobs);
+        }
+        public async Task<IEnumerable<JobDTO>> getDisabledJobAsync()
+        {
+            var Jobs = await unitOfWork.Jobs.getDisabledJob();
+            return this.toDtoRange(Jobs);
+        }
+
+        new public async Task<IEnumerable<Job>> SortAsync(IEnumerable<Job> entities, ORDER_ENUM col, ORDER_ENUM order)
+        {
+            IEnumerable<Job> res = null;
+            await Task.Run(() => true);
+            if (order == ORDER_ENUM.DESCENDING)
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.NAME: res = entities.OrderByDescending(m => m.JobName); break;
+                    case ORDER_ENUM.STATUS: res = entities.OrderByDescending(m => m.Status); break;
+                    default: res = entities.OrderByDescending(m => m.JobId); break;
+                }
+            }
+            else
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.NAME: res = entities.OrderBy(m => m.JobName); break;
+                    case ORDER_ENUM.STATUS: res = entities.OrderBy(m => m.Status); break;
+                    default: res = entities.OrderBy(m => m.JobId); break;
+                }
+
+            }
+            return res;
+        }
+
         //actions
         private async Task generateJobId(Job Job)
         {
@@ -60,8 +98,11 @@ namespace ApplicationCore.Services
         {
             if (await unitOfWork.Jobs.GetByAsync(dto.JobId) != null)
             {
-                var job = this.toEntity(dto);
-                await unitOfWork.Jobs.UpdateAsync(job);
+                // var Job = this.toEntity(dto);
+                // await unitOfWork.Jobs.UpdateAsync(Job);
+                var Job = await unitOfWork.Jobs.GetByAsync(dto.JobId);
+                this.convertDtoToEntity(dto, Job);
+
             }
             else
             {

@@ -23,6 +23,21 @@ namespace Infrastructure.Persistence.Repos
             return res;
         }
 
+        private async Task<IEnumerable<Maker>> getMakersByStatus(STATUS status)
+        {
+            return await this.FindAsync(m => m.Status == status);
+        }
+
+        public async Task<IEnumerable<Maker>> getAvailableMaker()
+        {
+            return await this.getMakersByStatus(STATUS.AVAILABLE);
+        }
+
+        public async Task<IEnumerable<Maker>> getDisabledMaker()
+        {
+            return await this.getMakersByStatus(STATUS.DISABLED);
+        }
+
         private async Task changeMakerStatus(string Maker_id, STATUS status)
         {
             try

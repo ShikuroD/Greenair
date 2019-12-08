@@ -9,6 +9,9 @@ namespace ApplicationCore.Interfaces
     {
         Task<IEnumerable<Maker>> getMakerByName(string name);
 
+        Task<IEnumerable<Maker>> getAvailableMaker();
+        Task<IEnumerable<Maker>> getDisabledMaker();
+
         Task disable(string Maker_id);
         Task activate(string Maker_id);
         Task disable(Maker acc);

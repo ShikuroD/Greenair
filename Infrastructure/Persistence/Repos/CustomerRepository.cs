@@ -101,6 +101,22 @@ namespace Infrastructure.Persistence.Repos
         //         return null;
         //     }
         // }
+
+        private async Task<IEnumerable<Customer>> getCustomersByStatus(STATUS status)
+        {
+            return await this.FindAsync(m => m.Status == status);
+        }
+
+        public async Task<IEnumerable<Customer>> getAvailableCustomer()
+        {
+            return await this.getCustomersByStatus(STATUS.AVAILABLE);
+        }
+
+        public async Task<IEnumerable<Customer>> getDisabledCustomer()
+        {
+            return await this.getCustomersByStatus(STATUS.DISABLED);
+        }
+
         private async Task changeCustomerStatus(string cus_id, STATUS status)
         {
             try

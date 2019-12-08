@@ -31,6 +31,21 @@ namespace Infrastructure.Persistence.Repos
             return airport.Address.isDomestic();
         }
 
+        private async Task<IEnumerable<Airport>> getAirportsByStatus(STATUS status)
+        {
+            return await this.FindAsync(m => m.Status == status);
+        }
+
+        public async Task<IEnumerable<Airport>> getAvailableAirport()
+        {
+            return await this.getAirportsByStatus(STATUS.AVAILABLE);
+        }
+
+        public async Task<IEnumerable<Airport>> getDisabledAirport()
+        {
+            return await this.getAirportsByStatus(STATUS.DISABLED);
+        }
+
         private async Task changeAirportStatus(string Airport_id, STATUS status)
         {
             try

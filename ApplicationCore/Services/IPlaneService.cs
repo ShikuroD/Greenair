@@ -12,6 +12,10 @@ namespace ApplicationCore.Services
         Task<IEnumerable<PlaneDTO>> getAllPlaneAsync();
         Task<IEnumerable<PlaneDTO>> getPlaneByMakerIdAsync(string maker_id);
         Task<String> getPlaneFullname(string plane_id);
+        Task<String> getPlaneFullname(Plane plane, string maker_id);
+
+        Task<IEnumerable<PlaneDTO>> getAvailablePlaneAsync();
+        Task<IEnumerable<PlaneDTO>> getDisabledPlaneAsync();
 
         //actions
         Task addPlaneAsync(PlaneDTO dto);

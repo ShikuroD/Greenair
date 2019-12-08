@@ -18,13 +18,15 @@ namespace Presentation.Pages.Admin
     {
         private readonly IUnitOfWork _unitofwork;
         private readonly IFlightService _services;
-        private readonly IPlaneService _servicesPlane;
+        private readonly IPlaneService _planeServices;
+        private readonly IRouteService _routeServices;
 
-        public FlightModel(IFlightService services, IUnitOfWork unitofwork,IPlaneService servicesPlane)
+        public FlightModel(IFlightService services, IUnitOfWork unitofwork, IPlaneService servicesPlane, IRouteService routeServices)
         {
             _unitofwork = unitofwork;
             _services = services;
-            _servicesPlane=servicesPlane;
+            _planeServices = servicesPlane;
+            _routeServices = routeServices;
         }
 
         [BindProperty(SupportsGet = true)]
@@ -32,22 +34,29 @@ namespace Presentation.Pages.Admin
 
         public IEnumerable<FlightDTO> ListFlights { get; set; }
         public IList<string> ListNamePlanes { get; set; }
-        public IEnumerable<Route> ListRoutes { get; set; }
+        public IEnumerable<RouteDTO> ListRoutes { get; set; }
+        public IList<string> ListNameRoutes { get; set; }
         public IEnumerable<Airport> ListAirports { get; set; }
         public IEnumerable<FlightDetail> ListFlightDetail { get; set; }
         public IList<FlightDetailVM> ListFlightDetailVM { get; set; }
-        public async Task OnGet()
-        {   
-            ListNamePlanes =new List<string>();
+        public async Task OnGet()// chưa đụng gì tới bên này đâu
+        {
             ListFlights = await _services.getAllFlightAsync();
-            var ListPlanes = await _servicesPlane.getAllPlaneAsync();
-            foreach( var item in ListPlanes){
-                var s=await _servicesPlane.getPlaneFullname(item.PlaneId);
+            ListAirports = await _unitofwork.Airports.GetAllAsync();
+            ListRoutes = await _routeServices.getAllRouteAsync();
+            ListNameRoutes = new List<string>();
+            foreach (var item in ListRoutes)
+            {
+                Console.WriteLine(item.RouteId + ": " + item.Origin + " - " + item.Destination);
+                ListNameRoutes.Add(item.RouteId + ": " + item.Origin + " - " + item.Destination);
+            }
+            var ListPlanes = await _planeServices.getAllPlaneAsync();
+            ListNamePlanes = new List<string>();
+            foreach (var item in ListPlanes)
+            {
+                var s = await _planeServices.getPlaneFullname(item.PlaneId);
                 ListNamePlanes.Add(s);
             }
-
-            ListRoutes = await _unitofwork.Routes.GetAllAsync();
-            ListAirports = await _unitofwork.Airports.GetAllAsync();
         }
         public async Task<JsonResult> OnGetDetailFlight(string id)
         {
@@ -87,6 +96,11 @@ namespace Presentation.Pages.Admin
             }
             string mes = "Remove flight" + FlightId + " Success!";
             return new JsonResult(mes);
+        }
+        public async Task<JsonResult> OnGetRoutes()
+        {
+            ListRoutes = await _routeServices.getAllRouteAsync();
+            return new JsonResult(ListRoutes);
         }
     }
     public class FlightDetailVM

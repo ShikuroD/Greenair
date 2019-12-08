@@ -36,6 +36,59 @@ namespace ApplicationCore.Services
             return this.toDto(acc);
         }
 
+        public async Task<IEnumerable<AccountDTO>> getAvailableAccountAsync()
+        {
+            var Accounts = await unitOfWork.Accounts.getAvailableAccount();
+            return this.toDtoRange(Accounts);
+        }
+        public async Task<IEnumerable<AccountDTO>> getDisabledAccountAsync()
+        {
+            var Accounts = await unitOfWork.Accounts.getDisabledAccount();
+            return this.toDtoRange(Accounts);
+        }
+
+        new public async Task<IEnumerable<Account>> SortAsync(IEnumerable<Account> entities, ORDER_ENUM col, ORDER_ENUM order)
+        {
+            IEnumerable<Account> res = null;
+            await Task.Run(() => true);
+            if (order == ORDER_ENUM.DESCENDING)
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.PERSON_NAME:
+                        res = entities.OrderByDescending(m => unitOfWork.Persons.GetByAsync(m.PersonId)
+                                       .GetAwaiter().GetResult().FullName); break;
+                    case ORDER_ENUM.PERSON_FIRST_NAME:
+                        res = entities.OrderByDescending(m => unitOfWork.Persons.GetByAsync(m.PersonId)
+                                       .GetAwaiter().GetResult().FirstName); break;
+                    case ORDER_ENUM.PERSON_LAST_NAME:
+                        res = entities.OrderByDescending(m => unitOfWork.Persons.GetByAsync(m.PersonId)
+                                       .GetAwaiter().GetResult().LastName); break;
+                    case ORDER_ENUM.STATUS: res = entities.OrderByDescending(m => m.Status); break;
+                    default: res = entities.OrderByDescending(m => m.Username); break;
+                }
+            }
+            else
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.PERSON_NAME:
+                        res = entities.OrderBy(m => unitOfWork.Persons.GetByAsync(m.PersonId)
+                                       .GetAwaiter().GetResult().FullName); break;
+                    case ORDER_ENUM.PERSON_FIRST_NAME:
+                        res = entities.OrderBy(m => unitOfWork.Persons.GetByAsync(m.PersonId)
+                                       .GetAwaiter().GetResult().FirstName); break;
+                    case ORDER_ENUM.PERSON_LAST_NAME:
+                        res = entities.OrderBy(m => unitOfWork.Persons.GetByAsync(m.PersonId)
+                                       .GetAwaiter().GetResult().LastName); break;
+                    case ORDER_ENUM.STATUS: res = entities.OrderBy(m => m.Status); break;
+                    default: res = entities.OrderBy(m => m.Username); break;
+                }
+
+            }
+            return res;
+        }
+
 
         //action
         public async Task addAccountAsync(AccountDTO dto)
@@ -62,8 +115,10 @@ namespace ApplicationCore.Services
         {
             if (await this.isExistedUsernameAsync(dto.Username))
             {
-                var acc = this.toEntity(dto);
-                await unitOfWork.Accounts.UpdateAsync(acc);
+                // var acc = this.toEntity(dto);
+                // await unitOfWork.Accounts.UpdateAsync(acc);
+                var acc = await unitOfWork.Accounts.GetByAsync(dto.Username);
+                this.convertDtoToEntity(dto, acc);
             }
             else
             {

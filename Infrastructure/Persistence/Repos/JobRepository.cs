@@ -23,6 +23,21 @@ namespace Infrastructure.Persistence.Repos
             return res;
         }
 
+        private async Task<IEnumerable<Job>> getJobsByStatus(STATUS status)
+        {
+            return await this.FindAsync(m => m.Status == status);
+        }
+
+        public async Task<IEnumerable<Job>> getAvailableJob()
+        {
+            return await this.getJobsByStatus(STATUS.AVAILABLE);
+        }
+
+        public async Task<IEnumerable<Job>> getDisabledJob()
+        {
+            return await this.getJobsByStatus(STATUS.DISABLED);
+        }
+
         private async Task changeJobStatus(string Job_id, STATUS status)
         {
             try

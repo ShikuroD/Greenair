@@ -48,6 +48,45 @@ namespace ApplicationCore.Services
             return await unitOfWork.Airports.isDomestic(airport_id);
         }
 
+        public async Task<IEnumerable<AirportDTO>> getAvailableAirportAsync()
+        {
+            var Airports = await unitOfWork.Airports.getAvailableAirport();
+            return this.toDtoRange(Airports);
+        }
+        public async Task<IEnumerable<AirportDTO>> getDisabledAirportAsync()
+        {
+            var Airports = await unitOfWork.Airports.getDisabledAirport();
+            return this.toDtoRange(Airports);
+        }
+
+        new public async Task<IEnumerable<Airport>> SortAsync(IEnumerable<Airport> entities, ORDER_ENUM col, ORDER_ENUM order)
+        {
+            IEnumerable<Airport> res = null;
+            await Task.Run(() => true);
+            if (order == ORDER_ENUM.DESCENDING)
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.NAME: res = entities.OrderByDescending(m => m.AirportName); break;
+                    case ORDER_ENUM.ADDRESS: res = entities.OrderByDescending(m => m.Address.ToString()); break;
+                    case ORDER_ENUM.STATUS: res = entities.OrderByDescending(m => m.Status); break;
+                    default: res = entities.OrderByDescending(m => m.AirportId); break;
+                }
+            }
+            else
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.NAME: res = entities.OrderBy(m => m.AirportName); break;
+                    case ORDER_ENUM.ADDRESS: res = entities.OrderBy(m => m.Address.ToString()); break;
+                    case ORDER_ENUM.STATUS: res = entities.OrderBy(m => m.Status); break;
+                    default: res = entities.OrderBy(m => m.AirportId); break;
+                }
+
+            }
+            return res;
+        }
+
 
 
 
@@ -74,8 +113,10 @@ namespace ApplicationCore.Services
         {
             if (await unitOfWork.Airports.GetByAsync(dto.AirportId) != null)
             {
-                var airport = this.toEntity(dto);
-                await unitOfWork.Airports.UpdateAsync(airport);
+                // var airport = this.toEntity(dto);
+                // await unitOfWork.Airports.UpdateAsync(airport);
+                var airport = await unitOfWork.Airports.GetByAsync(dto.AirportId);
+                this.convertDtoToEntity(dto, airport);
             }
             else
             {

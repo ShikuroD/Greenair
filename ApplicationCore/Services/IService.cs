@@ -11,6 +11,8 @@ namespace ApplicationCore.Services
         void convertEntityToDto(Entity entity, Dto dto);
         void convertDtoToEntity(SaveDto dto, Entity entity);
 
+        Task<IEnumerable<Entity>> SortAsync(IEnumerable<Entity> entities, ORDER_ENUM col, ORDER_ENUM order);
+
         Task<int> CompleteAsync();
     }
 }

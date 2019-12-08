@@ -26,5 +26,7 @@ namespace ApplicationCore.Interfaces
         Task RemoveRangeAsync(IEnumerable<T> entities);
         Task UpdateAsync(T entity);
         Task UpdateRangeAsync(IEnumerable<T> entities);
+
+
     }
 }

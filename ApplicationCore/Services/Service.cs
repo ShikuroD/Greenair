@@ -40,6 +40,12 @@ namespace ApplicationCore.Services
             mapper.Map<SaveDto, Entity>(save, entity);
         }
 
+        public async Task<IEnumerable<Entity>> SortAsync(IEnumerable<Entity> entities, ORDER_ENUM col, ORDER_ENUM order)
+        {
+            await Task.Run(() => true);
+            return null;
+        }
+
         public async Task<int> CompleteAsync()
         {
             return await unitOfWork.CompleteAsync();

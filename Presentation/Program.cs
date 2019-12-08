@@ -40,6 +40,10 @@ namespace Presentation
                     // acc.Password = "12345";
                     // Console.WriteLine(acc.PersonId);
                     // unit.Accounts.UpdateAsync(acc);
+                    //var routes = unit.Routes.GetAllAsync().GetAwaiter().GetResult();
+                    var flights = unit.Customers.GetAllAsync().GetAwaiter().GetResult();
+
+
 
                     greenairContext.SaveChanges();
                     DataSeed.Initialize(greenairContext);
