@@ -40,6 +40,8 @@ namespace Presentation
                     // acc.Password = "12345";
                     // Console.WriteLine(acc.PersonId);
                     // unit.Accounts.UpdateAsync(acc);
+                    
+                    
 
                     greenairContext.SaveChanges();
                     DataSeed.Initialize(greenairContext);
