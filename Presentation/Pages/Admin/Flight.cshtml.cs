@@ -32,22 +32,27 @@ namespace Presentation.Pages.Admin
 
         public IEnumerable<FlightDTO> ListFlights { get; set; }
         public IList<string> ListNamePlanes { get; set; }
-        public IEnumerable<Route> ListRoutes { get; set; }
+        // public IEnumerable<Route> ListRoutes { get; set; }
+        public IList<string> ListNameRoutes { get; set; }
         public IEnumerable<Airport> ListAirports { get; set; }
         public IEnumerable<FlightDetail> ListFlightDetail { get; set; }
         public IList<FlightDetailVM> ListFlightDetailVM { get; set; }
-        public async Task OnGet()
+        public async Task OnGet()// chưa đụng gì tới bên này đâu
         {   
-            ListNamePlanes =new List<string>();
             ListFlights = await _services.getAllFlightAsync();
+            ListAirports = await _unitofwork.Airports.GetAllAsync();
+            
+            var ListRoutes = await _unitofwork.Routes.GetAllAsync();
+            ListNameRoutes =new List<string>();
+            foreach( var item in ListRoutes){
+                ListNameRoutes.Add(item.RouteId+": "+ item.Origin+" - "+ item.Destination);
+            }
             var ListPlanes = await _servicesPlane.getAllPlaneAsync();
+            ListNamePlanes =new List<string>();
             foreach( var item in ListPlanes){
                 var s=await _servicesPlane.getPlaneFullname(item.PlaneId);
                 ListNamePlanes.Add(s);
             }
-
-            ListRoutes = await _unitofwork.Routes.GetAllAsync();
-            ListAirports = await _unitofwork.Airports.GetAllAsync();
         }
         public async Task<JsonResult> OnGetDetailFlight(string id)
         {
@@ -87,6 +92,15 @@ namespace Presentation.Pages.Admin
             }
             string mes = "Remove flight" + FlightId + " Success!";
             return new JsonResult(mes);
+        } 
+        // code owr dqay ne, co ve IList ko tra ve json đc à thì ra là vậy, t doán thui, căng à
+        public async Task<JsonResult> OnGetRoutes(){
+             var ListRoutes = await _unitofwork.Routes.GetAllAsync();// here
+            // foreach( var item in ListRoutes){
+            //     ListNameRoutes.Add(item.RouteId+": "+ item.Origin+" - "+ item.Destination);// và nếu chạy cái này thì nó lại thêm data lần 2
+            // }
+            // quan trọng là mình gọi lại thằng này thì cái listname nó bi null
+            return new JsonResult(ListRoutes);// lấy cái listNameRoute ấy, cái này là object, ok
         }
     }
     public class FlightDetailVM
