@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
@@ -11,6 +12,21 @@ namespace Infrastructure.Persistence.Repos
         protected new GreenairContext Context => base.Context as GreenairContext;
         public TicketTypeRepository(GreenairContext context) : base(context)
         {
+        }
+
+        private async Task<IEnumerable<TicketType>> getTicketTypesByStatus(STATUS status)
+        {
+            return await this.FindAsync(m => m.Status == status);
+        }
+
+        public async Task<IEnumerable<TicketType>> getAvailableTicketType()
+        {
+            return await this.getTicketTypesByStatus(STATUS.AVAILABLE);
+        }
+
+        public async Task<IEnumerable<TicketType>> getDisabledTicketType()
+        {
+            return await this.getTicketTypesByStatus(STATUS.DISABLED);
         }
 
         private async Task changeTicketTypeStatus(string TicketType_id, STATUS status)

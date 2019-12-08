@@ -22,6 +22,21 @@ namespace Infrastructure.Persistence.Repos
             return await this.FindAsync(predicate);
         }
 
+        private async Task<IEnumerable<Plane>> getPlanesByStatus(STATUS status)
+        {
+            return await this.FindAsync(m => m.Status == status);
+        }
+
+        public async Task<IEnumerable<Plane>> getAvailablePlane()
+        {
+            return await this.getPlanesByStatus(STATUS.AVAILABLE);
+        }
+
+        public async Task<IEnumerable<Plane>> getDisabledPlane()
+        {
+            return await this.getPlanesByStatus(STATUS.DISABLED);
+        }
+
         private async Task changePlaneStatus(string Plane_id, STATUS status)
         {
             try

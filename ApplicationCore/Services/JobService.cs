@@ -28,6 +28,18 @@ namespace ApplicationCore.Services
         {
             return this.toDtoRange(await unitOfWork.Jobs.getJobByName(job_name));
         }
+
+        public async Task<IEnumerable<JobDTO>> getAvailableJobAsync()
+        {
+            var Jobs = await unitOfWork.Jobs.getAvailableJob();
+            return this.toDtoRange(Jobs);
+        }
+        public async Task<IEnumerable<JobDTO>> getDisabledJobAsync()
+        {
+            var Jobs = await unitOfWork.Jobs.getDisabledJob();
+            return this.toDtoRange(Jobs);
+        }
+
         //actions
         private async Task generateJobId(Job Job)
         {

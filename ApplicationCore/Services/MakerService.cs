@@ -29,6 +29,18 @@ namespace ApplicationCore.Services
         {
             return this.toDtoRange(await unitOfWork.Makers.getMakerByName(Maker_name));
         }
+
+        public async Task<IEnumerable<MakerDTO>> getAvailableMakerAsync()
+        {
+            var Makers = await unitOfWork.Makers.getAvailableMaker();
+            return this.toDtoRange(Makers);
+        }
+        public async Task<IEnumerable<MakerDTO>> getDisabledMakerAsync()
+        {
+            var Makers = await unitOfWork.Makers.getDisabledMaker();
+            return this.toDtoRange(Makers);
+        }
+
         //actions
         private async Task generateMakerId(Maker Maker)
         {

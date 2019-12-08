@@ -35,6 +35,18 @@ namespace ApplicationCore.Services
             var maker = await unitOfWork.Makers.GetByAsync(plane.MakerId);
             return String.Format("{0}-{1}", maker.MakerName, plane.PlaneId);
         }
+
+        public async Task<IEnumerable<PlaneDTO>> getAvailablePlaneAsync()
+        {
+            var Planes = await unitOfWork.Planes.getAvailablePlane();
+            return this.toDtoRange(Planes);
+        }
+        public async Task<IEnumerable<PlaneDTO>> getDisabledPlaneAsync()
+        {
+            var Planes = await unitOfWork.Planes.getDisabledPlane();
+            return this.toDtoRange(Planes);
+        }
+
         //actions
         private async Task generatePlaneId(Plane Plane)
         {

@@ -14,6 +14,9 @@ namespace ApplicationCore.Services
         Task<IEnumerable<EmployeeDTO>> getEmployeeByName(string lastname, string firstname);
         Task<IEnumerable<EmployeeDTO>> getEmployeeByName(string fullname);
 
+        Task<IEnumerable<EmployeeDTO>> getAvailableEmployeeAsync();
+        Task<IEnumerable<EmployeeDTO>> getDisabledEmployeeAsync();
+
         //actions
 
         Task addEmployeeAsync(EmployeeDTO dto);

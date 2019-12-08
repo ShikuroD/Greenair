@@ -15,6 +15,10 @@ namespace ApplicationCore.Services
 
         Task<IEnumerable<Object>> searchAirport(string term);
         Task<IEnumerable<Object>> getAirportName();
+
+        Task<IEnumerable<AirportDTO>> getAvailableAirportAsync();
+        Task<IEnumerable<AirportDTO>> getDisabledAirportAsync();
+
         //actions
         Task addAirportAsync(AirportDTO dto);
         Task removeAirportAsync(string airport_id);

@@ -36,6 +36,17 @@ namespace ApplicationCore.Services
             return this.toDto(acc);
         }
 
+        public async Task<IEnumerable<AccountDTO>> getAvailableAccountAsync()
+        {
+            var Accounts = await unitOfWork.Accounts.getAvailableAccount();
+            return this.toDtoRange(Accounts);
+        }
+        public async Task<IEnumerable<AccountDTO>> getDisabledAccountAsync()
+        {
+            var Accounts = await unitOfWork.Accounts.getDisabledAccount();
+            return this.toDtoRange(Accounts);
+        }
+
 
         //action
         public async Task addAccountAsync(AccountDTO dto)

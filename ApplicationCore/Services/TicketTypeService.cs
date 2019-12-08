@@ -25,6 +25,17 @@ namespace ApplicationCore.Services
             return this.toDtoRange(await unitOfWork.TicketTypes.GetAllAsync());
         }
 
+        public async Task<IEnumerable<TicketTypeDTO>> getAvailableTicketTypeAsync()
+        {
+            var TicketTypes = await unitOfWork.TicketTypes.getAvailableTicketType();
+            return this.toDtoRange(TicketTypes);
+        }
+        public async Task<IEnumerable<TicketTypeDTO>> getDisabledTicketTypeAsync()
+        {
+            var TicketTypes = await unitOfWork.TicketTypes.getDisabledTicketType();
+            return this.toDtoRange(TicketTypes);
+        }
+
 
         //actions
         private async Task generateTicketTypeId(TicketType TicketType)

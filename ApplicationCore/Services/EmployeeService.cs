@@ -43,6 +43,17 @@ namespace ApplicationCore.Services
             return this.toDtoRange(await unitOfWork.Employees.getEmployeeByJob(job_id));
         }
 
+        public async Task<IEnumerable<EmployeeDTO>> getAvailableEmployeeAsync()
+        {
+            var Employees = await unitOfWork.Employees.getAvailableEmployee();
+            return this.toDtoRange(Employees);
+        }
+        public async Task<IEnumerable<EmployeeDTO>> getDisabledEmployeeAsync()
+        {
+            var Employees = await unitOfWork.Employees.getDisabledEmployee();
+            return this.toDtoRange(Employees);
+        }
+
 
 
 

@@ -46,6 +46,17 @@ namespace ApplicationCore.Services
             return this.toDtoRange(await unitOfWork.Customers.getCustomerByName(fullname));
         }
 
+        public async Task<IEnumerable<CustomerDTO>> getAvailableCustomerAsync()
+        {
+            var Customers = await unitOfWork.Customers.getAvailableCustomer();
+            return this.toDtoRange(Customers);
+        }
+        public async Task<IEnumerable<CustomerDTO>> getDisabledCustomerAsync()
+        {
+            var Customers = await unitOfWork.Customers.getDisabledCustomer();
+            return this.toDtoRange(Customers);
+        }
+
 
 
 

@@ -33,14 +33,16 @@ namespace ApplicationCore.Services
         }
         public async Task<IEnumerable<FlightDTO>> getAllAvailableFlightAsync()
         {
-            var flights = await unitOfWork.Flights.GetAllAsync();
-            flights = flights.Where(m => m.Status == STATUS.AVAILABLE);
+            // var flights = await unitOfWork.Flights.GetAllAsync();
+            // flights = flights.Where(m => m.Status == STATUS.AVAILABLE);
+            var flights = await unitOfWork.Flights.getAvailableFlights();
             return mapper.Map<IEnumerable<Flight>, IEnumerable<FlightDTO>>(flights);
         }
         public async Task<IEnumerable<FlightDTO>> getAllDisabledFlightAsync()
         {
-            var flights = await unitOfWork.Flights.GetAllAsync();
-            flights = flights.Where(m => m.Status == STATUS.DISABLED);
+            // var flights = await unitOfWork.Flights.GetAllAsync();
+            // flights = flights.Where(m => m.Status == STATUS.DISABLED);
+            var flights = await unitOfWork.Flights.getDisabledFlights();
             return mapper.Map<IEnumerable<Flight>, IEnumerable<FlightDTO>>(flights);
         }
 

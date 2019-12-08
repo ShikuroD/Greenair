@@ -12,6 +12,9 @@ namespace ApplicationCore.Services
         Task<IEnumerable<MakerDTO>> getAllMakerAsync();
         Task<IEnumerable<MakerDTO>> getMakerByNameAsync(string maker_name);
 
+        Task<IEnumerable<MakerDTO>> getAvailableMakerAsync();
+        Task<IEnumerable<MakerDTO>> getDisabledMakerAsync();
+
         //actions
         Task addMakerAsync(MakerDTO dto);
         Task removeMakerAsync(string Maker_id);

@@ -33,6 +33,17 @@ namespace ApplicationCore.Services
             return this.toDtoRange(await unitOfWork.Routes.getRouteByDestinationAsync(destination));
         }
 
+        public async Task<IEnumerable<RouteDTO>> getAvailableRouteAsync()
+        {
+            var Routes = await unitOfWork.Routes.getAvailableRoute();
+            return this.toDtoRange(Routes);
+        }
+        public async Task<IEnumerable<RouteDTO>> getDisabledRouteAsync()
+        {
+            var Routes = await unitOfWork.Routes.getDisabledRoute();
+            return this.toDtoRange(Routes);
+        }
+
         //actions
         private async Task generateRouteId(Route Route)
         {
