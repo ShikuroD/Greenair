@@ -14,5 +14,8 @@ namespace ApplicationCore.Services
         Task addJobAsync(JobDTO dto);
         Task removeJobAsync(string job_id);
         Task updateJobAsync(JobDTO dto);
+
+        Task disableJobAsync(string Job_id);
+        Task activateJobAsync(string Job_id);
     }
 }

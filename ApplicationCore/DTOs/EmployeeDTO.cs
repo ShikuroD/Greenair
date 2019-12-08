@@ -13,6 +13,6 @@ namespace ApplicationCore.DTOs
 
         [Required]
         public string JobId { get; set; }
-        public JobDTO Job { get; set; }
+        //public JobDTO Job { get; set; }
     }
 }

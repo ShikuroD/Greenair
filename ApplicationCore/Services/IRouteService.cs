@@ -15,5 +15,8 @@ namespace ApplicationCore.Services
         Task addRouteAsync(RouteDTO dto);
         Task removeRouteAsync(string route_id);
         Task updateRouteAsync(RouteDTO dto);
+
+        Task disableRouteAsync(string Route_id);
+        Task activateRouteAsync(string Route_id);
     }
 }

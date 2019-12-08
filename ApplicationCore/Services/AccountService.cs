@@ -11,9 +11,10 @@ namespace ApplicationCore.Services
 {
     public class AccountService : Service<Account, AccountDTO, AccountDTO>, IAccountService
     {
+        //public IEnumerable<Account> List { get; set; }
         public AccountService(IUnitOfWork _unitOfWork, IMapper _mapper) : base(_unitOfWork, _mapper)
         {
-
+            //List = unitOfWork.Accounts.GetAllAsync().GetAwaiter().GetResult();
         }
 
         //query
@@ -21,9 +22,16 @@ namespace ApplicationCore.Services
         {
             return this.toDtoRange(await unitOfWork.Accounts.GetAllAsync());
         }
-        public async Task<AccountDTO> getAccountAsync(string person_id)
+        public async Task<AccountDTO> getAccountByPersonIdAsync(string person_id)
         {
             var acc = await unitOfWork.Accounts.getAccountByPersonId(person_id);
+            if (acc == null) return null;
+            return this.toDto(acc);
+        }
+
+        public async Task<AccountDTO> getAccountAsync(string username)
+        {
+            var acc = await unitOfWork.Accounts.GetByAsync(username);
             if (acc == null) return null;
             return this.toDto(acc);
         }

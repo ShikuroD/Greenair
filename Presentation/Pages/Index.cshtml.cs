@@ -10,6 +10,9 @@ using ApplicationCore.DTOs;
 using ApplicationCore.Entities;
 using Microsoft.AspNetCore.Http;
 using ApplicationCore.Interfaces;
+using ApplicationCore.Services;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Presentation.Pages
 {
@@ -17,10 +20,12 @@ namespace Presentation.Pages
     {
         //private readonly ILogger<IndexModel> _logger;
         private readonly IUnitOfWork _unitofwork;
-
-        public IndexModel(IUnitOfWork unitofwork)
+        private readonly IAirportService _airportService;
+        [ActivatorUtilitiesConstructor]
+        public IndexModel(IUnitOfWork unitofwork,IAirportService airportService )
         {
             this._unitofwork = unitofwork;
+            this._airportService = airportService;
         }
         [BindProperty]
         public string From { get; set; }
@@ -36,7 +41,8 @@ namespace Presentation.Pages
         public string NumChilds { get; set; }
         [BindProperty]
         public string FlightType { get; set; }
-        public IEnumerable<Airport> ListAirports { get; set; }
+        public IEnumerable<Object> ListAirportNames { get; set; }
+        public IEnumerable<AirportDTO> ListAirports  { get; set; }
         //public List<FlightDetail> FlightSearch { get; set; }
         public string Msg { get; set; }
         // public IndexModel(ILogger<IndexModel> logger)
@@ -46,7 +52,6 @@ namespace Presentation.Pages
 
         public void OnGet()
         {
-            
         }
         public IActionResult OnPost()
         {
@@ -61,14 +66,14 @@ namespace Presentation.Pages
             SessionHelper.SetObjectAsJson(HttpContext.Session, "FlightSearch", FlightSearch);
             return RedirectToPage("Flight");
         }
-        public IActionResult OnGetAirPort(string term)
+        public async Task<IActionResult> OnGetAirPortAsync(string term)
         {
-            ListAirports =  _unitofwork.Airports.GetAll();
-            var ListAirportNames = from m in ListAirports
-                                where m.AirportName.Contains(term)
-                                select m.AirportName
-                                ;
+            ListAirportNames = await _airportService.searchAirport(term);
             return new JsonResult(ListAirportNames);
+        }
+        public async Task<IActionResult> OnGetAllAirPortAsync()
+        {
+            return new JsonResult(await _airportService.getAllAirportAsync());
         }
     }
 }

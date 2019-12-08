@@ -15,10 +15,10 @@ namespace ApplicationCore.DTOs
 
         [Required]
         public string PlaneId { get; set; }
-        public PlaneDTO Plane { get; set; }
+        //public PlaneDTO Plane { get; set; }
 
-        public IList<FlightDetailDTO> FlightDetails { get; set; }
+        //public IList<FlightDetailDTO> FlightDetails { get; set; }
 
-        public IList<TicketDTO> Tickets { get; set; }
+        //public IList<TicketDTO> Tickets { get; set; }
     }
 }

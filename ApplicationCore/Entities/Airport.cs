@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using ApplicationCore.Interfaces;
+using ApplicationCore;
 
 namespace ApplicationCore.Entities
 {
@@ -12,6 +13,8 @@ namespace ApplicationCore.Entities
         public string AirportName { get; set; }
 
         public Address Address { get; set; }
+
+        public STATUS Status { get; set; }
 
         public IList<Route> RouteStarts { get; set; }
 

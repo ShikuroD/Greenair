@@ -38,15 +38,32 @@ namespace Infrastructure.Persistence
                 Address add = new Address("472", "Mac Cua", "An Lan", "Cai Chien", "Ha Noi", "Viet Nam");
                 Address add2 = new Address("472", "Cong Hoa", "5", "Tan Binh", "Ho Chi Minh", "Viet Nam");
                 context.Airports.AddRange(
-                    new Airport("000", "Noi Bai", add),
-                    new Airport("001", "Tan Son Nhat", add2),
-                    new Airport("003", "San Francisco", new Address("25/78", "HeHe", "TuTu", "MeMe", "California", "USA")),
-                    new Airport("004", "Dallas", new Address("2547", "TonTon", "ChiChi", "Goku", "Texas", "USA")),
-                    new Airport("005", "Los Angeles", new Address("2547", "TonTon", "ChiChi", "Goku", "California", "USA")),
-                    new Airport("006", "Tokyo", new Address("2547", "TonTon", "ChiChi", "Goku", "Tokyo", "Japan")),
-                    new Airport("007", "Osaka", new Address("2547", "TonTon", "ChiChi", "Goku", "Osaka", "Japan")),
-                    new Airport("008", "Liverpool John Lennon", new Address("2547", "TonTon", "ChiChi", "Goku", "Liverpool", "UK")),
-                    new Airport("009", "London City", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK"))
+                    new Airport("HAN", "Noi Bai", add),
+                    new Airport("SGN", "Tan Son Nhat", add2),
+                    new Airport("HPH", "Hai Phong", new Address("25/78", "HeHe", "TuTu", "MeMe", "California", "USA")),
+                    new Airport("VDO", "Van Don", new Address("2547", "TonTon", "ChiChi", "Goku", "Texas", "USA")),
+                    new Airport("THD", "Thanh Hoa", new Address("2547", "TonTon", "ChiChi", "Goku", "California", "USA")),
+                    new Airport("VII", "Vinh", new Address("2547", "TonTon", "ChiChi", "Goku", "Tokyo", "Japan")),
+                    new Airport("VDH", "Dong Hoi", new Address("2547", "TonTon", "ChiChi", "Goku", "Osaka", "Japan")),
+                    new Airport("HUI", "Hue", new Address("2547", "TonTon", "ChiChi", "Goku", "Liverpool", "UK")),
+                    new Airport("DAD", "Da Nang", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK")),
+                    new Airport("VCL", "Tam Ky", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK")),
+                    new Airport("UIH", "Quy Nhon", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK")),
+                    new Airport("TBB", "Tuy Hoa", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK")),
+                    new Airport("CXR", "Nha Trang", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK")),
+                    new Airport("PQC", "Phu Quoc", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK")),
+                    new Airport("PXU", "Pleiku", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK")),
+                    new Airport("BMV", "Buon Me Thuot", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK")),
+                    new Airport("DLI", "Da Lat", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK")),
+                    new Airport("SIN", "Singapore", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK")),
+                    new Airport("BKK", "Bangkok", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK")),
+                    new Airport("JKT", "Jakarta jkt", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK")),
+                    new Airport("HKG", "Hong Kong", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK")),
+                    new Airport("CAN", "Guangzhou", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK")),
+                    new Airport("KIX", "Osaka Kansai", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK")),
+                    new Airport("SYD", "Sydney", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK")),
+                    new Airport("MEl", "Melbourne", new Address("2547", "TonTon", "ChiChi", "Goku", "London", "UK"))
+
                 );
                 context.SaveChanges();
             }
@@ -102,16 +119,16 @@ namespace Infrastructure.Persistence
             if (!context.Routes.Any())
             {
                 context.Routes.AddRange(
-                    new Route("00000", "001", "000", new FlightTime(1, 45)),
-                    new Route("00001", "000", "001", new FlightTime(1, 45)),
-                    new Route("00002", "000", "006", new FlightTime(4, 0)),
-                    new Route("00003", "006", "000", new FlightTime(4, 0)),
-                    new Route("00004", "001", "006", new FlightTime(4, 30)),
-                    new Route("00005", "006", "001", new FlightTime(4, 30)),
-                    new Route("00006", "001", "005", new FlightTime(10, 30)),
-                    new Route("00007", "005", "001", new FlightTime(10, 30)),
-                    new Route("00008", "000", "005", new FlightTime(10, 0)),
-                    new Route("00009", "005", "000", new FlightTime(10, 0))
+                    new Route("00000", "HAN", "SGN", new FlightTime(1, 45)),
+                    new Route("00001", "SGN", "HAN", new FlightTime(1, 45)),
+                    new Route("00002", "HAN", "THD", new FlightTime(4, 0)),
+                    new Route("00003", "THD", "HAN", new FlightTime(4, 0)),
+                    new Route("00004", "DLI", "BMV", new FlightTime(4, 30)),
+                    new Route("00005", "BMV", "DLI", new FlightTime(4, 30)),
+                    new Route("00006", "SGN", "DLI", new FlightTime(10, 30)),
+                    new Route("00007", "DLI", "SGN", new FlightTime(10, 30)),
+                    new Route("00008", "BMV", "HAN", new FlightTime(10, 0)),
+                    new Route("00009", "HAN", "BMV", new FlightTime(10, 0))
                 );
                 context.SaveChanges();
             }

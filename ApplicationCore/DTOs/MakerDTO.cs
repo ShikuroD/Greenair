@@ -18,7 +18,9 @@ namespace ApplicationCore.DTOs
 
         public AddressDTO Address { get; set; }
 
-        public IList<PlaneDTO> Planes { get; set; }
+        public STATUS Status { get; set; }
+
+        //public IList<PlaneDTO> Planes { get; set; }
 
         public MakerDTO(string makerId, string makerName, AddressDTO address)
         {

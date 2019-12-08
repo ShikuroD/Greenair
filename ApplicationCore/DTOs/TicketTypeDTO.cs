@@ -19,6 +19,8 @@ namespace ApplicationCore.DTOs
         [Column(TypeName = "decimal(18,2)")]
         public decimal BasePrice { get; set; }
 
-        public IList<TicketDTO> Tickets { get; set; }
+        public STATUS Status { get; set; }
+
+        //public IList<TicketDTO> Tickets { get; set; }
     }
 }

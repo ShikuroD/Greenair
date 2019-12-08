@@ -9,5 +9,10 @@ namespace ApplicationCore.Interfaces
     public interface IJobRepository : IRepository<Job>
     {
         Task<IEnumerable<Job>> getJobByName(string job_name);
+
+        Task disable(string job_id);
+        Task activate(string job_id);
+        Task disable(Job acc);
+        Task activate(Job acc);
     }
 }

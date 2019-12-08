@@ -78,7 +78,9 @@
 													<label for="#">From</label>
 													<div class="form-field" >
 														<div class="icon"><span class="icon-my_location"></span></div>
-														<input asp-for="@Model.From" type="text" id="From" class="form-control" placeholder="From" />
+														<input type="text" id="From" class="form-control" placeholder="From" />
+													
+														<input asp-for="@Model.From" type="hidden" id="AirportId"/>
 													</div>
 												</div>
 											</div>

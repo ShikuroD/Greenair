@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using System.Reflection.Emit;
 using System.Collections.Generic;
 using AutoMapper;
@@ -14,6 +15,7 @@ namespace ApplicationCore.Services
             unitOfWork = _unitOfWork;
             mapper = _mapper;
         }
+
 
         public Dto toDto(Entity entity)
         {
@@ -36,6 +38,11 @@ namespace ApplicationCore.Services
         public void convertDtoToEntity(SaveDto save, Entity entity)
         {
             mapper.Map<SaveDto, Entity>(save, entity);
+        }
+
+        public async Task<int> CompleteAsync()
+        {
+            return await unitOfWork.CompleteAsync();
         }
     }
 }

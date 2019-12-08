@@ -70,11 +70,16 @@ namespace Presentation.Pages
         {
 
         }
+        // public async Task<IActionResult> OnGetProfile()
+        // {
+
+        // }
         public async Task<IActionResult> OnPostLogIn()
         {
             string username = "";
             string password = "";
             string userId = "";
+            string cusId ="";
             {
                 MemoryStream stream = new MemoryStream();
                 Request.Body.CopyTo(stream);
@@ -96,7 +101,9 @@ namespace Presentation.Pages
                                 Person Person = await _accountService.getPersonByAccount(username);
                                 CustomerDTO customer = await _customerService.getCustomerAsync(Person.Id.ToString());
                                 userId = customer.FirstName;
+                                cusId = customer.Id;
                                 HttpContext.Session.SetString("username",userId);
+                                HttpContext.Session.SetString("cusid",cusId);
                                 Msg = "true";
                             }
                             else{

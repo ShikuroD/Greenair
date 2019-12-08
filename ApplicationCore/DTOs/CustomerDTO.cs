@@ -12,6 +12,6 @@ namespace ApplicationCore.DTOs
             @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$", ErrorMessage = "Email không đúng")]
         [Required]
         public string Email { get; set; }
-        public IList<TicketDTO> Tickets { get; set; }
+        //public IList<TicketDTO> Tickets { get; set; }
     }
 }

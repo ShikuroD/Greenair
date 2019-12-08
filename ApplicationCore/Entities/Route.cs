@@ -19,6 +19,8 @@ namespace ApplicationCore.Entities
         public FlightTime FlightTime { get; set; }
         public IList<FlightDetail> FlightDetails { get; set; }
 
+        public STATUS Status { get; set; }
+
         public Route() { }
 
         public Route(string RouteId, string Origin, string Destination, FlightTime flightTime)
