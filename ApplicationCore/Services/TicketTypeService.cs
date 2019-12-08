@@ -36,6 +36,34 @@ namespace ApplicationCore.Services
             return this.toDtoRange(TicketTypes);
         }
 
+        new public async Task<IEnumerable<TicketType>> SortAsync(IEnumerable<TicketType> entities, ORDER_ENUM col, ORDER_ENUM order)
+        {
+            IEnumerable<TicketType> res = null;
+            await Task.Run(() => true);
+            if (order == ORDER_ENUM.DESCENDING)
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.NAME: res = entities.OrderByDescending(m => m.TicketTypeName); break;
+                    case ORDER_ENUM.STATUS: res = entities.OrderByDescending(m => m.Status); break;
+                    case ORDER_ENUM.BASEPRICE: res = entities.OrderByDescending(m => m.BasePrice); break;
+                    default: res = entities.OrderByDescending(m => m.TicketTypeId); break;
+                }
+            }
+            else
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.NAME: res = entities.OrderBy(m => m.TicketTypeName); break;
+                    case ORDER_ENUM.STATUS: res = entities.OrderBy(m => m.Status); break;
+                    case ORDER_ENUM.BASEPRICE: res = entities.OrderBy(m => m.BasePrice); break;
+                    default: res = entities.OrderBy(m => m.TicketTypeId); break;
+                }
+
+            }
+            return res;
+        }
+
 
         //actions
         private async Task generateTicketTypeId(TicketType TicketType)

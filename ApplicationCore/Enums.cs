@@ -35,19 +35,27 @@ namespace ApplicationCore
 
         //for account
         PERSON_NAME = 13,
+        PERSON_FIRST_NAME = 15,
+        PERSON_LAST_NAME = 16,
 
-        //for flight
-        PLANE_NAME = 14,
+        //for plane
+        PLANE_NAME = 17,
+        MAKER_NAME = 18,
 
-        //for route
-        ORIGIN_NAME = 15,
-        DESTINATION_NAME = 16,
+        //for flight and route
+        ORIGIN_NAME = 19,
+        DESTINATION_NAME = 20,
+        FLIGHT_TIME = 21,
 
         //for ticket
-        CUSTOMER_NAME = 17,
+        CUSTOMER_NAME = 22,
 
         //for tickettype
-        BASEPRICE = 18
+        BASEPRICE = 23,
+
+        //for flight
+        DEP_DATE = 24, //departure date
+        ARR_DATE = 25 //arrive date
 
     }
 }

@@ -35,6 +35,11 @@ namespace ApplicationCore.Services
             var maker = await unitOfWork.Makers.GetByAsync(plane.MakerId);
             return String.Format("{0}-{1}", maker.MakerName, plane.PlaneId);
         }
+        public async Task<String> getPlaneFullname(Plane plane, string maker_id)
+        {
+            var maker = await unitOfWork.Makers.GetByAsync(plane.MakerId);
+            return String.Format("{0}-{1}", maker.MakerName, plane.PlaneId);
+        }
 
         public async Task<IEnumerable<PlaneDTO>> getAvailablePlaneAsync()
         {
@@ -46,6 +51,36 @@ namespace ApplicationCore.Services
             var Planes = await unitOfWork.Planes.getDisabledPlane();
             return this.toDtoRange(Planes);
         }
+
+        new public async Task<IEnumerable<Plane>> SortAsync(IEnumerable<Plane> entities, ORDER_ENUM col, ORDER_ENUM order)
+        {
+            IEnumerable<Plane> res = null;
+            await Task.Run(() => true);
+            if (order == ORDER_ENUM.DESCENDING)
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.NAME: case ORDER_ENUM.PLANE_NAME: res = entities.OrderByDescending(m => this.getPlaneFullname(m, m.MakerId).GetAwaiter().GetResult()); break;
+                    case ORDER_ENUM.MAKER_NAME: res = entities.OrderByDescending(m => unitOfWork.Makers.GetByAsync(m.MakerId).GetAwaiter().GetResult()); break;
+                    case ORDER_ENUM.STATUS: res = entities.OrderByDescending(m => m.Status); break;
+                    default: res = entities.OrderByDescending(m => m.PlaneId); break;
+                }
+            }
+            else
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.NAME: case ORDER_ENUM.PLANE_NAME: res = entities.OrderBy(m => this.getPlaneFullname(m, m.MakerId).GetAwaiter().GetResult()); break;
+                    case ORDER_ENUM.MAKER_NAME: res = entities.OrderBy(m => unitOfWork.Makers.GetByAsync(m.MakerId).GetAwaiter().GetResult()); break;
+                    case ORDER_ENUM.STATUS: res = entities.OrderBy(m => m.Status); break;
+                    default: res = entities.OrderBy(m => m.PlaneId); break;
+                }
+
+            }
+            return res;
+        }
+
+
 
         //actions
         private async Task generatePlaneId(Plane Plane)

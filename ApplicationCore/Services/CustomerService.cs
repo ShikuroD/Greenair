@@ -57,6 +57,39 @@ namespace ApplicationCore.Services
             return this.toDtoRange(Customers);
         }
 
+        new public async Task<IEnumerable<Customer>> SortAsync(IEnumerable<Customer> entities, ORDER_ENUM col, ORDER_ENUM order)
+        {
+            IEnumerable<Customer> res = null;
+            await Task.Run(() => true);
+            if (order == ORDER_ENUM.DESCENDING)
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.NAME: res = entities.OrderByDescending(m => m.FullName); break;
+                    case ORDER_ENUM.FIRST_NAME: res = entities.OrderByDescending(m => m.FirstName); break;
+                    case ORDER_ENUM.LAST_NAME: res = entities.OrderByDescending(m => m.LastName); break;
+                    case ORDER_ENUM.ADDRESS: res = entities.OrderByDescending(m => m.Address.ToString()); break;
+                    case ORDER_ENUM.STATUS: res = entities.OrderByDescending(m => m.Status); break;
+                    default: res = entities.OrderByDescending(m => m.Id); break;
+                }
+            }
+            else
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.NAME: res = entities.OrderBy(m => m.FullName); break;
+                    case ORDER_ENUM.FIRST_NAME: res = entities.OrderBy(m => m.FirstName); break;
+                    case ORDER_ENUM.LAST_NAME: res = entities.OrderBy(m => m.LastName); break;
+                    case ORDER_ENUM.ADDRESS: res = entities.OrderBy(m => m.Address.ToString()); break;
+                    case ORDER_ENUM.STATUS: res = entities.OrderBy(m => m.Status); break;
+                    default: res = entities.OrderBy(m => m.Id); break;
+                }
+
+            }
+            return res;
+        }
+
+
 
 
 

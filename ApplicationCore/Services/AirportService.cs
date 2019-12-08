@@ -59,6 +59,34 @@ namespace ApplicationCore.Services
             return this.toDtoRange(Airports);
         }
 
+        new public async Task<IEnumerable<Airport>> SortAsync(IEnumerable<Airport> entities, ORDER_ENUM col, ORDER_ENUM order)
+        {
+            IEnumerable<Airport> res = null;
+            await Task.Run(() => true);
+            if (order == ORDER_ENUM.DESCENDING)
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.NAME: res = entities.OrderByDescending(m => m.AirportName); break;
+                    case ORDER_ENUM.ADDRESS: res = entities.OrderByDescending(m => m.Address.ToString()); break;
+                    case ORDER_ENUM.STATUS: res = entities.OrderByDescending(m => m.Status); break;
+                    default: res = entities.OrderByDescending(m => m.AirportId); break;
+                }
+            }
+            else
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.NAME: res = entities.OrderBy(m => m.AirportName); break;
+                    case ORDER_ENUM.ADDRESS: res = entities.OrderBy(m => m.Address.ToString()); break;
+                    case ORDER_ENUM.STATUS: res = entities.OrderBy(m => m.Status); break;
+                    default: res = entities.OrderBy(m => m.AirportId); break;
+                }
+
+            }
+            return res;
+        }
+
 
 
 

@@ -41,6 +41,34 @@ namespace ApplicationCore.Services
             return this.toDtoRange(Makers);
         }
 
+        new public async Task<IEnumerable<Maker>> SortAsync(IEnumerable<Maker> entities, ORDER_ENUM col, ORDER_ENUM order)
+        {
+            IEnumerable<Maker> res = null;
+            await Task.Run(() => true);
+            if (order == ORDER_ENUM.DESCENDING)
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.NAME: res = entities.OrderByDescending(m => m.MakerName); break;
+                    case ORDER_ENUM.STATUS: res = entities.OrderByDescending(m => m.Status); break;
+                    case ORDER_ENUM.ADDRESS: res = entities.OrderByDescending(m => m.Address.ToString()); break;
+                    default: res = entities.OrderByDescending(m => m.MakerId); break;
+                }
+            }
+            else
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.NAME: res = entities.OrderBy(m => m.MakerName); break;
+                    case ORDER_ENUM.STATUS: res = entities.OrderBy(m => m.Status); break;
+                    case ORDER_ENUM.ADDRESS: res = entities.OrderBy(m => m.Address.ToString()); break;
+                    default: res = entities.OrderBy(m => m.MakerId); break;
+                }
+
+            }
+            return res;
+        }
+
         //actions
         private async Task generateMakerId(Maker Maker)
         {

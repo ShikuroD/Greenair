@@ -40,6 +40,32 @@ namespace ApplicationCore.Services
             return this.toDtoRange(Jobs);
         }
 
+        new public async Task<IEnumerable<Job>> SortAsync(IEnumerable<Job> entities, ORDER_ENUM col, ORDER_ENUM order)
+        {
+            IEnumerable<Job> res = null;
+            await Task.Run(() => true);
+            if (order == ORDER_ENUM.DESCENDING)
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.NAME: res = entities.OrderByDescending(m => m.JobName); break;
+                    case ORDER_ENUM.STATUS: res = entities.OrderByDescending(m => m.Status); break;
+                    default: res = entities.OrderByDescending(m => m.JobId); break;
+                }
+            }
+            else
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.NAME: res = entities.OrderBy(m => m.JobName); break;
+                    case ORDER_ENUM.STATUS: res = entities.OrderBy(m => m.Status); break;
+                    default: res = entities.OrderBy(m => m.JobId); break;
+                }
+
+            }
+            return res;
+        }
+
         //actions
         private async Task generateJobId(Job Job)
         {

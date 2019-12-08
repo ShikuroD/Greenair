@@ -47,6 +47,48 @@ namespace ApplicationCore.Services
             return this.toDtoRange(Accounts);
         }
 
+        new public async Task<IEnumerable<Account>> SortAsync(IEnumerable<Account> entities, ORDER_ENUM col, ORDER_ENUM order)
+        {
+            IEnumerable<Account> res = null;
+            await Task.Run(() => true);
+            if (order == ORDER_ENUM.DESCENDING)
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.PERSON_NAME:
+                        res = entities.OrderByDescending(m => unitOfWork.Persons.GetByAsync(m.PersonId)
+                                       .GetAwaiter().GetResult().FullName); break;
+                    case ORDER_ENUM.PERSON_FIRST_NAME:
+                        res = entities.OrderByDescending(m => unitOfWork.Persons.GetByAsync(m.PersonId)
+                                       .GetAwaiter().GetResult().FirstName); break;
+                    case ORDER_ENUM.PERSON_LAST_NAME:
+                        res = entities.OrderByDescending(m => unitOfWork.Persons.GetByAsync(m.PersonId)
+                                       .GetAwaiter().GetResult().LastName); break;
+                    case ORDER_ENUM.STATUS: res = entities.OrderByDescending(m => m.Status); break;
+                    default: res = entities.OrderByDescending(m => m.Username); break;
+                }
+            }
+            else
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.PERSON_NAME:
+                        res = entities.OrderBy(m => unitOfWork.Persons.GetByAsync(m.PersonId)
+                                       .GetAwaiter().GetResult().FullName); break;
+                    case ORDER_ENUM.PERSON_FIRST_NAME:
+                        res = entities.OrderBy(m => unitOfWork.Persons.GetByAsync(m.PersonId)
+                                       .GetAwaiter().GetResult().FirstName); break;
+                    case ORDER_ENUM.PERSON_LAST_NAME:
+                        res = entities.OrderBy(m => unitOfWork.Persons.GetByAsync(m.PersonId)
+                                       .GetAwaiter().GetResult().LastName); break;
+                    case ORDER_ENUM.STATUS: res = entities.OrderBy(m => m.Status); break;
+                    default: res = entities.OrderBy(m => m.Username); break;
+                }
+
+            }
+            return res;
+        }
+
 
         //action
         public async Task addAccountAsync(AccountDTO dto)

@@ -44,6 +44,34 @@ namespace ApplicationCore.Services
             return this.toDtoRange(Routes);
         }
 
+        new public async Task<IEnumerable<Route>> SortAsync(IEnumerable<Route> entities, ORDER_ENUM col, ORDER_ENUM order)
+        {
+            IEnumerable<Route> res = null;
+            await Task.Run(() => true);
+            if (order == ORDER_ENUM.DESCENDING)
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.ORIGIN_NAME: res = entities.OrderByDescending(m => unitOfWork.Airports.GetByAsync(m.Origin).GetAwaiter().GetResult().AirportName); break;
+                    case ORDER_ENUM.DESTINATION_NAME: res = entities.OrderByDescending(m => unitOfWork.Airports.GetByAsync(m.Destination).GetAwaiter().GetResult().AirportName); break;
+                    case ORDER_ENUM.STATUS: res = entities.OrderByDescending(m => m.Status); break;
+                    default: res = entities.OrderByDescending(m => m.RouteId); break;
+                }
+            }
+            else
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.ORIGIN_NAME: res = entities.OrderBy(m => unitOfWork.Airports.GetByAsync(m.Origin).GetAwaiter().GetResult().AirportName); break;
+                    case ORDER_ENUM.DESTINATION_NAME: res = entities.OrderBy(m => unitOfWork.Airports.GetByAsync(m.Destination).GetAwaiter().GetResult().AirportName); break;
+                    case ORDER_ENUM.STATUS: res = entities.OrderBy(m => m.Status); break;
+                    default: res = entities.OrderBy(m => m.RouteId); break;
+                }
+
+            }
+            return res;
+        }
+
         //actions
         private async Task generateRouteId(Route Route)
         {
