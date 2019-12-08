@@ -742,6 +742,7 @@ contentWayPoint();
 						}),
 						success: function(response)
 						{
+								alert(response);
 								$("#pass-field").addClass("hidden");
 								$("#pass-show").removeClass("hidedn");
 								$("#open-pass").removeClass("hidden");
@@ -750,6 +751,10 @@ contentWayPoint();
 								$("#new-pass").val("");
 								$("#re-pass").val("");
 								$("#old-pass").val(NewPass);
+						},
+						error:function()
+						{
+							alert("false");
 						}
 					});	
 				}

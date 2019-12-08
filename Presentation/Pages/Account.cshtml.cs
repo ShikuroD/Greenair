@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ApplicationCore.DTOs;
 using ApplicationCore.Entities;
+using ApplicationCore.Interfaces;
 using ApplicationCore.Services;
 using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Http;
@@ -24,10 +25,12 @@ namespace Presentation.Pages
         [ActivatorUtilitiesConstructor]
         private readonly ICustomerService _customerService;
         [ActivatorUtilitiesConstructor]
-        public AccountModel(IAccountService accountService, ICustomerService customerService)
+        private readonly IUnitOfWork _unitOfWork;
+        public AccountModel(IAccountService accountService, ICustomerService customerService, IUnitOfWork unitOfWork)
         {
             _accountService = accountService;
             _customerService = customerService;
+            _unitOfWork = unitOfWork;
         }
         public AccountDTO account { get; set; }
         public CustomerDTO customer { get; set; }
@@ -198,6 +201,7 @@ namespace Presentation.Pages
         public async Task<IActionResult> OnPostEditAccountCustomer()
         {
             string username ="";
+            string rs ="";
             if(HttpContext.Session.GetString("username")!= null)
             {
                 username = HttpContext.Session.GetString("username");
@@ -216,14 +220,15 @@ namespace Presentation.Pages
                         {
                             AccountDTO account = await _accountService.getAccountAsync(username);
                             account.Password = obj.Password;
-                            // unitofwork.completeasync;
+                            // await _unitOfWork.CompleteAsync();
                             // await _accountService.updateAccountAsync(account);
                             Msg = "Successful";
+                            rs = account.Username;
                         }
                     }
                 }
             }
-            return new JsonResult(Msg);
+            return new JsonResult(rs);
         }
     }
     class CustomerViewModel
