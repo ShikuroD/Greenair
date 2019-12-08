@@ -100,8 +100,10 @@ namespace ApplicationCore.Services
         {
             if (await unitOfWork.Flights.GetByAsync(flightDto.FlightId) != null)
             {
-                var flight = this.toEntity(flightDto);
-                await unitOfWork.Flights.UpdateAsync(flight);
+                // var Flight = this.toEntity(dto);
+                // await unitOfWork.Flights.UpdateAsync(Flight);
+                var Flight = await unitOfWork.Flights.GetByAsync(flightDto.FlightId);
+                this.convertDtoToEntity(flightDto, Flight);
             }
             else
             {

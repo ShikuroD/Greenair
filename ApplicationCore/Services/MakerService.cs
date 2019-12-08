@@ -61,8 +61,10 @@ namespace ApplicationCore.Services
         {
             if (await unitOfWork.Makers.GetByAsync(dto.MakerId) != null)
             {
-                var Maker = this.toEntity(dto);
-                await unitOfWork.Makers.UpdateAsync(Maker);
+                // var Maker = this.toEntity(dto);
+                // await unitOfWork.Makers.UpdateAsync(Maker);
+                var Maker = await unitOfWork.Makers.GetByAsync(dto.MakerId);
+                this.convertDtoToEntity(dto, Maker);
             }
             else
             {

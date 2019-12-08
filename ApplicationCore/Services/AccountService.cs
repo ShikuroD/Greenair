@@ -62,8 +62,10 @@ namespace ApplicationCore.Services
         {
             if (await this.isExistedUsernameAsync(dto.Username))
             {
-                var acc = this.toEntity(dto);
-                await unitOfWork.Accounts.UpdateAsync(acc);
+                // var acc = this.toEntity(dto);
+                // await unitOfWork.Accounts.UpdateAsync(acc);
+                var acc = await unitOfWork.Accounts.GetByAsync(dto.Username);
+                this.convertDtoToEntity(dto, acc);
             }
             else
             {

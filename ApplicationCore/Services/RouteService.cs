@@ -70,8 +70,10 @@ namespace ApplicationCore.Services
         {
             if (await unitOfWork.Routes.GetByAsync(dto.RouteId) != null && await this.isExisted(this.toEntity(dto)))
             {
-                var route = this.toEntity(dto);
-                await unitOfWork.Routes.UpdateAsync(route);
+                // var Route = this.toEntity(dto);
+                // await unitOfWork.Routes.UpdateAsync(Route);
+                var Route = await unitOfWork.Routes.GetByAsync(dto.RouteId);
+                this.convertDtoToEntity(dto, Route);
             }
             else
             {

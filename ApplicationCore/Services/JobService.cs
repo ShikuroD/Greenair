@@ -60,8 +60,11 @@ namespace ApplicationCore.Services
         {
             if (await unitOfWork.Jobs.GetByAsync(dto.JobId) != null)
             {
-                var job = this.toEntity(dto);
-                await unitOfWork.Jobs.UpdateAsync(job);
+                // var Job = this.toEntity(dto);
+                // await unitOfWork.Jobs.UpdateAsync(Job);
+                var Job = await unitOfWork.Jobs.GetByAsync(dto.JobId);
+                this.convertDtoToEntity(dto, Job);
+
             }
             else
             {

@@ -67,8 +67,10 @@ namespace ApplicationCore.Services
         {
             if (await unitOfWork.Planes.GetByAsync(dto.PlaneId) != null)
             {
-                var plane = this.toEntity(dto);
-                await unitOfWork.Planes.UpdateAsync(plane);
+                // var Plane = this.toEntity(dto);
+                // await unitOfWork.Planes.UpdateAsync(Plane);
+                var Plane = await unitOfWork.Planes.GetByAsync(dto.PlaneId);
+                this.convertDtoToEntity(dto, Plane);
             }
             else
             {
