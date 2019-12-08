@@ -36,6 +36,17 @@ namespace ApplicationCore.Services
             return this.toDto(acc);
         }
 
+        public async Task<IEnumerable<AccountDTO>> getAvailableAccountAsync()
+        {
+            var Accounts = await unitOfWork.Accounts.getAvailableAccount();
+            return this.toDtoRange(Accounts);
+        }
+        public async Task<IEnumerable<AccountDTO>> getDisabledAccountAsync()
+        {
+            var Accounts = await unitOfWork.Accounts.getDisabledAccount();
+            return this.toDtoRange(Accounts);
+        }
+
 
         //action
         public async Task addAccountAsync(AccountDTO dto)
@@ -62,8 +73,10 @@ namespace ApplicationCore.Services
         {
             if (await this.isExistedUsernameAsync(dto.Username))
             {
-                var acc = this.toEntity(dto);
-                await unitOfWork.Accounts.UpdateAsync(acc);
+                // var acc = this.toEntity(dto);
+                // await unitOfWork.Accounts.UpdateAsync(acc);
+                var acc = await unitOfWork.Accounts.GetByAsync(dto.Username);
+                this.convertDtoToEntity(dto, acc);
             }
             else
             {

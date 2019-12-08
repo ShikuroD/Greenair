@@ -52,6 +52,22 @@ namespace Infrastructure.Persistence.Repos
             return await this.FindAsync(predicate);
         }
 
+
+        private async Task<IEnumerable<Employee>> getEmployeesByStatus(STATUS status)
+        {
+            return await this.FindAsync(m => m.Status == status);
+        }
+
+        public async Task<IEnumerable<Employee>> getAvailableEmployee()
+        {
+            return await this.getEmployeesByStatus(STATUS.AVAILABLE);
+        }
+
+        public async Task<IEnumerable<Employee>> getDisabledEmployee()
+        {
+            return await this.getEmployeesByStatus(STATUS.DISABLED);
+        }
+
         private async Task changeEmployeeStatus(string emp_id, STATUS status)
         {
             try

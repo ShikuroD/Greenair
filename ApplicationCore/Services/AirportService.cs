@@ -48,6 +48,17 @@ namespace ApplicationCore.Services
             return await unitOfWork.Airports.isDomestic(airport_id);
         }
 
+        public async Task<IEnumerable<AirportDTO>> getAvailableAirportAsync()
+        {
+            var Airports = await unitOfWork.Airports.getAvailableAirport();
+            return this.toDtoRange(Airports);
+        }
+        public async Task<IEnumerable<AirportDTO>> getDisabledAirportAsync()
+        {
+            var Airports = await unitOfWork.Airports.getDisabledAirport();
+            return this.toDtoRange(Airports);
+        }
+
 
 
 
@@ -74,8 +85,10 @@ namespace ApplicationCore.Services
         {
             if (await unitOfWork.Airports.GetByAsync(dto.AirportId) != null)
             {
-                var airport = this.toEntity(dto);
-                await unitOfWork.Airports.UpdateAsync(airport);
+                // var airport = this.toEntity(dto);
+                // await unitOfWork.Airports.UpdateAsync(airport);
+                var airport = await unitOfWork.Airports.GetByAsync(dto.AirportId);
+                this.convertDtoToEntity(dto, airport);
             }
             else
             {

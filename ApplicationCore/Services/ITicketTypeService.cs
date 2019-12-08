@@ -9,6 +9,10 @@ namespace ApplicationCore.Services
         //query
         Task<TicketTypeDTO> getTicketTypeAsync(string ticketType_id);
         Task<IEnumerable<TicketTypeDTO>> getAllTicketTypeAsync();
+
+        Task<IEnumerable<TicketTypeDTO>> getAvailableTicketTypeAsync();
+        Task<IEnumerable<TicketTypeDTO>> getDisabledTicketTypeAsync();
+
         //actions
         Task addTicketTypeAsync(TicketTypeDTO dto);
         Task removeTicketTypeAsync(string ticketType_id);

@@ -25,6 +25,17 @@ namespace ApplicationCore.Services
             return this.toDtoRange(await unitOfWork.TicketTypes.GetAllAsync());
         }
 
+        public async Task<IEnumerable<TicketTypeDTO>> getAvailableTicketTypeAsync()
+        {
+            var TicketTypes = await unitOfWork.TicketTypes.getAvailableTicketType();
+            return this.toDtoRange(TicketTypes);
+        }
+        public async Task<IEnumerable<TicketTypeDTO>> getDisabledTicketTypeAsync()
+        {
+            var TicketTypes = await unitOfWork.TicketTypes.getDisabledTicketType();
+            return this.toDtoRange(TicketTypes);
+        }
+
 
         //actions
         private async Task generateTicketTypeId(TicketType TicketType)
@@ -58,8 +69,10 @@ namespace ApplicationCore.Services
         {
             if (await unitOfWork.TicketTypes.GetByAsync(dto.TicketTypeId) != null)
             {
-                var ticket_type = this.toEntity(dto);
-                await unitOfWork.TicketTypes.UpdateAsync(ticket_type);
+                // var TicketType = this.toEntity(dto);
+                // await unitOfWork.TicketTypes.UpdateAsync(TicketType);
+                var TicketType = await unitOfWork.TicketTypes.GetByAsync(dto.TicketTypeId);
+                this.convertDtoToEntity(dto, TicketType);
             }
             else
             {

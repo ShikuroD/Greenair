@@ -42,6 +42,21 @@ namespace Infrastructure.Persistence.Repos
             return true;
         }
 
+        private async Task<IEnumerable<Route>> getRoutesByStatus(STATUS status)
+        {
+            return await this.FindAsync(m => m.Status == status);
+        }
+
+        public async Task<IEnumerable<Route>> getAvailableRoute()
+        {
+            return await this.getRoutesByStatus(STATUS.AVAILABLE);
+        }
+
+        public async Task<IEnumerable<Route>> getDisabledRoute()
+        {
+            return await this.getRoutesByStatus(STATUS.DISABLED);
+        }
+
         private async Task changeRouteStatus(string Route_id, STATUS status)
         {
             try

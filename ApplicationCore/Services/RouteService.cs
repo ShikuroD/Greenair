@@ -33,6 +33,17 @@ namespace ApplicationCore.Services
             return this.toDtoRange(await unitOfWork.Routes.getRouteByDestinationAsync(destination));
         }
 
+        public async Task<IEnumerable<RouteDTO>> getAvailableRouteAsync()
+        {
+            var Routes = await unitOfWork.Routes.getAvailableRoute();
+            return this.toDtoRange(Routes);
+        }
+        public async Task<IEnumerable<RouteDTO>> getDisabledRouteAsync()
+        {
+            var Routes = await unitOfWork.Routes.getDisabledRoute();
+            return this.toDtoRange(Routes);
+        }
+
         //actions
         private async Task generateRouteId(Route Route)
         {
@@ -70,8 +81,10 @@ namespace ApplicationCore.Services
         {
             if (await unitOfWork.Routes.GetByAsync(dto.RouteId) != null && await this.isExisted(this.toEntity(dto)))
             {
-                var route = this.toEntity(dto);
-                await unitOfWork.Routes.UpdateAsync(route);
+                // var Route = this.toEntity(dto);
+                // await unitOfWork.Routes.UpdateAsync(Route);
+                var Route = await unitOfWork.Routes.GetByAsync(dto.RouteId);
+                this.convertDtoToEntity(dto, Route);
             }
             else
             {

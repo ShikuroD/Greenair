@@ -13,6 +13,9 @@ namespace ApplicationCore.Services
         Task<IEnumerable<CustomerDTO>> getCustomerByName(string lastname, string firstname);
         Task<IEnumerable<CustomerDTO>> getCustomerByName(string fullname);
 
+        Task<IEnumerable<CustomerDTO>> getAvailableCustomerAsync();
+        Task<IEnumerable<CustomerDTO>> getDisabledCustomerAsync();
+
         //actions
         Task orderTicketAsync(string flight_id, string cus_id, string assined_cus, string ticket_type_id);
         Task orderTicketRangeAsync(string flight_id, int adult_num, int child_num, string cus_id);

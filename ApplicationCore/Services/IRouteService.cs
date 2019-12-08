@@ -11,6 +11,10 @@ namespace ApplicationCore.Services
         Task<IEnumerable<RouteDTO>> getAllRouteAsync();
         Task<IEnumerable<RouteDTO>> getRouteByOriginAsync(string origin);
         Task<IEnumerable<RouteDTO>> getRouteByDestinationAsync(string destination);
+
+        Task<IEnumerable<RouteDTO>> getAvailableRouteAsync();
+        Task<IEnumerable<RouteDTO>> getDisabledRouteAsync();
+
         //actions
         Task addRouteAsync(RouteDTO dto);
         Task removeRouteAsync(string route_id);

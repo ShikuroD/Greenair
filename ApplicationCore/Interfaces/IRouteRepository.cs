@@ -10,6 +10,9 @@ namespace ApplicationCore.Interfaces
         Task<bool> isExisted(Route route);
         Task<bool> isExisted(string origin, string dest);
 
+        Task<IEnumerable<Route>> getAvailableRoute();
+        Task<IEnumerable<Route>> getDisabledRoute();
+
         Task disable(string Route_id);
         Task activate(string Route_id);
         Task disable(Route acc);
