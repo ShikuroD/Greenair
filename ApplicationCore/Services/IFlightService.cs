@@ -47,7 +47,7 @@ namespace ApplicationCore.Services
         Task removeAllFlightDetailAsync(string flight_id);
 
         //Thao tac voi ve =======================================================================================
-        //Task generateTicket(string flight_id);
+        Task generateTicket(string flight_id);
         Task<TicketDTO> getTicketAsync(string flight_id, string ticket_id);
         Task<IEnumerable<TicketDTO>> getAllTicketAsync();
         Task<IEnumerable<TicketDTO>> getAllTicketByFlightIdAsync(string flight_id);

@@ -130,6 +130,7 @@ namespace ApplicationCore.Services
             {
                 var flight = this.toEntity(flightDto);
                 await generateFlightId(flight);
+                await generateTicket(flight.FlightId);
                 await unitOfWork.Flights.AddAsync(flight);
                 await unitOfWork.CompleteAsync();
             }
@@ -147,6 +148,7 @@ namespace ApplicationCore.Services
             {
                 var flight = this.toEntity(flightDto);
                 await generateFlightId(flight);
+                await generateTicket(flight.FlightId);
                 await unitOfWork.Flights.AddAsync(flight);
             }
             await unitOfWork.CompleteAsync();
@@ -296,7 +298,7 @@ namespace ApplicationCore.Services
 
         }
 
-        private async Task generateTicket(string flight_id)
+        public async Task generateTicket(string flight_id)
         {
             var flight = await unitOfWork.Flights.GetByAsync(flight_id);
             var plane = await unitOfWork.Planes.GetByAsync(flight.PlaneId);
