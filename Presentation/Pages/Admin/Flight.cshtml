@@ -249,8 +249,11 @@
               <div class="row" id="CreateFlight-row1">
                 <div class="col-md-4">
                   <select class="form-control form-control-lg" id="CreateFlight-routeid1">
-                      @foreach (var item in Model.ListNameRoutes){
-                        <option >@item</option>
+                      @foreach (var item in Model.ListRoutes){
+                        <option >@item.RouteId :
+                          @item.Origin - 
+                          @item.Destination
+                        </option>
                       }
                   </select>
                 </div>
