@@ -65,7 +65,6 @@
                 }
             });
         });
-        // var listroute = "";
 
         function loadRoute() {
             var html = "";
