@@ -2,7 +2,7 @@
 @model AccountModel
 @using Microsoft.AspNetCore.Http
 @{
-	if(HttpContext.Session.GetString("username") == null)
+	if(HttpContext.Session.GetString("userid") == null)
 		Response.Redirect("Index");
 }
 <div class="hero-wrap js-fullheight" style="background-image: url('images/bg_1.jpg');">

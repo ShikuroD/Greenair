@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ApplicationCore.DTOs;
 using ApplicationCore.Entities;
 using ApplicationCore.Services;
+using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -42,11 +43,11 @@ namespace Presentation.Pages
             
             string userId = "";
             string check = "";
-            if( HttpContext.Session.GetString("username") != null)
+            if( HttpContext.Session.GetString("userid") != null)
             {                
                 
                 check = "not"; 
-                userId = HttpContext.Session.GetString("username");
+                userId = HttpContext.Session.GetString("userid");
 
             }
             else{   
@@ -60,14 +61,15 @@ namespace Presentation.Pages
         public async Task OnGet()
         {
             string cusId ="";
+            string username = "";
             if(HttpContext.Session.GetString("cusid")!= null)
             {
                 cusId = HttpContext.Session.GetString("cusid");
                 string street ="";
-                
+                username = HttpContext.Session.GetString("username");
                 
                 customer = await _customerService.getCustomerAsync(cusId);
-                account = await _accountService.getAccountAsync(cusId);
+                account = await _accountService.getAccountAsync(username);
                 ViewData["username"] = account.Username;
                 ViewData["password"] = account.Password;
                 ViewData["firstname"] = customer.FirstName;
@@ -134,7 +136,8 @@ namespace Presentation.Pages
                                 CustomerDTO customer = await _customerService.getCustomerAsync(Person.Id.ToString());
                                 userId = customer.FirstName;
                                 cusId = customer.Id;
-                                HttpContext.Session.SetString("username",userId);
+                                HttpContext.Session.SetString("userid",userId);
+                                HttpContext.Session.SetString("username",username);
                                 HttpContext.Session.SetString("cusid",cusId);
                                 Msg = "true";
                             }
@@ -152,7 +155,9 @@ namespace Presentation.Pages
         }
         public IActionResult OnPostLogout()
         {
+            HttpContext.Session.Remove("userid");
             HttpContext.Session.Remove("username");
+            HttpContext.Session.Remove("cusid");
             return new JsonResult(Msg);
         }
         public async Task<IActionResult> OnPostEditCustomer()
@@ -192,10 +197,10 @@ namespace Presentation.Pages
         }
         public async Task<IActionResult> OnPostEditAccountCustomer()
         {
-            string cusId ="";
-            if(HttpContext.Session.GetString("cusid")!= null)
+            string username ="";
+            if(HttpContext.Session.GetString("username")!= null)
             {
-                cusId = HttpContext.Session.GetString("cusid");
+                username = HttpContext.Session.GetString("username");
             }
             {
                 MemoryStream stream = new MemoryStream();
@@ -209,9 +214,9 @@ namespace Presentation.Pages
                         var obj = JsonConvert.DeserializeObject<AccountDTO>(requestBody);
                         if (obj != null)
                         {
-                            AccountDTO account = await _accountService.getAccountAsync(cusId);
-                            // account.Username = obj.Username;
+                            AccountDTO account = await _accountService.getAccountAsync(username);
                             account.Password = obj.Password;
+                            // unitofwork.completeasync;
                             // await _accountService.updateAccountAsync(account);
                             Msg = "Successful";
                         }
