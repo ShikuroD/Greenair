@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using System.Collections.Generic;
 namespace ApplicationCore.Services
 {
@@ -9,5 +10,7 @@ namespace ApplicationCore.Services
         Entity toEntity(SaveDto save);
         void convertEntityToDto(Entity entity, Dto dto);
         void convertDtoToEntity(SaveDto dto, Entity entity);
+
+        Task<int> CompleteAsync();
     }
 }
