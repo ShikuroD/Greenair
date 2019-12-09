@@ -1,15 +1,15 @@
-using System.Linq.Expressions;
-using System.Globalization;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-using ApplicationCore.Entities;
-using ApplicationCore.Interfaces;
-using ApplicationCore;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using ApplicationCore;
+using ApplicationCore.Entities;
+using ApplicationCore.Interfaces;
 using Infrastructure;
+using Microsoft.EntityFrameworkCore;
 namespace Infrastructure.Persistence.Repos
 {
     public class FlightRepository : Repository<Flight>, IFlightRepository
@@ -63,25 +63,27 @@ namespace Infrastructure.Persistence.Repos
         public async Task<string> getFirstRouteId(string flight_id)
         {
             var sql = await this.getAllFlightDetails(flight_id);
-            return sql.ElementAt(0).RouteId;
+            return sql.FirstOrDefault().RouteId;
         }
 
         public async Task<string> getLastRouteId(string flight_id)
         {
             var sql = await this.getAllFlightDetails(flight_id);
-            return sql.ElementAt(sql.Count()).RouteId;
+            return sql.LastOrDefault().RouteId;
         }
 
         public async Task<DateTime> getArrDate(string flight_id)
         {
             var sql = await this.getAllFlightDetails(flight_id);
-            return sql.ElementAt(sql.Count()).ArrDate;
+            if (sql == null) return DateTime.MaxValue;
+            else return sql.LastOrDefault().ArrDate;
         }
 
         public async Task<DateTime> getDepDate(string flight_id)
         {
             var sql = await this.getAllFlightDetails(flight_id);
-            return sql.ElementAt(0).DepDate;
+            if (sql == null) return DateTime.MinValue;
+            return sql.FirstOrDefault().DepDate;
         }
 
         //=========================================================================================================================

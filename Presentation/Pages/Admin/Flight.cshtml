@@ -120,74 +120,6 @@
     </div>
 </div>
 
-<!--edit flight form  -->
-<div class="modal fade" id="EditFlightForm" role="dialog">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content" >
-            <div class="modal-header" style=" background-color:aliceblue;">
-                <h4 class="modal-title" style="margin: 10px 0 10px 510px; color:#000; font-weight: bold;font-size:34">Edit Flight</h4>
-            </div>
-		    <div class="model-body" style="margin: 15px">
-          <form class="form-sample">
-            <input id="EditFlight-flightid" type="text" class="form-control" hidden/>
-				    <p style="font-weight:600" class="card-description"> Flight info </p>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Plane ID</label>
-                  <div class="col-sm-9">
-                    <select class="form-control form-control-lg" id="EditFlight-planeid">
-                      @foreach (var item in Model.ListNamePlanes){
-                        <option>@item</option>
-                      }
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Status</label>
-                  <div class="col-sm-9">
-                    <select class="form-control form-control-lg" id="EditFlight-status">
-                      <option>AVAILABLE</option>
-                      <option>DISABLED</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div> 
-            <p style="font-weight:600" class="card-description"> Flight Detail </p>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Plane ID</label>
-                  <div class="col-sm-9">
-                    
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Status</label>
-                  <div class="col-sm-9">
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            
-          </form>
-		    </div>
-        <div class="model-footer" style="margin: 15px">
-          <div class="row" style=" display: flex; justify-content: flex-end;">
-              <button class="btn btn-light" data-dismiss="modal"><b>Back to list</b></button>
-            </div>
-        </div>
-      </div>    
-    </div>
-</div>
-
 <!--create flight form  đây là form thêm-->
 <div class="modal fade" id="CreateFlightForm" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -248,7 +180,7 @@
               </div>
               <div class="row" id="CreateFlight-row1">
                 <div class="col-md-4">
-                  <select class="form-control form-control-lg" id="CreateFlight-routeid1">
+                  <select class="form-control form-control-lg CreateFlight-routeid" id="CreateFlight-routeid1">
                       @foreach (var item in Model.ListRoutes){
                         <option >@item.RouteId :
                           @item.Origin - 
@@ -258,17 +190,87 @@
                   </select>
                 </div>
                 <div class="col-md-4">
-                  <input id="CreateFlight-depdate1" type="date" class="form-control" />
+                  <input id="CreateFlight-depdate1" type="text" class="form-control CreateFlight-depdate choose_date" />
                 </div>
                 <div class="col-md-4">
-                  <input id="CreateFlight-arrdate1" type="date" class="form-control" disabled/>
+                  <input id="CreateFlight-arrdate1" type="text" class="form-control CreateFlight-arrdate choose_date" disabled/>
                 </div>
               </div>
               <hr id="CreateFlight-hr1">
               
             </div>
 
-            <button id="btsubmitCreateMaker" type="submit" class="btn btn-success mr-2" ><b>Create</b></button>
+            <button id="btsubmitCreateFlight" type="submit" class="btn btn-success mr-2" ><b>Create</b></button>
+            <button class="btn btn-light" data-dismiss="modal"><b>Cancel</b></button>
+          </form>
+		    </div>
+      </div>    
+    </div>
+</div>
+
+<!--edit flight form -->
+<div class="modal fade" id="EditFlightForm" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content" >
+            <div class="modal-header" style=" background-color:aliceblue;">
+                <h4 class="modal-title" style="margin: 10px 0 10px 510px; color:#000; font-weight: bold;font-size:34">Edit Flight</h4>
+            </div>
+		    <div class="model-body" style="margin: 15px">
+          <form class="form-sample">
+            <input id="EditFlight-flightid" type="text" class="form-control" hidden/>
+				    <p style="font-weight:600" class="card-description"> Flight info </p>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Plane ID</label>
+                  <div class="col-sm-9">
+                    <select class="form-control form-control-lg" id="EditFlight-planeid">
+                      <option id="EditFlight-planeiddefault"></option>
+                      @foreach (var item in Model.ListNamePlanes){
+                        <option>@item</option>
+                      }
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Status</label>
+                  <div class="col-sm-9">
+                    <select class="form-control form-control-lg" id="EditFlight-status">
+                      <option id="EditFlight-statusdefault"></option>
+                      <option>AVAILABLE</option>
+                      <option>DISABLED</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div> 
+            <p style="font-weight:600" class="card-description"> Flight Detail </p>
+              <input id="EditFlight-number" type="text" class="form-control" value="1" hidden/>
+              <div class="row">
+                <div class="col-md-4">
+                  <button  id="EditFlight-btadd" type="button" class="btn  btn-primary btn-md">
+                  <i class="mdi mdi-upload"></i>Add</button>
+                   <button  id="EditFlight-btdelete" type="button" class="btn btn-danger btn-md">
+                  <i class="fa fa-times" ></i>Remove</button>
+                </div>
+              </div>
+              <div class ="row">
+                <div class="col-md-4">
+                  <label class="col-form-label">Route ID</label>
+                </div>
+                <div class="col-md-4">
+                  <label class="col-form-label">Departure Date</label>
+                </div>
+                <div class="col-md-4">
+                  <label class="col-form-label">Arrive Date</label>
+                </div>
+              </div>
+            <div id="EditFlight-context">
+            </div>
+
+            <button id="btsubmitEditMaker" type="submit" class="btn btn-success mr-2" ><b>Update</b></button>
             <button class="btn btn-light" data-dismiss="modal"><b>Cancel</b></button>
           </form>
 		    </div>
