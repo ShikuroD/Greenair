@@ -90,7 +90,8 @@
 													<label for="#">Where</label>
 													<div class="form-field">
 														<div class="icon"><span class="icon-map-marker"></span></div>
-														<input asp-for="@Model.Where" type="text" id="Where" class="form-control" placeholder="Where">
+														<input type="text" id="Where" class="form-control" placeholder="Where">
+														<input asp-for="@Model.Where" type="hidden" id="AirportId_2"/>
 													</div>
 												</div>
 											</div>

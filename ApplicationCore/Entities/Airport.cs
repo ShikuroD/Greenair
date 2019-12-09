@@ -22,11 +22,12 @@ namespace ApplicationCore.Entities
 
         public Airport() { }
 
-        public Airport(string AirportId, string AirportName, Address address)
+        public Airport(string AirportId, string AirportName, Address address,STATUS Status)
         {
             this.AirportId = AirportId;
             this.AirportName = AirportName;
             this.Address = address;
+            this.Status = Status;
         }
 
         public Airport(Airport airport)
