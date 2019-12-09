@@ -41,7 +41,7 @@ namespace Presentation.Pages.Admin
         public IList<FlightDetailVM> ListFlightDetailVM { get; set; }
         public async Task OnGet()// chưa đụng gì tới bên này đâu
         {
-            ListFlights = await _services.getAllFlightAsync();
+            ListFlights = await _services.getAllAvailableFlightAsync();
             ListAirports = await _unitofwork.Airports.GetAllAsync();
             ListRoutes = await _routeServices.getAllRouteAsync();
             ListNameRoutes = new List<string>();
@@ -90,7 +90,8 @@ namespace Presentation.Pages.Admin
                     if (obj != null)
                     {
                         FlightId = obj.FlightId;
-                        await _services.removeFlightAsync(FlightId);
+                        await _services.disableFlightAsync(FlightId);
+                        await _services.CompleteAsync();
                     }
                 }
             }
@@ -101,6 +102,28 @@ namespace Presentation.Pages.Admin
         {
             ListRoutes = await _routeServices.getAllRouteAsync();
             return new JsonResult(ListRoutes);
+        }
+        public async Task<IActionResult> OnGetEditFlight(string id)
+        {
+            var flight = await _services.getFlightAsync(id);
+            var flightdetail = await _services.getAllFlightDetailAsync(id);
+            Dictionary<string, object> Result = new Dictionary<string, object>();
+            Result.Add("flight", flight);
+            // Result.Add("flightNum", flightdetail.Count());
+            Result.Add("flightDetail", flightdetail);
+            return new JsonResult(Result);
+        }
+        public async Task<IActionResult> OnGetCalArrDate(string routeid, string depDate)
+        {
+            // Console.WriteLine(routeid + " " + year + " " + month + " " + day);
+            DateTime DepDate = DateTime.ParseExact(depDate, "dd-MM-yyyy hh:mm tt", null);
+            Console.WriteLine(DepDate);
+            var routedto = await _routeServices.getRouteAsync(routeid);
+            Route route = new Route();
+            _routeServices.convertDtoToEntity(routedto, route);
+            DateTime arrDate = await _services.calArrDate(DepDate, route.FlightTime);
+
+            return new JsonResult(arrDate.ToString("dd-MM-yyyy hh:mm tt"));
         }
     }
     public class FlightDetailVM

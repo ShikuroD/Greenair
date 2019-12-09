@@ -13,6 +13,11 @@
     <link rel="stylesheet" href="../assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css">
     <link rel="stylesheet" href="../assets/vendors/css/vendor.bundle.base.css">
     <link rel="stylesheet" href="../assets/vendors/css/vendor.bundle.addons.css">
+    <!-- <link rel="stylesheet" href="~/css/bootstrap-datepicker.css"> -->
+    <link rel="stylesheet" href="~/css/jquery-ui.css">
+    <link rel="stylesheet" href="~/css/jquery.timepicker.css">
+    
+    <link rel="stylesheet" href="~/assets/css/shared/jquery-datetimepicker.css">
     <!-- endinject -->
     <!-- plugin css for this page -->
     <link rel="stylesheet" href="../../../assets/vendors/iconfonts/font-awesome/css/font-awesome.min.css">
@@ -146,6 +151,10 @@
     <script src="../assets/vendors/js/vendor.bundle.addons.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page-->
+    <script src="~/js/jquery-ui.js"></script>
+    <!-- <script src="~/js/bootstrap-datepicker.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"></script>
+    <script src="~/assets/js/shared/jquery-datetimepicker.js"></script>
     <!-- End plugin js for this page-->
     <!-- inject:js -->
     <script src="../assets/js/shared/off-canvas.js"></script>
@@ -154,6 +163,11 @@
     <!-- Custom js for this page-->
     <script src="../assets/js/demo_1/dashboard.js"></script>
     <!-- End custom js for this page-->
+    <script>
+      (function ($) {
+           
+		  })(jQuery);
+    </script>
     <script src="../assets/js/demo_1/Maker.js"></script>
     <script src="../assets/js/demo_1/Plane.js"></script>
     <script src="../assets/js/demo_1/Airport.js"></script>
@@ -163,11 +177,7 @@
     <script src="../assets/js/demo_1/Layout.js"></script>
     <script src="../assets/js/shared/jquery.min.js"></script>
     <script src="../assets/js/shared/jquery-ui.js"></script>
-    <script>
-      (function ($) {
-        
-		  })(jQuery);
-    </script>
+    
     @RenderSection("Scripts", required: false)
 </body>
 </html>
