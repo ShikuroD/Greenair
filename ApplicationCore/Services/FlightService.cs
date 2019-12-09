@@ -260,8 +260,9 @@ namespace ApplicationCore.Services
                 det.FlightDetailId = String.Format("{0:000}", res.Count());
             }
         }
-        public DateTime calArrDate(DateTime depDate, FlightTime time)
+        public async Task<DateTime> calArrDate(DateTime depDate, FlightTime time)
         {
+            await Task.Run(() => true);
             return depDate.AddMinutes(time.toMinutes());
         }
         public async Task addFlightDetailAsync(FlightDetailDTO det_dto)
