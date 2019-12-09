@@ -341,7 +341,7 @@ contentWayPoint();
 		$("#register").dialog({
 		autoOpen: false,
 		height: 600,
-		width: 500,
+		width: 800,
 		modal: true,
 		closeOnEscape: true,
 		buttons: {
@@ -448,35 +448,43 @@ contentWayPoint();
 	$("#profile").on("click",function(){
 		location.replace("/Account");
 	})
+	
 	//Open close class
-	$(".open-user").on("click",function(){
-		$(".user-show").addClass("hidden");
-		$(".user-field").removeClass("hidden");
-		$(".open-user").addClass("hidden");
-		$(".close-user").removeClass("hidden");
-		$(".save-user").removeClass("hidden");
+	$(".open-account").on("click",function(){
+		var id = $(this).attr("id");
+		if(id == "open-user"){
+			$(".user-show").addClass("hidden");
+			$(".user-field").removeClass("hidden");
+			$("#open-user").addClass("hidden");
+			$("#close-user").removeClass("hidden");
+			$("#save-user").removeClass("hidden");
+		}
+		if(id == "open-pass")
+		{
+			$("#pass-field").removeClass("hidden");
+			$("#pass-show").addClass("hidden");
+			$("#open-pass").addClass("hidden");
+			$("#close-pass").removeClass("hidden");
+			$("#save-pass").removeClass("hidden");
+		}
 	});
-	$(".open-pass").on("click",function(){
-		$("#pass-field").removeClass("hidden");
-		$("#pass-show").addClass("hidden");
-		$(".open-pass").addClass("hidden");
-		$(".close-pass").removeClass("hidden");
-		$(".save-pass").removeClass("hidden");
-	});
-	$(".close-user").on("click",function(){
-		$(".user-show").removeClass("hidden");
-		$(".user-field").addClass("hidden");
-		$(".open-user").removeClass("hidden");
-		$(".close-user").addClass("hidden");
-		$(".save-user").addClass("hidden");
-	});
-	$(".close-pass").on("click",function()
-	{
-		$("#pass-field").addClass("hidden");
-		$("#pass-show").removeClass("hidedn");
-		$(".open-pass").removeClass("hidden");
-		$(".close-pass").addClass("hidden");
-		$(".save-pass").addClass("hidden");
+	$(".close-account").on("click",function(){
+		var id = $(this).attr("id");
+		if(id == "close-user"){
+			$(".user-show").removeClass("hidden");
+			$(".user-field").addClass("hidden");
+			$("#open-user").removeClass("hidden");
+			$("#close-user").addClass("hidden");
+			$("#save-user").addClass("hidden");
+		}
+		if(id == "close-pass")
+		{
+			$("#pass-field").addClass("hidden");
+			$("#pass-show").removeClass("hidedn");
+			$("#open-pass").removeClass("hidden");
+			$("#close-pass").addClass("hidden");
+			$("#save-pass").addClass("hidden");
+		}
 	});
 	$(".open").on("click",function(){
 		var id = $(this).attr("id");
@@ -503,6 +511,14 @@ contentWayPoint();
 			$("#phone_s").removeClass("hidden");
 			$(".phone-show").addClass("hidden");
 			$(".phone-field").removeClass("hidden");
+		}
+		if(id == "email_op")
+		{
+			$("#email_op").addClass("hidden");
+			$("#email_cl").removeClass("hidden");
+			$("#email_s").removeClass("hidden");
+			$(".email-show").addClass("hidden");
+			$(".email-field").removeClass("hidden");
 		}
 	});
 	$(".cancel").on("click",function(){
@@ -531,12 +547,29 @@ contentWayPoint();
 			$(".phone-show").removeClass("hidden");
 			$(".phone-field").addClass("hidden");
 		}
+		if(id == "email_cl")
+		{
+			$("#email_op").removeClass("hidden");
+			$("#email_cl").addClass("hidden");
+			$("#email_s").addClass("hidden");
+			$(".email-show").removeClass("hidden");
+			$(".email-field").addClass("hidden");
+		}
 	});
 	//end of open close class
 
 	// select country
 	var country_list = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua &amp; Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia &amp; Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Cape Verde","Cayman Islands","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cruise Ship","Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kuwait","Kyrgyz Republic","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Mauritania","Mauritius","Mexico","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Namibia","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","Norway","Oman","Pakistan","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre &amp; Miquelon","Samoa","San Marino","Satellite","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","South Africa","South Korea","Spain","Sri Lanka","St Kitts &amp; Nevis","St Lucia","St Vincent","St. Lucia","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad &amp; Tobago","Tunisia","Turkey","Turkmenistan","Turks &amp; Caicos","Uganda","Ukraine","United Arab Emirates","United Kingdom","Uruguay","Uzbekistan","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
 	var option = '';
+	var country = $("#country").val();
+	if(country != null)
+	{
+		option += '<option value="' + country + '" selected>' + country + '</option>';
+	}
+	else
+	{
+		option += '<option value="0" selected>Select your country</option>';
+	}
 	for(var i = 0;i<country_list.length;i++)
 	{
 		option += '<option value="' + country_list[i] + '">' + country_list[i] + '</option>';
@@ -548,6 +581,159 @@ contentWayPoint();
 	var firstName = $("#firstName").val();
 	var lastName = $("#lastName").val();
 	$(".name").text(firstName+" "+lastName);
-	var birth_date = $(".birth_date").val();
-	$(".birth_day").text(birth_date);
+	var birth_date = new Date() ;
+	// $(".birth_day").text(birth_date);
+	var OldPass;
+	var phone ;
+	var num;
+	var street;
+	var district;
+	var state;
+	var city;
+	var email;
+	
+	// save profile
+	$(".save").on("click",function(){
+		var id = $(this).attr("id");
+		firstName = $("#firstName").val();
+		lastName =$("#lastName").val();
+		birth_date = $(".birth_date").val();
+		num =$("#num").val();
+		street=$("#street").val();
+		district = $("#district").val();
+		state = $("#state").val();
+		city = $("#city").val();
+		country = $(".country").children("option:selected").val();
+		phone = $("#phone").val();
+		email = $("#email").val();
+		var save_button = $(this).find("button");
+		save_button.button("loading");
+		$.ajax({
+			type: "POST",
+			url: "/Account?handler=EditCustomer",
+			headers: {
+			"XSRF-TOKEN": $('input:hidden[name="__RequestVerificationToken"]').val()
+			},
+			data: JSON.stringify({
+				FirstName: firstName,
+				LastName: lastName,
+				Birthdate: birth_date,
+				Num: num,
+				Street: street,
+				District: district,
+				State: state,
+				City: city,
+				Country: country,
+				Phone: phone,
+				Email: email
+			}),
+			success:function(response){
+				alert(response);
+				$(".name").text(firstName+" "+lastName);
+				$(".birth_day").text(birth_date);
+				$("#text-num").text(num);
+				$("#text-street").text(street);
+				$("#text-district").text(district);
+				$("#text-city").text(city);
+				$("#text-state").text(state);
+				$("#text-country").text(country);
+				$("#text-phone").text(phone);
+				$("#text-email").text(email);
+				save_button.button("reset");
+				if(id == "profile_s")
+				{
+					$("#profile_op").removeClass("hidden");
+					$("#profile_cl").addClass("hidden");
+					$("#profile_s").addClass("hidden");
+					$(".pro-show").removeClass("hidden");
+					$(".pro-field").addClass("hidden");
+				}
+				if(id == "add_s")
+				{
+					$("#add_op").removeClass("hidden");
+					$("#add_cl").addClass("hidden");
+					$("#add_s").addClass("hidden");
+					$("#address-show").removeClass("hidden");
+					$("#address-field").addClass("hidden");
+				}
+				if(id == "phone_s")
+				{
+					$("#phone_op").removeClass("hidden");
+					$("#phone_cl").addClass("hidden");
+					$("#phone_s").addClass("hidden");
+					$(".phone-show").removeClass("hidden");
+					$(".phone-field").addClass("hidden");
+				}
+				if(id == "email_s")
+				{
+					$("#email_op").removeClass("hidden");
+					$("#email_cl").addClass("hidden");
+					$("#email_s").addClass("hidden");
+					$(".email-show").removeClass("hidden");
+					$(".email-field").addClass("hidden");
+				}
+			},
+			error: function(response){
+				alert("Cant save your changes");
+			}
+		});
+		// alert(num);
+		
+		
+	});
+	$(".save-account").on("click",function(){
+		var id = $(this).attr("id");
+		var UserName = $("#Username").val();
+		var NewPass = $("#new-pass").val();
+		var RePass = $("#re-pass").val();
+		OldPass = $("#old-pass").val();
+		var PassWordRegexp = new RegExp(/^(?=[^a-z]*[a-z])(?=\D*\d)[^:&.~\s]{5,20}$/);
+		var save_button = $(this).find("button");
+		
+		if(id == "save-pass"){
+			if(!PassWordRegexp.test(NewPass))
+			{
+				$("#err-new-pass").removeClass("hidden");
+			}
+			else{
+				$("#err-new-pass").addClass("hidden");
+				if(RePass != NewPass)
+				{
+					$("#err-re-pass").removeClass("hidden");
+				}
+				else{
+					save_button.button('loading');
+					$("#err-re-pass").addClass("hidden");
+					$.ajax({
+						type: "POST",
+						url: "/Account?handler=EditAccountCustomer",
+						headers: {
+						"XSRF-TOKEN": $('input:hidden[name="__RequestVerificationToken"]').val()
+						},
+						data: JSON.stringify({
+							// Username: UserName,
+							Password: NewPass
+						}),
+						success: function(response)
+						{
+								$("#pass-field").addClass("hidden");
+								$("#pass-show").removeClass("hidedn");
+								$("#open-pass").removeClass("hidden");
+								$("#close-pass").addClass("hidden");
+								$("#save-pass").addClass("hidden");
+								$("#new-pass").val("");
+								$("#re-pass").val("");
+								$("#old-pass").val(NewPass);
+								save_button.button("reset");
+						},
+						error:function()
+						{
+							alert("false");
+						}
+					});	
+				}
+			}
+		}
+	})
+	// end of save profile
 })(jQuery);
