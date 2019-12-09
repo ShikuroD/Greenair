@@ -41,7 +41,7 @@ namespace Presentation
                     // Console.WriteLine(acc.PersonId);
                     // unit.Accounts.UpdateAsync(acc);
                     //var routes = unit.Routes.GetAllAsync().GetAwaiter().GetResult();
-                    var flights = unit.Customers.GetAllAsync().GetAwaiter().GetResult();
+                    //var flights = unit.Customers.GetAllAsync().GetAwaiter().GetResult();
 
 
 
