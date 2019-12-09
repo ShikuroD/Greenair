@@ -200,11 +200,13 @@ namespace ApplicationCore.Services
         public async Task<string> getOriginId(string flight_id)
         {
             var route = await this.getFirstRoute(flight_id);
+            if (route == null) return null;
             return route.Origin;
         }
         public async Task<string> getDestinationId(string flight_id)
         {
             var route = await this.getLastRoute(flight_id);
+            if (route == null) return null;
             return route.Destination;
         }
         public async Task<AirportDTO> getOrigin(string flight_id)
