@@ -201,7 +201,6 @@ namespace Presentation.Pages
         public async Task<IActionResult> OnPostEditAccountCustomer()
         {
             string username ="";
-            string rs ="";
             if(HttpContext.Session.GetString("username")!= null)
             {
                 username = HttpContext.Session.GetString("username");
@@ -221,14 +220,14 @@ namespace Presentation.Pages
                             AccountDTO account = await _accountService.getAccountAsync(username);
                             account.Password = obj.Password;
                             // await _unitOfWork.CompleteAsync();
-                            // await _accountService.updateAccountAsync(account);
+                            await _accountService.updateAccountAsync(account);
                             Msg = "Successful";
-                            rs = account.Username;
+                            
                         }
                     }
                 }
             }
-            return new JsonResult(rs);
+            return new JsonResult(Msg);
         }
     }
     class CustomerViewModel
