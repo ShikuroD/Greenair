@@ -63,12 +63,14 @@ namespace Infrastructure.Persistence.Repos
         public async Task<string> getFirstRouteId(string flight_id)
         {
             var sql = await this.getAllFlightDetails(flight_id);
+            if (sql == null) return null;
             return sql.FirstOrDefault().RouteId;
         }
 
         public async Task<string> getLastRouteId(string flight_id)
         {
             var sql = await this.getAllFlightDetails(flight_id);
+            if (sql == null) return null;
             return sql.LastOrDefault().RouteId;
         }
 
