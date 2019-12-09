@@ -318,24 +318,27 @@ contentWayPoint();
 	});
 	// DatePicker
 	$('.checkin_date').datepicker({
-		'format': 'dd/mm/yyyy',
-		'todayHighlight': 'true',
-		'startDate': '0d',	
+		dateFormat: 'dd/mm/yy',
+		minDate: new Date(),	
 		'autoclose': true
 	});
 	$('.checkout_date').datepicker({
-		'format': 'dd/mm/yyyy',
-		'setDate': $('.checkin_date').val(),
-		'startDate': '0d',
-		'autoclose': true
+		dateFormat: 'dd/mm/yy',
+		minDate: $('.checkin_date').val()
 	});
-	$('.checkin_date').datepicker('setDate', new Date());
+
 	$(".birth_date").datepicker({
-		'format': 'dd/mm/yyyy',
+		dateFormat: 'dd/mm/yy',
 		'autoclose': true
 	})
 	//end of datepicker
+	$( ".checkin_date" ).datepicker( "setDate", new Date() );
+	$( ".checkout_date" ).datepicker( "setDate", $(".checkin_date").val() );
+	$( ".checkout_date" ).datepicker( "option", "minDate", $(".checkin_date").val());
 
+	$(document).on("change",".checkin_date",function(){
+		$( ".checkout_date" ).datepicker( "option", "minDate", $(".checkin_date").val());
+	})
 	//dialog,form
 		var dialog, form;
 		$("#register").dialog({
@@ -425,7 +428,7 @@ contentWayPoint();
 					}))
 				},
 				error: function(response){
-					alert("Cant found");
+					
 				}
 			});
 		},
@@ -457,7 +460,7 @@ contentWayPoint();
 					}))
 				},
 				error: function(response){
-					alert("Cant found");
+					
 				}
 			});
 		},
