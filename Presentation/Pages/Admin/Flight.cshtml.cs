@@ -125,6 +125,36 @@ namespace Presentation.Pages.Admin
 
             return new JsonResult(arrDate.ToString("dd-MM-yyyy hh:mm tt"));
         }
+        public async Task<IActionResult> OnPostCreateMaker()
+        {
+            string respone = "True";
+            MemoryStream stream = new MemoryStream();
+            Request.Body.CopyTo(stream);
+            stream.Position = 0;
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string requestBody = reader.ReadLine();
+                FlightDTO flight = new FlightDTO();
+                flight.PlaneId = requestBody;
+                Console.WriteLine("This is planeID" + flight.PlaneId);
+                requestBody = reader.ReadLine();
+                flight.Status = 0;
+                Console.WriteLine("This is status" + flight.Status);
+                requestBody = reader.ReadLine();
+                if (requestBody.Length > 0)
+                {
+                    var obj = JsonConvert.DeserializeObject<List<FlightDetailDTO>>(requestBody);
+                    if (obj != null)
+                    {
+                        foreach (var item in obj)
+                        {
+                            Console.WriteLine("This is flight detail" + item.RouteId + " " + item.DepDate + " " + item.ArrDate);
+                        }
+                    }
+                }
+            }
+            return new JsonResult(respone);
+        }
     }
     public class FlightDetailVM
     {

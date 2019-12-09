@@ -140,7 +140,7 @@
             var id = $(this).attr("id");
             var num = parseInt(id.slice(id.length - 1, id.length));
             var text = $(this).val().slice(0, 5);
-            alert(text);
+            // alert(text);
             // alert(id + " " + num + " " + text);
             var depDate = $("#CreateFlight-depdate" + num).val();
             if (depDate != "") {
@@ -182,9 +182,49 @@
                     }
                 });
             }
+        });
+        $("#btsubmitCreateFlight").click(function () {
+            alert("Create");
+            var planeid = $("#CreateMaker-planeid").val();
+            var planeid = $("#CreateMaker-planeid").val().slice(planeid.length - 5, planeid.length);
+            var status = $("#CreateMaker-status").val();
+            var num = parseInt($("#CreateFlight-number").val());
+            var listFlightDetail = [];
+            for (var i = 1; i <= num; ++i) {
+                listFlightDetail[i - 1].routeId = $("#CreateFlight-routeid" + i).val();
+                listFlightDetail[i - 1].depDate = $("#CreateFlight-depdate" + i).val();
+                listFlightDetail[i - 1].arrDate = $("#CreateFlight-arrdate" + i).val();
+            }
+            event.preventDefault();
+            // event.preventDefault() là để ngăn thằng form nó load lại trang ..
+            $.ajax({
+                type: 'POST',
+                headers: {
+                    "XSRF-TOKEN": $('input:hidden[name="__RequestVerificationToken"]').val()
+                },
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                url: '/Admin/Maker?handler=CreateFlight',
+                data: JSON.stringify({
+                    planeId: planeid,
+                    status: status,
+                    list: listFlightDetail
+                }),
+                success: function (respone) {
+                    // $('#CreateMaker').modal('hide');
+                    if (respone.trim() == "True") {
+                        alert("Create success");
+                        location.reload();
+                    } else {
+                        alert("This Id exists");
+                        $('#CreateMaker-id').focus();
+                    }
+                },
+                failure: function (result) {
+                    alert("fail");
+                }
 
-            // alert(id + " " + num + " " + depDate);
-
+            });
         });
 
         // edit form
