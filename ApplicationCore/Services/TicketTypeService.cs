@@ -73,7 +73,7 @@ namespace ApplicationCore.Services
             if (res != null) id = res.LastOrDefault().TicketTypeId;
             var code = 0;
             Int32.TryParse(id, out code);
-            TicketType.TicketTypeId = String.Format("{0:000}", code);
+            TicketType.TicketTypeId = String.Format("{0:000}", code+1);
         }
         public async Task addTicketTypeAsync(TicketTypeDTO dto)
         {

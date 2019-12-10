@@ -143,7 +143,7 @@ namespace ApplicationCore.Services
             if (res != null) id = res.LastOrDefault().Id;
             var code = 0;
             Int32.TryParse(id, out code);
-            Employee.Id = String.Format("{0:00000}", code);
+            Employee.Id = String.Format("{0:00000}", code+1);
         }
         public async Task addEmployeeAsync(EmployeeDTO dto)
         {
