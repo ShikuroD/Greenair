@@ -98,10 +98,20 @@ namespace Presentation.Pages.Admin
             string mes = "Remove flight" + FlightId + " Success!";
             return new JsonResult(mes);
         }
-        public async Task<JsonResult> OnGetRoutes()
+        public async Task<JsonResult> OnGetRoutes(string routeid)
         {
-            ListRoutes = await _routeServices.getAllRouteAsync();
+            // ListRoutes = await _routeServices.getAllRouteAsync();
+            var n = routeid.Length;
+            ListRoutes = await _routeServices.getRouteByDestinationAsync(routeid.Substring(n - 3, n));
             return new JsonResult(ListRoutes);
+        }
+        public async Task<JsonResult> OnGetDateTimes(string depdate)
+        {
+            // ListRoutes = await _routeServices.getAllRouteAsync();
+            DateTime Date = DateTime.ParseExact(depdate, "dd-MM-yyyy hh:mm tt", null);
+            FlightTime timeDTO = new FlightTime(0, 30);
+            DateTime depDate = await _services.calArrDate(Date, timeDTO);
+            return new JsonResult(depDate.ToString("dd-MM-yyyy hh:mm tt"));
         }
         public async Task<IActionResult> OnGetEditFlight(string id)
         {

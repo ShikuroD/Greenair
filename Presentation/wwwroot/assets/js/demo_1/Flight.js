@@ -88,17 +88,41 @@
         function loadRoute() {
             var html = "";
             var num = parseInt($("#CreateFlight-number").val());
+            var routeid = $("CreateFlight-routeid" + num).val();
             $.ajax({
                 type: 'GET',
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
                 url: '/Admin/Flight?Handler=Routes',
+                data: {
+                    routeid: routeid
+                },
                 success: function (response) {
                     for (var i = 0; i < response.length; i++) {
                         html += `<option >` + response[i].routeId + `: ` + response[i].origin + ` - ` + response[i].destination + `</option>`;
                     }
                     $(".list").html(html);
-                    $(".list2").append(html);
+                    $(".listEdit").append(html);
+                    $(".list" + (num + 1)).html(html);
+                }
+            });
+            return html;
+        }
+
+        function loadDateTime() {
+            var html = "";
+            var num = parseInt($("#CreateFlight-number").val());
+            var depid = $("CreateFlight-đepate" + num).val();
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                url: '/Admin/Flight?Handler=DateTimes',
+                data: {
+                    depdate: đepate
+                },
+                success: function (response) {
+
                 }
             });
             return html;
@@ -111,7 +135,7 @@
                 var html = "";
                 html += `<div class="row" id="CreateFlight-row` + num + `">
                     <div class="col-md-4">`;
-                html += `    <select class="form-control form-control-lg list CreateFlight-routeid" id="CreateFlight-routeid` + num + `">
+                html += `    <select class="form-control form-control-lg list` + num + ` CreateFlight-routeid" id="CreateFlight-routeid` + num + `">
                             </select>`;
                 html += `    </div>
                     <div class="col-md-4">`;
@@ -256,7 +280,7 @@
                         num++;
                         s += `<div class="row" id="EditFlight-row` + num + `">`;
                         s += `  <div class="col-md-4">`;
-                        s += `<select class="form-control form-control-lg list2 EditFlight-routeid" id="EditFlight-routeid` + num + `">`;
+                        s += `<select class="form-control form-control-lg listEdit EditFlight-routeid" id="EditFlight-routeid` + num + `">`;
                         s += `<option>` + item.routeId + `</option>`;
                         s += `</select></div>`;
                         s += `<div class="col-md-4"><input id="EditFlight-depdate` + num + `" type="datetime-local" class="form-control EditFlight-depdate" value="` + item.depDate + `"/></div>`;
