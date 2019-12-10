@@ -64,6 +64,7 @@ namespace Infrastructure.Persistence.Repos
         {
             var sql = await this.getAllFlightDetails(flight_id);
             if (sql == null) return null;
+            sql = sql.OrderBy(m => m.FlightDetailId);
             return sql.FirstOrDefault().RouteId;
         }
 
@@ -71,6 +72,7 @@ namespace Infrastructure.Persistence.Repos
         {
             var sql = await this.getAllFlightDetails(flight_id);
             if (sql == null) return null;
+            sql = sql.OrderBy(m => m.FlightDetailId);
             return sql.LastOrDefault().RouteId;
         }
 
@@ -78,13 +80,15 @@ namespace Infrastructure.Persistence.Repos
         {
             var sql = await this.getAllFlightDetails(flight_id);
             if (sql == null) return DateTime.MaxValue;
-            else return sql.LastOrDefault().ArrDate;
+            sql = sql.OrderBy(m => m.FlightDetailId);
+            return sql.LastOrDefault().ArrDate;
         }
 
         public async Task<DateTime> getDepDate(string flight_id)
         {
             var sql = await this.getAllFlightDetails(flight_id);
             if (sql == null) return DateTime.MinValue;
+            sql = sql.OrderBy(m => m.FlightDetailId);
             return sql.FirstOrDefault().DepDate;
         }
 
