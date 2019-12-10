@@ -69,12 +69,6 @@ namespace ApplicationCore.Services
                     res = res.Where(m => DateTime.Compare(Task.Run(() => this.getDepDate(m.FlightId)).GetAwaiter().GetResult(), dep_date) >= 0);
                 res = res.Where(m => Task.Run(() => this.checkOrderNum(m.FlightId, num)).GetAwaiter().GetResult().Equals(origin_id));
 
-                if (res == null)
-                {
-                    Console.WriteLine("null u mtfk");
-                    return null;
-                }
-                Console.WriteLine(res.Count());
                 return toDtoRange(res);
             }
             else return null;
