@@ -120,10 +120,14 @@ namespace ApplicationCore.Services
         {
             var res = await unitOfWork.Flights.GetAllAsync();
             string id = null;
-            if (res != null) id = res.Last().FlightId;
             var code = 0;
-            Int32.TryParse(id, out code);
-            return String.Format("{0:00000}", code+1);
+            if (res != null)
+            {
+                code = res.Count();
+                id = res.Last().FlightId;
+            }
+            //Int32.TryParse(id, out code);
+            return String.Format("{0:00000}", code);
         }
 
         // public async Task generateFlightId(Flight Flight)
