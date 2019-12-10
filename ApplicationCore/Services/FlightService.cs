@@ -125,6 +125,7 @@ namespace ApplicationCore.Services
             Int32.TryParse(id, out code);
             return String.Format("{0:00000}", code);
         }
+        
         // public async Task generateFlightId(Flight Flight)
         // {
         //     var res = await unitOfWork.Flights.GetAllAsync();
