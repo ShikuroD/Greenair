@@ -69,12 +69,6 @@ namespace ApplicationCore.Services
                     res = res.Where(m => DateTime.Compare(Task.Run(() => this.getDepDate(m.FlightId)).GetAwaiter().GetResult(), dep_date) >= 0);
                 res = res.Where(m => Task.Run(() => this.checkOrderNum(m.FlightId, num)).GetAwaiter().GetResult().Equals(origin_id));
 
-                if (res == null)
-                {
-                    Console.WriteLine("null u mtfk");
-                    return null;
-                }
-                Console.WriteLine(res.Count());
                 return toDtoRange(res);
             }
             else return null;
@@ -131,6 +125,7 @@ namespace ApplicationCore.Services
             Int32.TryParse(id, out code);
             return String.Format("{0:00000}", code);
         }
+
         // public async Task generateFlightId(Flight Flight)
         // {
         //     var res = await unitOfWork.Flights.GetAllAsync();
@@ -143,21 +138,6 @@ namespace ApplicationCore.Services
         {
             await unitOfWork.Flights.AddAsync(flight);
             await unitOfWork.CompleteAsync();
-        }
-        public async Task<string> generateFlightId()
-        {
-            var res = await unitOfWork.Flights.GetAllAsync();
-            Console.WriteLine(res.Count());
-            string id = null;
-            if (res == null) id = "0";
-            else
-            {
-                id = res.LastOrDefault().FlightId;
-            }
-            Console.WriteLine(id);
-            var code = 0;
-            Int32.TryParse(id, out code);
-            return String.Format("{0:00000}", code);
         }
 
         public async Task addFlightAsync(FlightDTO flightDto, IEnumerable<FlightDetailDTO> details)
