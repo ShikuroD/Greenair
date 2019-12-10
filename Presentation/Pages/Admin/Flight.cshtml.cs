@@ -168,6 +168,7 @@ namespace Presentation.Pages.Admin
                         // {
                         //     Console.WriteLine(item);
                         // }
+<<<<<<< HEAD
                         FlightDTO flight = new FlightDTO();
                         flight.PlaneId = obj.planeId;
                         if (obj.Status == "AVAILABLE")
@@ -184,6 +185,29 @@ namespace Presentation.Pages.Admin
                             detailDTO.Add(detail);
                         }
                         await _services.addFlightAsync(flight, detailDTO);
+=======
+
+
+                        // FlightDTO flight = new FlightDTO();
+                        // flight.PlaneId = obj.planeId;
+                        // if (obj.Status == "AVAILABLE")
+                        // {
+                        //     flight.Status = 0;
+                        // }
+                        // var code = await _services.generateFlightId();
+                        // flight.FlightId = code;
+                        // await _services.addFlightAsync(flight);
+                        // Console.WriteLine(code);
+                        // // IList<FlightDetailDTO> detailDTO = new List<FlightDetailDTO>();
+                        // int n = obj.routeId.Count();
+                        // for (var i = 0; i < n; ++i)
+                        // {
+                        //     DateTime depDate = DateTime.ParseExact(obj.depDate[i], "dd-MM-yyyy hh:mm tt", null);
+                        //     DateTime arrDate = DateTime.ParseExact(obj.arrDate[i], "dd-MM-yyyy hh:mm tt", null);
+                        //     FlightDetailDTO detail = new FlightDetailDTO(null, code, obj.routeId[i], depDate, arrDate);
+                        //     await _services.addFlightDetailAsync(detail);
+                        // }
+>>>>>>> 45ed251778f898f106355e61be88bc19df0c7b75
                     }
                 }
             }
