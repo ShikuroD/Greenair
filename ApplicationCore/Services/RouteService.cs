@@ -80,7 +80,7 @@ namespace ApplicationCore.Services
             if (res != null) id = res.LastOrDefault().RouteId;
             var code = 0;
             Int32.TryParse(id, out code);
-            Route.RouteId = String.Format("{0:00000}", code);
+            Route.RouteId = String.Format("{0:00000}", code+1);
         }
         private async Task<bool> isExisted(Route route)
         {

@@ -20,6 +20,10 @@ namespace ApplicationCore.Services
         Task<string> generateFlightId();
         //Task addFlightAsync(FlightDTO flightDto);
         Task addFlightAsync(FlightDTO flightDto, IEnumerable<FlightDetailDTO> details);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 45ed251778f898f106355e61be88bc19df0c7b75
         Task updateFlightAsync(FlightDTO flightDto);
         Task removeFlightAsync(string flight_id);
         Task removeAllFlightAsync();

@@ -67,12 +67,6 @@ namespace ApplicationCore.Services
                     res = res.Where(m => DateTime.Compare(Task.Run(() => this.getDepDate(m.FlightId)).GetAwaiter().GetResult(), dep_date) >= 0);
                 res = res.Where(m => Task.Run(() => this.checkOrderNum(m.FlightId, num)).GetAwaiter().GetResult().Equals(origin_id));
 
-                if (res == null)
-                {
-                    Console.WriteLine("null u mtfk");
-                    return null;
-                }
-                Console.WriteLine(res.Count());
                 return toDtoRange(res);
             }
             else return null;
@@ -123,12 +117,17 @@ namespace ApplicationCore.Services
         public async Task<string> generateFlightId()
         {
             var res = await unitOfWork.Flights.GetAllAsync();
-            string id = null;
-            if (res != null) id = res.Last().FlightId;
+            //string id = null;
             var code = 0;
-            Int32.TryParse(id, out code);
+            if (res != null)
+            {
+                code = res.Count();
+                //id = res.Last().FlightId;
+            }
+            //Int32.TryParse(id, out code);
             return String.Format("{0:00000}", code);
         }
+
         // public async Task generateFlightId(Flight Flight)
         // {
         //     var res = await unitOfWork.Flights.GetAllAsync();
@@ -280,6 +279,10 @@ namespace ApplicationCore.Services
             if (String.IsNullOrEmpty(det.FlightDetailId))
             {
                 var res = await unitOfWork.Flights.getAllFlightDetails(det.FlightId);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 45ed251778f898f106355e61be88bc19df0c7b75
                 if (res != null) det.FlightDetailId = String.Format("{0:000}", res.Count());
                 else det.FlightDetailId = "000";
             }
