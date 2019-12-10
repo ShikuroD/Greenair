@@ -125,7 +125,7 @@ namespace Presentation.Pages.Admin
 
             return new JsonResult(arrDate.ToString("dd-MM-yyyy hh:mm tt"));
         }
-        public async Task<IActionResult> OnPostCreateMaker()
+        public async Task<IActionResult> OnPostCreateFlight()
         {
             await Task.Run(() => true);
             string respone = "True";
@@ -134,22 +134,44 @@ namespace Presentation.Pages.Admin
             stream.Position = 0;
             using (StreamReader reader = new StreamReader(stream))
             {
-                string requestBody = reader.ReadLine();
-                FlightDTO flight = new FlightDTO();
-                flight.PlaneId = requestBody;
-                Console.WriteLine("This is planeID" + flight.PlaneId);
-                requestBody = reader.ReadLine();
-                flight.Status = 0;
-                Console.WriteLine("This is status" + flight.Status);
-                requestBody = reader.ReadLine();
+
+                string requestBody = reader.ReadToEnd();
                 if (requestBody.Length > 0)
                 {
-                    var obj = JsonConvert.DeserializeObject<List<FlightDetailDTO>>(requestBody);
+                    var obj = JsonConvert.DeserializeObject<CreateFlightVM>(requestBody);
                     if (obj != null)
                     {
-                        foreach (var item in obj)
+                        // Console.WriteLine(obj.planeId + " " + obj.Status);
+                        // foreach (var item in obj.routeId)
+                        // {
+                        //     Console.WriteLine(item);
+                        // }
+                        // foreach (var item in obj.depDate)
+                        // {
+                        //     Console.WriteLine(item);
+                        // }
+                        // foreach (var item in obj.arrDate)
+                        // {
+                        //     Console.WriteLine(item);
+                        // }
+                        FlightDTO flight = new FlightDTO();
+                        flight.PlaneId = obj.planeId;
+                        if (obj.Status == "AVAILABLE")
                         {
-                            Console.WriteLine("This is flight detail" + item.RouteId + " " + item.DepDate + " " + item.ArrDate);
+                            flight.Status = 0;
+                        }
+                        var code = await _services.generateFlightId();
+                        flight.FlightId = code;
+                        await _services.addFlightAsync(flight);
+                        Console.WriteLine(code);
+                        // IList<FlightDetailDTO> detailDTO = new List<FlightDetailDTO>();
+                        int n = obj.routeId.Count();
+                        for (var i = 0; i < n; ++i)
+                        {
+                            DateTime depDate = DateTime.ParseExact(obj.depDate[i], "dd-MM-yyyy hh:mm tt", null);
+                            DateTime arrDate = DateTime.ParseExact(obj.arrDate[i], "dd-MM-yyyy hh:mm tt", null);
+                            FlightDetailDTO detail = new FlightDetailDTO(null, code, obj.routeId[i], depDate, arrDate);
+                            await _services.addFlightDetailAsync(detail);
                         }
                     }
                 }
@@ -223,4 +245,13 @@ namespace Presentation.Pages.Admin
             this.DepDate = fd.DepDate.ToString();
         }
     }
+    public class CreateFlightVM
+    {
+        public string planeId { get; set; }
+        public string Status { get; set; }
+        public List<string> routeId { get; set; }
+        public List<string> depDate { get; set; }
+        public List<string> arrDate { get; set; }
+    }
+
 }
