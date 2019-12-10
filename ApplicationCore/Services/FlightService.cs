@@ -280,17 +280,8 @@ namespace ApplicationCore.Services
             if (String.IsNullOrEmpty(det.FlightDetailId))
             {
                 var res = await unitOfWork.Flights.getAllFlightDetails(det.FlightId);
-<<<<<<< HEAD
                 if (res == null) det.FlightDetailId = "000";
                 else det.FlightDetailId = String.Format("{0:000}", res.Count());
-=======
-<<<<<<< HEAD
-=======
->>>>>>> 7d3bac84cb85228f1871d61f86593fc1fe3741a6
-
->>>>>>> 45ed251778f898f106355e61be88bc19df0c7b75
-                if (res != null) det.FlightDetailId = String.Format("{0:000}", res.Count());
-                else det.FlightDetailId = "000";
             }
         }
         public async Task<DateTime> calArrDate(DateTime depDate, FlightTime time)
