@@ -318,24 +318,27 @@ contentWayPoint();
 	});
 	// DatePicker
 	$('.checkin_date').datepicker({
-		'format': 'dd/mm/yyyy',
-		'todayHighlight': 'true',
-		'startDate': '0d',	
+		dateFormat: 'dd/mm/yy',
+		minDate: new Date(),	
 		'autoclose': true
 	});
 	$('.checkout_date').datepicker({
-		'format': 'dd/mm/yyyy',
-		'setDate': $('.checkin_date').val(),
-		'startDate': '0d',
-		'autoclose': true
+		dateFormat: 'dd/mm/yy',
+		minDate: $('.checkin_date').val()
 	});
-	$('.checkin_date').datepicker('setDate', new Date());
+
 	$(".birth_date").datepicker({
-		'format': 'dd/mm/yyyy',
+		dateFormat: 'dd/mm/yy',
 		'autoclose': true
 	})
 	//end of datepicker
+	$( ".checkin_date" ).datepicker( "setDate", new Date() );
+	$( ".checkout_date" ).datepicker( "setDate", $(".checkin_date").val() );
+	$( ".checkout_date" ).datepicker( "option", "minDate", $(".checkin_date").val());
 
+	$(document).on("change",".checkin_date",function(){
+		$( ".checkout_date" ).datepicker( "option", "minDate", $(".checkin_date").val());
+	})
 	//dialog,form
 		var dialog, form;
 		$("#register").dialog({
@@ -425,7 +428,7 @@ contentWayPoint();
 					}))
 				},
 				error: function(response){
-					alert("Cant found");
+					
 				}
 			});
 		},
@@ -441,8 +444,37 @@ contentWayPoint();
 		$(this).autocomplete("search");
 	});
 	$("#Where").autocomplete({
-		source: '/Index?handler=AirPort'
-	})
+		source: function(request,response){
+			$.ajax({
+				url: '/Index?handler=AirPort',
+				datatype: "json",
+				data:{term: request.term},
+				contentType: "application/json; charset=utf-8",
+				success: function(data){
+					response($.map(data,function(item){
+						return {
+							label: item.name,
+							value: item.name,
+							CategoryId: item.id
+						}
+					}))
+				},
+				error: function(response){
+					
+				}
+			});
+		},
+		minLength: 1,
+		select: function(e,i)
+		{
+			$("#AirportId_2").val(i.item.CategoryId);
+			//bind airport dropdown
+			
+		},
+		
+	}).focus(function(){
+		$(this).autocomplete("search");
+	});
 	// End autocomplete
 	//click everything
 	$("#profile").on("click",function(){

@@ -78,10 +78,11 @@
 													<label for="#">From</label>
 													<div class="form-field" >
 														<div class="icon"><span class="icon-my_location"></span></div>
-														<input type="text" id="From" class="form-control" placeholder="From" />
-													
+														<input type="text" asp-for="@Model.From_City" id="From" class="form-control" placeholder="From" />
+														
 														<input asp-for="@Model.From" type="hidden" id="AirportId"/>
 													</div>
+													<span asp-validation-for="@Model.From_City" style="color:red"></span>
 												</div>
 											</div>
 											<!-- where -->
@@ -90,8 +91,11 @@
 													<label for="#">Where</label>
 													<div class="form-field">
 														<div class="icon"><span class="icon-map-marker"></span></div>
-														<input asp-for="@Model.Where" type="text" id="Where" class="form-control" placeholder="Where">
+														<input asp-for="@Model.Where_City" type="text" id="Where" class="form-control" placeholder="Where">
+														<input asp-for="@Model.Where" type="hidden" id="AirportId_2"/>
 													</div>
+													<span asp-validation-for="@Model.Where_City" style="color:red"></span>
+
 												</div>
 											</div>
 											<!-- checkin -->
@@ -102,6 +106,7 @@
 														<div class="icon"><span class="icon-map-marker"></span></div>
 														<input asp-for="@Model.DepDate" type="text" class="form-control checkin_date" placeholder="Check In">
 													</div>
+													<span asp-validation-for="@Model.DepDate" style="color:red"></span>
 												</div>
 											</div>
 											<!-- checkout -->
@@ -112,6 +117,7 @@
 														<div class="icon"><span class="icon-map-marker"></span></div>
 														<input asp-for="@Model.ArrDate"  type="text" class="form-control checkout_date" placeholder="Check Out">
 													</div>
+													<span asp-validation-for="@Model.ArrDate" style="color:red"></span>
 												</div>
 											</div>
 											

@@ -144,7 +144,8 @@ namespace ApplicationCore.Services
         private async Task generateCustomerId(Customer Customer)
         {
             var res = await unitOfWork.Persons.GetAllAsync();
-            var id = res.LastOrDefault().Id;
+            string id = null;
+            if (res != null) id = res.LastOrDefault().Id;
             var code = 0;
             Int32.TryParse(id, out code);
             Customer.Id = String.Format("{0:00000}", code);

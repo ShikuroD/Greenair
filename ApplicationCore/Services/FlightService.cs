@@ -60,15 +60,22 @@ namespace ApplicationCore.Services
             if (!String.IsNullOrEmpty(origin_id) && !String.IsNullOrEmpty(destination_id))
             {
                 int num = adults_num + childs_num;
-                var res = await this.getAllAvailableFlightAsync();
+                var res = await unitOfWork.Flights.getAvailableFlights();
 
-                res = res.Where(m => Task.Run(() => this.getOriginId(m.FlightId)).GetAwaiter().GetResult().Equals(origin_id))
-                    .Where(m => Task.Run(() => this.getDestinationId(m.FlightId)).GetAwaiter().GetResult().Equals(destination_id));
+
+                res = res.Where(m => Task.Run(() => this.getOriginId(m.FlightId)).GetAwaiter().GetResult().Equals(origin_id));
+                res = res.Where(m => Task.Run(() => this.getDestinationId(m.FlightId)).GetAwaiter().GetResult().Equals(destination_id));
                 if (dep_date != null)
                     res = res.Where(m => DateTime.Compare(Task.Run(() => this.getDepDate(m.FlightId)).GetAwaiter().GetResult(), dep_date) >= 0);
                 res = res.Where(m => Task.Run(() => this.checkOrderNum(m.FlightId, num)).GetAwaiter().GetResult().Equals(origin_id));
 
-                return res;
+                if (res == null)
+                {
+                    Console.WriteLine("null u mtfk");
+                    return null;
+                }
+                Console.WriteLine(res.Count());
+                return toDtoRange(res);
             }
             else return null;
         }
@@ -115,13 +122,27 @@ namespace ApplicationCore.Services
             }
             return res;
         }
-        private async Task generateFlightId(Flight Flight)
+        public async Task<string> generateFlightId()
         {
             var res = await unitOfWork.Flights.GetAllAsync();
-            var id = res.LastOrDefault().FlightId;
+            string id = null;
+            if (res != null) id = res.Last().FlightId;
             var code = 0;
             Int32.TryParse(id, out code);
-            Flight.FlightId = String.Format("{0:00000}", code);
+            return String.Format("{0:00000}", code);
+        }
+        // public async Task generateFlightId(Flight Flight)
+        // {
+        //     var res = await unitOfWork.Flights.GetAllAsync();
+        //     var id = res.LastOrDefault().FlightId;
+        //     var code = 0;
+        //     Int32.TryParse(id, out code);
+        //     Flight.FlightId = String.Format("{0:00000}", code);
+        // }
+        private async Task addFlightAsync(Flight flight)
+        {
+            await unitOfWork.Flights.AddAsync(flight);
+            await unitOfWork.CompleteAsync();
         }
         public async Task<string> generateFlightId()
         {
@@ -139,17 +160,21 @@ namespace ApplicationCore.Services
             return String.Format("{0:00000}", code);
         }
 
-        public async Task addFlightAsync(FlightDTO flightDto)
+        public async Task addFlightAsync(FlightDTO flightDto, IEnumerable<FlightDetailDTO> details)
         {
-            if (await unitOfWork.Flights.GetByAsync(flightDto.FlightId) == null)
+            var flight = this.toEntity(flightDto);
+            flight.FlightId = await generateFlightId();
+            await this.addFlightAsync(flight);
+            foreach (FlightDetailDTO dto in details)
             {
-                var flight = this.toEntity(flightDto);
-                await generateFlightId(flight);
-                await generateTicket(flight.FlightId);
-                await unitOfWork.Flights.AddAsync(flight);
-                await unitOfWork.CompleteAsync();
+                dto.FlightId = flight.FlightId;
+                await this.addFlightDetailAsync(dto);
             }
+            await generateTicket(flight.FlightId);
+            await unitOfWork.CompleteAsync();
+
         }
+
         public async Task updateFlightAsync(FlightDTO flightDto)
         {
             if (await unitOfWork.Flights.GetByAsync(flightDto.FlightId) != null)
@@ -159,13 +184,13 @@ namespace ApplicationCore.Services
                 var Flight = await unitOfWork.Flights.GetByAsync(flightDto.FlightId);
                 this.convertDtoToEntity(flightDto, Flight);
             }
-            else
-            {
-                var flight = this.toEntity(flightDto);
-                await generateFlightId(flight);
-                await generateTicket(flight.FlightId);
-                await unitOfWork.Flights.AddAsync(flight);
-            }
+            // else
+            // {
+            //     var flight = this.toEntity(flightDto);
+            //     await generateFlightId(flight);
+            //     await generateTicket(flight.FlightId);
+            //     await unitOfWork.Flights.AddAsync(flight);
+            // }
             await unitOfWork.CompleteAsync();
         }
 
@@ -215,11 +240,13 @@ namespace ApplicationCore.Services
         public async Task<string> getOriginId(string flight_id)
         {
             var route = await this.getFirstRoute(flight_id);
+            if (route == null) return "";
             return route.Origin;
         }
         public async Task<string> getDestinationId(string flight_id)
         {
             var route = await this.getLastRoute(flight_id);
+            if (route == null) return "";
             return route.Destination;
         }
         public async Task<AirportDTO> getOrigin(string flight_id)
@@ -270,8 +297,13 @@ namespace ApplicationCore.Services
             if (String.IsNullOrEmpty(det.FlightDetailId))
             {
                 var res = await unitOfWork.Flights.getAllFlightDetails(det.FlightId);
+<<<<<<< HEAD
                 if (res == null) det.FlightDetailId = "000";
                 else det.FlightDetailId = String.Format("{0:000}", res.Count());
+=======
+                if (res != null) det.FlightDetailId = String.Format("{0:000}", res.Count());
+                else det.FlightDetailId = "000";
+>>>>>>> 5f6bbf5e2d56f1d224125cc6f6410cb58201b310
             }
         }
         public async Task<DateTime> calArrDate(DateTime depDate, FlightTime time)

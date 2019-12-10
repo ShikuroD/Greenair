@@ -1,4 +1,5 @@
 
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System;
 using System.Collections.Generic;
@@ -40,9 +41,13 @@ namespace Presentation
                     // acc.Password = "12345";
                     // Console.WriteLine(acc.PersonId);
                     // unit.Accounts.UpdateAsync(acc);
-                    //var routes = unit.Routes.GetAllAsync().GetAwaiter().GetResult();
-                    //var flights = unit.Customers.GetAllAsync().GetAwaiter().GetResult();
+                    var dets = unit.Flights.getAllFlightDetails("00005").GetAwaiter().GetResult();
+                    if (dets == null) Console.WriteLine("NULLLLL");
+                    else Console.WriteLine(dets.Count());
 
+                    var temp = unit.Flights.getFirstRouteId("00005").GetAwaiter().GetResult();
+                    if (temp == null) Console.WriteLine("NULLLLL");
+                    else Console.WriteLine(temp);
 
 
                     greenairContext.SaveChanges();

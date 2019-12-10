@@ -24,7 +24,7 @@ namespace ApplicationCore.Services
         {
             var airports = await this.getAllAirportAsync();
             var res = airports.Where(t =>
-                                t.AirportName.ToLower().StartsWith(term.ToLower())).Select(t => new { Name = t.AirportName, Id = t.AirportId }
+                                t.Address.City.ToLower().StartsWith(term.ToLower())).Select(t => new { Name = t.Address.City, Id = t.AirportId }
                                 ).ToList();
             return res;
         }

@@ -13,6 +13,7 @@ using ApplicationCore.Interfaces;
 using ApplicationCore.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace Presentation.Pages
 {
@@ -31,12 +32,19 @@ namespace Presentation.Pages
         public string From { get; set; }
         [BindProperty]
         public string Where { get; set; }
+        [Required(ErrorMessage = "You must choose the origin city")]
+        [BindProperty]
+        public string From_City { get; set; }
+        [Required(ErrorMessage = "You must choose the destination city")]
+        [BindProperty]
+        public string Where_City { get; set; }
         [BindProperty]
         public string DepDate { get; set; }
         [BindProperty]
         public string ArrDate { get; set; }
         [BindProperty]
         public string NumAdults { get; set; }
+        
         [BindProperty]
         public string NumChilds { get; set; }
         [BindProperty]
@@ -55,21 +63,35 @@ namespace Presentation.Pages
         }
         public IActionResult OnPost()
         {
-            var FlightSearch = new Dictionary<string,object>();
-            FlightSearch.Add("from",From);
-            FlightSearch.Add("where",Where);
-            FlightSearch.Add("depdate",DepDate);
-            FlightSearch.Add("arrdate",ArrDate);
-            FlightSearch.Add("type",FlightType);
-            FlightSearch.Add("adults",NumAdults);
-            FlightSearch.Add("childs",NumChilds);
-            SessionHelper.SetObjectAsJson(HttpContext.Session, "FlightSearch", FlightSearch);
-            return RedirectToPage("Flight");
+            if (ModelState.IsValid)
+            {
+                var FlightSearch = new Dictionary<string,object>();
+                FlightSearch.Add("from",From);
+                FlightSearch.Add("where",Where);
+                FlightSearch.Add("from_city",From_City);
+                FlightSearch.Add("where_city",Where_City);
+                FlightSearch.Add("depdate",DepDate);
+                FlightSearch.Add("arrdate",ArrDate);
+                FlightSearch.Add("type",FlightType);
+                FlightSearch.Add("adults",NumAdults);
+                FlightSearch.Add("childs",NumChilds);
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "FlightSearch", FlightSearch);
+                return RedirectToPage("Flight");
+            }
+            else{
+                return Page();
+            }
         }
         public async Task<IActionResult> OnGetAirPortAsync(string term)
         {
-            ListAirportNames = await _airportService.searchAirport(term);
-            return new JsonResult(ListAirportNames);
+            if(term != ""){
+                ListAirportNames = await _airportService.searchAirport(term);
+                return new JsonResult(ListAirportNames);
+            }
+            else
+            {
+                return new JsonResult("null");
+            }
         }
         public async Task<IActionResult> OnGetAllAirPortAsync()
         {
