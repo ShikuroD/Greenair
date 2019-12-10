@@ -7,13 +7,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Presentation.Helpers;
-
+using ApplicationCore.Entities;
 namespace Presentation.Pages
 {
     public class PaymentModel : PageModel
     {
         private readonly ILogger<PaymentModel> _logger;
         public int Adults { get; set; }
+        public List<Ticket> Cart { get; set; }
+        public double Total { get; set; }
 
         public int Childs { get; set; }
         public PaymentModel(ILogger<PaymentModel> logger)
@@ -30,6 +32,15 @@ namespace Presentation.Pages
                 Adults = Convert.ToInt32(FlightSearch["adults"]);
                 Childs = Convert.ToInt32(FlightSearch["childs"]);
             }
+        }
+        public IActionResult OnGetCart()
+        {   
+            Cart = SessionHelper.GetObjectFromJson<List<Ticket>>(HttpContext.Session,"cart");
+            return new JsonResult(Cart);
+        }
+        public IActionResult OnGetChoose()
+        {
+            return new JsonResult("aaa");
         }
     }
 }

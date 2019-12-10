@@ -168,23 +168,64 @@ namespace Presentation.Pages.Admin
                         // {
                         //     Console.WriteLine(item);
                         // }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 7d3bac84cb85228f1871d61f86593fc1fe3741a6
                         FlightDTO flight = new FlightDTO();
                         flight.PlaneId = obj.planeId;
                         if (obj.Status == "AVAILABLE")
                         {
                             flight.Status = 0;
                         }
+<<<<<<< HEAD
                         IList<FlightDetailDTO> detailDTO = new List<FlightDetailDTO>();
+=======
+                        var code = await _services.generateFlightId();
+                        flight.FlightId = code;
+                        // await _services.addFlightAsync(flight);
+                        Console.WriteLine(code);
+                        // IList<FlightDetailDTO> detailDTO = new List<FlightDetailDTO>();
+>>>>>>> 7d3bac84cb85228f1871d61f86593fc1fe3741a6
                         int n = obj.routeId.Count();
                         for (var i = 0; i < n; ++i)
                         {
                             DateTime depDate = DateTime.ParseExact(obj.depDate[i], "dd-MM-yyyy hh:mm tt", null);
                             DateTime arrDate = DateTime.ParseExact(obj.arrDate[i], "dd-MM-yyyy hh:mm tt", null);
+<<<<<<< HEAD
                             FlightDetailDTO detail = new FlightDetailDTO(null, null, obj.routeId[i], depDate, arrDate);
                             detailDTO.Add(detail);
                         }
                         await _services.addFlightAsync(flight, detailDTO);
 
+=======
+                            FlightDetailDTO detail = new FlightDetailDTO(null, code, obj.routeId[i], depDate, arrDate);
+                            await _services.addFlightDetailAsync(detail);
+                        }
+=======
+
+
+                        // FlightDTO flight = new FlightDTO();
+                        // flight.PlaneId = obj.planeId;
+                        // if (obj.Status == "AVAILABLE")
+                        // {
+                        //     flight.Status = 0;
+                        // }
+                        // var code = await _services.generateFlightId();
+                        // flight.FlightId = code;
+                        // await _services.addFlightAsync(flight);
+                        // Console.WriteLine(code);
+                        // // IList<FlightDetailDTO> detailDTO = new List<FlightDetailDTO>();
+                        // int n = obj.routeId.Count();
+                        // for (var i = 0; i < n; ++i)
+                        // {
+                        //     DateTime depDate = DateTime.ParseExact(obj.depDate[i], "dd-MM-yyyy hh:mm tt", null);
+                        //     DateTime arrDate = DateTime.ParseExact(obj.arrDate[i], "dd-MM-yyyy hh:mm tt", null);
+                        //     FlightDetailDTO detail = new FlightDetailDTO(null, code, obj.routeId[i], depDate, arrDate);
+                        //     await _services.addFlightDetailAsync(detail);
+                        // }
+>>>>>>> 45ed251778f898f106355e61be88bc19df0c7b75
+>>>>>>> 7d3bac84cb85228f1871d61f86593fc1fe3741a6
                     }
                 }
             }

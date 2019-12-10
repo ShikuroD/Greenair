@@ -61,8 +61,6 @@ namespace ApplicationCore.Services
             {
                 int num = adults_num + childs_num;
                 var res = await unitOfWork.Flights.getAvailableFlights();
-
-
                 res = res.Where(m => Task.Run(() => this.getOriginId(m.FlightId)).GetAwaiter().GetResult().Equals(origin_id));
                 res = res.Where(m => Task.Run(() => this.getDestinationId(m.FlightId)).GetAwaiter().GetResult().Equals(destination_id));
                 if (dep_date != null)
@@ -282,9 +280,15 @@ namespace ApplicationCore.Services
             if (String.IsNullOrEmpty(det.FlightDetailId))
             {
                 var res = await unitOfWork.Flights.getAllFlightDetails(det.FlightId);
+<<<<<<< HEAD
                 if (res == null) det.FlightDetailId = "000";
                 else det.FlightDetailId = String.Format("{0:000}", res.Count());
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 7d3bac84cb85228f1871d61f86593fc1fe3741a6
 
+>>>>>>> 45ed251778f898f106355e61be88bc19df0c7b75
                 if (res != null) det.FlightDetailId = String.Format("{0:000}", res.Count());
                 else det.FlightDetailId = "000";
             }

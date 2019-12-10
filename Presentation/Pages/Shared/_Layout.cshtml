@@ -42,22 +42,26 @@
                         <li class="nav-item"><a asp-page="/blog" class="nav-link">Blog</a></li>
                         <li class="nav-item"><a asp-page="/contact" class="nav-link">Contact</a></li>   
                         <li class="nav-item" id="userField">
-                                    <a id='opener' style='cursor:pointer' class='nav-link'>
-                                        <span class='ion-ios-person'></span>
-                                        Log in
-                                    </a>
-                                    <div class='dropdown user nav-link hidden'>
-                                        <a id='account-dropdown' class=' dropdown-toggle ' style='cursor:pointer' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' >
-                                            <span class='ion-ios-person' ></span>
-                                            <span id='userId'></span>
-                                        </a>
-                                        <div class='dropdown-menu' aria-labelledby='account-dropdown'>
-                                            
-                                            <button id="profile" class='dropdown-item' asp-page='/account' type='button'>Your Profile</button>
-                                            <button id='logOut' class='dropdown-item'  type='button'>Logout</button>
-                                        </div>
-                                    </div>
-                            
+                            <a id='opener' style='cursor:pointer' class='nav-link'>
+                                <span class='ion-ios-person'></span>
+                                Log in
+                            </a>
+                            <div class='dropdown user nav-link hidden'>
+                                <a id='account-dropdown' class=' dropdown-toggle ' style='cursor:pointer' type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' >
+                                    <span class='ion-ios-person' ></span>
+                                    <span id='userId'></span>
+                                </a>
+                                <div class='dropdown-menu' aria-labelledby='account-dropdown'>
+                                    
+                                    <button id="profile" class='dropdown-item' asp-page='/account' type='button'>Your Profile</button>
+                                    <button id='logOut' class='dropdown-item'  type='button'>Logout</button>
+                                </div>
+                            </div>                          
+                        </li>
+                        <li class="nav-item">
+                            <a style="cursor:pointer" class="nav-link">
+                                <span class="ion-ios-cart"></span>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -395,6 +399,25 @@
 				}
 			});
 		});
+
+    //cart
+    loadCart();
+    function loadCart()
+    {
+        $.ajax({
+            type:"GET",
+            url: "/Payment?handler=Cart",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(response){
+
+            },
+            error: function(e){
+
+            }
+        });
+    }
+    //end of cart
     })(jQuery);
     </script>
     @section scripts{
