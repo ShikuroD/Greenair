@@ -15,6 +15,8 @@ namespace Presentation.Pages
         private readonly ILogger<PaymentModel> _logger;
         public int Adults { get; set; }
         public List<Ticket> Cart { get; set; }
+        public double Total { get; set; }
+
         public int Childs { get; set; }
         public PaymentModel(ILogger<PaymentModel> logger)
         {
@@ -32,9 +34,13 @@ namespace Presentation.Pages
             }
         }
         public IActionResult OnGetCart()
+        {   
+            Cart = SessionHelper.GetObjectFromJson<List<Ticket>>(HttpContext.Session,"cart");
+            return new JsonResult(Cart);
+        }
+        public IActionResult OnGetChoose()
         {
-            string msg = "";
-            return new JsonResult(msg);
+            return new JsonResult("aaa");
         }
     }
 }

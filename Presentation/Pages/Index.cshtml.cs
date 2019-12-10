@@ -84,14 +84,8 @@ namespace Presentation.Pages
         }
         public async Task<IActionResult> OnGetAirPortAsync(string term)
         {
-            if(term != ""){
                 ListAirportNames = await _airportService.searchAirport(term);
                 return new JsonResult(ListAirportNames);
-            }
-            else
-            {
-                return new JsonResult("null");
-            }
         }
         public async Task<IActionResult> OnGetAllAirPortAsync()
         {

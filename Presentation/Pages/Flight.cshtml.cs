@@ -57,26 +57,20 @@ namespace Presentation.Pages
                 ViewData["arrDate"] = arrDate.ToString("dddd, dd MMMM yyyy");
                 ViewData["value_dep_date"] = depDate.ToString("dddd-dd/MM/yyyy");
                 ViewData["value_arr_date"] = arrDate.ToString("dddd-dd/MM/yyyy");
-
                 Msg = depDate.ToString("dddd dd MMMM yyyy");
                 int Adults = Convert.ToInt32(FlightSearch["adults"]);
                 int Childs = Convert.ToInt32(FlightSearch["childs"]);
                 ViewData["text"] = Adults;
                 // DateTime arrDate = DateTime.;
+                ListFlights_1 = await _flightService.searchFlightAsync(FlightSearch["from"].ToString()
+                ,FlightSearch["where"].ToString(),depDate,Adults,Childs);
                 if(type == "round"){
-                    // if( await _flightService.searchFlightAsync(FlightSearch["from"].ToString(),FlightSearch["where"].ToString(),depDate,Adults,Childs) == null)
-                    // {
-                    //     Msg = "Cant found anything!";
-                    // }
-                    // else{
-
-                    // }
-                    ListFlights_1 = await _flightService.searchFlightAsync(FlightSearch["from"].ToString(),FlightSearch["where"].ToString(),depDate,Adults,Childs);
-                    ListFlights_2 = await _flightService.searchFlightAsync(FlightSearch["where"].ToString(),FlightSearch["from"].ToString(),arrDate,Adults,Childs);
+                    // ListFlights_2 = await _flightService.searchFlightAsync(FlightSearch["where"].ToString(),FlightSearch["from"].ToString(),arrDate,Adults,Childs);
                     CheckType = "round";
                 }
                 else{
-                    ListFlights_1 = await _flightService.searchFlightAsync(FlightSearch["from"].ToString(),FlightSearch["where"].ToString(),depDate,Adults,Childs);
+                    ListFlights_1 = await _flightService.searchFlightAsync(FlightSearch["from"].ToString()
+                    ,FlightSearch["where"].ToString(),depDate,Adults,Childs);
                     CheckType = "one";
                 }
 

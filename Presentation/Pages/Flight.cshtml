@@ -21,8 +21,7 @@
 	</div>
 </div>
 <section class="ftco-section bg-light">
-	@foreach(var item in Model.ListFlights_1)
-	{
+
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12" style="text-align:center;padding-left: .9375rem;padding-right: .9375rem;">
@@ -189,11 +188,9 @@
 				</div>
 			</div>
 		</div>
-	}
-	
-	@if(Model.CheckType == "round"){
-		foreach(var item in Model.ListFlights_2)
-		{
+		@foreach(var item in Model.ListFlights_1){
+			
+		}
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-12" style="text-align:center;padding-left: .9375rem;padding-right: .9375rem;">
@@ -360,8 +357,10 @@
 					</div>
 				</div>
 			</div>
-		}
-	}
+			@ViewData["from"]
+			@ViewData["where"]
+		<!-- }
+	} -->
 </section>
 <script>
 	$(document).ready(function()

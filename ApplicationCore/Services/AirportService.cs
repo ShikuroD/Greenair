@@ -23,10 +23,17 @@ namespace ApplicationCore.Services
         public async Task<IEnumerable<Object>> searchAirport(string term)
         {
             var airports = await this.getAllAirportAsync();
-            var res = airports.Where(t =>
+
+            if(term != null){
+                var res = airports.Where(t =>
                                 t.Address.City.ToLower().StartsWith(term.ToLower())).Select(t => new { Name = t.Address.City, Id = t.AirportId }
                                 ).ToList();
-            return res;
+                return res;
+            }
+            else{
+                var res = airports.Select(t => new { Name = t.Address.City, Id = t.AirportId }).ToList();
+                return res;
+            }
         }
         public async Task<IEnumerable<Object>> getAirportName()
         {
