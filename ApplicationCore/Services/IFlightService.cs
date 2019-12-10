@@ -17,6 +17,7 @@ namespace ApplicationCore.Services
                      int adults_num, int childs_num);
         Task<IEnumerable<FlightDTO>> getLimitFlightAsync(IEnumerable<FlightDTO> flights, DateTime arr_date);
         //Task generateId(Flight flight);
+        Task<string> generateFlightId();
         Task addFlightAsync(FlightDTO flightDto);
         Task updateFlightAsync(FlightDTO flightDto);
         Task removeFlightAsync(string flight_id);

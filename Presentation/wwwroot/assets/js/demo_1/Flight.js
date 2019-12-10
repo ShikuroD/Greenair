@@ -87,6 +87,7 @@
 
         function loadRoute() {
             var html = "";
+            var num = parseInt($("#CreateFlight-number").val());
             $.ajax({
                 type: 'GET',
                 dataType: 'json',
@@ -161,7 +162,7 @@
             }
 
         });
-        $(document).on('blur', '.CreateFlight-depdate', function () {
+        $(document).on('change', '.CreateFlight-depdate', function () {
             var id = $(this).attr("id");
             var num = parseInt(id.slice(id.length - 1, id.length));
             var text = $("#CreateFlight-routeid" + num).children("option:selected").val().slice(0, 5);
@@ -185,17 +186,20 @@
         });
         $("#btsubmitCreateFlight").click(function () {
             alert("Create");
-            var planeid = $("#CreateMaker-planeid").val();
-            var planeid = $("#CreateMaker-planeid").val().slice(planeid.length - 5, planeid.length);
-            var status = $("#CreateMaker-status").val();
-            var num = parseInt($("#CreateFlight-number").val());
-            var listFlightDetail = [];
-            for (var i = 1; i <= num; ++i) {
-                listFlightDetail[i - 1].routeId = $("#CreateFlight-routeid" + i).val();
-                listFlightDetail[i - 1].depDate = $("#CreateFlight-depdate" + i).val();
-                listFlightDetail[i - 1].arrDate = $("#CreateFlight-arrdate" + i).val();
-            }
             event.preventDefault();
+            var planeid = $("#CreateFlight-planeid").val();
+            var planeid = $("#CreateFlight-planeid").val().slice(planeid.length - 5, planeid.length);
+            var status = $("#CreateFlight-status").val();
+            var num = parseInt($("#CreateFlight-number").val());
+            var routeId = [];
+            var depDate = [];
+            var arrDate = [];
+            for (var i = 1; i <= num; ++i) {
+                routeId[i - 1] = $("#CreateFlight-routeid" + i).val();
+                depDate[i - 1] = $("#CreateFlight-depdate" + i).val();
+                arrDate[i - 1] = $("#CreateFlight-arrdate" + i).val();
+            }
+
             // event.preventDefault() là để ngăn thằng form nó load lại trang ..
             $.ajax({
                 type: 'POST',
@@ -204,20 +208,22 @@
                 },
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
-                url: '/Admin/Maker?handler=CreateFlight',
+                url: '/Admin/Flight?handler=CreateFlight',
                 data: JSON.stringify({
                     planeId: planeid,
                     status: status,
-                    list: listFlightDetail
+                    routeId: routeId,
+                    depDate: depDate,
+                    arrDate: arrDate
                 }),
                 success: function (respone) {
                     // $('#CreateMaker').modal('hide');
                     if (respone.trim() == "True") {
                         alert("Create success");
-                        location.reload();
+                        // location.reload();
                     } else {
                         alert("This Id exists");
-                        $('#CreateMaker-id').focus();
+                        // $('#CreateMaker-id').focus();
                     }
                 },
                 failure: function (result) {
