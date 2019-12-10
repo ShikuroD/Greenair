@@ -91,7 +91,7 @@ namespace Presentation.Pages.Admin
                     {
                         FlightId = obj.FlightId;
                         await _services.disableFlightAsync(FlightId);
-                        //await _services.CompleteAsync();
+                        // await _services.CompleteAsync();
                     }
                 }
             }
@@ -177,11 +177,8 @@ namespace Presentation.Pages.Admin
                         }
 
                         IList<FlightDetailDTO> detailDTO = new List<FlightDetailDTO>();
-
                         var code = await _services.generateFlightId();
                         Console.WriteLine(code);
-
-
                         int n = obj.routeId.Count();
                         for (var i = 0; i < n; ++i)
                         {
@@ -191,7 +188,6 @@ namespace Presentation.Pages.Admin
                             detailDTO.Add(detail);
                         }
                         await _services.addFlightAsync(flight, detailDTO);
-
 
                     }
                 }

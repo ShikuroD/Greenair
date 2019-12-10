@@ -61,8 +61,6 @@ namespace ApplicationCore.Services
             {
                 int num = adults_num + childs_num;
                 var res = await unitOfWork.Flights.getAvailableFlights();
-
-
                 res = res.Where(m => Task.Run(() => this.getOriginId(m.FlightId)).GetAwaiter().GetResult().Equals(origin_id));
                 res = res.Where(m => Task.Run(() => this.getDestinationId(m.FlightId)).GetAwaiter().GetResult().Equals(destination_id));
                 if (dep_date != null)
