@@ -162,7 +162,7 @@ namespace Presentation.Pages.Admin
                         }
                         var code = await _services.generateFlightId();
                         flight.FlightId = code;
-                        await _services.addFlightAsync(flight);
+                        // await _services.addFlightAsync(flight);
                         Console.WriteLine(code);
                         // IList<FlightDetailDTO> detailDTO = new List<FlightDetailDTO>();
                         int n = obj.routeId.Count();

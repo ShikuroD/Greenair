@@ -324,7 +324,7 @@ contentWayPoint();
 	});
 	$('.checkout_date').datepicker({
 		dateFormat: 'dd/mm/yy',
-		minDate: $('.checkin_date').val()
+		minDate: $('.checkin_date').val() + 1 
 	});
 
 	$(".birth_date").datepicker({

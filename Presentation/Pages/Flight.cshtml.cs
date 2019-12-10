@@ -15,6 +15,7 @@ using Presentation.ViewModels;
 using System.IO;
 using ApplicationCore.DTOs;
 using Microsoft.Extensions.DependencyInjection;
+using System.Globalization;
 
 namespace Presentation.Pages
 {
@@ -30,6 +31,8 @@ namespace Presentation.Pages
         public string Msg { get; set; }
         public string CheckType { get; set; }
         public string Check { get; set; }
+        public DateTime Check_in { get; set; }
+        public DateTime Check_out { get; set; }
         public IEnumerable<FlightDTO> ListFlights_1 { get; set; }
         public IEnumerable<FlightDTO> ListFlights_2 { get; set; }
         private readonly ILogger<FlightModel> _logger;
@@ -41,7 +44,6 @@ namespace Presentation.Pages
 
         public async Task OnGetAsync()
         {
-            
             var FlightSearch = SessionHelper.GetObjectFromJson<Dictionary<string,object>>(HttpContext.Session,"FlightSearch");
             if(FlightSearch != null)
             {
@@ -52,13 +54,13 @@ namespace Presentation.Pages
                 string type = FlightSearch["type"].ToString();
                 string vlDepDate = FlightSearch["depdate"].ToString();
                 string vlArrDate = FlightSearch["arrdate"].ToString();
-                DateTime depDate = DateTime.ParseExact(vlDepDate, "dd/MM/yyyy", null); 
-                DateTime arrDate = DateTime.ParseExact(vlArrDate, "dd/MM/yyyy", null);
-                ViewData["depDate"] = depDate.ToString("dddd, dd MMMM yyyy");
-                ViewData["arrDate"] = arrDate.ToString("dddd, dd MMMM yyyy");
-                ViewData["value_dep_date"] = depDate.ToString("dddd-dd/MM/yyyy");
-                ViewData["value_arr_date"] = arrDate.ToString("dddd-dd/MM/yyyy");
-                Msg = depDate.ToString("dddd dd MMMM yyyy");
+                Check_in = DateTime.ParseExact(vlDepDate.ToString(), "dd/MM/yyyy", null); 
+                Check_out = DateTime.ParseExact(vlArrDate, "dd/MM/yyyy", null);
+                ViewData["depDate"] = Check_in.ToString("dddd, dd MMMM yyyy");
+                ViewData["arrDate"] = Check_out.ToString("dddd, dd MMMM yyyy");
+                ViewData["value_dep_date"] = Check_in.ToString("dd/MM/yyyy");
+                ViewData["value_arr_date"] = Check_out.ToString("dd/MM/yyyy");
+                Msg = Check_in.ToString("dddd dd MMMM yyyy");
                 int Adults = Convert.ToInt32(FlightSearch["adults"]);
                 int Childs = Convert.ToInt32(FlightSearch["childs"]);
                 ViewData["text"] = Adults;
@@ -66,21 +68,36 @@ namespace Presentation.Pages
                 
                 if(type == "round"){
                         ListFlights_1 = await _flightService.searchFlightAsync(FlightSearch["from"].ToString()
-                        ,FlightSearch["where"].ToString(),depDate,Adults,Childs);
+                        ,FlightSearch["where"].ToString(),Check_in,Adults,Childs);
                         ListFlights_2 = await _flightService.searchFlightAsync(FlightSearch["where"].ToString()
-                        ,FlightSearch["from"].ToString(),arrDate,Adults,Childs);
+                        ,FlightSearch["from"].ToString(),Check_out,Adults,Childs);
                         CheckType = "round";
                 }
                 else{
                         ListFlights_1 = await _flightService.searchFlightAsync(FlightSearch["from"].ToString()
-                        ,FlightSearch["where"].ToString(),depDate,Adults,Childs);
+                        ,FlightSearch["where"].ToString(),Check_in,Adults,Childs);
                     CheckType = "one";
                 }
 
                 
             }
         }
-        
+        public IActionResult OnGetNewDate(string choose,string type_date)
+        {
+            var FlightSearch = SessionHelper.GetObjectFromJson<Dictionary<string,object>>(HttpContext.Session,"FlightSearch");
+            Console.WriteLine(choose);
+            if(type_date == "check_in")
+            {
+                FlightSearch["depdate"] = choose;
+            }
+            if(type_date == "check_out")
+            {
+                FlightSearch["arrdate"] = choose;
+            }
+            SessionHelper.SetObjectAsJson(HttpContext.Session,"FlightSearch",FlightSearch);
+    
+            return new JsonResult(choose);
+        }
     }
     // private class Account
     // {

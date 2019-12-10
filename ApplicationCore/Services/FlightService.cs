@@ -142,21 +142,6 @@ namespace ApplicationCore.Services
             await unitOfWork.Flights.AddAsync(flight);
             await unitOfWork.CompleteAsync();
         }
-        public async Task<string> generateFlightId()
-        {
-            var res = await unitOfWork.Flights.GetAllAsync();
-            Console.WriteLine(res.Count());
-            string id = null;
-            if (res == null) id = "0";
-            else
-            {
-                id = res.LastOrDefault().FlightId;
-            }
-            Console.WriteLine(id);
-            var code = 0;
-            Int32.TryParse(id, out code);
-            return String.Format("{0:00000}", code);
-        }
 
         public async Task addFlightAsync(FlightDTO flightDto, IEnumerable<FlightDetailDTO> details)
         {
@@ -295,13 +280,8 @@ namespace ApplicationCore.Services
             if (String.IsNullOrEmpty(det.FlightDetailId))
             {
                 var res = await unitOfWork.Flights.getAllFlightDetails(det.FlightId);
-<<<<<<< HEAD
-                if (res == null) det.FlightDetailId = "000";
-                else det.FlightDetailId = String.Format("{0:000}", res.Count());
-=======
                 if (res != null) det.FlightDetailId = String.Format("{0:000}", res.Count());
                 else det.FlightDetailId = "000";
->>>>>>> 5f6bbf5e2d56f1d224125cc6f6410cb58201b310
             }
         }
         public async Task<DateTime> calArrDate(DateTime depDate, FlightTime time)
