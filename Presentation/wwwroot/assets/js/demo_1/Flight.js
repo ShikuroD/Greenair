@@ -88,7 +88,8 @@
         function loadRoute() {
             var html = "";
             var num = parseInt($("#CreateFlight-number").val());
-            var routeid = $("CreateFlight-routeid" + num).val();
+            var routeid = $("#CreateFlight-routeid" + num).val();
+            // alert(num + " " + routeid);
             $.ajax({
                 type: 'GET',
                 dataType: 'json',
@@ -101,7 +102,7 @@
                     for (var i = 0; i < response.length; i++) {
                         html += `<option >` + response[i].routeId + `: ` + response[i].origin + ` - ` + response[i].destination + `</option>`;
                     }
-                    $(".list").html(html);
+                    // $(".list").html(html);
                     $(".listEdit").append(html);
                     $(".list" + (num + 1)).html(html);
                 }
@@ -112,25 +113,29 @@
         function loadDateTime() {
             var html = "";
             var num = parseInt($("#CreateFlight-number").val());
-            var depid = $("CreateFlight-đepate" + num).val();
+            var arrdate = $("#CreateFlight-arrdate" + num).val();
+            // alert(arrdate);
             $.ajax({
                 type: 'GET',
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
                 url: '/Admin/Flight?Handler=DateTimes',
                 data: {
-                    depdate: đepate
+                    arrdate: arrdate
                 },
                 success: function (response) {
+                    // alert(response);
+                    if (response != "null") {
+                        $("#CreateFlight-depdate" + (num + 1)).val(response);
+                    }
 
                 }
             });
-            return html;
         }
         $("#CreateFlight-btadd").click(function () {
             var num = parseInt($("#CreateFlight-number").val());
             num = num + 1;
-            loadRoute()
+            loadRoute();
             if (num <= 4) {
                 var html = "";
                 html += `<div class="row" id="CreateFlight-row` + num + `">
@@ -145,6 +150,7 @@
                 html += `      <input id="CreateFlight-arrdate` + num + `" type="text" class="form-control CreateFlight-arrdate choose_date" disabled/>`;
                 html += `    </div>
                     </div><hr id="CreateFlight-hr` + num + `"/>`;
+                loadDateTime();
                 $("#CreateFlight-number").val(num);
                 $("#CreateFlight-context").append(html);
             } else {

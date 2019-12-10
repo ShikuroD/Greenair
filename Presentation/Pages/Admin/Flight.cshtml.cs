@@ -41,7 +41,7 @@ namespace Presentation.Pages.Admin
         public IList<FlightDetailVM> ListFlightDetailVM { get; set; }
         public async Task OnGet()// chưa đụng gì tới bên này đâu
         {
-            ListFlights = await _services.getAllAvailableFlightAsync();
+            ListFlights = await _services.getAllFlightAsync();
             ListAirports = await _unitofwork.Airports.GetAllAsync();
             ListRoutes = await _routeServices.getAllRouteAsync();
             ListNameRoutes = new List<string>();
@@ -91,7 +91,7 @@ namespace Presentation.Pages.Admin
                     {
                         FlightId = obj.FlightId;
                         await _services.disableFlightAsync(FlightId);
-                        await _services.CompleteAsync();
+                        // await _services.CompleteAsync();
                     }
                 }
             }
@@ -101,17 +101,21 @@ namespace Presentation.Pages.Admin
         public async Task<JsonResult> OnGetRoutes(string routeid)
         {
             // ListRoutes = await _routeServices.getAllRouteAsync();
-            var n = routeid.Length;
-            ListRoutes = await _routeServices.getRouteByDestinationAsync(routeid.Substring(n - 3, n));
+            var n = routeid.Count();
+            ListRoutes = await _routeServices.getRouteByOriginAsync(routeid.Substring(n - 3, 3));
             return new JsonResult(ListRoutes);
         }
-        public async Task<JsonResult> OnGetDateTimes(string depdate)
+        public async Task<JsonResult> OnGetDateTimes(string arrdate)
         {
             // ListRoutes = await _routeServices.getAllRouteAsync();
-            DateTime Date = DateTime.ParseExact(depdate, "dd-MM-yyyy hh:mm tt", null);
-            FlightTime timeDTO = new FlightTime(0, 30);
-            DateTime depDate = await _services.calArrDate(Date, timeDTO);
-            return new JsonResult(depDate.ToString("dd-MM-yyyy hh:mm tt"));
+            if (arrdate.Count() != 0)
+            {
+                DateTime Date = DateTime.ParseExact(arrdate, "dd-MM-yyyy hh:mm tt", null);
+                FlightTime timeDTO = new FlightTime(0, 30);
+                DateTime depDate = await _services.calArrDate(Date, timeDTO);
+                return new JsonResult(depDate.ToString("dd-MM-yyyy hh:mm tt"));
+            }
+            return new JsonResult("null");
         }
         public async Task<IActionResult> OnGetEditFlight(string id)
         {
@@ -170,19 +174,16 @@ namespace Presentation.Pages.Admin
                         {
                             flight.Status = 0;
                         }
-                        var code = await _services.generateFlightId();
-                        flight.FlightId = code;
-                        await _services.addFlightAsync(flight);
-                        Console.WriteLine(code);
-                        // IList<FlightDetailDTO> detailDTO = new List<FlightDetailDTO>();
+                        IList<FlightDetailDTO> detailDTO = new List<FlightDetailDTO>();
                         int n = obj.routeId.Count();
                         for (var i = 0; i < n; ++i)
                         {
                             DateTime depDate = DateTime.ParseExact(obj.depDate[i], "dd-MM-yyyy hh:mm tt", null);
                             DateTime arrDate = DateTime.ParseExact(obj.arrDate[i], "dd-MM-yyyy hh:mm tt", null);
-                            FlightDetailDTO detail = new FlightDetailDTO(null, code, obj.routeId[i], depDate, arrDate);
-                            await _services.addFlightDetailAsync(detail);
+                            FlightDetailDTO detail = new FlightDetailDTO(null, null, obj.routeId[i], depDate, arrDate);
+                            detailDTO.Add(detail);
                         }
+                        await _services.addFlightAsync(flight, detailDTO);
                     }
                 }
             }
