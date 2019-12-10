@@ -21,6 +21,18 @@ namespace ApplicationCore.Services
         // Task addFlightAsync(FlightDTO flightDto);
         //Task addFlightAsync(FlightDTO flightDto);
         Task addFlightAsync(FlightDTO flightDto, IEnumerable<FlightDetailDTO> details);
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        //Task addFlightAsync(FlightDTO flightDto);
+        // Task addFlightAsync(FlightDTO flightDto, IEnumerable<FlightDetailDTO> details);
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> 45ed251778f898f106355e61be88bc19df0c7b75
+>>>>>>> 7d3bac84cb85228f1871d61f86593fc1fe3741a6
+>>>>>>> d9c547133127c7e6e21276b4e7e15c2e619001e2
         Task updateFlightAsync(FlightDTO flightDto);
         Task removeFlightAsync(string flight_id);
         Task removeAllFlightAsync();

@@ -120,6 +120,7 @@ namespace ApplicationCore.Services
             res = res.OrderBy(m => m.FlightId);
             string id = null;
             var code = 0;
+
             if (res != null)
             {
                 id = res.Last().FlightId;
@@ -279,9 +280,22 @@ namespace ApplicationCore.Services
             if (String.IsNullOrEmpty(det.FlightDetailId))
             {
                 var res = await unitOfWork.Flights.getAllFlightDetails(det.FlightId);
+<<<<<<< HEAD
+                if (res == null) det.FlightDetailId = "000";
+                else det.FlightDetailId = String.Format("{0:000}", res.Count());
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 7d3bac84cb85228f1871d61f86593fc1fe3741a6
 
+<<<<<<< HEAD
                 if (res == null || res.Count() == 0) det.FlightDetailId = "000";
                 else det.FlightDetailId = String.Format("{0:000}", res.Count());
+=======
+>>>>>>> 45ed251778f898f106355e61be88bc19df0c7b75
+                if (res != null) det.FlightDetailId = String.Format("{0:000}", res.Count());
+                else det.FlightDetailId = "000";
+>>>>>>> d9c547133127c7e6e21276b4e7e15c2e619001e2
             }
         }
         public async Task<DateTime> calArrDate(DateTime depDate, FlightTime time)
