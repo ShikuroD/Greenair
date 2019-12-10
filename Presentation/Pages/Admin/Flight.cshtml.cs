@@ -41,7 +41,7 @@ namespace Presentation.Pages.Admin
         public IList<FlightDetailVM> ListFlightDetailVM { get; set; }
         public async Task OnGet()// chưa đụng gì tới bên này đâu
         {
-            ListFlights = await _services.getAllAvailableFlightAsync();
+            ListFlights = await _services.getAllFlightAsync();
             ListAirports = await _unitofwork.Airports.GetAllAsync();
             ListRoutes = await _routeServices.getAllRouteAsync();
             ListNameRoutes = new List<string>();
@@ -91,17 +91,31 @@ namespace Presentation.Pages.Admin
                     {
                         FlightId = obj.FlightId;
                         await _services.disableFlightAsync(FlightId);
-                        await _services.CompleteAsync();
+                        // await _services.CompleteAsync();
                     }
                 }
             }
             string mes = "Remove flight" + FlightId + " Success!";
             return new JsonResult(mes);
         }
-        public async Task<JsonResult> OnGetRoutes()
+        public async Task<JsonResult> OnGetRoutes(string routeid)
         {
-            ListRoutes = await _routeServices.getAllRouteAsync();
+            // ListRoutes = await _routeServices.getAllRouteAsync();
+            var n = routeid.Count();
+            ListRoutes = await _routeServices.getRouteByOriginAsync(routeid.Substring(n - 3, 3));
             return new JsonResult(ListRoutes);
+        }
+        public async Task<JsonResult> OnGetDateTimes(string arrdate)
+        {
+            // ListRoutes = await _routeServices.getAllRouteAsync();
+            if (arrdate.Count() != 0)
+            {
+                DateTime Date = DateTime.ParseExact(arrdate, "dd-MM-yyyy hh:mm tt", null);
+                FlightTime timeDTO = new FlightTime(0, 30);
+                DateTime depDate = await _services.calArrDate(Date, timeDTO);
+                return new JsonResult(depDate.ToString("dd-MM-yyyy hh:mm tt"));
+            }
+            return new JsonResult("null");
         }
         public async Task<IActionResult> OnGetEditFlight(string id)
         {
@@ -154,6 +168,41 @@ namespace Presentation.Pages.Admin
                         // {
                         //     Console.WriteLine(item);
                         // }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 7d3bac84cb85228f1871d61f86593fc1fe3741a6
+                        FlightDTO flight = new FlightDTO();
+                        flight.PlaneId = obj.planeId;
+                        if (obj.Status == "AVAILABLE")
+                        {
+                            flight.Status = 0;
+                        }
+<<<<<<< HEAD
+                        IList<FlightDetailDTO> detailDTO = new List<FlightDetailDTO>();
+=======
+                        var code = await _services.generateFlightId();
+                        flight.FlightId = code;
+                        // await _services.addFlightAsync(flight);
+                        Console.WriteLine(code);
+                        // IList<FlightDetailDTO> detailDTO = new List<FlightDetailDTO>();
+>>>>>>> 7d3bac84cb85228f1871d61f86593fc1fe3741a6
+                        int n = obj.routeId.Count();
+                        for (var i = 0; i < n; ++i)
+                        {
+                            DateTime depDate = DateTime.ParseExact(obj.depDate[i], "dd-MM-yyyy hh:mm tt", null);
+                            DateTime arrDate = DateTime.ParseExact(obj.arrDate[i], "dd-MM-yyyy hh:mm tt", null);
+<<<<<<< HEAD
+                            FlightDetailDTO detail = new FlightDetailDTO(null, null, obj.routeId[i], depDate, arrDate);
+                            detailDTO.Add(detail);
+                        }
+                        await _services.addFlightAsync(flight, detailDTO);
+
+=======
+                            FlightDetailDTO detail = new FlightDetailDTO(null, code, obj.routeId[i], depDate, arrDate);
+                            await _services.addFlightDetailAsync(detail);
+                        }
+=======
 
 
                         // FlightDTO flight = new FlightDTO();
@@ -175,6 +224,8 @@ namespace Presentation.Pages.Admin
                         //     FlightDetailDTO detail = new FlightDetailDTO(null, code, obj.routeId[i], depDate, arrDate);
                         //     await _services.addFlightDetailAsync(detail);
                         // }
+>>>>>>> 45ed251778f898f106355e61be88bc19df0c7b75
+>>>>>>> 7d3bac84cb85228f1871d61f86593fc1fe3741a6
                     }
                 }
             }

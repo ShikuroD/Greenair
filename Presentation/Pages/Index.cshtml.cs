@@ -32,10 +32,10 @@ namespace Presentation.Pages
         public string From { get; set; }
         [BindProperty]
         public string Where { get; set; }
-        [Required(ErrorMessage = "You must choose the origin city")]
+        [Required(ErrorMessage = "You must choose origin!")]
         [BindProperty]
         public string From_City { get; set; }
-        [Required(ErrorMessage = "You must choose the destination city")]
+        [Required(ErrorMessage = "You must choose destination and different the origin!")]
         [BindProperty]
         public string Where_City { get; set; }
         [BindProperty]
@@ -65,18 +65,24 @@ namespace Presentation.Pages
         {
             if (ModelState.IsValid)
             {
-                var FlightSearch = new Dictionary<string,object>();
-                FlightSearch.Add("from",From);
-                FlightSearch.Add("where",Where);
-                FlightSearch.Add("from_city",From_City);
-                FlightSearch.Add("where_city",Where_City);
-                FlightSearch.Add("depdate",DepDate);
-                FlightSearch.Add("arrdate",ArrDate);
-                FlightSearch.Add("type",FlightType);
-                FlightSearch.Add("adults",NumAdults);
-                FlightSearch.Add("childs",NumChilds);
-                SessionHelper.SetObjectAsJson(HttpContext.Session, "FlightSearch", FlightSearch);
-                return RedirectToPage("Flight");
+                if(From == Where){
+                    return Page();
+                }
+                else{
+                    var FlightSearch = new Dictionary<string,object>();
+                    FlightSearch.Add("from",From);
+                    FlightSearch.Add("where",Where);
+                    FlightSearch.Add("from_city",From_City);
+                    FlightSearch.Add("where_city",Where_City);
+                    FlightSearch.Add("depdate",DepDate);
+                    FlightSearch.Add("arrdate",ArrDate);
+                    FlightSearch.Add("type",FlightType);
+                    FlightSearch.Add("adults",NumAdults);
+                    FlightSearch.Add("childs",NumChilds);
+                    SessionHelper.SetObjectAsJson(HttpContext.Session, "FlightSearch", FlightSearch);
+                    return RedirectToPage("Flight");
+                }
+                
             }
             else{
                 return Page();
@@ -84,14 +90,8 @@ namespace Presentation.Pages
         }
         public async Task<IActionResult> OnGetAirPortAsync(string term)
         {
-            if(term != ""){
                 ListAirportNames = await _airportService.searchAirport(term);
                 return new JsonResult(ListAirportNames);
-            }
-            else
-            {
-                return new JsonResult("null");
-            }
         }
         public async Task<IActionResult> OnGetAllAirPortAsync()
         {
