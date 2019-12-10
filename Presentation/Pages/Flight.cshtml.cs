@@ -64,6 +64,13 @@ namespace Presentation.Pages
                 ViewData["text"] = Adults;
                 // DateTime arrDate = DateTime.;
                 if(type == "round"){
+                    // if( await _flightService.searchFlightAsync(FlightSearch["from"].ToString(),FlightSearch["where"].ToString(),depDate,Adults,Childs) == null)
+                    // {
+                    //     Msg = "Cant found anything!";
+                    // }
+                    // else{
+
+                    // }
                     ListFlights_1 = await _flightService.searchFlightAsync(FlightSearch["from"].ToString(),FlightSearch["where"].ToString(),depDate,Adults,Childs);
                     ListFlights_2 = await _flightService.searchFlightAsync(FlightSearch["where"].ToString(),FlightSearch["from"].ToString(),arrDate,Adults,Childs);
                     CheckType = "round";

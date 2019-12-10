@@ -7,15 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Presentation.Helpers;
-// using ApplicationCore.DTOs;
-
+using ApplicationCore.Entities;
 namespace Presentation.Pages
 {
     public class PaymentModel : PageModel
     {
         private readonly ILogger<PaymentModel> _logger;
         public int Adults { get; set; }
-        public List<TicketDTO> Cart { get; set; }
+        public List<Ticket> Cart { get; set; }
         public int Childs { get; set; }
         public PaymentModel(ILogger<PaymentModel> logger)
         {
