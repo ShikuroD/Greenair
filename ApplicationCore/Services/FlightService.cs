@@ -60,15 +60,22 @@ namespace ApplicationCore.Services
             if (!String.IsNullOrEmpty(origin_id) && !String.IsNullOrEmpty(destination_id))
             {
                 int num = adults_num + childs_num;
-                var res = await this.getAllAvailableFlightAsync();
+                var res = await unitOfWork.Flights.getAvailableFlights();
 
-                res = res.Where(m => Task.Run(() => this.getOriginId(m.FlightId)).GetAwaiter().GetResult().Equals(origin_id))
-                    .Where(m => Task.Run(() => this.getDestinationId(m.FlightId)).GetAwaiter().GetResult().Equals(destination_id));
+
+                res = res.Where(m => Task.Run(() => this.getOriginId(m.FlightId)).GetAwaiter().GetResult().Equals(origin_id));
+                res = res.Where(m => Task.Run(() => this.getDestinationId(m.FlightId)).GetAwaiter().GetResult().Equals(destination_id));
                 if (dep_date != null)
                     res = res.Where(m => DateTime.Compare(Task.Run(() => this.getDepDate(m.FlightId)).GetAwaiter().GetResult(), dep_date) >= 0);
                 res = res.Where(m => Task.Run(() => this.checkOrderNum(m.FlightId, num)).GetAwaiter().GetResult().Equals(origin_id));
 
-                return res;
+                if (res == null)
+                {
+                    Console.WriteLine("null u mtfk");
+                    return null;
+                }
+                Console.WriteLine(res.Count());
+                return toDtoRange(res);
             }
             else return null;
         }
@@ -218,13 +225,13 @@ namespace ApplicationCore.Services
         public async Task<string> getOriginId(string flight_id)
         {
             var route = await this.getFirstRoute(flight_id);
-            if (route == null) return null;
+            if (route == null) return "";
             return route.Origin;
         }
         public async Task<string> getDestinationId(string flight_id)
         {
             var route = await this.getLastRoute(flight_id);
-            if (route == null) return null;
+            if (route == null) return "";
             return route.Destination;
         }
         public async Task<AirportDTO> getOrigin(string flight_id)

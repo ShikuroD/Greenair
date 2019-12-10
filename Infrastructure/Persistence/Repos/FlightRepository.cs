@@ -63,7 +63,7 @@ namespace Infrastructure.Persistence.Repos
         public async Task<string> getFirstRouteId(string flight_id)
         {
             var sql = await this.getAllFlightDetails(flight_id);
-            if (sql == null) return null;
+            if (sql == null || sql.Count() == 0) return "";
             sql = sql.OrderBy(m => m.FlightDetailId);
             return sql.FirstOrDefault().RouteId;
         }
@@ -71,7 +71,7 @@ namespace Infrastructure.Persistence.Repos
         public async Task<string> getLastRouteId(string flight_id)
         {
             var sql = await this.getAllFlightDetails(flight_id);
-            if (sql == null) return null;
+            if (sql == null || sql.Count() == 0) return "";
             sql = sql.OrderBy(m => m.FlightDetailId);
             return sql.LastOrDefault().RouteId;
         }
@@ -79,7 +79,7 @@ namespace Infrastructure.Persistence.Repos
         public async Task<DateTime> getArrDate(string flight_id)
         {
             var sql = await this.getAllFlightDetails(flight_id);
-            if (sql == null) return DateTime.MaxValue;
+            if (sql == null || sql.Count() == 0) return DateTime.MaxValue;
             sql = sql.OrderBy(m => m.FlightDetailId);
             return sql.LastOrDefault().ArrDate;
         }
@@ -87,7 +87,7 @@ namespace Infrastructure.Persistence.Repos
         public async Task<DateTime> getDepDate(string flight_id)
         {
             var sql = await this.getAllFlightDetails(flight_id);
-            if (sql == null) return DateTime.MinValue;
+            if (sql == null || sql.Count() == 0) return DateTime.MinValue;
             sql = sql.OrderBy(m => m.FlightDetailId);
             return sql.FirstOrDefault().DepDate;
         }

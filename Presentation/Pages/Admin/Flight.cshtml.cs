@@ -127,6 +127,7 @@ namespace Presentation.Pages.Admin
         }
         public async Task<IActionResult> OnPostCreateMaker()
         {
+            await Task.Run(() => true);
             string respone = "True";
             MemoryStream stream = new MemoryStream();
             Request.Body.CopyTo(stream);
