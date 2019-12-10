@@ -139,7 +139,8 @@ namespace ApplicationCore.Services
         private async Task generateEmployeeId(Employee Employee)
         {
             var res = await unitOfWork.Persons.GetAllAsync();
-            var id = res.LastOrDefault().Id;
+            string id = null;
+            if (res != null) id = res.LastOrDefault().Id;
             var code = 0;
             Int32.TryParse(id, out code);
             Employee.Id = String.Format("{0:00000}", code);

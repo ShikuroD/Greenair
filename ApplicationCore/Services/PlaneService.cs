@@ -86,7 +86,8 @@ namespace ApplicationCore.Services
         private async Task generatePlaneId(Plane Plane)
         {
             var res = await unitOfWork.Planes.GetAllAsync();
-            var id = res.LastOrDefault().PlaneId;
+            string id = null;
+            if (res != null) id = res.LastOrDefault().PlaneId;
             var code = 0;
             Int32.TryParse(id, out code);
             Plane.PlaneId = String.Format("{0:00000}", code);

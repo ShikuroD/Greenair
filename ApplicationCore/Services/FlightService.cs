@@ -115,26 +115,39 @@ namespace ApplicationCore.Services
             }
             return res;
         }
-        private async Task generateFlightId(Flight Flight)
+        public async Task<string> generateFlightId()
         {
             var res = await unitOfWork.Flights.GetAllAsync();
-            var id = res.LastOrDefault().FlightId;
+            string id = null;
+            if (res != null) id = res.Last().FlightId;
             var code = 0;
             Int32.TryParse(id, out code);
-            Flight.FlightId = String.Format("{0:00000}", code);
+            return String.Format("{0:00000}", code);
+        }
+        // public async Task generateFlightId(Flight Flight)
+        // {
+        //     var res = await unitOfWork.Flights.GetAllAsync();
+        //     var id = res.LastOrDefault().FlightId;
+        //     var code = 0;
+        //     Int32.TryParse(id, out code);
+        //     Flight.FlightId = String.Format("{0:00000}", code);
+        // }
+
+        public async Task addFlightAsync(FlightDTO flightDto, IEnumerable<FlightDetailDTO> details)
+        {
+            var flight = this.toEntity(flightDto);
+            flight.FlightId = await generateFlightId();
+            foreach (FlightDetailDTO dto in details)
+            {
+
+                dto.FlightId = flight.FlightId;
+                await this.addFlightDetailAsync(dto);
+            }
+            await generateTicket(flight.FlightId);
+            await unitOfWork.CompleteAsync();
+
         }
 
-        public async Task addFlightAsync(FlightDTO flightDto)
-        {
-            if (await unitOfWork.Flights.GetByAsync(flightDto.FlightId) == null)
-            {
-                var flight = this.toEntity(flightDto);
-                await generateFlightId(flight);
-                await generateTicket(flight.FlightId);
-                await unitOfWork.Flights.AddAsync(flight);
-                await unitOfWork.CompleteAsync();
-            }
-        }
         public async Task updateFlightAsync(FlightDTO flightDto)
         {
             if (await unitOfWork.Flights.GetByAsync(flightDto.FlightId) != null)
@@ -144,13 +157,13 @@ namespace ApplicationCore.Services
                 var Flight = await unitOfWork.Flights.GetByAsync(flightDto.FlightId);
                 this.convertDtoToEntity(flightDto, Flight);
             }
-            else
-            {
-                var flight = this.toEntity(flightDto);
-                await generateFlightId(flight);
-                await generateTicket(flight.FlightId);
-                await unitOfWork.Flights.AddAsync(flight);
-            }
+            // else
+            // {
+            //     var flight = this.toEntity(flightDto);
+            //     await generateFlightId(flight);
+            //     await generateTicket(flight.FlightId);
+            //     await unitOfWork.Flights.AddAsync(flight);
+            // }
             await unitOfWork.CompleteAsync();
         }
 
@@ -257,7 +270,8 @@ namespace ApplicationCore.Services
             if (String.IsNullOrEmpty(det.FlightDetailId))
             {
                 var res = await unitOfWork.Flights.getAllFlightDetails(det.FlightId);
-                det.FlightDetailId = String.Format("{0:000}", res.Count());
+                if (res != null) det.FlightDetailId = String.Format("{0:000}", res.Count());
+                else det.FlightDetailId = "000";
             }
         }
         public async Task<DateTime> calArrDate(DateTime depDate, FlightTime time)

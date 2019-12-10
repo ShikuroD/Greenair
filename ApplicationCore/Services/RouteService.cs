@@ -76,7 +76,8 @@ namespace ApplicationCore.Services
         private async Task generateRouteId(Route Route)
         {
             var res = await unitOfWork.Routes.GetAllAsync();
-            var id = res.LastOrDefault().RouteId;
+            string id = null;
+            if (res != null) id = res.LastOrDefault().RouteId;
             var code = 0;
             Int32.TryParse(id, out code);
             Route.RouteId = String.Format("{0:00000}", code);

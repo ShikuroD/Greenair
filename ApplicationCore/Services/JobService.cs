@@ -70,7 +70,8 @@ namespace ApplicationCore.Services
         private async Task generateJobId(Job Job)
         {
             var res = await unitOfWork.Jobs.GetAllAsync();
-            var id = res.LastOrDefault().JobId;
+            string id = null;
+            if (res != null) id = res.LastOrDefault().JobId;
             var code = 0;
             Int32.TryParse(id, out code);
             Job.JobId = String.Format("{0:000}", code);

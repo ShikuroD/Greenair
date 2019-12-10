@@ -41,8 +41,11 @@ namespace Presentation
                     // acc.Password = "12345";
                     // Console.WriteLine(acc.PersonId);
                     // unit.Accounts.UpdateAsync(acc);
-                    //var routes = unit.Routes.GetAllAsync().GetAwaiter().GetResult();
-                    //var flights = unit.Customers.GetAllAsync().GetAwaiter().GetResult();
+                    // var routes = unit.Routes.GetAllAsync().GetAwaiter().GetResult();
+                    // //var flights = unit.Customers.GetAllAsync().GetAwaiter().GetResult();
+                    // Console.WriteLine(routes.Count());
+                    // Console.WriteLine(routes.ElementAt(routes.Count() - 1).Origin + " - " + routes.ElementAt(routes.Count() - 1).Destination);
+                    // Console.WriteLine(routes.LastOrDefault().Origin + " - " + routes.LastOrDefault().Destination);
 
 
                     greenairContext.SaveChanges();
