@@ -77,7 +77,7 @@ namespace ApplicationCore.Services
             if (res != null) id = res.LastOrDefault().MakerId;
             var code = 0;
             Int32.TryParse(id, out code);
-            Maker.MakerId = String.Format("{0:000}", code);
+            Maker.MakerId = String.Format("{0:000}", code+1);
         }
         public async Task addMakerAsync(MakerDTO dto)
         {

@@ -123,7 +123,7 @@ namespace ApplicationCore.Services
             if (res != null) id = res.Last().FlightId;
             var code = 0;
             Int32.TryParse(id, out code);
-            return String.Format("{0:00000}", code);
+            return String.Format("{0:00000}", code+1);
         }
 
         // public async Task generateFlightId(Flight Flight)
@@ -277,8 +277,12 @@ namespace ApplicationCore.Services
             if (String.IsNullOrEmpty(det.FlightDetailId))
             {
                 var res = await unitOfWork.Flights.getAllFlightDetails(det.FlightId);
+<<<<<<< HEAD
                 if (res == null) det.FlightDetailId = "000";
                 else det.FlightDetailId = String.Format("{0:000}", res.Count());
+=======
+
+>>>>>>> 0b313439b819166c2931c85f9e0b5ceaa6900cb3
                 if (res != null) det.FlightDetailId = String.Format("{0:000}", res.Count());
                 else det.FlightDetailId = "000";
             }
