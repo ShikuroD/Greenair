@@ -119,12 +119,12 @@ namespace ApplicationCore.Services
         public async Task<string> generateFlightId()
         {
             var res = await unitOfWork.Flights.GetAllAsync();
-            string id = null;
+            //string id = null;
             var code = 0;
             if (res != null)
             {
                 code = res.Count();
-                id = res.Last().FlightId;
+                //id = res.Last().FlightId;
             }
             //Int32.TryParse(id, out code);
             return String.Format("{0:00000}", code);
