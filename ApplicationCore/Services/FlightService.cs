@@ -132,14 +132,19 @@ namespace ApplicationCore.Services
         //     Int32.TryParse(id, out code);
         //     Flight.FlightId = String.Format("{0:00000}", code);
         // }
+        private async Task addFlightAsync(Flight flight)
+        {
+            await unitOfWork.Flights.AddAsync(flight);
+            await unitOfWork.CompleteAsync();
+        }
 
         public async Task addFlightAsync(FlightDTO flightDto, IEnumerable<FlightDetailDTO> details)
         {
             var flight = this.toEntity(flightDto);
             flight.FlightId = await generateFlightId();
+            await this.addFlightAsync(flight);
             foreach (FlightDetailDTO dto in details)
             {
-
                 dto.FlightId = flight.FlightId;
                 await this.addFlightDetailAsync(dto);
             }
