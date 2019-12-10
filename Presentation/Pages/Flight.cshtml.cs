@@ -29,6 +29,7 @@ namespace Presentation.Pages
         }
         public string Msg { get; set; }
         public string CheckType { get; set; }
+        public string Check { get; set; }
         public IEnumerable<FlightDTO> ListFlights_1 { get; set; }
         public IEnumerable<FlightDTO> ListFlights_2 { get; set; }
         private readonly ILogger<FlightModel> _logger;
@@ -62,15 +63,17 @@ namespace Presentation.Pages
                 int Childs = Convert.ToInt32(FlightSearch["childs"]);
                 ViewData["text"] = Adults;
                 // DateTime arrDate = DateTime.;
-                ListFlights_1 = await _flightService.searchFlightAsync(FlightSearch["from"].ToString()
-                ,FlightSearch["where"].ToString(),depDate,Adults,Childs);
+                
                 if(type == "round"){
-                    // ListFlights_2 = await _flightService.searchFlightAsync(FlightSearch["where"].ToString(),FlightSearch["from"].ToString(),arrDate,Adults,Childs);
-                    CheckType = "round";
+                        ListFlights_1 = await _flightService.searchFlightAsync(FlightSearch["from"].ToString()
+                        ,FlightSearch["where"].ToString(),depDate,Adults,Childs);
+                        ListFlights_2 = await _flightService.searchFlightAsync(FlightSearch["where"].ToString()
+                        ,FlightSearch["from"].ToString(),arrDate,Adults,Childs);
+                        CheckType = "round";
                 }
                 else{
-                    ListFlights_1 = await _flightService.searchFlightAsync(FlightSearch["from"].ToString()
-                    ,FlightSearch["where"].ToString(),depDate,Adults,Childs);
+                        ListFlights_1 = await _flightService.searchFlightAsync(FlightSearch["from"].ToString()
+                        ,FlightSearch["where"].ToString(),depDate,Adults,Childs);
                     CheckType = "one";
                 }
 
