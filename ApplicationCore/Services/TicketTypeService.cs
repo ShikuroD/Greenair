@@ -69,7 +69,8 @@ namespace ApplicationCore.Services
         private async Task generateTicketTypeId(TicketType TicketType)
         {
             var res = await unitOfWork.TicketTypes.GetAllAsync();
-            var id = res.LastOrDefault().TicketTypeId;
+            string id = null;
+            if (res != null) id = res.LastOrDefault().TicketTypeId;
             var code = 0;
             Int32.TryParse(id, out code);
             TicketType.TicketTypeId = String.Format("{0:000}", code);
