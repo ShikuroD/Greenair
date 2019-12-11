@@ -79,9 +79,9 @@ namespace ApplicationCore.Services
             return flights;
         }
 
-        new public async Task<IEnumerable<Flight>> SortAsync(IEnumerable<Flight> entities, ORDER_ENUM col, ORDER_ENUM order)
+        new public async Task<IEnumerable<FlightDTO>> SortAsync(IEnumerable<FlightDTO> entities, ORDER_ENUM col, ORDER_ENUM order)
         {
-            IEnumerable<Flight> res = null;
+            IEnumerable<FlightDTO> res = null;
             await Task.Run(() => true);
             if (order == ORDER_ENUM.DESCENDING)
             {
@@ -263,36 +263,17 @@ namespace ApplicationCore.Services
         }
 
         //Thao tac voi chi tiet ============================================================================================
-        new public async Task<IEnumerable<FlightDetailDTO>> SortFlightDetailAsync(IEnumerable<FlightDetailDTO> entities, ORDER_ENUM col, ORDER_ENUM order)
+        public async Task<IEnumerable<FlightDetailDTO>> SortFlightDetailAsync(IEnumerable<FlightDetailDTO> entities, ORDER_ENUM order)
         {
             IEnumerable<FlightDetailDTO> res = null;
             await Task.Run(() => true);
             if (order == ORDER_ENUM.DESCENDING)
             {
-                switch (col)
-                {
-                    case ORDER_ENUM.ORIGIN_NAME: res = entities.OrderByDescending(m => this.getOrigin(m.FlightId).GetAwaiter().GetResult().AirportName); break;
-
-                    case ORDER_ENUM.FLIGHT_TIME: res = entities.OrderByDescending(m => this.getTotalFlightTime(m.FlightId).GetAwaiter().GetResult()); break;
-
-
-                    default: res = entities.OrderBy(m => m.FlightId).ThenByDescending(m => m.FlightDetailId); break;
-                }
+                res = entities.OrderBy(m => m.FlightId).ThenByDescending(m => m.FlightDetailId);
             }
             else
             {
-                switch (col)
-                {
-                    case ORDER_ENUM.ORIGIN_NAME: res = entities.OrderBy(m => this.getOrigin(m.FlightId).GetAwaiter().GetResult().AirportName); break;
-                    case ORDER_ENUM.DESTINATION_NAME: res = entities.OrderBy(m => this.getDestination(m.FlightId).GetAwaiter().GetResult().AirportName); break;
-                    case ORDER_ENUM.DEP_DATE: res = entities.OrderBy(m => this.getDepDate(m.FlightId).GetAwaiter().GetResult()); break;
-                    case ORDER_ENUM.ARR_DATE: res = entities.OrderBy(m => this.getArrDate(m.FlightId).GetAwaiter().GetResult()); break;
-                    case ORDER_ENUM.FLIGHT_TIME: res = entities.OrderBy(m => this.getTotalFlightTime(m.FlightId).GetAwaiter().GetResult()); break;
-
-
-                    default: res = entities.OrderBy(m => m.FlightId).ThenBy(m => m.FlightDetailId); break;
-                }
-
+                res = entities.OrderBy(m => m.FlightId).ThenBy(m => m.FlightDetailId);
             }
             return res;
         }
@@ -345,6 +326,38 @@ namespace ApplicationCore.Services
         }
 
         //Thao tac voi ve =======================================================================================
+
+        public async Task<IEnumerable<TicketDTO>> SortTicketAsync(IEnumerable<TicketDTO> entities, ORDER_ENUM col, ORDER_ENUM order)
+        {
+            IEnumerable<TicketDTO> res = null;
+            await Task.Run(() => true);
+            if (order == ORDER_ENUM.DESCENDING)
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.CUSTOMER_NAME: res = entities.OrderBy(m => m.FlightId).ThenByDescending(m => unitOfWork.Customers.GetByAsync(m.CustomerId).GetAwaiter().GetResult()); break;
+                    case ORDER_ENUM.ASSIGNED_CUSTOMER: res = entities.OrderBy(m => m.FlightId).ThenByDescending(m => m.AssignedCus); break;
+                    case ORDER_ENUM.TICKET_TYPE_ID: res = entities.OrderBy(m => m.FlightId).ThenByDescending(m => m.TicketTypeId); break;
+                    case ORDER_ENUM.STATUS: res = entities.OrderBy(m => m.FlightId).ThenByDescending(m => m.Status); break;
+
+                    default: res = entities.OrderBy(m => m.FlightId).OrderByDescending(m => m.FlightId); break;
+                }
+            }
+            else
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.CUSTOMER_NAME: res = entities.OrderBy(m => m.FlightId).ThenBy(m => unitOfWork.Customers.GetByAsync(m.CustomerId).GetAwaiter().GetResult()); break;
+                    case ORDER_ENUM.ASSIGNED_CUSTOMER: res = entities.OrderBy(m => m.FlightId).ThenBy(m => m.AssignedCus); break;
+                    case ORDER_ENUM.TICKET_TYPE_ID: res = entities.OrderBy(m => m.FlightId).ThenBy(m => m.TicketTypeId); break;
+                    case ORDER_ENUM.STATUS: res = entities.OrderBy(m => m.FlightId).ThenBy(m => m.Status); break;
+
+                    default: res = entities.OrderBy(m => m.FlightId).OrderBy(m => m.TicketId); break;
+                }
+
+            }
+            return res;
+        }
 
         public async Task<decimal> calTicketPrice(string flight_id, string ticket_type_id)
         {

@@ -34,7 +34,6 @@ namespace Presentation
 
                     unit.Flights.RemoveRange(unit.Flights.GetAll());
 
-
                     //unit.Employees.RemoveRange(unit.Employees.GetAll());
                     unit.Customers.RemoveRange(unit.Customers.GetAll());
 
