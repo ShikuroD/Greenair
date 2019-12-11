@@ -105,7 +105,7 @@ namespace Presentation.Pages.Admin
             ListRoutes = await _routeServices.getRouteByOriginAsync(routeid.Substring(n - 3, 3));
             return new JsonResult(ListRoutes);
         }
-        public async Task<JsonResult> OnGetDateTimes(string arrdate)
+        public async Task<JsonResult> OnGetDateTimes(string arrdate,string routeid)
         {
             // ListRoutes = await _routeServices.getAllRouteAsync();
             if (arrdate.Count() != 0)
@@ -113,7 +113,18 @@ namespace Presentation.Pages.Admin
                 DateTime Date = DateTime.ParseExact(arrdate, "dd-MM-yyyy hh:mm tt", null);
                 FlightTime timeDTO = new FlightTime(0, 30);
                 DateTime depDate = await _services.calArrDate(Date, timeDTO);
-                return new JsonResult(depDate.ToString("dd-MM-yyyy hh:mm tt"));
+
+                var routedto= await _routeServices.getRouteAsync(routeid);
+                var Listrou = await _routeServices.getRouteByOriginAsync(routedto.Destination);
+                routedto=Listrou.ElementAt(0);
+                Route route = new Route();
+                _routeServices.convertDtoToEntity(routedto, route);
+                DateTime arrDate = await _services.calArrDate(Date, route.FlightTime);
+
+                Dictionary<string, object> Result = new Dictionary<string, object>();
+                Result.Add("arrDate", arrDate.ToString("dd-MM-yyyy hh:mm tt"));
+                Result.Add("depDate", depDate.ToString("dd-MM-yyyy hh:mm tt"));
+                return new JsonResult(Result);
             }
             return new JsonResult("null");
         }

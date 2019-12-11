@@ -1,3 +1,4 @@
+using System.IO.MemoryMappedFiles;
 using System.Threading.Tasks;
 using System.Reflection.Emit;
 using System.Collections.Generic;
@@ -33,6 +34,12 @@ namespace ApplicationCore.Services
         {
             return mapper.Map<SaveDto, Entity>(save);
         }
+
+        public IEnumerable<Entity> toEnityRange(IEnumerable<SaveDto> dtos)
+        {
+            return mapper.Map<IEnumerable<SaveDto>, IEnumerable<Entity>>(dtos);
+        }
+
         public void convertEntityToDto(Entity entity, Dto dto)
         {
             mapper.Map<Entity, Dto>(entity, dto);

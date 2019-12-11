@@ -1,7 +1,11 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "C:\\Users\\Administrator\\Desktop\\Greenair\\Presentation\\Presentation.csproj": {}
+=======
+    "C:\\Users\\Administrator\\Desktop\\Greenair\\presentation\\Presentation.csproj": {}
+>>>>>>> b2666a023ae98722534983fcef4591adeeefc7d1
   },
   "projects": {
     "C:\\Users\\Administrator\\Desktop\\Greenair\\ApplicationCore\\ApplicationCore.csproj": {
@@ -182,6 +186,7 @@
         }
       }
     },
+<<<<<<< HEAD
     "C:\\Users\\Administrator\\Desktop\\Greenair\\Presentation\\Presentation.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -190,6 +195,16 @@
         "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\Presentation\\Presentation.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\Presentation\\obj\\",
+=======
+    "C:\\Users\\Administrator\\Desktop\\Greenair\\presentation\\Presentation.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\Greenair\\presentation\\Presentation.csproj",
+        "projectName": "Presentation",
+        "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\presentation\\Presentation.csproj",
+        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\presentation\\obj\\",
+>>>>>>> b2666a023ae98722534983fcef4591adeeefc7d1
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
