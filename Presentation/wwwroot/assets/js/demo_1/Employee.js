@@ -116,6 +116,60 @@
 
             });
         });
+        $("#btsubmitCreateEmployee").click(function () {
+            alert("Create");
+            // var id = $('#CreateEmployee-id').val();
+            var firstname = $("#CreateEmployee-firstname").val();
+            var lastname = $("#CreateEmployee-lastname").val();
+            var username = $("#CreateEmployee-username").val();
+            var password = $("#CreateEmployee-password").val();
+            var password2 = $("#CreateEmployee-password2").val();
+            var birthdate = $("#CreateEmployee-birthdate").val();
+            var phone = $("#CreateEmployee-phone").val();
+            var job = $("#CreateEmployee-job").val().slice(0, 3);
+            var status = $("#CreateEmployee-status").val();
+            var salary = $("#CreateEmployee-salary").val();
+            var address = $("#CreateEmployee-address").val();
+            alert("not check");
+            return;
+            event.preventDefault();
+            // event.preventDefault() là để ngăn thằng form nó load lại trang ..
+            $.ajax({
+                type: 'POST',
+                headers: {
+                    "XSRF-TOKEN": $('input:hidden[name="__RequestVerificationToken"]').val()
+                },
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                url: '/Admin/Employee?handler=CreateEmployee',
+                data: JSON.stringify({
+                    FirstName: firstname,
+                    LastName: lastname,
+                    Username: username,
+                    Password: password,
+                    Birthdate: birthdate,
+                    Phone: phone,
+                    JobId: job,
+                    Salary: salary,
+                    Status: status,
+                    Address: address
+                }),
+                success: function (respone) {
+                    // $('#CreateEmployee').modal('hide');
+                    if (respone.trim() == "True") {
+                        alert("Create success");
+                        location.reload();
+                    } else {
+                        alert("This Id exists");
+                        $('#CreateEmployee-id').focus();
+                    }
+                },
+                failure: function (result) {
+                    alert("fail");
+                }
+
+            });
+        });
         // $("#btsubmitSearchEmployee").click(function () {
         //     var search = $('#SearchEmployee').val();
         //     event.preventDefault();

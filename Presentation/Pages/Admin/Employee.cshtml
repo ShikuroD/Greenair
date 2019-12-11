@@ -266,7 +266,6 @@
                   <label class="col-sm-3 col-form-label">Job</label>
                   <div class="col-sm-9">
                     <select id="CreateEmployee-job" class="form-control">
-                      <option id="CreateEmployee-default" hidden></option>
                       @foreach (var item in Model.ListJobs){
                         <option>@item.JobId - 
                           @item.JobName</option>

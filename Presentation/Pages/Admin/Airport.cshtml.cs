@@ -13,17 +13,20 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using ApplicationCore.DTOs;
 using Presentation.Services.ServiceInterfaces;
+using ApplicationCore.Services;
 
 namespace Presentation.Pages.Admin
 {
     public class AirportModel : PageModel
     {
         private readonly IUnitOfWork _unitofwork;
-        private readonly IAirportVMService _services;
+        private readonly IAirportVMService _servicesVM;
+        private readonly IAirportService _services;
 
-        public AirportModel(IAirportVMService services, IUnitOfWork unitofwork)
+        public AirportModel(IAirportService services,IAirportVMService servicesVM, IUnitOfWork unitofwork)
         {
             this._unitofwork = unitofwork;
+            this._servicesVM = servicesVM;
             this._services = services;
 
         }
