@@ -320,6 +320,7 @@ namespace ApplicationCore.Services
 
             }
             await unitOfWork.Flights.removeAllFlightDetail(flight_id);
+            await unitOfWork.CompleteAsync();
             await unitOfWork.Flights.addFlightDetailRange(dets);
             await unitOfWork.CompleteAsync();
         }
