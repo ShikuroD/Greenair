@@ -117,7 +117,7 @@
             });
         });
         $("#btsubmitCreateEmployee").click(function () {
-            alert("Create");
+            // alert("Create");
             var check = true;
             var test = true;
             // var id = $('#CreateEmployee-id').val();
@@ -132,14 +132,14 @@
             var status = $("#CreateEmployee-status").val();
             var salary = $("#CreateEmployee-salary").val();
             var address = $("#CreateEmployee-address").val();
-            // alert("not check");
-            if (username == null || username.length > 20) {
+            alert(username + " " + password + " " + password2);
+            if (username.length == 0 || username.length > 20) {
                 $("#z-CreateEmployee-username").removeClass("hidden-class");
                 check = false;
             } else {
                 $("#z-CreateEmployee-username").addClass("hidden-class");
             }
-            if (password == null || password.length > 20) {
+            if (password.length == 0 || password.length > 20) {
                 $("#z-CreateEmployee-password").removeClass("hidden-class");
                 check = false;
             } else {
@@ -181,7 +181,8 @@
                 $("#z-CreateEmployee-birthdate").addClass("hidden-class");
             }
             if (check == false) {
-                alert("fail");
+                alert("Fail");
+                return;
             } else {
                 alert("Well");
             }
