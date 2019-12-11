@@ -90,6 +90,7 @@ namespace Presentation.Pages.Admin
                     if (obj != null)
                     {
                         FlightId = obj.FlightId;
+                        Console.WriteLine(FlightId + "  ggggg");
                         await _services.disableFlightAsync(FlightId);
                         // await _services.CompleteAsync();
                     }
