@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using ApplicationCore.DTOs;
+
 namespace ApplicationCore.Services
 {
     public interface IService<Entity, Dto, SaveDto>
@@ -16,5 +18,6 @@ namespace ApplicationCore.Services
         Task<IEnumerable<Dto>> SortAsync(IEnumerable<Dto> entities, ORDER_ENUM col, ORDER_ENUM order);
 
         Task<int> CompleteAsync();
+        Task addFlightAsync(FlightDTO flightDto, IEnumerable<FlightDetailDTO> details);
     }
 }

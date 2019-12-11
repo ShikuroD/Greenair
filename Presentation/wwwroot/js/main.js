@@ -357,10 +357,145 @@ contentWayPoint();
 			$(this).dialog("close");
 		}
 		});
+			//test
+		var firstName = $("#firstName").val();
+		var lastName = $("#lastName").val();
+		$(".name").text(firstName+" "+lastName);
+		var birth_date = new Date() ;
+		// $(".birth_day").text(birth_date);
+		var OldPass;
+		var phone ;
+		var num;
+		var street;
+		var district;
+		var state;
+		var city;
+		var email;
+	
 		function addUser() {
-		$("#register").dialog("close");
-		alert("Succesful");
-	}
+			firstName = $("#reg-first-name").val();
+			lastName =$("#reg-last-name").val();
+			birth_date = $("#reg-birth-date").val();
+			num =$("#reg-num").val();
+			street=$("#reg-street").val();
+			district = $("#reg-district").val();
+			state = $("#reg-state").val();
+			city = $("#reg-city").val();
+			country = $("reg-country").children("option:selected").val();
+			phone = $("#reg-phone").val();
+			email = $("#reg-email").val();
+			var nameRegex = new RegExp(/^([A-Za-z]+[,.]?[ ]?|[A-Za-z]+['-]?)+$/);
+			var dateRegex = new RegExp(/^\s*((31([-/ ])((0?[13578])|(1[02]))\3(\d\d)?\d\d)|((([012]?[1-9])|([123]0))([-/ ])((0?[13-9])|(1[0-2]))\12(\d\d)?\d\d)|(((2[0-8])|(1[0-9])|(0?[1-9]))([-/ ])0?2\22(\d\d)?\d\d)|(29([-/ ])0?2\25(((\d\d)?(([2468][048])|([13579][26])|(0[48])))|((([02468][048])|([13579][26]))00))))\s*$/);
+			var emailRegex = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/);
+			var phoneRegex = new RegExp(/((09|03|07|08|05)+([0-9]{8})\b)/g);
+			var UserName = $("#reg-username").val();
+			var NewPass = $("#reg-password").val();
+			var RePass = $("#reg-re-password").val();
+			var UserNameRegexp = new RegExp(/^(?![0-9]+$)(?=[a-zA-Z0-9-]{5,25}$)[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$/);
+			var PassWordRegexp = new RegExp(/^(?=[^a-z]*[a-z])(?=\D*\d)[^:&.~\s]{5,20}$/);
+			if(!nameRegex.test(firstName))
+			{
+				$("#err-first-name").removeClass("hidden");
+			}
+			else
+			{
+				$("#err-first-name").addClass("hidden");
+				if(!nameRegex.test(lastName))
+				{
+					$("#err-last-name").removeClass("hidden");
+				}
+				else
+				{
+					$("#err-last-name").addClass("hidden");
+					if(!dateRegex.test(birth_date))
+					{
+						$("#err-birth-date").removeClass("hidden");
+					}	
+					else
+					{
+						$("#err-birth-date").addClass("hidden");
+						if(!emailRegex.test(email))
+						{
+							$("#err-email").removeClass("hidden");
+							
+						}
+						else
+						{
+							$("#err-email").addClass("hidden");
+							if(!phoneRegex.test(phone))
+							{
+								$("#err-phone").removeClass("hidden");
+							}
+							else
+							{
+								$("#err-phone").addClass("hidden");
+								if(!UserNameRegexp.test(UserName))
+								{
+									$("#err-user").removeClass("hidden");
+								}
+								else
+								{
+									$("#err-user").addClass("hidden");
+									if(!PassWordRegexp.test(NewPass))
+									{
+										$("#err-new-pass").removeClass("hidden");
+									}
+									else
+									{
+										$("#err-new-pass").addClass("hidden");
+										if(RePass != NewPass)
+										{
+											$("#err-re-pass").removeClass("hidden");
+										}
+										else
+										{
+											$("#err-re-pass").addClass("hidden");
+											$.ajax({
+												type: "POST",
+												url: "/Account?handler=NewCustomer",
+												headers: {
+												"XSRF-TOKEN": $('input:hidden[name="__RequestVerificationToken"]').val()
+												},
+												data: JSON.stringify({
+													FirstName: firstName,
+													LastName: lastName,
+													Birthdate: birth_date,
+													Num: num,
+													Street: street,
+													District: district,
+													State: state,
+													City: city,
+													Country: country,
+													Phone: phone,
+													Email: email,
+													Username: UserName,
+													Password: NewPass
+												}),
+												success:function(response){
+													if($.trim(response) == "false")
+													{
+														alert("Your account already exists");	
+													}
+													else
+													{
+														$("#register").dialog("close");
+													}
+													
+												},
+												error: function(response){
+													alert("Cant save your changes");
+												}
+											});
+										}
+									}
+								}
+								
+							}
+						}
+					}
+				}
+			}
+		}
 	dialog = $("#dialog").dialog({
 		autoOpen: false,
 		height: 270,	
@@ -609,21 +744,7 @@ contentWayPoint();
 	$("#items").append(option);
 	//end of array coutries
 	
-	//test
-	var firstName = $("#firstName").val();
-	var lastName = $("#lastName").val();
-	$(".name").text(firstName+" "+lastName);
-	var birth_date = new Date() ;
-	// $(".birth_day").text(birth_date);
-	var OldPass;
-	var phone ;
-	var num;
-	var street;
-	var district;
-	var state;
-	var city;
-	var email;
-	
+
 	// save profile
 	$(".save").on("click",function(){
 		var id = $(this).attr("id");
@@ -638,77 +759,154 @@ contentWayPoint();
 		country = $(".country").children("option:selected").val();
 		phone = $("#phone").val();
 		email = $("#email").val();
-		var save_button = $(this).find("button");
-		save_button.button("loading");
-		$.ajax({
-			type: "POST",
-			url: "/Account?handler=EditCustomer",
-			headers: {
-			"XSRF-TOKEN": $('input:hidden[name="__RequestVerificationToken"]').val()
-			},
-			data: JSON.stringify({
-				FirstName: firstName,
-				LastName: lastName,
-				Birthdate: birth_date,
-				Num: num,
-				Street: street,
-				District: district,
-				State: state,
-				City: city,
-				Country: country,
-				Phone: phone,
-				Email: email
-			}),
-			success:function(response){
-				alert(response);
-				$(".name").text(firstName+" "+lastName);
-				$(".birth_day").text(birth_date);
-				$("#text-num").text(num);
-				$("#text-street").text(street);
-				$("#text-district").text(district);
-				$("#text-city").text(city);
-				$("#text-state").text(state);
-				$("#text-country").text(country);
-				$("#text-phone").text(phone);
-				$("#text-email").text(email);
-				save_button.button("reset");
-				if(id == "profile_s")
-				{
-					$("#profile_op").removeClass("hidden");
-					$("#profile_cl").addClass("hidden");
-					$("#profile_s").addClass("hidden");
-					$(".pro-show").removeClass("hidden");
-					$(".pro-field").addClass("hidden");
-				}
-				if(id == "add_s")
-				{
-					$("#add_op").removeClass("hidden");
-					$("#add_cl").addClass("hidden");
-					$("#add_s").addClass("hidden");
-					$("#address-show").removeClass("hidden");
-					$("#address-field").addClass("hidden");
-				}
-				if(id == "phone_s")
-				{
-					$("#phone_op").removeClass("hidden");
-					$("#phone_cl").addClass("hidden");
-					$("#phone_s").addClass("hidden");
-					$(".phone-show").removeClass("hidden");
-					$(".phone-field").addClass("hidden");
-				}
-				if(id == "email_s")
-				{
-					$("#email_op").removeClass("hidden");
-					$("#email_cl").addClass("hidden");
-					$("#email_s").addClass("hidden");
-					$(".email-show").removeClass("hidden");
-					$(".email-field").addClass("hidden");
-				}
-			},
-			error: function(response){
-				alert("Cant save your changes");
+		var nameRegex = new RegExp(/^([A-Za-z]+[,.]?[ ]?|[A-Za-z]+['-]?)+$/);
+		var dateRegex = new RegExp(/^\s*((31([-/ ])((0?[13578])|(1[02]))\3(\d\d)?\d\d)|((([012]?[1-9])|([123]0))([-/ ])((0?[13-9])|(1[0-2]))\12(\d\d)?\d\d)|(((2[0-8])|(1[0-9])|(0?[1-9]))([-/ ])0?2\22(\d\d)?\d\d)|(29([-/ ])0?2\25(((\d\d)?(([2468][048])|([13579][26])|(0[48])))|((([02468][048])|([13579][26]))00))))\s*$/);
+		var emailRegex = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/);
+		var phoneRegex = new RegExp(/((09|03|07|08|05)+([0-9]{8})\b)/g);
+		if(!nameRegex.test(firstName))
+		{
+			$("#err-first-name").removeClass("hidden");
+			if(id != "profile_s")
+			{
+				$("#profile_op").addClass("hidden");
+				$("#profile_cl").removeClass("hidden");
+				$("#profile_s").removeClass("hidden");
+				$(".pro-show").addClass("hidden");
+				$(".pro-field").removeClass("hidden");
 			}
-		});
+		}
+		else
+		{
+			$("#err-first-name").addClass("hidden");
+			if(!nameRegex.test(lastName))
+			{
+				$("#err-last-name").removeClass("hidden");
+				if(id != "profile_s")
+				{
+					$("#profile_op").addClass("hidden");
+					$("#profile_cl").removeClass("hidden");
+					$("#profile_s").removeClass("hidden");
+					$(".pro-show").addClass("hidden");
+					$(".pro-field").removeClass("hidden");
+				}
+			}
+			else
+			{
+				$("#err-last-name").addClass("hidden");
+				if(!dateRegex.test(birth_date))
+				{
+					$("#err-birth-date").removeClass("hidden");
+					if(id != "profile_s")
+					{
+						$("#profile_op").addClass("hidden");
+						$("#profile_cl").removeClass("hidden");
+						$("#profile_s").removeClass("hidden");
+						$(".pro-show").addClass("hidden");
+						$(".pro-field").removeClass("hidden");
+					}
+				}	
+				else
+				{
+					$("#err-birth-date").addClass("hidden");
+					if(!emailRegex.test(email))
+					{
+						$("#err-email").removeClass("hidden");
+						if(id != "email_s")
+						{
+							$("#email_op").addClass("hidden");
+							$("#email_cl").removeClass("hidden");
+							$("#email_s").removeClass("hidden");
+							$(".email-show").addClass("hidden");
+							$(".email-field").removeClass("hidden");
+						}
+					}
+					else
+					{
+						$("#err-email").addClass("hidden");
+						if(!phoneRegex.test(phone))
+						{
+							$("#err-phone").removeClass("hidden");
+							if(id != "phone_s")
+							{
+								$("#phone_op").addClass("hidden");
+								$("#phone_cl").removeClass("hidden");
+								$("#phone_s").removeClass("hidden");
+								$(".phone-show").addClass("hidden");
+								$(".phone-field").removeClass("hidden");
+							}
+						}
+						else
+						{
+							$("#err-phone").addClass("hidden");
+							var save_button = $(this).find("button");
+							save_button.button("loading");
+							$.ajax({
+								type: "POST",
+								url: "/Account?handler=EditCustomer",
+								headers: {
+								"XSRF-TOKEN": $('input:hidden[name="__RequestVerificationToken"]').val()
+								},
+								data: JSON.stringify({
+									FirstName: firstName,
+									LastName: lastName,
+									Birthdate: birth_date,
+									Num: num,
+									Street: street,
+									District: district,
+									State: state,
+									City: city,
+									Country: country,
+									Phone: phone,
+									Email: email
+								}),
+								success:function(response){
+									alert(response);
+									$(".name").text(firstName+" "+lastName);
+									$(".birth_day").text(birth_date);
+									$("#text-num").text(num);
+									$("#text-street").text(street);
+									$("#text-district").text(district);
+									$("#text-city").text(city);
+									$("#text-state").text(state);
+									$("#text-country").text(country);
+									$("#text-phone").text(phone);
+									$("#text-email").text(email);
+									save_button.button("reset");
+										//profile
+										$("#profile_op").removeClass("hidden");
+										$("#profile_cl").addClass("hidden");
+										$("#profile_s").addClass("hidden");
+										$(".pro-show").removeClass("hidden");
+										$(".pro-field").addClass("hidden");
+										//address
+										$("#add_op").removeClass("hidden");
+										$("#add_cl").addClass("hidden");
+										$("#add_s").addClass("hidden");
+										$("#address-show").removeClass("hidden");
+										$("#address-field").addClass("hidden");
+										//phone
+										$("#phone_op").removeClass("hidden");
+										$("#phone_cl").addClass("hidden");
+										$("#phone_s").addClass("hidden");
+										$(".phone-show").removeClass("hidden");
+										$(".phone-field").addClass("hidden");
+										//email
+										$("#email_op").removeClass("hidden");
+										$("#email_cl").addClass("hidden");
+										$("#email_s").addClass("hidden");
+										$(".email-show").removeClass("hidden");
+										$(".email-field").addClass("hidden");
+								},
+								error: function(response){
+									alert("Cant save your changes");
+								}
+							});
+						}
+					}
+				}
+			}
+		}
+		
 		// alert(num);
 		
 		
@@ -719,52 +917,62 @@ contentWayPoint();
 		var NewPass = $("#new-pass").val();
 		var RePass = $("#re-pass").val();
 		OldPass = $("#old-pass").val();
+		var CheckPass = $("#check-pass").val();
 		var PassWordRegexp = new RegExp(/^(?=[^a-z]*[a-z])(?=\D*\d)[^:&.~\s]{5,20}$/);
 		var save_button = $(this).find("button");
 		
 		if(id == "save-pass"){
-			if(!PassWordRegexp.test(NewPass))
+			if(OldPass != CheckPass)
 			{
-				$("#err-new-pass").removeClass("hidden");
+				$("#err-old-pass").removeClass("hidden");
 			}
-			else{
-				$("#err-new-pass").addClass("hidden");
-				if(RePass != NewPass)
+			else
+			{
+				$("#err-old-pass").addClass("hidden");
+				if(!PassWordRegexp.test(NewPass))
 				{
-					$("#err-re-pass").removeClass("hidden");
+					$("#err-new-pass").removeClass("hidden");
 				}
 				else{
-					save_button.button('loading');
-					$("#err-re-pass").addClass("hidden");
-					$.ajax({
-						type: "POST",
-						url: "/Account?handler=EditAccountCustomer",
-						headers: {
-						"XSRF-TOKEN": $('input:hidden[name="__RequestVerificationToken"]').val()
-						},
-						data: JSON.stringify({
-							// Username: UserName,
-							Password: NewPass
-						}),
-						success: function(response)
-						{
-								$("#pass-field").addClass("hidden");
-								$("#pass-show").removeClass("hidedn");
-								$("#open-pass").removeClass("hidden");
-								$("#close-pass").addClass("hidden");
-								$("#save-pass").addClass("hidden");
-								$("#new-pass").val("");
-								$("#re-pass").val("");
-								$("#old-pass").val(NewPass);
-								save_button.button("reset");
-						},
-						error:function()
-						{
-							alert("false");
-						}
-					});	
+					$("#err-new-pass").addClass("hidden");
+					if(RePass != NewPass)
+					{
+						$("#err-re-pass").removeClass("hidden");
+					}
+					else{
+						save_button.button('loading');
+						$("#err-re-pass").addClass("hidden");
+						$.ajax({
+							type: "POST",
+							url: "/Account?handler=EditAccountCustomer",
+							headers: {
+							"XSRF-TOKEN": $('input:hidden[name="__RequestVerificationToken"]').val()
+							},
+							data: JSON.stringify({
+								// Username: UserName,
+								Password: NewPass
+							}),
+							success: function(response)
+							{
+									$("#pass-field").addClass("hidden");
+									$("#pass-show").removeClass("hidedn");
+									$("#open-pass").removeClass("hidden");
+									$("#close-pass").addClass("hidden");
+									$("#save-pass").addClass("hidden");
+									$("#new-pass").val("");
+									$("#re-pass").val("");
+									$("#old-pass").val(NewPass);
+									save_button.button("reset");
+							},
+							error:function()
+							{
+								alert("false");
+							}
+						});	
+					}
 				}
 			}
+			
 		}
 	})
 	// end of save profile

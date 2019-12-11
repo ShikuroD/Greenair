@@ -143,7 +143,7 @@ namespace ApplicationCore.Services
             await unitOfWork.CompleteAsync();
         }
 
-        public async Task addFlightAsync(FlightDTO flightDto, IEnumerable<FlightDetailDTO> details)
+        public new async Task addFlightAsync(FlightDTO flightDto, IEnumerable<FlightDetailDTO> details)
         {
             var flight = this.toEntity(flightDto);
             flight.FlightId = await generateFlightId();
@@ -461,5 +461,9 @@ namespace ApplicationCore.Services
             await unitOfWork.CompleteAsync();
         }
 
+        public Task addFlightDetailAsync(FlightDetailDTO det_dto, IEnumerable<FlightDetailDTO> detail)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

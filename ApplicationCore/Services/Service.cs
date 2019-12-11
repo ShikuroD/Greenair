@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using AutoMapper;
 using System;
 using ApplicationCore.Interfaces;
+using ApplicationCore.DTOs;
+
 namespace ApplicationCore.Services
 {
     public class Service<Entity, Dto, SaveDto> : IService<Entity, Dto, SaveDto>
@@ -56,6 +58,11 @@ namespace ApplicationCore.Services
         public async Task<int> CompleteAsync()
         {
             return await unitOfWork.CompleteAsync();
+        }
+
+        public Task addFlightAsync(FlightDTO flightDto, IEnumerable<FlightDetailDTO> details)
+        {
+            throw new NotImplementedException();
         }
     }
 }
