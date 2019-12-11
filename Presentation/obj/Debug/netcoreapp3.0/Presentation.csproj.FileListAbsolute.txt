@@ -683,3 +683,4 @@ C:\Users\ASUS\Desktop\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pag
 C:\Users\Administrator\Desktop\Greenair\presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Account.cshtml.g.cs
 D:\Code\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Account.cshtml.g.cs
 C:\Users\ASUS\Desktop\C#\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Account.cshtml.g.cs
+C:\Users\Administrator\Desktop\Greenair\Presentation\obj\Debug\netcoreapp3.0\Razor\Pages\Admin\Route.cshtml.g.cs

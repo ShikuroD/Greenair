@@ -16,6 +16,7 @@ using System.IO;
 using ApplicationCore.DTOs;
 using Microsoft.Extensions.DependencyInjection;
 using System.Globalization;
+using ApplicationCore;
 
 
 namespace Presentation.Pages
@@ -86,7 +87,6 @@ namespace Presentation.Pages
         public IActionResult OnGetNewDate(string choose, string type_date, string check)
         {
             var FlightSearch = SessionHelper.GetObjectFromJson<Dictionary<string, object>>(HttpContext.Session, "FlightSearch");
-            Console.WriteLine(choose);
             if (type_date == "check_in")
             {
                 if (check == "true")

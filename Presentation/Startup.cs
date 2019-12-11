@@ -93,8 +93,12 @@ namespace Presentation
             services.AddScoped<IMakerVMService, MakerVMService>();
             services.AddScoped<ICustomerVMService, CustomerVMService>();
             services.AddScoped<IEmployeeVMService, EmployeeVMService>();
+<<<<<<< HEAD
             services.AddScoped<IFlightVMService, FlightVMService>();
 
+=======
+            services.AddScoped<IRouteVMService, RouteVMService>();
+>>>>>>> e7e2793a73dfec4cac0da3f11009f133bd620b22
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
