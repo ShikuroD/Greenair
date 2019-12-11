@@ -107,7 +107,7 @@ namespace Infrastructure.Persistence
             if (!context.Customers.Any())
             {
                 context.Customers.AddRange(
-                     new Customer("000", "", "Unknown", new DateTime.MinValue, "0000000000", new Address("", "", "", "", "", ""), new Account("cus0", "12345"), "unknow@gmail.com"),
+                    new Customer("000", "", "Unknown", new DateTime.MinValue, "0000000000", new Address("", "", "", "", "", ""), new Account("cus0", "12345"), "unknow@gmail.com"),
                     new Customer("00005", "Phung Quoc", "Hai", new DateTime(1999, 12, 5), "0802774147", new Address("142", "An Duong Vuong", "10", "5", "Ho Chi Minh", "Viet Nam"), new Account("cus1", "12345"), "abrrc@gmail.com"),
                     new Customer("00006", "Luu Minh", "Hoang", new DateTime(1999, 4, 30), "0801774147", new Address("472", "Mac Cua", "An Lan", "Cai Chien", "Ha Noi", "Viet Nam"), new Account("cus2", "12345"), "abrrfsc@gmail.com"),
                     new Customer("00007", "Tran Van", "Hoang", new DateTime(1999, 6, 1), "0908774147", new Address("789", "gfd", "fsd", "sdf", "fs", "fsd"), new Account("cus3", "12345"), "abrrfsc@gmail.com"),
