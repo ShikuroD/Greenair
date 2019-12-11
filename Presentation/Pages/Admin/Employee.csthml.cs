@@ -53,17 +53,17 @@ namespace Presentation.Pages.Admin
             // return new JsonResult(Employee);
         }
 
-        public async Task<IActionResult> OnGetEditCustomer(string id)
+        public async Task<IActionResult> OnGetEditEmployee(string id)
         {
             var Employee = await _unitofwork.Employees.GetByAsync(id);
             Account acc = await _unitofwork.Accounts.getAccountByPersonId(Employee.Id);
             EmployeeVM EmployeeVM = new EmployeeVM(Employee, acc);
-            // return Content(JsonConvert.SerializeObject(customerVM));
+            // return Content(JsonConvert.SerializeObject(EmployeeVM));
             return new JsonResult(EmployeeVM);
         }
-        public async Task<IActionResult> OnPostEditCustomerLock()
+        public async Task<IActionResult> OnPostEditEmployeeLock()
         {
-            string respone = "Successful";
+            string respone = "Lock Successful";
             MemoryStream stream = new MemoryStream();
             Request.Body.CopyTo(stream);
             stream.Position = 0;
@@ -72,7 +72,7 @@ namespace Presentation.Pages.Admin
                 string requestBody = reader.ReadToEnd();
                 if (requestBody.Length > 0)
                 {
-                    var obj = JsonConvert.DeserializeObject<CustomerDTO>(requestBody);
+                    var obj = JsonConvert.DeserializeObject<EmployeeDTO>(requestBody);
                     if (obj != null)
                     {
                         string id = obj.Id;
@@ -83,9 +83,9 @@ namespace Presentation.Pages.Admin
             }
             return new JsonResult(respone);
         }
-        public async Task<IActionResult> OnPostEditCustomerUnlock()
+        public async Task<IActionResult> OnPostEditEmployeeUnlock()
         {
-            string respone = "Successful";
+            string respone = "Unlock Successful";
             MemoryStream stream = new MemoryStream();
             Request.Body.CopyTo(stream);
             stream.Position = 0;
@@ -94,7 +94,7 @@ namespace Presentation.Pages.Admin
                 string requestBody = reader.ReadToEnd();
                 if (requestBody.Length > 0)
                 {
-                    var obj = JsonConvert.DeserializeObject<CustomerDTO>(requestBody);
+                    var obj = JsonConvert.DeserializeObject<EmployeeDTO>(requestBody);
                     if (obj != null)
                     {
                         string id = obj.Id;
@@ -105,7 +105,7 @@ namespace Presentation.Pages.Admin
             }
             return new JsonResult(respone);
         }
-        public async Task<IActionResult> OnPostDeleteCustomer()
+        public async Task<IActionResult> OnPostDeleteEmployee()
         {
             string EmployeeId = "";
             MemoryStream stream = new MemoryStream();
@@ -120,7 +120,7 @@ namespace Presentation.Pages.Admin
                     if (obj != null)
                     {
                         EmployeeId = obj.Id;
-                        // await _service.removeCustomerAsync(obj.Id);
+                        // await _service.removeEmployeeAsync(obj.Id);
                         var em = await _unitofwork.Employees.GetByAsync(EmployeeId);
                         await _unitofwork.Employees.RemoveAsync(em);
                         await _unitofwork.CompleteAsync();

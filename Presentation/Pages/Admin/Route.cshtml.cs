@@ -36,6 +36,7 @@ namespace Presentation.Pages.Admin
         [BindProperty(SupportsGet = true)]
         public string SearchRoute { get; set; }
 
+
         public async Task OnGet(int pageIndex = 1)
         {
             ListRoutePage = await _servicesVM.GetRoutePageViewModelAsync(SearchRoute, pageIndex);
