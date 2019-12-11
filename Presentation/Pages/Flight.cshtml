@@ -417,9 +417,6 @@
 					var type_date = "check_in";
 					var check = "";
 					var choose = $("#check-in").val();
-<<<<<<< HEAD
-					var checkOut = $("#check-out").val();
-=======
 					var arrdate = $("#check-out").val();
 					var check = "";
 					if(choose > arrdate)
@@ -427,7 +424,6 @@
 						$("#check-out").val(choose);
 						check = "true";
 					}
->>>>>>> b2666a023ae98722534983fcef4591adeeefc7d1
 					$("#check-out").datepicker("option","minDate",$("#check-in").val());
 					if(choose.slice(0,2) > checkOut.slice(0,2))
 					{
@@ -449,10 +445,6 @@
 						success:function(response)
 						{
 							$(".flight-go").load("/Flight" + " .flight-go");
-<<<<<<< HEAD
-=======
-
->>>>>>> b2666a023ae98722534983fcef4591adeeefc7d1
 							$(".flight-back").load("/Flight" + " .flight-back");
 						}
 					});
