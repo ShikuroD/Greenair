@@ -23,6 +23,14 @@ namespace ApplicationCore.DTOs
         public FlightTimeDTO FlightTime { get; set; }
 
         public STATUS Status { get; set; }
+        public RouteDTO(string RouteId, string Origin, string Destination, FlightTimeDTO flightTime,STATUS Status)
+        {
+            this.RouteId = RouteId;
+            this.Origin = Origin;
+            this.Destination = Destination;
+            this.FlightTime = flightTime;
+            this.Status = Status;
+        }
 
         //public IList<FlightDetailDTO> FlightDetails { get; set; }
     }

@@ -41,41 +41,40 @@ namespace Presentation.Pages.Admin
             ListRoutePage = await _servicesVM.GetRoutePageViewModelAsync(SearchRoute, pageIndex);
             Airports = await _servicesVM.GetAllAirport();
         }
-        // public async Task<IActionResult> OnGetEditRoute(string id)
-        // {
+        public async Task<IActionResult> OnGetEditRoute(string id)
+        {
         //     var Route = await _unitofwork.Routes.GetByAsync(id);
         //     RouteDTO RouteDTO = new RouteDTO();
         //     RouteDTO.RouteId = Route.RouteId;
         //     RouteDTO.SeatNum = Route.SeatNum;
         //     RouteDTO.MakerId = Route.MakerId;
         //     return Content(JsonConvert.SerializeObject(RouteDTO));
-        //     // return new JsonResult(RouteDTO);
-        // }
-        // public async Task<IActionResult> OnPostEditRoute()
-        // {
-        //     string respone = "Successful";
-        //     MemoryStream stream = new MemoryStream();
-        //     Request.Body.CopyTo(stream);
-        //     stream.Position = 0;
-        //     using (StreamReader reader = new StreamReader(stream))
-        //     {
-        //         string requestBody = reader.ReadToEnd();
-        //         if (requestBody.Length > 0)
-        //         {
-        //             var obj = JsonConvert.DeserializeObject<RouteDTO>(requestBody);
-        //             if (obj != null)
-        //             {
-        //                 Route Route = new Route();
-        //                 Route.RouteId = obj.RouteId;
-        //                 Route.SeatNum = obj.SeatNum;
-        //                 Route.MakerId = obj.MakerId.Substring(0, 3);
-        //                 await _unitofwork.Routes.UpdateAsync(Route);
-        //                 await _unitofwork.CompleteAsync();
-        //             }
-        //         }
-        //     }
-        //     return new JsonResult(respone);
-        // }
+            return new JsonResult(await _servicesVM.GetRoute(id));
+        }
+        public async Task<IActionResult> OnPostEditRoute()
+        {
+            string respone = "waiting";
+            MemoryStream stream = new MemoryStream();
+            Request.Body.CopyTo(stream);
+            stream.Position = 0;
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string requestBody = reader.ReadToEnd();
+                if (requestBody.Length > 0)
+                {
+                    var obj = JsonConvert.DeserializeObject<RouteVM>(requestBody);
+                    if (obj != null)
+                    {
+                        FlightTimeDTO flightTime = new FlightTimeDTO(obj.Hour,obj.Minute);
+                        
+                        RouteDTO Route = new RouteDTO(obj.RouteId,obj.Origin,obj.Destination,flightTime,obj.Status);
+                        await _servicesVM.UpdateRoute(Route);
+                        respone = "successful";
+                    }
+                }
+            }
+            return new JsonResult(respone);
+        }
         // public async Task<IActionResult> OnPostDeleteRoute()
         // {
         //     string RouteId = "";
