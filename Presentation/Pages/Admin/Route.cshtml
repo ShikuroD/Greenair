@@ -1,7 +1,7 @@
 @page
 @model Presentation.Pages.Admin.RouteModel
 @{
-  Layout = "_LayoutAdmin";
+    Layout = "_LayoutAdmin";
 	ViewData["Title"] = "Admin Page";
 }
 <div class="main-panel">
@@ -41,8 +41,7 @@
                     <th>Route ID</th>
                     <th>Origin</th>
                     <th>Destination</th>
-                    <th>Flight Hour</th>
-                    <th>Flight Minutes</th>
+                    <th>Flight Time</th>
                     <th>Status</th>
                 </tr>
             </thead>
@@ -53,10 +52,16 @@
                         @item.RouteId
                     </td>
                     <td>
-                        @item.SeatNum
+                        @item.Origin
                     </td>
                     <td>
-                        @item.MakerId
+                        @item.Destination
+                    </td>
+                    <td>
+                        @item.FlightTime
+                    </td>
+                    <td>
+                        @item.Status
                     </td>
                     <td> 
                     <button  id="@item.RouteId" data-toggle="modal" data-target="#EditRouteForm"  type="button" class="btn btn-dark btn-sm  btn-rounded EditRoute"><i class="fa fa-cog"></i></button>
@@ -100,74 +105,4 @@
     </div>
     <!-- end content-wrapper -->
     </div>
-
-    <!--create Route form  -->
-    <div class="modal fade" id="CreateRouteForm" role="dialog">
-    <div class="modal-dialog modal-dialog-centered modal-sm">
-        <div class="modal-content" >
-        <div class="modal-header" style="text-align:center !important; background-color:aliceblue;">
-            <h4 class="modal-title" style=" color:#000; font-weight: bold;font-size:34">Create Route</h4>
-        </div>
-            <div class="model-body" style="margin: 15px">
-                    <form class="forms-sample">
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">SeatNum</label>
-                <div class="col-sm-9">
-                <input id="CreateRoute-seatnum" type="number" class="form-control"  placeholder="Enter seat number">
-                </div>    
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Maker ID</label>
-                <div class="col-sm-9">
-                <select class="form-control form-control-lg" id="CreateRoute-makerid">
-                    @foreach (var item in Model.ListMakers){
-                    <option>@item.MakerId - 
-                        @item.MakerName</option>
-                    }
-                </select>
-                </div>
-            </div>
-            <button id="btsubmitCreateRoute" type="submit" class="btn btn-success mr-2" ><b>Create</b></button>
-            <button class="btn btn-light" data-dismiss="modal"><b>Cancel</b></button>
-            </form>
-            </div>
-        </div> 
-    </div>
-    </div>
-
-    <!-- edit Route form -->
-    <div class="modal fade" id="EditRouteForm" role="dialog">
-    <div class="modal-dialog modal-dialog-centered modal-sm">
-        <div class="modal-content" >
-        <div class="modal-header" style="text-align:center !important; background-color:aliceblue;">
-            <h4 class="modal-title" style=" color:#000; font-weight: bold;font-size:34">Edit Route</h4>
-        </div>
-        <div class="model-body" style="margin: 15px" id="bodyEditRoute">
-                    <form class="forms-sample">
-            <input id="EditRoute-id" type="hidden" class="form-control"   >
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">SeatNum</label>
-                <div class="col-sm-9">
-                <input id="EditRoute-seatnum" type="number" class="form-control"  placeholder="Enter seat number">
-                </div>    
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Maker ID</label>
-                <div class="col-sm-9">
-                <select class="form-control form-control-lg" id="EditRoute-makerid">
-                    <option id="EditRoute-default" hidden></option>
-                    @foreach (var item in Model.ListMakers){
-                    <option>@item.MakerId - 
-                        @item.MakerName</option>
-                    }
-                </select>
-                </div>
-            </div>
-            <button id="btsubmitEditRoute" type="submit" class="btn btn-success mr-2" ><b>Update</b></button>
-            <button class="btn btn-light" data-dismiss="modal"><b>Cancel</b></button>
-            </form>
-        </div>
-        </div>    
-    </div>
-</div>
 

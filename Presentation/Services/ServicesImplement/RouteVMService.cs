@@ -28,7 +28,7 @@ namespace Presentation.Services.ServicesImplement
         {
             // var movies = await _service.GetMoviesAsync(searchString, genre);
             var Routes = await _service.getAllRouteAsync();
-            // Routes = await _service.SortAsync();
+            Routes = await _service.SortAsync(Routes,ORDER_ENUM.ORIGIN_NAME,ORDER_ENUM.DESCENDING);
             if (searchString != null)
             {
                 // Routes = await _service.getRouteByConditionsAsync(searchString, "", "");
