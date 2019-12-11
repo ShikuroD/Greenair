@@ -81,6 +81,7 @@ namespace Presentation
             // Services
             services.AddScoped<IFlightService, FlightService>();
             services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IPlaneService, PlaneService>();
             services.AddScoped<IAirportService, AirportService>();

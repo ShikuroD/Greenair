@@ -240,7 +240,7 @@ namespace Presentation.Pages.Admin
                         flight.PlaneId = obj.PlaneId;
                         if (obj.Status == "AVAILABLE")
                         {
-                            flight.Status = 0;
+                            flight.Status = STATUS.AVAILABLE;
                         }
                         else if (obj.Status == "DISABLED")
                         {
@@ -257,6 +257,7 @@ namespace Presentation.Pages.Admin
                             detailDTO.Add(detail);
                         }
                         await _services.updateFlightAsync(flight);
+                        Console.WriteLine(flight.FlightId + " ggggg");
                         await _services.addFlightDetailRangeAsync(detailDTO, flight.FlightId);
 
                     }
