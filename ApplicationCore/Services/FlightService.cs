@@ -117,16 +117,16 @@ namespace ApplicationCore.Services
         public async Task<string> generateFlightId()
         {
             var res = await unitOfWork.Flights.GetAllAsync();
-            //string id = null;
+            res = res.OrderBy(m => m.FlightId);
+            string id = null;
             var code = 0;
 
             if (res != null)
             {
-                code = res.Count();
-                //id = res.Last().FlightId;
+                id = res.Last().FlightId;
             }
-            //Int32.TryParse(id, out code);
-            return String.Format("{0:00000}", code);
+            Int32.TryParse(id, out code);
+            return String.Format("{0:00000}", code + 1);
         }
 
         // public async Task generateFlightId(Flight Flight)
@@ -280,7 +280,11 @@ namespace ApplicationCore.Services
             if (String.IsNullOrEmpty(det.FlightDetailId))
             {
                 var res = await unitOfWork.Flights.getAllFlightDetails(det.FlightId);
+<<<<<<< HEAD
                 if (res == null) det.FlightDetailId = "000";
+=======
+                if (res == null || res.Count() == 0) det.FlightDetailId = "000";
+>>>>>>> 33245a89d44bc6e74f3a3c18c94289129b344ae8
                 else det.FlightDetailId = String.Format("{0:000}", res.Count());
             }
         }
@@ -293,6 +297,7 @@ namespace ApplicationCore.Services
         {
             var det = mapper.Map<FlightDetailDTO, FlightDetail>(det_dto);
             await generateDetailId(det);
+            Console.WriteLine("{0} - {1} - wtf?? {2} wtf??", det.FlightDetailId, det.FlightId, det.RouteId);
             await unitOfWork.Flights.addFlightDetail(det);
             await unitOfWork.CompleteAsync();
         }

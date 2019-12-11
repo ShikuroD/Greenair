@@ -76,11 +76,12 @@ namespace ApplicationCore.Services
         private async Task generateRouteId(Route Route)
         {
             var res = await unitOfWork.Routes.GetAllAsync();
+            res = res.OrderBy(m => m.RouteId);
             string id = null;
             if (res != null) id = res.LastOrDefault().RouteId;
             var code = 0;
             Int32.TryParse(id, out code);
-            Route.RouteId = String.Format("{0:00000}", code+1);
+            Route.RouteId = String.Format("{0:00000}", code + 1);
         }
         private async Task<bool> isExisted(Route route)
         {
