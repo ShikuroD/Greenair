@@ -148,10 +148,7 @@
                 <div class="form-group row">
                   <label class="col-sm-3 col-form-label">Status</label>
                   <div class="col-sm-9">
-                    <select class="form-control form-control-lg" id="CreateFlight-status">
-                      <option>AVAILABLE</option>
-                      <option>DISABLED</option>
-                    </select>
+                     <input id="CreateFlight-status" type="text" class="form-control form-control-lg" value="AVAILABLE" disabled/>
                   </div>
                 </div>
               </div>
@@ -191,6 +188,7 @@
                 </div>
                 <div class="col-md-4">
                   <input id="CreateFlight-depdate1" type="text" class="form-control CreateFlight-depdate choose_date" required/>
+                  <span style="color:red" id="error-date1" class=" hidden-class"> Please choose date</span>
                 </div>
                 <div class="col-md-4">
                   <input id="CreateFlight-arrdate1" type="text" class="form-control CreateFlight-arrdate choose_date" disabled/>
