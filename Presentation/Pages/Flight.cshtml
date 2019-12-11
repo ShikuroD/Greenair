@@ -416,6 +416,13 @@
 				{
 					var type_date = "check_in";
 					var choose = $("#check-in").val();
+					var arrdate = $("#check-out").val();
+					var check = "";
+					if(choose > arrdate)
+					{
+						$("#check-out").val(choose);
+						check = "true";
+					}
 					$("#check-out").datepicker("option","minDate",$("#check-in").val());
 					$.ajax({
 						type: "GET",
@@ -424,11 +431,14 @@
 						contentType: 'application/json; charset=utf-8',
 						data: { 
 							choose: choose,
-							type_date: type_date
+							type_date: type_date,
+							check: check
 						},
 						success:function(response)
 						{
 							$(".flight-go").load("/Flight" + " .flight-go");
+
+							$(".flight-back").load("/Flight" + " .flight-back");
 						}
 					});
 					

@@ -31,7 +31,9 @@ namespace Presentation
                     var greenairContext = services.GetRequiredService<GreenairContext>();
 
                     IUnitOfWork unit = new UnitOfWork(greenairContext);
-                    //unit.Planes.RemoveRange(unit.Planes.GetAll());
+                    
+                    unit.Flights.RemoveRange(unit.Flights.GetAll());
+                    
                     //unit.Employees.RemoveRange(unit.Employees.GetAll());
                     //unit.Customers.RemoveRange(unit.Customers.GetAll());
 
@@ -44,7 +46,7 @@ namespace Presentation
                     //unit.Flights.RemoveAsync(unit.Flights.GetByAsync("00006").GetAwaiter().GetResult());
 
 
-                    //greenairContext.SaveChanges();
+                    greenairContext.SaveChanges();
                     DataSeed.Initialize(greenairContext);
 
 
