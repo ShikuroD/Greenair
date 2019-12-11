@@ -1,23 +1,24 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "C:\\Users\\Administrator\\Desktop\\Greenair\\presentation\\Presentation.csproj": {}
+=======
+    "C:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Presentation.csproj": {}
+>>>>>>> 268bf045070a7e863b0aa2ded347392e2a1ac748
   },
   "projects": {
-    "C:\\Users\\Administrator\\Desktop\\Greenair\\ApplicationCore\\ApplicationCore.csproj": {
+    "C:\\Users\\ASUS\\Desktop\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\Greenair\\ApplicationCore\\ApplicationCore.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\Desktop\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj",
         "projectName": "ApplicationCore",
-        "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\ApplicationCore\\ApplicationCore.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\ApplicationCore\\obj\\",
+        "projectPath": "C:\\Users\\ASUS\\Desktop\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ASUS\\Desktop\\C#\\Greenair\\ApplicationCore\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"
@@ -95,20 +96,17 @@
         }
       }
     },
-    "C:\\Users\\Administrator\\Desktop\\Greenair\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\Greenair\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\Infrastructure\\Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\Infrastructure\\obj\\",
+        "projectPath": "C:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Infrastructure\\Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"
@@ -119,8 +117,8 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "C:\\Users\\Administrator\\Desktop\\Greenair\\ApplicationCore\\ApplicationCore.csproj": {
-                "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\ApplicationCore\\ApplicationCore.csproj"
+              "C:\\Users\\ASUS\\Desktop\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj": {
+                "projectPath": "C:\\Users\\ASUS\\Desktop\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj"
               }
             }
           }
@@ -182,6 +180,7 @@
         }
       }
     },
+<<<<<<< HEAD
     "C:\\Users\\Administrator\\Desktop\\Greenair\\presentation\\Presentation.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -190,12 +189,19 @@
         "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\presentation\\Presentation.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\presentation\\obj\\",
+=======
+    "C:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Presentation.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Presentation.csproj",
+        "projectName": "Presentation",
+        "projectPath": "C:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\Presentation.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Presentation\\obj\\",
+>>>>>>> 268bf045070a7e863b0aa2ded347392e2a1ac748
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"
@@ -206,11 +212,11 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "C:\\Users\\Administrator\\Desktop\\Greenair\\ApplicationCore\\ApplicationCore.csproj": {
-                "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\ApplicationCore\\ApplicationCore.csproj"
+              "C:\\Users\\ASUS\\Desktop\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj": {
+                "projectPath": "C:\\Users\\ASUS\\Desktop\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj"
               },
-              "C:\\Users\\Administrator\\Desktop\\Greenair\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\Infrastructure\\Infrastructure.csproj"
+              "C:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\ASUS\\Desktop\\C#\\Greenair\\Infrastructure\\Infrastructure.csproj"
               }
             }
           }
