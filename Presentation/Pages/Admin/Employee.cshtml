@@ -4,19 +4,29 @@
   Layout = "_LayoutAdmin";
 	ViewData["Title"] = "Admin Page";
 }
+@using Microsoft.AspNetCore.Http
+@{
+  if(HttpContext.Session.GetString("username") == null)
+  {
+    Response.Redirect("Index");
+  }
+  string job = HttpContext.Session.GetString("job");
+}
 <div class="main-panel">
   <div class="content-wrapper">
      <!-- row search -->
     <div class="row">
     </div>
     <!-- row button insert -->
-    <div class="row">
-      <div class="col-lg-12 stretch-card">
-        <a href="#CreateEmployeeForm" data-toggle="modal" id="btCreateEmployee" type="button" class="btn  btn-primary btn-lg btn-inverse-*">
-          <i class="mdi mdi-upload"></i>Create Employee
-        </a>
+    @if(job =="002"){
+      <div class="row">
+        <div class="col-lg-12 stretch-card">
+          <a href="#CreateEmployeeForm" data-toggle="modal" id="btCreateEmployee" type="button" class="btn  btn-primary btn-lg btn-inverse-*">
+            <i class="mdi mdi-upload"></i>Create Employee
+          </a>
+        </div>
       </div>
-    </div>
+    }
     <!-- row table -->
     <div class="row">
     <div class="col-lg-12 stretch-card">
@@ -68,14 +78,17 @@
                 <td> 
                   <button  id="@item.Id" data-toggle="modal" data-target="#DetailEmployeeForm"  type="button" class="btn btn-info btn-sm  btn-rounded DetailEmployee"><i class="fa fa-vcard-o"></i></button>
                   @{
-                    if (item.Status==Model.Status){
-                      <button  id="@item.Id" data-toggle="modal" data-target="#EditEmployeeFormLock"  type="button" class="btn btn-dark btn-sm  btn-rounded EditEmployee"><i class="fa fa-cog"></i></button>
-                    }
-                    else {
-                      <button  id="@item.Id" data-toggle="modal" data-target="#EditEmployeeFormUnlock"  type="button" class="btn btn-dark btn-sm  btn-rounded EditEmployee"><i class="fa fa-cog"></i></button>
+                    if(job =="002"){
+                      if (item.Status==Model.Status){
+                        <button  id="@item.Id" data-toggle="modal" data-target="#EditEmployeeFormLock"  type="button" class="btn btn-dark btn-sm  btn-rounded EditEmployee"><i class="fa fa-cog"></i></button>
+                      }
+                      else {
+                        <button  id="@item.Id" data-toggle="modal" data-target="#EditEmployeeFormUnlock"  type="button" class="btn btn-dark btn-sm  btn-rounded EditEmployee"><i class="fa fa-cog"></i></button>
+                      }
+                      <button  id="@item.Id" type="button" class="btn btn-danger btn-sm  btn-rounded DeleteEmployee"><i class="fa fa-times" ></i></button>
                     }
                   }
-                  <button  id="@item.Id" type="button" class="btn btn-danger btn-sm  btn-rounded DeleteEmployee"><i class="fa fa-times" ></i></button>
+                  
                 </td>
               </tr>
             }

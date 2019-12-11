@@ -182,7 +182,7 @@ namespace ApplicationCore.Services
         }
 
 
-        public async Task disableCutomerAsync(string emp_id)
+        public async Task disableEmployeeAsync(string emp_id)
         {
             var emp = await unitOfWork.Employees.GetByAsync(emp_id);
             if (emp != null) await unitOfWork.Employees.disable(emp);

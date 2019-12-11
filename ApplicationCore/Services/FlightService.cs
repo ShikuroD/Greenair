@@ -312,15 +312,17 @@ namespace ApplicationCore.Services
         }
         public async Task addFlightDetailRangeAsync(IEnumerable<FlightDetailDTO> dets_dto, string flight_id)
         {
+            await unitOfWork.Flights.removeAllFlightDetail(flight_id);
+            await unitOfWork.CompleteAsync();
+
             var dets = mapper.Map<IEnumerable<FlightDetailDTO>, IEnumerable<FlightDetail>>(dets_dto);
+            int count = 0;
             foreach (FlightDetail det in dets)
             {
                 det.FlightId = flight_id;
-                await generateDetailId(det);
+                det.FlightDetailId = String.Format("{0:000}", count++);
 
             }
-            await unitOfWork.Flights.removeAllFlightDetail(flight_id);
-            await unitOfWork.CompleteAsync();
             await unitOfWork.Flights.addFlightDetailRange(dets);
             await unitOfWork.CompleteAsync();
         }
