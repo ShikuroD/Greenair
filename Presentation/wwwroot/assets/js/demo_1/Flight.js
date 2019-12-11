@@ -225,7 +225,7 @@
             var depDate = [];
             var arrDate = [];
             for (var i = 1; i <= num; ++i) {
-                routeId[i - 1] = $("#CreateFlight-routeid" + i).val();
+                routeId[i - 1] = $("#CreateFlight-routeid" + i).val().slice(0, 5);
                 depDate[i - 1] = $("#CreateFlight-depdate" + i).val();
                 arrDate[i - 1] = $("#CreateFlight-arrdate" + i).val();
             }
