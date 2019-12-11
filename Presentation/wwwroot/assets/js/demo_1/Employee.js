@@ -131,7 +131,19 @@
             var salary = $("#CreateEmployee-salary").val();
             var address = $("#CreateEmployee-address").val();
             alert("not check");
-            return;
+            if (password.length > 20) {
+                $("#z-CreateEmployee-password").removeClass("hidden-class");
+                return;
+            } else {
+                $("#z-CreateEmployee-password").addClass("hidden-class");
+                if (password2.length > 20) {
+                    $("#z-CreateEmployee-password2").removeClass("hidden-class");
+                } else {
+                    $("#z-CreateEmployee-password2").addClass("hidden-class");
+                }
+            }
+
+
             event.preventDefault();
             // event.preventDefault() là để ngăn thằng form nó load lại trang ..
             $.ajax({
