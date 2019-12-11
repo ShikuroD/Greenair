@@ -118,6 +118,8 @@
         });
         $("#btsubmitCreateEmployee").click(function () {
             alert("Create");
+            var check = true;
+            var test = true;
             // var id = $('#CreateEmployee-id').val();
             var firstname = $("#CreateEmployee-firstname").val();
             var lastname = $("#CreateEmployee-lastname").val();
@@ -130,19 +132,59 @@
             var status = $("#CreateEmployee-status").val();
             var salary = $("#CreateEmployee-salary").val();
             var address = $("#CreateEmployee-address").val();
-            alert("not check");
-            if (password.length > 20) {
+            // alert("not check");
+            if (username == null || username.length > 20) {
+                $("#z-CreateEmployee-username").removeClass("hidden-class");
+                check = false;
+            } else {
+                $("#z-CreateEmployee-username").addClass("hidden-class");
+            }
+            if (password == null || password.length > 20) {
                 $("#z-CreateEmployee-password").removeClass("hidden-class");
-                return;
+                check = false;
             } else {
                 $("#z-CreateEmployee-password").addClass("hidden-class");
-                if (password2.length > 20) {
+                if (password2 == null || (password2 != password)) {
                     $("#z-CreateEmployee-password2").removeClass("hidden-class");
+                    check = false;
                 } else {
                     $("#z-CreateEmployee-password2").addClass("hidden-class");
                 }
             }
-
+            var patt = /[A-Za-z\s]+/;
+            test = patt.test(firstname);
+            if (test == false) {
+                $("#z-CreateEmployee-firstname").removeClass("hidden-class");
+                check = false;
+            } else {
+                $("#z-CreateEmployee-firstname").addClass("hidden-class");
+            }
+            test = patt.test(lastname);
+            if (test == false) {
+                $("#z-CreateEmployee-lastname").removeClass("hidden-class");
+                check = false;
+            } else {
+                $("#z-CreateEmployee-lastname").addClass("hidden-class");
+            }
+            var patt = /0[0-9]{9,10}/;
+            test = patt.test(phone);
+            if (test == false) {
+                $("#z-CreateEmployee-phone").removeClass("hidden-class");
+                check = false;
+            } else {
+                $("#z-CreateEmployee-phone").addClass("hidden-class");
+            }
+            if (birthdate.length == 0) {
+                $("#z-CreateEmployee-birthdate").removeClass("hidden-class");
+                check = false;
+            } else {
+                $("#z-CreateEmployee-birthdate").addClass("hidden-class");
+            }
+            if (check == false) {
+                alert("fail");
+            } else {
+                alert("Well");
+            }
 
             event.preventDefault();
             // event.preventDefault() là để ngăn thằng form nó load lại trang ..
