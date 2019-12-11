@@ -65,19 +65,17 @@ namespace Presentation.Pages
                 int Childs = Convert.ToInt32(FlightSearch["childs"]);
                 ViewData["text"] = Adults;
                 // DateTime arrDate = DateTime.;
-
+                ListFlights_1 = await _flightService.searchFlightAsync(FlightSearch["from"].ToString()
+                   , FlightSearch["where"].ToString(), Check_in, Adults, Childs);
                 if (type == "round")
                 {
-                    ListFlights_1 = await _flightService.searchFlightAsync(FlightSearch["from"].ToString()
-                    , FlightSearch["where"].ToString(), Check_in, Adults, Childs);
+
                     ListFlights_2 = await _flightService.searchFlightAsync(FlightSearch["where"].ToString()
                     , FlightSearch["from"].ToString(), Check_out, Adults, Childs);
                     CheckType = "round";
                 }
                 else
                 {
-                    ListFlights_1 = await _flightService.searchFlightAsync(FlightSearch["from"].ToString()
-                    , FlightSearch["where"].ToString(), Check_in, Adults, Childs);
                     CheckType = "one";
                 }
 
