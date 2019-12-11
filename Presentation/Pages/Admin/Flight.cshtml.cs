@@ -248,17 +248,16 @@ namespace Presentation.Pages.Admin
                         }
 
                         IList<FlightDetailDTO> detailDTO = new List<FlightDetailDTO>();
-                        var code = await _services.generateFlightId();
-                        Console.WriteLine(code);
                         int n = obj.routeId.Count();
                         for (var i = 0; i < n; ++i)
                         {
                             DateTime depDate = DateTime.ParseExact(obj.depDate[i], "dd-MM-yyyy hh:mm tt", null);
                             DateTime arrDate = DateTime.ParseExact(obj.arrDate[i], "dd-MM-yyyy hh:mm tt", null);
-                            FlightDetailDTO detail = new FlightDetailDTO(obj.flightDetailId[i], flight.FlightId, obj.routeId[i], depDate, arrDate);
+                            FlightDetailDTO detail = new FlightDetailDTO(null, null, obj.routeId[i], depDate, arrDate);
                             detailDTO.Add(detail);
                         }
-                        await _services.addFlightAsync(flight, detailDTO);
+                        await _services.updateFlightAsync(flight);
+                        await _services.addFlightDetailRangeAsync(detailDTO, flight.FlightId);
 
                     }
                 }

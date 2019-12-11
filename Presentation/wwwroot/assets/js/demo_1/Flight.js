@@ -299,7 +299,7 @@
                     for (var i = 0; i < n; ++i) {
                         num++;
                         s += `<div class="row" id="EditFlight-row` + num + `">`;
-                        s += ` <input id="EditFlight-flightdetailid` + num + `" type="text" class="form-control form-control-lg" value="` + result.flightDetailId[i] + `" />`;
+                        s += ` <input id="EditFlight-flightdetailid` + num + `" type="text" class="form-control form-control-lg" value="` + result.flightDetailId[i] + `" hidden/>`;
                         s += `  <div class="col-md-4">`;
                         s += `<select class="form-control form-control-lg EditFlight-routeid listEdit` + num + ` EditFlight-routeid" id="EditFlight-routeid` + num + `">`;
                         s += `<option hidden>` + result.routeId[i] + `</option>`;
@@ -380,7 +380,7 @@
             if (num > 4) return;
             var html = "";
             html += `<div class="row" id="EditFlight-row` + num + `">`;
-            html += ` <input id="EditFlight-flightdetailid` + num + `" type="text" class="form-control form-control-lg" value="" />`;
+            html += ` <input id="EditFlight-flightdetailid` + num + `" type="text" class="form-control form-control-lg" value="" hidden/>`;
             html += `    <div class="col-md-4">`;
             html += `    <select class="form-control form-control-lg EditFlight-routeid listEdit` + num + `" id="EditFlight-routeid` + num + `">
                         </select>`;
