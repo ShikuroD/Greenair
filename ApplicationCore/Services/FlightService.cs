@@ -342,16 +342,16 @@ namespace ApplicationCore.Services
                 switch (i / mod)
                 {
                     case 0:
-                        tickets.Add(new Ticket(String.Format("A{0:00}", i), flight_id, "000", null, null));
+                        tickets.Add(new Ticket(String.Format("A{0:00}", i), flight_id, null, "000", "000"));
                         break;
                     case 1:
-                        tickets.Add(new Ticket(String.Format("B{0:00}", i), flight_id, "000", null, null));
+                        tickets.Add(new Ticket(String.Format("B{0:00}", i), flight_id, null, "000", "000"));
                         break;
                     case 3:
-                        tickets.Add(new Ticket(String.Format("C{0:00}", i), flight_id, "000", null, null));
+                        tickets.Add(new Ticket(String.Format("C{0:00}", i), flight_id, null, "000", "000"));
                         break;
                     default:
-                        tickets.Add(new Ticket(String.Format("D{0:00}", i), flight_id, "000", null, null));
+                        tickets.Add(new Ticket(String.Format("D{0:00}", i), flight_id, null, "000", "000"));
                         break;
                 }
             }
