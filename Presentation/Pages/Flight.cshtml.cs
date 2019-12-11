@@ -44,8 +44,8 @@ namespace Presentation.Pages
 
         public async Task OnGetAsync()
         {
-            var FlightSearch = SessionHelper.GetObjectFromJson<Dictionary<string,object>>(HttpContext.Session,"FlightSearch");
-            if(FlightSearch != null)
+            var FlightSearch = SessionHelper.GetObjectFromJson<Dictionary<string, object>>(HttpContext.Session, "FlightSearch");
+            if (FlightSearch != null)
             {
                 ViewData["from_city"] = FlightSearch["from_city"];
                 ViewData["where_city"] = FlightSearch["where_city"];
@@ -54,7 +54,7 @@ namespace Presentation.Pages
                 string type = FlightSearch["type"].ToString();
                 string vlDepDate = FlightSearch["depdate"].ToString();
                 string vlArrDate = FlightSearch["arrdate"].ToString();
-                Check_in = DateTime.ParseExact(vlDepDate.ToString(), "dd/MM/yyyy", null); 
+                Check_in = DateTime.ParseExact(vlDepDate.ToString(), "dd/MM/yyyy", null);
                 Check_out = DateTime.ParseExact(vlArrDate, "dd/MM/yyyy", null);
                 ViewData["depDate"] = Check_in.ToString("dddd, dd MMMM yyyy");
                 ViewData["arrDate"] = Check_out.ToString("dddd, dd MMMM yyyy");
@@ -65,37 +65,43 @@ namespace Presentation.Pages
                 int Childs = Convert.ToInt32(FlightSearch["childs"]);
                 ViewData["text"] = Adults;
                 // DateTime arrDate = DateTime.;
-                
-                if(type == "round"){
-                        ListFlights_1 = await _flightService.searchFlightAsync(FlightSearch["from"].ToString()
-                        ,FlightSearch["where"].ToString(),Check_in,Adults,Childs);
-                        ListFlights_2 = await _flightService.searchFlightAsync(FlightSearch["where"].ToString()
-                        ,FlightSearch["from"].ToString(),Check_out,Adults,Childs);
-                        CheckType = "round";
+
+                if (type == "round")
+                {
+                    ListFlights_1 = await _flightService.searchFlightAsync(FlightSearch["from"].ToString()
+                    , FlightSearch["where"].ToString(), Check_in, Adults, Childs);
+                    ListFlights_2 = await _flightService.searchFlightAsync(FlightSearch["where"].ToString()
+                    , FlightSearch["from"].ToString(), Check_out, Adults, Childs);
+                    CheckType = "round";
                 }
-                else{
-                        ListFlights_1 = await _flightService.searchFlightAsync(FlightSearch["from"].ToString()
-                        ,FlightSearch["where"].ToString(),Check_in,Adults,Childs);
+                else
+                {
+                    ListFlights_1 = await _flightService.searchFlightAsync(FlightSearch["from"].ToString()
+                    , FlightSearch["where"].ToString(), Check_in, Adults, Childs);
                     CheckType = "one";
                 }
 
-                
+
             }
         }
-        public IActionResult OnGetNewDate(string choose,string type_date)
+        public IActionResult OnGetNewDate(string choose, string type_date, string check)
         {
-            var FlightSearch = SessionHelper.GetObjectFromJson<Dictionary<string,object>>(HttpContext.Session,"FlightSearch");
+            var FlightSearch = SessionHelper.GetObjectFromJson<Dictionary<string, object>>(HttpContext.Session, "FlightSearch");
             Console.WriteLine(choose);
-            if(type_date == "check_in")
+            if (type_date == "check_in")
             {
+                if (check == "true")
+                {
+                    FlightSearch["arrdate"] = choose;
+                }
                 FlightSearch["depdate"] = choose;
             }
-            if(type_date == "check_out")
+            if (type_date == "check_out")
             {
                 FlightSearch["arrdate"] = choose;
             }
-            SessionHelper.SetObjectAsJson(HttpContext.Session,"FlightSearch",FlightSearch);
-    
+            SessionHelper.SetObjectAsJson(HttpContext.Session, "FlightSearch", FlightSearch);
+
             return new JsonResult(choose);
         }
     }
