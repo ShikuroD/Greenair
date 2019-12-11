@@ -51,7 +51,7 @@
               </tr>
             </thead>
             <tbody> 
-              @foreach (var item in Model.ListFlights){
+              @foreach (var item in Model.ListFlightPage.Flights){
                 <tr>
                 <!-- <tr id="@item.FlightId" class="list-Flight"> -->
                   <td>@item.FlightId</td>
@@ -70,6 +70,30 @@
               </tbody>
             </table>
           </div>
+          @{
+              var preDisabled = !Model.ListFlightPage.Flights.HasPrevious ? "disabled" : "";
+              var nextDisabled = !Model.ListFlightPage.Flights.HasNext ? "disabled" : "";
+              var pageNow =Model.ListFlightPage.Flights.PageIndex;
+          }
+          <!-- pagination -->
+            <div class="pagination" >
+              <a style="cursor:pointer" asp-page="/Admin/Flight" 
+              asp-route-pageIndex="@(Model.ListFlightPage.Flights.PageIndex - 1)" 
+              class="pagination_link @preDisabled" >Previous</a>
+              @for (int i=1;i<=Model.ListFlightPage.Flights.TotalPages;++i)
+              {
+                  if(i==pageNow)
+                  {
+                    <a style="cursor:pointer" asp-page="/Admin/Flight" asp-route-pageIndex="@i" class="pagination_link active" >@i</a>
+                  }
+                  else{
+                    <a style="cursor:pointer" asp-page="/Admin/Flight" asp-route-pageIndex="@i" class="pagination_link">@i</a>
+                  }
+              }
+              <a  style="cursor:pointer" asp-page="/Admin/Flight" 
+              asp-route-pageIndex="@(Model.ListFlightPage.Flights.PageIndex + 1)" 
+              class="pagination_link @nextDisabled">Next</a>
+            </div>
         </div>
       </div>
     </div>
@@ -228,7 +252,7 @@
             </div>
 		    <div class="model-body" style="margin: 15px">
           <form class="form-sample">
-            <input id="EditFlight-flightid" type="text" class="form-control" hidden/>
+            <input id="EditFlight-flightid" type="text" class="form-control" />
 				    <p style="font-weight:600" class="card-description"> Flight info </p>
             <div class="row">
               <div class="col-md-6">
@@ -236,7 +260,7 @@
                   <label class="col-sm-3 col-form-label">Plane ID</label>
                   <div class="col-sm-9">
                     <select class="form-control form-control-lg" id="EditFlight-planeid">
-                      <option id="EditFlight-planeiddefault"></option>
+                      <option id="EditFlight-planeiddefault" hidden></option>
                       @foreach (var item in Model.ListNamePlanes){
                         <option>@item</option>
                       }
@@ -249,7 +273,7 @@
                   <label class="col-sm-3 col-form-label">Status</label>
                   <div class="col-sm-9">
                     <select class="form-control form-control-lg" id="EditFlight-status">
-                      <option id="EditFlight-statusdefault"></option>
+                      <option id="EditFlight-statusdefault" hidden></option>
                       <option>AVAILABLE</option>
                       <option>DISABLED</option>
                     </select>
@@ -258,7 +282,7 @@
               </div>
             </div> 
             <p style="font-weight:600" class="card-description"> Flight Detail </p>
-              <input id="EditFlight-number" type="text" class="form-control" value="1" hidden/>
+              <input id="EditFlight-number" type="text" class="form-control" value="1" />
               <div class="row">
                 <div class="col-md-4">
                   <button  id="EditFlight-btadd" type="button" class="btn  btn-primary btn-md">
@@ -281,7 +305,7 @@
             <div id="EditFlight-context">
             </div>
 
-            <button id="btsubmitEditMaker" type="submit" class="btn btn-success mr-2" ><b>Update</b></button>
+            <button id="btsubmitEditFlight" type="submit" class="btn btn-success mr-2" ><b>Update</b></button>
             <button class="btn btn-light" data-dismiss="modal"><b>Cancel</b></button>
           </form>
 		    </div>

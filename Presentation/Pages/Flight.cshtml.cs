@@ -17,6 +17,7 @@ using ApplicationCore.DTOs;
 using Microsoft.Extensions.DependencyInjection;
 using System.Globalization;
 
+
 namespace Presentation.Pages
 {
 
