@@ -120,7 +120,7 @@
                     <label class="col-sm-3 col-form-label">Origin</label>
                     <div class="col-sm-9">
                         <select class="form-control form-control-lg" id="CreateRoute-origin">
-                            @foreach (var item in Model.ListAirports){
+                            @foreach (var item in Model.Airports){
                                 <option>@item.AirportId - 
                                  @item.AirportName</option>
                             }
@@ -131,7 +131,7 @@
                     <label class="col-sm-3 col-form-label">Destination</label>
                     <div class="col-sm-9">
                         <select class="form-control form-control-lg" id="CreateRoute-destination">
-                            @foreach (var item in Model.ListAirports){
+                            @foreach (var item in Model.Airports){
                                 <option>@item.AirportId - 
                                  @item.AirportName</option>
                             }
@@ -173,7 +173,7 @@
                     <label class="col-sm-3 col-form-label">Origin</label>
                     <div class="col-sm-9">
                         <select class="form-control form-control-lg" id="EditRoute-origin">
-                            @foreach (var item in Model.ListAirports){
+                            @foreach (var item in Model.Airports){
                                 <option>@item.AirportId - 
                                  @item.AirportName</option>
                             }
@@ -184,7 +184,7 @@
                     <label class="col-sm-3 col-form-label">Destination</label>
                     <div class="col-sm-9">
                         <select class="form-control form-control-lg" id="EditRoute-destination">
-                            @foreach (var item in Model.ListAirports){
+                            @foreach (var item in Model.Airports){
                                 <option>@item.AirportId - 
                                  @item.AirportName</option>
                             }

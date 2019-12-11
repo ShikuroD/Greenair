@@ -36,12 +36,10 @@ namespace Presentation.Pages.Admin
         [BindProperty(SupportsGet = true)]
         public string SearchRoute { get; set; }
 
-        public IEnumerable<Airport> ListAirports { get; set; }
 
         public async Task OnGet(int pageIndex = 1)
         {
             ListRoutePage = await _servicesVM.GetRoutePageViewModelAsync(SearchRoute, pageIndex);
-            ListAirports = await _unitofwork.Airports.GetAllAsync();
             Airports = await _servicesVM.GetAllAirport();
         }
         // public async Task<IActionResult> OnGetEditRoute(string id)
