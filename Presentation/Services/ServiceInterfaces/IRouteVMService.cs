@@ -10,5 +10,7 @@ namespace Presentation.Services.ServiceInterfaces
         Task<IEnumerable<AirportDTO>> GetAllAirport();
         Task<RouteDTO> GetRoute(string route_id);
         Task UpdateRoute(RouteDTO route);
+        Task AddRoute(RouteDTO route);
+        Task RemoveRoute(string route_id);
     }
 }

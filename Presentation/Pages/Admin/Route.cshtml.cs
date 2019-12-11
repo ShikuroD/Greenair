@@ -49,8 +49,8 @@ namespace Presentation.Pages.Admin
         //     RouteDTO.RouteId = Route.RouteId;
         //     RouteDTO.SeatNum = Route.SeatNum;
         //     RouteDTO.MakerId = Route.MakerId;
-        //     return Content(JsonConvert.SerializeObject(RouteDTO));
-            return new JsonResult(await _servicesVM.GetRoute(id));
+            return Content(JsonConvert.SerializeObject(await _servicesVM.GetRoute(id)));
+            // return new JsonResult(await _servicesVM.GetRoute(id));
         }
         public async Task<IActionResult> OnPostEditRoute()
         {
@@ -76,55 +76,55 @@ namespace Presentation.Pages.Admin
             }
             return new JsonResult(respone);
         }
-        // public async Task<IActionResult> OnPostDeleteRoute()
-        // {
-        //     string RouteId = "";
-        //     MemoryStream stream = new MemoryStream();
-        //     Request.Body.CopyTo(stream);
-        //     stream.Position = 0;
-        //     using (StreamReader reader = new StreamReader(stream))
-        //     {
-        //         string requestBody = reader.ReadToEnd();
-        //         if (requestBody.Length > 0)
-        //         {
-        //             var obj = JsonConvert.DeserializeObject<RouteDTO>(requestBody);
-        //             if (obj != null)
-        //             {
-        //                 RouteId = obj.RouteId;
-        //                 var item = await _unitofwork.Routes.GetByAsync(RouteId);
-        //                 await _unitofwork.Routes.RemoveAsync(item);
-        //                 await _unitofwork.CompleteAsync();
-        //             }
-        //         }
-        //     }
-        //     string mes = "Remove " + RouteId + " Success!";
-        //     return new JsonResult(mes);
-        // }
-        // public async Task<IActionResult> OnPostCreateRoute()
-        // {
-        //     string respone = "True";
-        //     MemoryStream stream = new MemoryStream();
-        //     Request.Body.CopyTo(stream);
-        //     stream.Position = 0;
-        //     using (StreamReader reader = new StreamReader(stream))
-        //     {
-        //         string requestBody = reader.ReadToEnd();
-        //         if (requestBody.Length > 0)
-        //         {
-        //             var obj = JsonConvert.DeserializeObject<RouteDTO>(requestBody);
-        //             if (obj != null)
-        //             {
-        //                 RouteDTO Route = new RouteDTO();
-        //                 // Route.RouteId = obj.RouteId;
-        //                 Route.SeatNum = obj.SeatNum;
-        //                 Route.MakerId = obj.MakerId.Substring(0, 3);
-        //                 await _services.addRouteAsync(Route);
+        public async Task<IActionResult> OnPostDeleteRoute()
+        {
+            
+            MemoryStream stream = new MemoryStream();
+            Request.Body.CopyTo(stream);
+            stream.Position = 0;
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string requestBody = reader.ReadToEnd();
+                if (requestBody.Length > 0)
+                {
+                    var obj = JsonConvert.DeserializeObject<RouteVM>(requestBody);
+                    if (obj != null)
+                    {
+                        await _servicesVM.RemoveRoute(obj.RouteId);
+                    }
+                }
+            }
+            string mes = "Remove  Success!";
+            return new JsonResult(mes);
+        }
+        public async Task<IActionResult> OnPostCreateRoute()
+        {
+            string respone = "True";
+            MemoryStream stream = new MemoryStream();
+            Request.Body.CopyTo(stream);
+            stream.Position = 0;
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string requestBody = reader.ReadToEnd();
+                if (requestBody.Length > 0)
+                {
+                    var obj = JsonConvert.DeserializeObject<RouteVM>(requestBody);
+                    if (obj != null)
+                    {
+                        FlightTimeDTO flightTime = new FlightTimeDTO(obj.Hour,obj.Minute);
+                        RouteDTO Route = new RouteDTO();
+                        Route.Origin = obj.Origin;
+                        Route.Destination = obj.Destination;
+                        Route.FlightTime = flightTime;
+                        Route.Status = obj.Status;
+                        // Route.RouteId = obj.RouteId;
+                        await _servicesVM.AddRoute(Route);
 
-        //             }
-        //         }
-        //     }
-        //     return new JsonResult(respone);
-        // }
+                    }
+                }
+            }
+            return new JsonResult(respone);
+        }
 
     }
 }

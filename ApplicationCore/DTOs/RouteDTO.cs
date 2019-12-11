@@ -31,6 +31,10 @@ namespace ApplicationCore.DTOs
             this.FlightTime = flightTime;
             this.Status = Status;
         }
+        public RouteDTO()
+        {
+            
+        }
 
         //public IList<FlightDetailDTO> FlightDetails { get; set; }
     }
