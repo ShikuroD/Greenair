@@ -22,7 +22,7 @@ namespace Presentation.Pages.Admin
         private readonly IRouteService _services;
         private readonly IUnitOfWork _unitofwork;
         private readonly IRouteVMService _servicesVM;
-        public List<AirportDTO> Airports { get; set; }
+        public IEnumerable<AirportDTO> Airports { get; set; }
         public RouteModel(IRouteService services, IUnitOfWork unitofwork, IRouteVMService servicesVM)
         {
             _unitofwork = unitofwork;
@@ -39,7 +39,7 @@ namespace Presentation.Pages.Admin
         public async Task OnGet(int pageIndex = 1)
         {
             ListRoutePage = await _servicesVM.GetRoutePageViewModelAsync(SearchRoute, pageIndex);
-            
+            Airports = await _servicesVM.GetAllAirport();
         }
         // public async Task<IActionResult> OnGetEditRoute(string id)
         // {

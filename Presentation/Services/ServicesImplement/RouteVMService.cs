@@ -55,7 +55,10 @@ namespace Presentation.Services.ServicesImplement
                 Routes = PaginatedList<RouteVM>.Create(ListRoutes, pageIndex, pageSize)
             };
         }
-        // public async 
+        public async Task<IEnumerable<AirportDTO>> GetAllAirport()
+        {
+            return await _airportService.getAllAirportAsync();
+        } 
 
     }
 }
