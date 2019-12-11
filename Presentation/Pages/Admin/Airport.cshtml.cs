@@ -37,7 +37,7 @@ namespace Presentation.Pages.Admin
         public async Task OnGet(string searchString, int pageIndex = 1)
         {
             // ListAirports = await _unitofwork.Airports.GetAllAsync();
-            ListAirportsPage = await _services.GetAirportPageViewModelAsync(SearchString, pageIndex);
+            ListAirportsPage = await _servicesVM.GetAirportPageViewModelAsync(SearchString, pageIndex);
         }
         // Airport methods
         public IActionResult OnGetEditAirport(string id)
