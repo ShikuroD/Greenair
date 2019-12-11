@@ -263,6 +263,39 @@ namespace ApplicationCore.Services
         }
 
         //Thao tac voi chi tiet ============================================================================================
+        new public async Task<IEnumerable<FlightDetailDTO>> SortFlightDetailAsync(IEnumerable<FlightDetailDTO> entities, ORDER_ENUM col, ORDER_ENUM order)
+        {
+            IEnumerable<FlightDetailDTO> res = null;
+            await Task.Run(() => true);
+            if (order == ORDER_ENUM.DESCENDING)
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.ORIGIN_NAME: res = entities.OrderByDescending(m => this.getOrigin(m.FlightId).GetAwaiter().GetResult().AirportName); break;
+
+                    case ORDER_ENUM.FLIGHT_TIME: res = entities.OrderByDescending(m => this.getTotalFlightTime(m.FlightId).GetAwaiter().GetResult()); break;
+
+
+                    default: res = entities.OrderBy(m => m.FlightId).ThenByDescending(m => m.FlightDetailId); break;
+                }
+            }
+            else
+            {
+                switch (col)
+                {
+                    case ORDER_ENUM.ORIGIN_NAME: res = entities.OrderBy(m => this.getOrigin(m.FlightId).GetAwaiter().GetResult().AirportName); break;
+                    case ORDER_ENUM.DESTINATION_NAME: res = entities.OrderBy(m => this.getDestination(m.FlightId).GetAwaiter().GetResult().AirportName); break;
+                    case ORDER_ENUM.DEP_DATE: res = entities.OrderBy(m => this.getDepDate(m.FlightId).GetAwaiter().GetResult()); break;
+                    case ORDER_ENUM.ARR_DATE: res = entities.OrderBy(m => this.getArrDate(m.FlightId).GetAwaiter().GetResult()); break;
+                    case ORDER_ENUM.FLIGHT_TIME: res = entities.OrderBy(m => this.getTotalFlightTime(m.FlightId).GetAwaiter().GetResult()); break;
+
+
+                    default: res = entities.OrderBy(m => m.FlightId).ThenBy(m => m.FlightDetailId); break;
+                }
+
+            }
+            return res;
+        }
         public async Task<FlightDetailDTO> getFllightdetailAsync(string flight_id, int part)
         {
             return mapper.Map<FlightDetail, FlightDetailDTO>(await unitOfWork.Flights.getFlightDetail(flight_id, part));
@@ -293,7 +326,6 @@ namespace ApplicationCore.Services
         {
             var det = mapper.Map<FlightDetailDTO, FlightDetail>(det_dto);
             await generateDetailId(det);
-            Console.WriteLine("{0} - {1} - wtf?? {2} wtf??", det.FlightDetailId, det.FlightId, det.RouteId);
             await unitOfWork.Flights.addFlightDetail(det);
             await unitOfWork.CompleteAsync();
         }
@@ -342,18 +374,19 @@ namespace ApplicationCore.Services
                 switch (i / mod)
                 {
                     case 0:
-                        tickets.Add(new Ticket(String.Format("A{0:00}", i), flight_id, null, "000", "000"));
+                        tickets.Add(new Ticket(String.Format("A{0:00}", i), flight_id, "000", "", "000"));
                         break;
                     case 1:
-                        tickets.Add(new Ticket(String.Format("B{0:00}", i), flight_id, null, "000", "000"));
+                        tickets.Add(new Ticket(String.Format("B{0:00}", i), flight_id, "000", "", "000"));
                         break;
                     case 3:
-                        tickets.Add(new Ticket(String.Format("C{0:00}", i), flight_id, null, "000", "000"));
+                        tickets.Add(new Ticket(String.Format("C{0:00}", i), flight_id, "000", "", "000"));
                         break;
                     default:
-                        tickets.Add(new Ticket(String.Format("D{0:00}", i), flight_id, null, "000", "000"));
+                        tickets.Add(new Ticket(String.Format("D{0:00}", i), flight_id, "000", "", "000"));
                         break;
                 }
+
             }
             await unitOfWork.Flights.addTicketRange(tickets);
         }
@@ -400,8 +433,8 @@ namespace ApplicationCore.Services
             var ticket = await unitOfWork.Flights.getTicket(flight_id, ticket_id);
             if (ticket == null) return;
             ticket.TicketTypeId = "000";
-            ticket.CustomerId = null;
-            ticket.AssignedCus = null;
+            ticket.CustomerId = "000";
+            ticket.AssignedCus = "";
             ticket.Status = STATUS.AVAILABLE;
             await unitOfWork.CompleteAsync();
         }
