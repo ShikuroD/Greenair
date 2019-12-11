@@ -59,6 +59,21 @@ namespace Presentation.Services.ServicesImplement
         {
             return await _airportService.getAllAirportAsync();
         } 
-
-    }
+        public async Task<RouteDTO> GetRoute(string route_id)
+        {
+            return await _service.getRouteAsync(route_id);
+        }
+        public async Task UpdateRoute(RouteDTO route)
+        {
+            await _service.updateRouteAsync(route);
+        }
+        public async Task AddRoute(RouteDTO route)
+        {
+            await _service.addRouteAsync(route);
+        }
+        public async Task RemoveRoute(string route_id)
+        {
+            await _service.removeRouteAsync(route_id);
+        }
+    }   
 }

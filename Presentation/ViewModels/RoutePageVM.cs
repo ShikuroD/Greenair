@@ -17,6 +17,8 @@ namespace Presentation.ViewModels
         public string Destination { get; set;}
         public STATUS Status { get; set; }
         public string FlightTime { get; set; }
+        public int Hour { get; set; }
+        public int Minute{ get; set; }
         public RouteVM(string RouteId, string Origin_name,string Destination_name, string Origin, string Destination, STATUS status,string FlightTime)
         {
             this.RouteId = RouteId;
