@@ -16,6 +16,7 @@ using System.IO;
 using ApplicationCore.DTOs;
 using Microsoft.Extensions.DependencyInjection;
 using System.Globalization;
+using ApplicationCore;
 
 namespace Presentation.Pages
 {
@@ -70,6 +71,7 @@ namespace Presentation.Pages
                         ListFlights_1 = await _flightService.searchFlightAsync(FlightSearch["from"].ToString()
                         ,FlightSearch["where"].ToString(),Check_in,Adults,Childs);
                         ListFlights_2 = await _flightService.searchFlightAsync(FlightSearch["where"].ToString()
+                        
                         ,FlightSearch["from"].ToString(),Check_out,Adults,Childs);
                         CheckType = "round";
                 }
@@ -82,12 +84,16 @@ namespace Presentation.Pages
                 
             }
         }
-        public IActionResult OnGetNewDate(string choose,string type_date)
+        public IActionResult OnGetNewDate(string choose,string type_date,string check)
         {
             var FlightSearch = SessionHelper.GetObjectFromJson<Dictionary<string,object>>(HttpContext.Session,"FlightSearch");
             Console.WriteLine(choose);
             if(type_date == "check_in")
             {
+                if(check == "true")
+                {
+                    FlightSearch["arrdate"] = choose;
+                }
                 FlightSearch["depdate"] = choose;
             }
             if(type_date == "check_out")

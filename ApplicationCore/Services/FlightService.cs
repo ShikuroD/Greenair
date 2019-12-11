@@ -143,7 +143,7 @@ namespace ApplicationCore.Services
             await unitOfWork.CompleteAsync();
         }
 
-        public async Task addFlightAsync(FlightDTO flightDto, IEnumerable<FlightDetailDTO> details)
+        public new async Task addFlightAsync(FlightDTO flightDto, IEnumerable<FlightDetailDTO> details)
         {
             var flight = this.toEntity(flightDto);
             flight.FlightId = await generateFlightId();
@@ -280,11 +280,7 @@ namespace ApplicationCore.Services
             if (String.IsNullOrEmpty(det.FlightDetailId))
             {
                 var res = await unitOfWork.Flights.getAllFlightDetails(det.FlightId);
-<<<<<<< HEAD
-                if (res == null) det.FlightDetailId = "000";
-=======
                 if (res == null || res.Count() == 0) det.FlightDetailId = "000";
->>>>>>> 33245a89d44bc6e74f3a3c18c94289129b344ae8
                 else det.FlightDetailId = String.Format("{0:000}", res.Count());
             }
         }
@@ -410,5 +406,9 @@ namespace ApplicationCore.Services
             await unitOfWork.CompleteAsync();
         }
 
+        public Task addFlightDetailAsync(FlightDetailDTO det_dto, IEnumerable<FlightDetailDTO> detail)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
