@@ -105,4 +105,111 @@
     </div>
     <!-- end content-wrapper -->
     </div>
+</div>
+
+<!--create Route form  -->
+<div class="modal fade" id="CreateRouteForm" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content" >
+      <div class="modal-header" style="text-align:center !important; background-color:aliceblue;">
+        <h4 class="modal-title" style=" color:#000; font-weight: bold;font-size:34">Create Route</h4>
+      </div>
+		  <div class="model-body" style="margin: 15px">
+            <form class="forms-sample">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Origin</label>
+                    <div class="col-sm-9">
+                        <select class="form-control form-control-lg" id="CreateRoute-origin">
+                            @foreach (var item in Model.ListAirports){
+                                <option>@item.AirportId - 
+                                 @item.AirportName</option>
+                            }
+                        </select>
+                    </div>    
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Destination</label>
+                    <div class="col-sm-9">
+                        <select class="form-control form-control-lg" id="CreateRoute-destination">
+                            @foreach (var item in Model.ListAirports){
+                                <option>@item.AirportId - 
+                                 @item.AirportName</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label class="col-sm-3 col-form-label">Hours</label>
+                        <div class="col-sm-9">
+                            <input id="CreatePlane-hour" type="number" class="form-control" value="0" min="0" max="24" >
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="col-sm-3 col-form-label">Minutes</label>
+                        <div class="col-sm-9">
+                            <input id="CreatePlane-minute" type="number" class="form-control" value="0"  min="0" max="59" >
+                        </div>
+                    </div>
+                </div>
+                <button id="btsubmitCreateRoute" type="submit" class="btn btn-success mr-2" ><b>Create</b></button>
+                <button class="btn btn-light" data-dismiss="modal"><b>Cancel</b></button>
+            </form>
+		  </div>
+    </div> 
+  </div>
+</div>
+
+<!--Edit Route form  -->
+<div class="modal fade" id="EditRouteForm" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content" >
+      <div class="modal-header" style="text-align:center !important; background-color:aliceblue;">
+        <h4 class="modal-title" style=" color:#000; font-weight: bold;font-size:34">Edit Route</h4>
+      </div>
+		  <div class="model-body" style="margin: 15px">
+            <form class="forms-sample">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Origin</label>
+                    <div class="col-sm-9">
+                        <select class="form-control form-control-lg" id="EditRoute-origin">
+                            @foreach (var item in Model.ListAirports){
+                                <option>@item.AirportId - 
+                                 @item.AirportName</option>
+                            }
+                        </select>
+                    </div>    
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Destination</label>
+                    <div class="col-sm-9">
+                        <select class="form-control form-control-lg" id="EditRoute-destination">
+                            @foreach (var item in Model.ListAirports){
+                                <option>@item.AirportId - 
+                                 @item.AirportName</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label class="col-sm-3 col-form-label">Hours</label>
+                        <div class="col-sm-9">
+                            <input id="EditPlane-hour" type="number" class="form-control" value="0" min="0" max="24" >
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="col-sm-3 col-form-label">Minutes</label>
+                        <div class="col-sm-9">
+                            <input id="EditPlane-minute" type="number" class="form-control" value="0"  min="0" max="59" >
+                        </div>
+                    </div>
+                </div>
+                <button id="btsubmitEditRoute" type="submit" class="btn btn-success mr-2" ><b>Update</b></button>
+                <button class="btn btn-light" data-dismiss="modal"><b>Cancel</b></button>
+            </form>
+		  </div>
+    </div> 
+  </div>
+</div>
 
