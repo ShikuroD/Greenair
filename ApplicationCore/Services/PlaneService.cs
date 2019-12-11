@@ -86,11 +86,12 @@ namespace ApplicationCore.Services
         private async Task generatePlaneId(Plane Plane)
         {
             var res = await unitOfWork.Planes.GetAllAsync();
+            res = res.OrderBy(m => m.PlaneId);
             string id = null;
             if (res != null) id = res.LastOrDefault().PlaneId;
             var code = 0;
             Int32.TryParse(id, out code);
-            Plane.PlaneId = String.Format("{0:00000}", code+1);
+            Plane.PlaneId = String.Format("{0:00000}", code + 1);
         }
         public async Task addPlaneAsync(PlaneDTO dto)
         {

@@ -69,11 +69,12 @@ namespace ApplicationCore.Services
         private async Task generateTicketTypeId(TicketType TicketType)
         {
             var res = await unitOfWork.TicketTypes.GetAllAsync();
+            res = res.OrderBy(m => m.TicketTypeId);
             string id = null;
             if (res != null) id = res.LastOrDefault().TicketTypeId;
             var code = 0;
             Int32.TryParse(id, out code);
-            TicketType.TicketTypeId = String.Format("{0:000}", code+1);
+            TicketType.TicketTypeId = String.Format("{0:000}", code + 1);
         }
         public async Task addTicketTypeAsync(TicketTypeDTO dto)
         {

@@ -41,10 +41,10 @@ namespace Presentation
                     // acc.Password = "12345";
                     // Console.WriteLine(acc.PersonId);
                     // unit.Accounts.UpdateAsync(acc);
-                    unit.Flights.disable("00004");
+                    //unit.Flights.RemoveAsync(unit.Flights.GetByAsync("00006").GetAwaiter().GetResult());
 
 
-                    greenairContext.SaveChanges();
+                    //greenairContext.SaveChanges();
                     DataSeed.Initialize(greenairContext);
 
 

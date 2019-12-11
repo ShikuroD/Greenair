@@ -8540,23 +8540,31 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Administrator\\.nuget\\packages\\": {},
+    "C:\\Users\\PC\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\Greenair\\presentation\\Presentation.csproj",
       "projectName": "Presentation",
       "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\presentation\\Presentation.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\presentation\\obj\\",
+=======
+      "projectUniqueName": "D:\\Code\\C#\\Greenair\\Presentation\\Presentation.csproj",
+      "projectName": "Presentation",
+      "projectPath": "D:\\Code\\C#\\Greenair\\Presentation\\Presentation.csproj",
+      "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+      "outputPath": "D:\\Code\\C#\\Greenair\\Presentation\\obj\\",
+>>>>>>> 33245a89d44bc6e74f3a3c18c94289129b344ae8
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.0"
@@ -8567,11 +8575,11 @@
       "frameworks": {
         "netcoreapp3.0": {
           "projectReferences": {
-            "C:\\Users\\Administrator\\Desktop\\Greenair\\ApplicationCore\\ApplicationCore.csproj": {
-              "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\ApplicationCore\\ApplicationCore.csproj"
+            "D:\\Code\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj": {
+              "projectPath": "D:\\Code\\C#\\Greenair\\ApplicationCore\\ApplicationCore.csproj"
             },
-            "C:\\Users\\Administrator\\Desktop\\Greenair\\Infrastructure\\Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\Administrator\\Desktop\\Greenair\\Infrastructure\\Infrastructure.csproj"
+            "D:\\Code\\C#\\Greenair\\Infrastructure\\Infrastructure.csproj": {
+              "projectPath": "D:\\Code\\C#\\Greenair\\Infrastructure\\Infrastructure.csproj"
             }
           }
         }
@@ -8653,7 +8661,11 @@
       "code": "Undefined",
       "level": "Warning",
       "warningLevel": 1,
+<<<<<<< HEAD
       "message": "Problem reading the cache file C:\\Users\\Administrator\\Desktop\\Greenair\\presentation\\obj\\Presentation.csproj.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+=======
+      "message": "Problem reading the cache file D:\\Code\\C#\\Greenair\\Presentation\\obj\\Presentation.csproj.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+>>>>>>> 33245a89d44bc6e74f3a3c18c94289129b344ae8
     }
   ]
 }

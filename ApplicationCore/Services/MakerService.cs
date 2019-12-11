@@ -73,11 +73,12 @@ namespace ApplicationCore.Services
         private async Task generateMakerId(Maker Maker)
         {
             var res = await unitOfWork.Makers.GetAllAsync();
+            res = res.OrderBy(m => m.MakerId);
             string id = null;
             if (res != null) id = res.LastOrDefault().MakerId;
             var code = 0;
             Int32.TryParse(id, out code);
-            Maker.MakerId = String.Format("{0:000}", code+1);
+            Maker.MakerId = String.Format("{0:000}", code + 1);
         }
         public async Task addMakerAsync(MakerDTO dto)
         {
