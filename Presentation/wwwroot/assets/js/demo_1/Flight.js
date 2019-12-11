@@ -103,7 +103,7 @@
                         html += `<option >` + response[i].routeId + `: ` + response[i].origin + ` - ` + response[i].destination + `</option>`;
                     }
                     // $(".list").html(html);
-                    $(".listEdit").append(html);
+                    // $(".listEdit" + (num + 1)).append(html);
                     $(".list" + (num + 1)).html(html);
                 }
             });
@@ -114,25 +114,32 @@
             var html = "";
             var num = parseInt($("#CreateFlight-number").val());
             var arrdate = $("#CreateFlight-arrdate" + num).val();
+            var route = $("#CreateFlight-routeid" + num).val();
+            route = route.slice(0, 5);
             // alert(arrdate);
+            if (arrdate == "") return;
             $.ajax({
                 type: 'GET',
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
                 url: '/Admin/Flight?Handler=DateTimes',
                 data: {
-                    arrdate: arrdate
+                    arrdate: arrdate,
+                    routeid: route
                 },
                 success: function (response) {
                     // alert(response);
                     if (response != "null") {
-                        $("#CreateFlight-depdate" + (num + 1)).val(response);
+                        $("#CreateFlight-depdate" + (num + 1)).val(response.depDate);
+                        $("#CreateFlight-arrdate" + (num + 1)).val(response.arrDate);
                     }
+
 
                 }
             });
         }
-        $("#CreateFlight-btadd").click(function () {
+
+        $(document).on("click", "#CreateFlight-btadd", function () {
             var num = parseInt($("#CreateFlight-number").val());
             num = num + 1;
             loadRoute();
@@ -145,14 +152,16 @@
                 html += `    </div>
                     <div class="col-md-4">`;
                 html += `      <input id="CreateFlight-depdate` + num + `" type="text" class="form-control CreateFlight-depdate choose_date " />`;
+                html += `                  <span style="color:red" id="error-date` + num + `" class=" hidden-class"> Please choose date</span>
+                `
                 html += `    </div>
                     <div class="col-md-4">`;
                 html += `      <input id="CreateFlight-arrdate` + num + `" type="text" class="form-control CreateFlight-arrdate choose_date" disabled/>`;
                 html += `    </div>
                     </div><hr id="CreateFlight-hr` + num + `"/>`;
+                $("#CreateFlight-context").append(html);
                 loadDateTime();
                 $("#CreateFlight-number").val(num);
-                $("#CreateFlight-context").append(html);
             } else {
                 alert("Fuck you");
             }
@@ -225,11 +234,16 @@
             var depDate = [];
             var arrDate = [];
             for (var i = 1; i <= num; ++i) {
-                routeId[i - 1] = $("#CreateFlight-routeid" + i).val();
+                routeId[i - 1] = $("#CreateFlight-routeid" + i).val().slice(0, 5);
                 depDate[i - 1] = $("#CreateFlight-depdate" + i).val();
+                if (depDate[i - 1] == "") {
+                    $("#error-date" + i).removeClass("hidden-class");
+                    return;
+                } else {
+                    $("#error-date" + i).addClass("hidden-class");
+                }
                 arrDate[i - 1] = $("#CreateFlight-arrdate" + i).val();
             }
-
             // event.preventDefault() là để ngăn thằng form nó load lại trang ..
             $.ajax({
                 type: 'POST',
@@ -250,7 +264,7 @@
                     // $('#CreateMaker').modal('hide');
                     if (respone.trim() == "True") {
                         alert("Create success");
-                        // location.reload();
+                        location.reload();
                     } else {
                         alert("This Id exists");
                         // $('#CreateMaker-id').focus();
