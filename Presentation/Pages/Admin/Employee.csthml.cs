@@ -76,7 +76,7 @@ namespace Presentation.Pages.Admin
                     if (obj != null)
                     {
                         string id = obj.Id;
-                        await _service.disableCutomerAsync(id);
+                        await _service.disableEmployeeAsync(id);
                         // _service
                     }
                 }
