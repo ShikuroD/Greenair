@@ -162,8 +162,6 @@
                 $("#CreateFlight-context").append(html);
                 loadDateTime();
                 $("#CreateFlight-number").val(num);
-            } else {
-                alert("Fuck you");
             }
         });
         $("#CreateFlight-btdelete").click(function () {
@@ -180,7 +178,6 @@
             var id = $(this).attr("id");
             var num = parseInt(id.slice(id.length - 1, id.length));
             var text = $(this).val().slice(0, 5);
-            // alert(text);
             // alert(id + " " + num + " " + text);
             var depDate = $("#CreateFlight-depdate" + num).val();
             if (depDate != "") {
