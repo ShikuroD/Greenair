@@ -46,7 +46,7 @@ namespace ApplicationCore.Services
         Task<IEnumerable<FlightDetailDTO>> getAllFlightDetailAsync(string flight_id);
         Task<DateTime> calArrDate(DateTime depDate, FlightTime time);
         Task addFlightDetailAsync(FlightDetailDTO det_dto);
-        Task addFlightDetailRangeAsync(IEnumerable<FlightDetailDTO> dets_dto);
+        Task addFlightDetailRangeAsync(IEnumerable<FlightDetailDTO> dets_dto, string flight_id);
         Task removeFlightDetailAsync(string flight_id); //xoa detail dung cuoi
         Task removeAllFlightDetailAsync(string flight_id);
 
