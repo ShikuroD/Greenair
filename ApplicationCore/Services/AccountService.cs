@@ -47,9 +47,9 @@ namespace ApplicationCore.Services
             return this.toDtoRange(Accounts);
         }
 
-        new public async Task<IEnumerable<Account>> SortAsync(IEnumerable<Account> entities, ORDER_ENUM col, ORDER_ENUM order)
+        new public async Task<IEnumerable<AccountDTO>> SortAsync(IEnumerable<AccountDTO> entities, ORDER_ENUM col, ORDER_ENUM order)
         {
-            IEnumerable<Account> res = null;
+            IEnumerable<AccountDTO> res = null;
             await Task.Run(() => true);
             if (order == ORDER_ENUM.DESCENDING)
             {
@@ -119,7 +119,7 @@ namespace ApplicationCore.Services
                 // await unitOfWork.Accounts.UpdateAsync(acc);
                 var acc = await unitOfWork.Accounts.GetByAsync(dto.Username);
                 this.convertDtoToEntity(dto, acc);
-                
+
             }
             else
             {
