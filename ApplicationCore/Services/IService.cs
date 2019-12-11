@@ -9,7 +9,7 @@ namespace ApplicationCore.Services
         IEnumerable<Dto> toDtoRange(IEnumerable<Entity> entities);
 
         Entity toEntity(SaveDto save);
-        IEnumerable<Entity> toEnityRange(IEnumberable<SaveDto> entites);
+        IEnumerable<Entity> toEnityRange(IEnumerable<SaveDto> entites);
         void convertEntityToDto(Entity entity, Dto dto);
         void convertDtoToEntity(SaveDto dto, Entity entity);
 

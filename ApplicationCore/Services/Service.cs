@@ -33,7 +33,7 @@ namespace ApplicationCore.Services
             return mapper.Map<SaveDto, Entity>(save);
         }
 
-        public IEnumerable<Entity> toEnityRange(IEnumberable<SaveDto> dtos)
+        public IEnumerable<Entity> toEnityRange(IEnumerable<SaveDto> dtos)
         {
             return mapper.Map<IEnumerable<SaveDto>, IEnumerable<Entity>>(dtos);
         }
