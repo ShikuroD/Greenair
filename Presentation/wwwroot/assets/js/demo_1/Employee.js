@@ -23,7 +23,7 @@
         });
         $(".DetailEmployee").click(function () {
             var id = $(this).attr("id");
-            alert("Id1 " + id);
+            // alert("Id1 " + id);
             $.ajax({
                 type: 'GET',
                 dataType: 'json',
@@ -33,7 +33,7 @@
                     id: id
                 },
                 success: function (result) {
-                    alert("Id2 " + result.Id);
+                    // alert("Id2 " + result.Id);
                     $("#DetailEmployee-lastname").val(result.LastName);
                     $("#DetailEmployee-firstname").val(result.FirstName);
                     $("#DetailEmployee-birthday").val(result.Birthdate);
@@ -50,6 +50,7 @@
         });
         $(".EditEmployee").click(function () {
             var id = $(this).attr("id");
+            // alert(id);
             $.ajax({
                 type: 'GET',
                 dataType: 'json',
@@ -59,14 +60,14 @@
                     id: id
                 },
                 success: function (result) {
-                    // alert("Id2 " + result.Id);
-                    $("#EditEmployeeLock-id").val(result.Id);
-                    $("#EditEmployeeUnlock-id").val(result.Id);
+                    // alert("Id2 " + result.id);
+                    $("#EditEmployeeLock-id").val(result.id);
+                    $("#EditEmployeeUnlock-id").val(result.id);
                 }
             });
         });
         $("#btsubmitEditEmployeeLock").click(function () {
-            var id = $('#EditEmployee-id').val();
+            var id = $('#EditEmployeeLock-id').val();
             event.preventDefault();
             // event.preventDefault() là để ngăn thằng form nó load lại trang ..
             $.ajax({
@@ -91,7 +92,7 @@
             });
         });
         $("#btsubmitEditEmployeeUnlock").click(function () {
-            var id = $('#EditEmployee-id').val();
+            var id = $('#EditEmployeeUnlock-id').val();
             event.preventDefault();
             // event.preventDefault() là để ngăn thằng form nó load lại trang ..
             $.ajax({
