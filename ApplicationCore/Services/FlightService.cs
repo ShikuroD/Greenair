@@ -316,10 +316,11 @@ namespace ApplicationCore.Services
             await unitOfWork.CompleteAsync();
 
             var dets = mapper.Map<IEnumerable<FlightDetailDTO>, IEnumerable<FlightDetail>>(dets_dto);
+            int count = 0;
             foreach (FlightDetail det in dets)
             {
                 det.FlightId = flight_id;
-                await generateDetailId(det);
+                det.FlightDetailId = String.Format("{0:000}", count++);
 
             }
             await unitOfWork.Flights.addFlightDetailRange(dets);
