@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using ApplicationCore.DTOs;
 using ApplicationCore;
+using ApplicationCore.Services;
 using Presentation.Services.ServiceInterfaces;
 
 namespace Presentation.Pages.Admin
@@ -21,12 +22,13 @@ namespace Presentation.Pages.Admin
     {
         public STATUS Status { get; set; }
         private readonly IUnitOfWork _unitofwork;
+        private readonly IEmployeeService _service;
         private readonly IEmployeeVMService _serviceVM;
 
-        public EmployeeModel(IUnitOfWork unitofwork, IEmployeeVMService serviceVM)
+        public EmployeeModel(IEmployeeService service, IUnitOfWork unitofwork, IEmployeeVMService serviceVM)
         {
             this.Status = STATUS.AVAILABLE;
-            // this._service = service;
+            this._service = service;
             this._serviceVM = serviceVM;
             this._unitofwork = unitofwork;
         }
@@ -59,50 +61,50 @@ namespace Presentation.Pages.Admin
             // return Content(JsonConvert.SerializeObject(customerVM));
             return new JsonResult(EmployeeVM);
         }
-        // public async Task<IActionResult> OnPostEditCustomerLock()
-        // {
-        //     string respone = "Successful";
-        //     MemoryStream stream = new MemoryStream();
-        //     Request.Body.CopyTo(stream);
-        //     stream.Position = 0;
-        //     using (StreamReader reader = new StreamReader(stream))
-        //     {
-        //         string requestBody = reader.ReadToEnd();
-        //         if (requestBody.Length > 0)
-        //         {
-        //             var obj = JsonConvert.DeserializeObject<CustomerDTO>(requestBody);
-        //             if (obj != null)
-        //             {
-        //                 string id = obj.Id;
-        //                 await _service.disableCutomerAsync(id);
-        //                 // _service
-        //             }
-        //         }
-        //     }
-        //     return new JsonResult(respone);
-        // }
-        // public async Task<IActionResult> OnPostEditCustomerUnlock()
-        // {
-        //     string respone = "Successful";
-        //     MemoryStream stream = new MemoryStream();
-        //     Request.Body.CopyTo(stream);
-        //     stream.Position = 0;
-        //     using (StreamReader reader = new StreamReader(stream))
-        //     {
-        //         string requestBody = reader.ReadToEnd();
-        //         if (requestBody.Length > 0)
-        //         {
-        //             var obj = JsonConvert.DeserializeObject<CustomerDTO>(requestBody);
-        //             if (obj != null)
-        //             {
-        //                 string id = obj.Id;
-        //                 await _service.activateCustomerAsync(id);
-        //                 // _service
-        //             }
-        //         }
-        //     }
-        //     return new JsonResult(respone);
-        // }
+        public async Task<IActionResult> OnPostEditCustomerLock()
+        {
+            string respone = "Successful";
+            MemoryStream stream = new MemoryStream();
+            Request.Body.CopyTo(stream);
+            stream.Position = 0;
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string requestBody = reader.ReadToEnd();
+                if (requestBody.Length > 0)
+                {
+                    var obj = JsonConvert.DeserializeObject<CustomerDTO>(requestBody);
+                    if (obj != null)
+                    {
+                        string id = obj.Id;
+                        await _service.disableCutomerAsync(id);
+                        // _service
+                    }
+                }
+            }
+            return new JsonResult(respone);
+        }
+        public async Task<IActionResult> OnPostEditCustomerUnlock()
+        {
+            string respone = "Successful";
+            MemoryStream stream = new MemoryStream();
+            Request.Body.CopyTo(stream);
+            stream.Position = 0;
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string requestBody = reader.ReadToEnd();
+                if (requestBody.Length > 0)
+                {
+                    var obj = JsonConvert.DeserializeObject<CustomerDTO>(requestBody);
+                    if (obj != null)
+                    {
+                        string id = obj.Id;
+                        await _service.activateEmployeeAsync(id);
+                        // _service
+                    }
+                }
+            }
+            return new JsonResult(respone);
+        }
         public async Task<IActionResult> OnPostDeleteCustomer()
         {
             string EmployeeId = "";
