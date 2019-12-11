@@ -25,9 +25,9 @@ namespace Presentation.Pages.Admin
 
         public RouteModel(IRouteService services, IUnitOfWork unitofwork, IRouteVMService servicesVM)
         {
-            this._unitofwork = unitofwork;
-            this._services = services;
-            this._servicesVM = servicesVM;
+            _unitofwork = unitofwork;
+            _services = services;
+            _servicesVM = servicesVM;
         }
 
         public string SearchString { get; set; }
@@ -39,7 +39,6 @@ namespace Presentation.Pages.Admin
         public async Task OnGet(int pageIndex = 1)
         {
             ListRoutePage = await _servicesVM.GetRoutePageViewModelAsync(SearchRoute, pageIndex);
-            
         }
         // public async Task<IActionResult> OnGetEditRoute(string id)
         // {

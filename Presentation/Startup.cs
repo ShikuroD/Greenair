@@ -93,7 +93,7 @@ namespace Presentation
             services.AddScoped<IMakerVMService, MakerVMService>();
             services.AddScoped<ICustomerVMService, CustomerVMService>();
             services.AddScoped<IEmployeeVMService, EmployeeVMService>();
-
+            services.AddScoped<IRouteVMService, RouteVMService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
