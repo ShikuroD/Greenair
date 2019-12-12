@@ -121,11 +121,7 @@ namespace Presentation.Pages.Admin
                     var obj = JsonConvert.DeserializeObject<EmployeeVM>(requestBody);
                     if (obj != null)
                     {
-                        EmployeeId = obj.Id;
-                        // await _service.removeEmployeeAsync(obj.Id);
-                        var em = await _unitofwork.Employees.GetByAsync(EmployeeId);
-                        await _unitofwork.Employees.RemoveAsync(em);
-                        await _unitofwork.CompleteAsync();
+                        await _service.removeEmployeeAsync(obj.Id);
                         // await _servic
                     }
                 }

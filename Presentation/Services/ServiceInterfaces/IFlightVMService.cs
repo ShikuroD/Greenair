@@ -7,6 +7,6 @@ namespace Presentation.Services.ServiceInterfaces
 {
     public interface IFlightVMService
     {
-        Task<FlightPageVM> GetFlightPageViewModelAsync(IEnumerable<FlightDTO> list, DateTime depDate, DateTime arrDate, int pageIndex = 1);
+        Task<FlightPageVM> GetFlightPageViewModelAsync(IEnumerable<FlightDTO> list, DateTime depDate, DateTime arrDate, string searchString, int pageIndex = 1);
     }
 }

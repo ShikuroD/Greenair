@@ -35,23 +35,25 @@ namespace Presentation.Pages.Admin
         }
 
         public FlightPageVM ListFlightPage { get; set; }
+        public FlightPageVM ListFlightPage_2 { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public string SearchString { get; set; }
 
         public IEnumerable<FlightDTO> ListFlights { get; set; }
+        public IEnumerable<FlightDTO> ListFlights_2 { get; set; }
         public IList<string> ListNamePlanes { get; set; }
         public IEnumerable<RouteDTO> ListRoutes { get; set; }
         public IList<string> ListNameRoutes { get; set; }
         public IEnumerable<Airport> ListAirports { get; set; }
         public IEnumerable<FlightDetail> ListFlightDetail { get; set; }
         public IList<FlightDetailVM> ListFlightDetailVM { get; set; }
-        public async Task OnGet(int pageIndex = 1)// chưa đụng gì tới bên này đâu
+        public async Task OnGet(string searchString, int pageIndex = 1)
         {
             ListFlights = await _services.getAllFlightAsync();
             DateTime depDate = new DateTime(10, 11, 12);
             DateTime arrDate = new DateTime(10, 11, 12);
-            ListFlightPage = await _serviceVM.GetFlightPageViewModelAsync(ListFlights, depDate, arrDate, pageIndex);
+            ListFlightPage = await _serviceVM.GetFlightPageViewModelAsync(ListFlights, depDate, arrDate, searchString, pageIndex);
 
             ListAirports = await _unitofwork.Airports.GetAllAsync();
             ListRoutes = await _routeServices.getAllRouteAsync();
@@ -68,6 +70,11 @@ namespace Presentation.Pages.Admin
                 var s = await _planeServices.getPlaneFullname(item.PlaneId);
                 ListNamePlanes.Add(s);
             }
+        }
+        public async Task<JsonResult> OnGetSearchFlight(string searchString, int pageIndex = 1)
+        {
+            await this.OnGet(searchString, pageIndex);
+            return new JsonResult(searchString);
         }
         public async Task<JsonResult> OnGetDetailFlight(string id)
         {

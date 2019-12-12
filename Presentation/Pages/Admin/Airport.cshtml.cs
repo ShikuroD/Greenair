@@ -23,7 +23,7 @@ namespace Presentation.Pages.Admin
         private readonly IAirportVMService _servicesVM;
         private readonly IAirportService _services;
 
-        public AirportModel(IAirportService services,IAirportVMService servicesVM, IUnitOfWork unitofwork)
+        public AirportModel(IAirportService services, IAirportVMService servicesVM, IUnitOfWork unitofwork)
         {
             this._unitofwork = unitofwork;
             this._servicesVM = servicesVM;
@@ -88,10 +88,8 @@ namespace Presentation.Pages.Admin
                     var obj = JsonConvert.DeserializeObject<AirportVM>(requestBody);
                     if (obj != null)
                     {
-                        AirportId = obj.AirportId;
-                        var item = await _unitofwork.Airports.GetByAsync(AirportId);
-                        await _unitofwork.Airports.RemoveAsync(item);
-                        await _unitofwork.CompleteAsync();
+
+                        await _services.disableAirportAsync(obj.AirportId);
                     }
                 }
             }

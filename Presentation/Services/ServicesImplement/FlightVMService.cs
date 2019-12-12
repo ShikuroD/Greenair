@@ -33,11 +33,17 @@ namespace Presentation.Services.ServicesImplement
             _service = service;
         }
 
-        public async Task<FlightPageVM> GetFlightPageViewModelAsync(IEnumerable<FlightDTO> list, DateTime depDate, DateTime arrDate, int pageIndex = 1)
+        public async Task<FlightPageVM> GetFlightPageViewModelAsync(IEnumerable<FlightDTO> list, DateTime depDate, DateTime arrDate, string searchString, int pageIndex = 1)
         {
             // var Flights = await service.getAllFlightAsync();
-            list = await _service.SortAsync(list, ORDER_ENUM.ID, ORDER_ENUM.DESCENDING);
 
+
+            if (searchString != null)
+            {
+                DateTime value_date = DateTime.ParseExact(searchString, "dd/MM/yyyy", null);
+                list = await _service.searchFlightAsync(null, null, value_date, 0, 0);
+            }
+            list = await _service.SortAsync(list, ORDER_ENUM.ID, ORDER_ENUM.DESCENDING);
             return new FlightPageVM
             {
                 Flights = PaginatedList<FlightDTO>.Create(list, pageIndex, pageSize)

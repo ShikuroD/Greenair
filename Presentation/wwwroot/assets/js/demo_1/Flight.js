@@ -525,80 +525,31 @@
                 }
             });
         }
-        // $("#btsubmitEditFlightLock").click(function () {
-        //     var id = $('#EditFlight-id').val();
-        //     event.preventDefault();
-        //     // event.preventDefault() là để ngăn thằng form nó load lại trang ..
-        //     $.ajax({
-        //         type: 'POST',
-        //         headers: {
-        //             "XSRF-TOKEN": $('input:hidden[name="__RequestVerificationToken"]').val()
-        //         },
-        //         dataType: 'json',
-        //         contentType: 'application/json; charset=utf-8',
-        //         url: '/Admin/Flight?handler=EditFlightLock',
-        //         data: JSON.stringify({
-        //             Id: id
-        //         }),
-        //         success: function (respone) {
-        //             alert("Disabled success");
-        //             location.reload();
-        //         },
-        //         failure: function (result) {
-        //             alert("fail");
-        //         }
 
-        //     });
-        // });
-        // $("#btsubmitEditFlightUnlock").click(function () {
-        //     var id = $('#EditFlight-id').val();
-        //     event.preventDefault();
-        //     // event.preventDefault() là để ngăn thằng form nó load lại trang ..
-        //     $.ajax({
-        //         type: 'POST',
-        //         headers: {
-        //             "XSRF-TOKEN": $('input:hidden[name="__RequestVerificationToken"]').val()
-        //         },
-        //         dataType: 'json',
-        //         contentType: 'application/json; charset=utf-8',
-        //         url: '/Admin/Flight?handler=EditFlightUnlock',
-        //         data: JSON.stringify({
-        //             Id: id
-        //         }),
-        //         success: function (respone) {
-        //             alert("Active success");
-        //             location.reload();
-        //         },
-        //         failure: function (result) {
-        //             alert("fail");
-        //         }
-
-        //     });
-        // });
-        // $("#btsubmitSearchFlight").click(function () {
-        //     var search = $('#SearchFlight').val();
-        //     event.preventDefault();
-        //     // event.preventDefault() là để ngăn thằng form nó load lại trang ..
-        //     $.ajax({
-        //         type: 'POST',
-        //         headers: {
-        //             "XSRF-TOKEN": $('input:hidden[name="__RequestVerificationToken"]').val()
-        //         },
-        //         dataType: 'json',
-        //         contentType: 'application/json; charset=utf-8',
-        //         url: '/Admin/Flight?handler=EditFlight',
-        //         data: {
-        //             searchString: search
-        //         },
-        //         success: function (respone) {
-        //             location.reload();
-        //         },
-        //         failure: function (result) {
-        //             alert("fail");
-        //         }
-
-        //     });
-        // });
+        $(".choose").datepicker({
+            dateFormat: 'dd/mm/yy',
+            minDate: new Date(),
+        })
+        $(document).on("change", "#Search_date", function () {
+            var searchString = $(this).val();
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                url: "/Admin/Flight?Handler=SearchFlight",
+                data: {
+                    searchString: searchString
+                },
+                success: function (reponse) {
+                    alert(reponse);
+                    $("#TableFlight").empty();
+                    $("#TableFlight").load("/Admin/Flight" + " #TableFlight");
+                },
+                error: function () {
+                    alert("not ok");
+                }
+            });
+        });
 
 
 

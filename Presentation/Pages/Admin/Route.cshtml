@@ -4,6 +4,14 @@
     Layout = "_LayoutAdmin";
 	ViewData["Title"] = "Admin Page";
 }
+@using Microsoft.AspNetCore.Http
+@{
+  if(HttpContext.Session.GetString("username") == null)
+  {
+    Response.Redirect("Index");
+  }
+  string job = HttpContext.Session.GetString("job");
+}
 <div class="main-panel">
     <div class="content-wrapper">
     <!-- row button create -->
@@ -63,9 +71,14 @@
                     <td>
                         @item.Status
                     </td>
-                    <td> 
-                    <button  id="@item.RouteId" data-toggle="modal" data-target="#EditRouteForm"  type="button" class="btn btn-dark btn-sm  btn-rounded EditRoute"><i class="fa fa-cog"></i></button>
-                    <button  id="@item.RouteId" type="button" class="btn btn-danger btn-sm  btn-rounded DeleteRoute"><i class="fa fa-times" ></i></button>
+                    <td>
+                    @if(job =="003")
+                    { 
+                        
+                        <button  id="@item.RouteId" data-toggle="modal" data-target="#EditRouteForm"  type="button" class="btn btn-dark btn-sm  btn-rounded EditRoute"><i class="fa fa-cog"></i></button>
+                        <button  id="@item.RouteId" type="button" class="btn btn-danger btn-sm  btn-rounded DeleteRoute"><i class="fa fa-times" ></i></button>
+                        
+                    }
                     </td>
                 </tr>
                 }

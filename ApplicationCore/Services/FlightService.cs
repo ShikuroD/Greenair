@@ -50,6 +50,11 @@ namespace ApplicationCore.Services
         private async Task<bool> checkOrderNum(string flight_id, int num)
         {
             var tickets = await this.getAvailableTicketAsync(flight_id);
+            if (tickets == null || tickets.Count() == 0)
+            {
+                Console.WriteLine("num = 0");
+                return false;
+            }
             return num <= tickets.Count();
         }
 
@@ -57,19 +62,31 @@ namespace ApplicationCore.Services
         {
             //Expression<Func<Flight, bool>> predicate = m => true;
             //var predicate = PredicateBuilder.New<Flight>();
+
             if (!String.IsNullOrEmpty(origin_id) && !String.IsNullOrEmpty(destination_id))
             {
                 int num = adults_num + childs_num;
                 var res = await unitOfWork.Flights.getAvailableFlights();
                 res = res.Where(m => Task.Run(() => this.getOriginId(m.FlightId)).GetAwaiter().GetResult().Equals(origin_id));
-                res = res.Where(m => Task.Run(() => this.getDestinationId(m.FlightId)).GetAwaiter().GetResult().Equals(destination_id));
-                if (dep_date != null)
-                    res = res.Where(m => DateTime.Compare(Task.Run(() => this.getDepDate(m.FlightId)).GetAwaiter().GetResult(), dep_date) >= 0);
-                res = res.Where(m => Task.Run(() => this.checkOrderNum(m.FlightId, num)).GetAwaiter().GetResult().Equals(origin_id));
 
+                Console.WriteLine(res.Count() + " count");
+                res = res.Where(m => Task.Run(() => this.getDestinationId(m.FlightId)).GetAwaiter().GetResult().Equals(destination_id));
+                Console.WriteLine(res.Count() + " count");
+                res = res.Where(m => DateTime.Compare(Task.Run(() => this.getDepDate(m.FlightId)).GetAwaiter().GetResult(), dep_date) >= 0);
+                Console.WriteLine(res.Count() + " count");
+                res = res.Where(m => Task.Run(() => this.checkOrderNum(m.FlightId, num)).GetAwaiter().GetResult());
+                Console.WriteLine(res.Count() + " count");
                 return toDtoRange(res);
             }
-            else return null;
+            else
+            {
+                var res = await unitOfWork.Flights.getAvailableFlights();
+                res = res.Where(m => DateTime.Compare(Task.Run(() => this.getDepDate(m.FlightId)).GetAwaiter().GetResult(), dep_date) >= 0);
+
+                Console.WriteLine(res.Count() + " count");
+                return toDtoRange(res);
+
+            };
         }
         public async Task<IEnumerable<FlightDTO>> getLimitFlightAsync(IEnumerable<FlightDTO> flights, DateTime arr_date)
         {

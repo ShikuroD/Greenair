@@ -15,7 +15,8 @@
 <div class="main-panel">
   <div class="content-wrapper">
      <!-- row button create -->
-    @if(job =="003"){
+    @if(job =="003")
+    {
       <div class="row">
         <div class="col-lg-12 stretch-card">
           <a href="#CreateFlightForm" data-toggle="modal" id="btCreateFlight" type="button" class="btn  btn-primary btn-lg btn-inverse-*">
@@ -34,8 +35,8 @@
               <div class="col-sm-5">
                 <form>
                   <div class="input-group">
-                    <input type="search" id="SearchFlight" class="form-control" placeholder="Search Here" name="searchString"  asp-for="SearchString">
-                    <button type="submit" id="btsubmitSearchFlight" class="btn btn-icons btn-rounded btn-outline-primary"><i class="fa fa-search"></i></button>
+                    <input type="text" id="Search_date" class="form-control choose" placeholder="Search Here" >
+                    <!-- <input type="" -->
                   </div>
                 </form> 
               </div> 
@@ -50,16 +51,17 @@
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody> 
+            <tbody > 
               @foreach (var item in Model.ListFlightPage.Flights){
-                <tr>
+                <tr class="load-table">
                 <!-- <tr id="@item.FlightId" class="list-Flight"> -->
                   <td>@item.FlightId</td>
                   <td>@item.Status</td>
                   <td>@item.PlaneId</td>
                   <td> 
                     <button  id="@item.FlightId" data-toggle="modal" data-target="#DetailFlightForm"  type="button" class="btn btn-info btn-sm  btn-rounded DetailFlight"><i class="fa fa-vcard-o"></i></button>
-                    @if(job =="003"){
+                    @if(job =="003")
+                    {
                       <button  id="@item.FlightId" data-toggle="modal" data-target="#EditFlightForm"  type="button" class="btn btn-dark btn-sm  btn-rounded EditFlight"><i class="fa fa-cog"></i></button>
                       <button  id="@item.FlightId" type="button" class="btn btn-danger btn-sm  btn-rounded DeleteFlight"><i class="fa fa-times" ></i></button>
                     }
@@ -82,11 +84,12 @@
               class="pagination_link @preDisabled" >Previous</a>
               @for (int i=1;i<=Model.ListFlightPage.Flights.TotalPages;++i)
               {
-                  if(i==pageNow)
+                  @if(i==pageNow)
                   {
                     <a style="cursor:pointer" asp-page="/Admin/Flight" asp-route-pageIndex="@i" class="pagination_link active" >@i</a>
                   }
-                  else{
+                  else
+                  {
                     <a style="cursor:pointer" asp-page="/Admin/Flight" asp-route-pageIndex="@i" class="pagination_link">@i</a>
                   }
               }

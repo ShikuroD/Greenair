@@ -145,8 +145,8 @@ namespace Infrastructure.Persistence
                 );
                 context.SaveChanges();
             }
-            context.FlightDetails.RemoveRange(context.FlightDetails.ToList());
-            context.Tickets.RemoveRange(context.Tickets.ToList());
+            //context.FlightDetails.RemoveRange(context.FlightDetails.ToList());
+            //context.Tickets.RemoveRange(context.Tickets.ToList());
 
             if (!context.FlightDetails.Any())
             {
