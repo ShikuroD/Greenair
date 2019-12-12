@@ -132,7 +132,7 @@
             var status = $("#CreateEmployee-status").val();
             var salary = $("#CreateEmployee-salary").val();
             var address = $("#CreateEmployee-address").val();
-            alert(username + " " + password + " " + password2);
+            alert(username + " " + password + " " + password2 + " " + birthdate);
             if (username.length == 0 || username.length > 20) {
                 $("#z-CreateEmployee-username").removeClass("hidden-class");
                 check = false;
@@ -216,7 +216,7 @@
                         location.reload();
                     } else {
                         alert("This Id exists");
-                        $('#CreateEmployee-id').focus();
+                        $('#CreateEmployee-username').focus();
                     }
                 },
                 failure: function (result) {
