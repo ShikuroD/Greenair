@@ -902,14 +902,16 @@
  })(jQuery);
  $(document).ready(function () {
  	$(document).on("click", ".info-show", function () {
- 		$(".info-show").css("display", "none");
- 		$(".info-hide").css("display", "inline-block");
- 		$(".fare__details").css("display", "block");
+ 		var id = $(this).attr("id");
+ 		$(".info-show #" + id).css("display", "none");
+ 		$("." + id + "Hide").css("display", "inline-block");
+ 		$("." + id).css("display", "block");
  	});
  	$(document).on("click", ".info-hide", function () {
- 		$(".info-hide").css("display", "none");
- 		$(".info-show").css("display", "inline-block");
- 		$(".fare__details").css("display", "none");
+ 		var id = $(this).attr("id");
+ 		$("." + id + "Hide").css("display", "none");
+ 		$(".info-show #" + id + "Hide").css("display", "inline-block");
+ 		$("." + id).css("display", "none");
  	})
  	$(document).on("click", ".flight-card", function () {
 

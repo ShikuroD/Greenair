@@ -66,13 +66,13 @@
 						</div>
 					</div>
 						@{
-							@if(Model.ListFlights_1.Any())
+							@if(Model.flightVM_1.Any())
 							{
 								@foreach(var item in Model.flightVM_1)
 								{
 									 
 									var depDate = @item.DepDate[0];
-									var arrDate = @item.ArrDate[Model.flightVM_1.Count() -1];									
+									var arrDate = @item.ArrDate[item.FlightDetailId.Count() -1];									
 									<div class="row" style="margin-top: 20px">
 										<div class="col-sm-12">
 											<div class="flight-card-wrapper">
@@ -107,11 +107,14 @@
 																	Departs from @ViewData["from_city"]
 
 																</span>
+																@{
+																	var a ="Hide";
+																}
 																<div class="flight-card-details__more">
-																	<span class="info-show" >
+																	<span id="@item.FlightId" class="info-show" >
 																		Detail
 																	</span>
-																	<span class="info-hide">
+																	<span id="@item.FlightId" class="info-hide @item.FlightId@a">
 																		Hide
 																	</span>
 																</div>
@@ -145,7 +148,7 @@
 													</div>
 												</div>
 												<div class=" qa-flight-card-details">
-													<div class="fare__details fare__details--leg-0 ">
+													<div class="fare__details fare__details--leg-0 @item.FlightId">
 														<span class="carrier"></span>
 														<div class="flight-info">
 															
@@ -277,7 +280,7 @@
 								{
 									 
 									var depDate = @item.DepDate[0];
-									var arrDate = @item.ArrDate[Model.flightVM_1.Count() -1];									
+									var arrDate = @item.ArrDate[item.FlightDetailId.Count() -1];									
 									<div class="row" style="margin-top: 20px">
 										<div class="col-sm-12">
 											<div class="flight-card-wrapper">
@@ -312,11 +315,14 @@
 																	Departs from  @ViewData["where_city"]
 
 																</span>
+																@{
+																	var a = "Hide";
+																}
 																<div class="flight-card-details__more">
-																	<span class="info-show" >
+																	<span id="@item.FlightId" class="info-show" >
 																		Detail
 																	</span>
-																	<span class="info-hide">
+																	<span id="@item.FlightId" class="info-hide @item.FlightId@a">
 																		Hide
 																	</span>
 																</div>
@@ -350,7 +356,7 @@
 													</div>
 												</div>
 												<div class=" qa-flight-card-details">
-													<div class="fare__details fare__details--leg-0 ">
+													<div  class="fare__details fare__details--leg-0 @item.FlightId">
 														<span class="carrier"></span>
 														<div class="flight-info">
 															
@@ -479,14 +485,16 @@
 						{
 							$(".flight-go").load("/Flight" + " .flight-go",function(responseText, textStatus, XMLHttpRequest){
 								$(document).on("click", ".info-show", function () {
-									$(".info-show").css("display", "none");
-									$(".info-hide").css("display", "inline-block");
-									$(".fare__details").css("display", "block");
+									var id = $(this).attr("id");
+									$(".info-show #"+id).css("display", "none");
+									$(".info-hide #"+id+"Hide").css("display", "inline-block");
+									$("."+id).css("display", "block");
 								});
 								$(document).on("click", ".info-hide", function () {
-									$(".info-hide").css("display", "none");
-									$(".info-show").css("display", "inline-block");
-									$(".fare__details").css("display", "none");
+									var id = $(this).attr("id");
+									$(".info-hide #"+id).css("display", "none");
+									$(".info-show #"+id+"Hide").css("display", "inline-block");
+									$("."+id).css("display", "none");
 								});
 							});
 							$(".flight-back").load("/Flight" + " .flight-back");

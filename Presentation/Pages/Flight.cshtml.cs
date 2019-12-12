@@ -126,6 +126,7 @@ namespace Presentation.Pages
                             vl_flight_2.Origin.Add(airport_destination.AirportName);
                             vl_flight_2.Destination.Add(route.Destination);
                         }
+                        vl_flight_2.Price = await _flightService.calTicketPrice(item.FlightId, "000");
                         flightVM_2.Add(vl_flight_2);
                     }
                 }
